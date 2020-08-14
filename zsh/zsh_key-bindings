@@ -1,0 +1,34 @@
+# Makes sure that the terminal is in application mode when zle is active, since
+# only then values from $terminfo are valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  function zle-line-init() {
+    echoti smkx
+  }
+
+  function zle-line-finish() {
+    echoti rmkx
+  }
+
+  zle -N zle-line-init
+  zle -N zle-line-finish
+fi
+
+# Enables Emacs key-bindings.
+bindkey -e
+
+# [Ctrl + Left-Arrow] - Moves backward one word.
+bindkey '^[[1;5C' forward-word
+
+# [Ctrl + Right-Arrow] - Moves forward one word.
+bindkey '^[[1;5D' backward-word
+
+# [Ctrl + Backspace] - Deletes the whole backward-word.
+bindkey '^H' backward-kill-word
+
+# [Ctrl + Delete] - Deletes the whole forward-word.
+bindkey '^[[3;5~' kill-word
+
+# [Shift + Tab] - Moves through the autocompletion menu backwards.
+if [[ -n "${terminfo[kcbt]}" ]]; then
+  bindkey "${terminfo[kcbt]}" reverse-menu-complete
+fi

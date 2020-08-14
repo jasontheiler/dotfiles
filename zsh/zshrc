@@ -1,0 +1,14 @@
+# Loads key-bindings.
+source ~/.zsh_key-bindings
+
+# Loads aliases.
+source ~/.zsh_aliases
+
+# Loads plugins if they exist.
+if [ -f ~/.zsh_plugins ]; then
+  source ~/.zsh_plugins
+fi
+
+# Initializes Starship.
+# See: https://starship.rs/
+source <(starship init zsh)

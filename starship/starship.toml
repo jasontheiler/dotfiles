@@ -1,0 +1,5 @@
+# Configures Starship.
+# See: https://starship.rs/config/
+
+[docker_context]
+disabled = false
