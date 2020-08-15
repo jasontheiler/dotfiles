@@ -7,9 +7,9 @@ stty -echo
 # Prints an error message.
 print_error() {
   if [ ! -z "$ERROR_MSG" ]; then
-    printf "\n\e[31mERROR: $ERROR_MSG\n\n"
+    printf "\n\e[31mX ERROR: $ERROR_MSG\n\n"
   else
-    printf "\n\e[31mERROR: An unknown error has occured!\n\n"
+    printf "\n\e[31mX ERROR: An unknown error has occured!\n\n"
   fi
 }
 
@@ -53,7 +53,7 @@ done
 
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
-printf "\n\e[33mWARNING: This script could overwrite some of your existing configuration files!\e[00m\n\n"
+printf "\n\e[33m! WARNING: This script could overwrite some of your existing configuration files!\e[00m\n\n"
 printf "Do you want to continue? [\e[32my\e[00m/\e[31mN\e[00m] "
 stty echo
 read -r CONTINUE_ANSWER
@@ -124,7 +124,7 @@ while read -r install_script; do
       sh -c "$install_script"
     fi
   then
-    printf "\e[32mdone\e[00m\n\n"
+    printf "\e[32m✓ done\e[00m\n\n"
   else
     ERROR_MSG="The install script of $install_script_dir threw an error!"
     exit 1
@@ -146,10 +146,10 @@ printf "\e[32m\
 
 You should now follow one of these steps:
 
-  \e[00m1. \e[32mIf you already use ZSH, run \e[36msource \e[35m~\e[00m/.zshrc\e[32m
+  \e[00m• \e[32mIf you already use ZSH, run \e[36msource \e[35m~\e[00m/.zshrc\e[32m
 
-  \e[00m2. \e[32mIf you don't use ZSH yet, run \e[00mzsh\e[32m
+  \e[00m• \e[32mIf you don't use ZSH yet, run \e[00mzsh\e[32m
 
-  \e[00m3. \e[32mAlternatively, you can just restart your shell!
+  \e[00m• \e[32mAlternatively, you can just restart your shell!
 
 \e[00m"

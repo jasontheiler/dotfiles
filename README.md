@@ -33,6 +33,7 @@ You need to make sure that you have access to all these things:
 - `git`: To clone this and other repositories.
 - `curl`: To download scripts and archives.
 - `tar`: To extract downloaded archives.
+- `bash`: To run some downloaded scripts.
 - `zsh`: To actually utilize the dotfiles.
 - `sudo`: Some installations need superuser privileges.
 
