@@ -1,15 +1,15 @@
 #!/bin/sh
 
 # Disables user inputs and traps exits to enable them again.
-trap "stty echo" EXIT
+trap 'stty echo' EXIT
 stty -echo
 
 # Prints an error message.
 print_error() {
   if [ ! -z "$ERROR_MSG" ]; then
-    printf "\n\e[31mX ERROR: $ERROR_MSG\n\n"
+    printf "\n\e[31mX ERROR: $ERROR_MSG\e[00m\n\n"
   else
-    printf "\n\e[31mX ERROR: An unknown error has occured!\n\n"
+    printf "\n\e[31mX ERROR: An unknown error has occured!\e[00m\n\n"
   fi
 }
 
@@ -35,7 +35,7 @@ if [ "$(id -u)" = 0 ]; then
 fi
 
 # Checks the provided flags.
-for flag in "$@"; do
+for flag in $@; do
   case $flag in
     # Enables verbose output.
     -v | --verbose)
@@ -109,7 +109,7 @@ printf "Installing a few things:\n\n"
 # Exports the absolute path to this repository.
 export DOTFILES="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
 
-# Runs all install scripts in sequence.
+# Runs all install scripts.
 while read -r install_script; do
   # Prints the install script's directory name.
   install_script_path=${install_script#*"$DOTFILES/"}
@@ -134,7 +134,7 @@ done << EOT
 EOT
 
 # Changes the default shell of the current user to ZSH.
-sudo chsh -s $(which zsh) $(whoami)
+sudo chsh -s "$(which zsh)" "$(whoami)"
 
 printf "\e[32m\
                       __    __

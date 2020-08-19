@@ -1,0 +1,28 @@
+# Prints the OS name.
+os() {
+  # Sources all *-release files.
+  for file in /etc/*-release; do
+    if [ -f "$file" ]; then
+      source "$file"
+    fi
+  done
+
+  # Prints the best available variable.
+  if [ ! -z "$PRETTY_NAME" ]; then
+    printf "$PRETTY_NAME"
+  elif [ ! -z "$DISTRIB_DESCRIPTION" ]; then
+    printf "$DISTRIB_DESCRIPTION"
+  else
+    printf "Unknown"
+  fi
+}
+
+printf "
+⚡ \e[01m\e[33m$USER\e[00m on 💻 \e[01m\e[32m$HOST\e[00m
+
+\e[01m\e[34mOS:\e[00m        $(os)
+\e[01m\e[34mKERNEL:\e[00m    $(uname -s -r)
+\e[01m\e[34mUPTIME:\e[00m    ${"$(uptime -p)"#*"up "}
+\e[01m\e[34mDOTFILES:\e[00m  https://github.com/jasontheiler/dotfiles
+
+"
