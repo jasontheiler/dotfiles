@@ -1,10 +1,19 @@
+# Gets terminal-dependent values of common text styling options.
+BOLD="$(tput bold 2>/dev/null || printf '')"
+BLACK="$(tput setaf 0 2>/dev/null || printf '')"
+RED="$(tput setaf 1 2>/dev/null || printf '')"
+GREEN="$(tput setaf 2 2>/dev/null || printf '')"
+YELLOW="$(tput setaf 3 2>/dev/null || printf '')"
+BLUE="$(tput setaf 4 2>/dev/null || printf '')"
+PURPLE="$(tput setaf 5 2>/dev/null || printf '')"
+CYAN="$(tput setaf 6 2>/dev/null || printf '')"
+RESET="$(tput sgr0 2>/dev/null || printf '')"
+
 # Prints the OS name.
 os() {
   # Sources all *-release files.
   for file in /etc/*-release; do
-    if [ -f "$file" ]; then
-      source "$file"
-    fi
+    [ -f "$file" ] && source "$file"
   done
 
   # Prints the best available variable.
@@ -18,11 +27,11 @@ os() {
 }
 
 printf "
-⚡ \e[01m\e[33m$USER\e[00m on 💻 \e[01m\e[32m$HOST\e[00m
+⚡ ${BOLD}${YELLOW}${USER}${RESET} on 💻 ${BOLD}${GREEN}${HOST}${RESET}
 
-\e[01m\e[34mOS:\e[00m        $(os)
-\e[01m\e[34mKERNEL:\e[00m    $(uname -s -r)
-\e[01m\e[34mUPTIME:\e[00m    ${"$(uptime -p)"#*"up "}
-\e[01m\e[34mDOTFILES:\e[00m  https://github.com/jasontheiler/dotfiles
+${BOLD}${BLUE}OS:${RESET}        $(os)
+${BOLD}${BLUE}KERNEL:${RESET}    $(uname -s -r)
+${BOLD}${BLUE}UPTIME:${RESET}    ${"$(uptime -p)"#*"up "}
+${BOLD}${BLUE}DOTFILES:${RESET}  https://github.com/jasontheiler/dotfiles
 
 "
