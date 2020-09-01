@@ -12,9 +12,7 @@ source ~/.zsh_key-bindings
 source ~/.zsh_aliases
 
 # Loads plugins if they exist.
-if [ -f ~/.zsh_plugins ]; then
-  source ~/.zsh_plugins
-fi
+[ -f ~/.zsh_plugins ] && source ~/.zsh_plugins
 
 # Initializes Starship.
 # See: https://starship.rs/
