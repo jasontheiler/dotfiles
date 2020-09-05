@@ -1,5 +1,6 @@
 # Gets terminal-dependent values of common text styling options.
 BOLD="$(tput bold 2>/dev/null || printf "")"
+REVERSE="$(tput rev 2>/dev/null || printf "")"
 BLACK="$(tput setaf 0 2>/dev/null || printf "")"
 RED="$(tput setaf 1 2>/dev/null || printf "")"
 GREEN="$(tput setaf 2 2>/dev/null || printf "")"
