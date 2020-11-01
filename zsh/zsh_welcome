@@ -10,6 +10,15 @@ PURPLE="$(tput setaf 5 2>/dev/null || printf "")"
 CYAN="$(tput setaf 6 2>/dev/null || printf "")"
 RESET="$(tput sgr0 2>/dev/null || printf "")"
 
+# Prints the username.
+username() {
+  if [ $(id -u) = 0 ]; then
+    printf "🚀 ${BOLD}${RED}${USER}${RESET}"
+  else
+    printf "⚡ ${BOLD}${YELLOW}${USER}${RESET}"
+  fi
+}
+
 # Prints the OS name.
 os() {
   # Sources all *-release files.
@@ -28,7 +37,7 @@ os() {
 }
 
 printf "
-⚡ ${BOLD}${YELLOW}${USER}${RESET} on 💻 ${BOLD}${GREEN}${HOST}${RESET}
+$(username) on 💻 ${BOLD}${GREEN}${HOST}${RESET}
 
 ${BOLD}${BLUE}OS:${RESET}        $(os)
 ${BOLD}${BLUE}KERNEL:${RESET}    $(uname -s -r)

@@ -14,6 +14,9 @@ source ~/.zsh_aliases
 # Loads plugins if they exist.
 [ -f ~/.zsh_plugins ] && source ~/.zsh_plugins
 
+# Extends PATH with the user's .bin directory if it exists.
+[ -d ~/.bin ] && export PATH=~/.bin:$PATH
+
 # Initializes Starship.
 # See: https://starship.rs/
 source <(starship init zsh)

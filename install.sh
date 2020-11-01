@@ -2,6 +2,9 @@
 
 # Options:
 #
+#   -p, --portable
+#     Enables portable installation.
+#
 #   -v, --verbose
 #     Enables verbose output.
 #
@@ -46,18 +49,18 @@ printf "${BLUE}\
 
 ${RESET}"
 
-# Prints an error message and exits the script if it is run as a superuser.
-if [ $(id -u) = 0 ]; then
-  ERROR_MSG="Don't run this script as a superuser!"
-  exit 1
-fi
-
 # Checks the provided flags.
 for flag in $@; do
   case $flag in
+    # Enables portable installation.
+    -p | --portable)
+    export PORTABLE="true"
+    shift
+    ;;
+
     # Enables verbose output.
     -v | --verbose)
-    VERBOSE=true
+    export VERBOSE="true"
     shift
     ;;
 
@@ -147,9 +150,6 @@ done << EOT
   $(find "$DOTFILES" -mindepth 2 -name "install.sh" -type f)
 EOT
 
-# Changes the default shell of the current user to ZSH.
-sudo chsh -s "$(which zsh)" "$(whoami)"
-
 printf "${GREEN}\
                       __    __
  _______  __ _  ___  / /__ / /____
@@ -160,10 +160,12 @@ printf "${GREEN}\
 
 You should now follow one of these steps:
 
-  ${RESET}•${GREEN} If you already use ZSH, run ${CYAN}source ${PURPLE}~${RESET}/.zshrc${GREEN}
+  ${RESET}•${GREEN} If you already use ZSH, run ${CYAN}source ${PURPLE}~${RESET}/.zshrc${GREEN} to reload your ZSH configuration.
 
-  ${RESET}•${GREEN} If you don't use ZSH yet, run ${RESET}zsh${GREEN}
+  ${RESET}•${GREEN} If you don't use ZSH yet...
 
-  ${RESET}•${GREEN} Alternatively, you can just restart your shell!
+    ${RESET}1)${GREEN} Run ${RESET}chsh -s ${YELLOW}\"\$(which zsh)\"${GREEN} to set ZSH as your default shell.
+
+    ${RESET}2)${GREEN} Restart your shell or run ${RESET}zsh${GREEN} to start ZSH immediately.
 
 ${RESET}"
