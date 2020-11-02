@@ -1,12 +1,19 @@
 #!/bin/sh
 
+#
 # Options:
 #
+#   -g, --skip-git-user-config
+#     Skips Git user configuration.
+#
 #   -p, --portable
-#     Enables portable installation.
+#     Installs all binaries in ~/.bin instead of /usr/local/bin.
 #
 #   -v, --verbose
 #     Enables verbose output.
+#
+#   -y, --yes
+#     Answers all questions about whether they want to continue with yes.
 #
 
 # Disables user inputs and traps exits to enable them again.
@@ -52,15 +59,27 @@ ${RESET}"
 # Checks the provided flags.
 for flag in $@; do
   case $flag in
-    # Enables portable installation.
+    # Skips Git user configuration.
+    -g | --skip-git-user-config)
+    export SKIP_GIT_USER_CONFIG=true
+    shift
+    ;;
+
+    # Installs all binaries in ~/.bin instead of /usr/local/bin.
     -p | --portable)
-    export PORTABLE="true"
+    export PORTABLE=true
     shift
     ;;
 
     # Enables verbose output.
     -v | --verbose)
-    export VERBOSE="true"
+    export VERBOSE=true
+    shift
+    ;;
+
+    # Answers all questions about whether they want to continue with yes.
+    -y | --yes)
+    export YES=true
     shift
     ;;
 
@@ -74,54 +93,64 @@ done
 
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
-printf "\n${REVERSE}${YELLOW} ! WARNING: ${RESET}${YELLOW} This script could overwrite some of your existing configuration files!${RESET}\n\n"
-printf "Do you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
-stty echo
-read -r CONTINUE_ANSWER
-stty -echo
-
-# Exits with an error if they don't want to continue.
-if [ "$CONTINUE_ANSWER" != "y" ]; then
-  ERROR_MSG="You need to answer with ${RESET}y${RED} to continue!"
-  exit 1
-else
-  printf "\n\n"
-fi
-
-# Sets the Windows Git credential helper as the default Git credential helper
-# if the current OS is a WSL2 instance and none is configured.
-# See: https://docs.microsoft.com/windows/wsl/tutorials/wsl-git
-if [ -z "$(git config --file "${HOME}/.git_userconfig" --get credential.helper)" ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager.exe" ]; then
-  git config --file "${HOME}/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
-fi
-
-# Prompts the user to set a default Git author email if none is configured.
-if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
-  printf "${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
+if [ "$YES" != true ]; then
+  printf "\n${REVERSE}${YELLOW} ! WARNING: ${RESET}${YELLOW} This script could overwrite some of your existing configuration files!${RESET}\n\n"
+  printf "Do you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
   stty echo
-  read -r USER_EMAIL
+  read -r CONTINUE_ANSWER
   stty -echo
 
-  # Sets the user's default Git author email if the input is not empty.
-  [ ! -z "$USER_EMAIL" ] && git config --file "${HOME}/.git_userconfig" user.email "$USER_EMAIL"
-
-  printf "\n\n"
+  # Exits with an error if they don't want to continue.
+  if [ "$CONTINUE_ANSWER" != "y" ]; then
+    ERROR_MSG="You need to answer with ${RESET}y${RED} to continue!"
+    exit 1
+  else
+    printf "\n"
+  fi
 fi
 
-# Prompts the user to set a default Git author name if none is configured.
-if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
-  printf "${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
-  stty echo
-  read -r USER_NAME
-  stty -echo
+# Sets up Git user configuration.
+if [ "$SKIP_GIT_USER_CONFIG" != true ]; then
+  # Sets the Windows Git credential helper as the default Git credential helper
+  # if the current OS is a WSL2 instance, the Windows Git credential helper is
+  # installed in its default directory and none is configured.
+  # See: https://docs.microsoft.com/windows/wsl/tutorials/wsl-git
+  if [ -z "$(git config --file "${HOME}/.git_userconfig" --get credential.helper)" ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager.exe" ]; then
+    git config --file "${HOME}/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+  fi
 
-  # Sets the user's default Git author name if the input is not empty.
-  [ ! -z "$USER_NAME" ] && git config --file "${HOME}/.git_userconfig" user.name "$USER_NAME"
+  # Prompts the user to set a default Git author email if none is configured.
+  if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
+    printf "\n"
 
-  printf "\n\n"
+    printf "${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
+    stty echo
+    read -r USER_EMAIL
+    stty -echo
+
+    # Sets the user's default Git author email if the input is not empty.
+    [ ! -z "$USER_EMAIL" ] && git config --file "${HOME}/.git_userconfig" user.email "$USER_EMAIL"
+
+    printf "\n"
+  fi
+
+  # Prompts the user to set a default Git author name if none is configured.
+  if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
+    printf "\n"
+
+    printf "${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
+    stty echo
+    read -r USER_NAME
+    stty -echo
+
+    # Sets the user's default Git author name if the input is not empty.
+    [ ! -z "$USER_NAME" ] && git config --file "${HOME}/.git_userconfig" user.name "$USER_NAME"
+
+    printf "\n"
+  fi
 fi
 
-printf "Installing a few things:\n\n"
+printf "\nInstalling a few things:\n\n"
 
 # Exports the absolute path to this repository.
 export DOTFILES="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
@@ -135,7 +164,7 @@ while read -r install_script; do
 
   # Runs the install script and prints a status message.
   if
-    if [ "$VERBOSE" != "true" ]; then
+    if [ "$VERBOSE" != true ]; then
       sh -c "$install_script" >/dev/null 2>&1
     else
       sh -c "$install_script"
