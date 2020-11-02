@@ -1,22 +1,15 @@
-<h1 align="center">dotfiles</h1>
+<div align="center">
 
-<h3 align="center">
-  My personal Linux configuration files for ZSH and more!
-</h3>
+# dotfiles
 
-<br />
+**My personal Linux configuration files for ZSH and more!**
 
-<p align="center">
-  <a href="https://getantibody.github.io">
-    <img src="https://img.shields.io/badge/powered%20by-antibody-6f5dff.svg?style=for-the-badge" alt="Powered by Antibody" />
-  </a>
+[![Powered by Antibody](https://img.shields.io/badge/powered%20by-antibody-6f5dff.svg?style=flat-square)](https://getantibody.github.io)
+[![Powered by Starship](https://img.shields.io/badge/powered%20by-starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
 
-  <a href="https://starship.rs/">
-    <img src="https://img.shields.io/badge/powered%20by-starship-ff33b8.svg?style=for-the-badge" alt="Powered by Starship" />
-  </a>
-</p>
+</div>
 
-<img src="/docs/preview.png" alt="dotfiles preview" />
+![dotfiles preview](/images/preview.png)
 
 > Configuration used in the preview:
 >
