@@ -91,32 +91,32 @@ fi
 # Sets the Windows Git credential helper as the default Git credential helper
 # if the current OS is a WSL2 instance and none is configured.
 # See: https://docs.microsoft.com/windows/wsl/tutorials/wsl-git
-if [ -z "$(git config --global --get credential.helper)" ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager.exe" ]; then
-  git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+if [ -z "$(git config --file "${HOME}/.git_userconfig" --get credential.helper)" ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager.exe" ]; then
+  git config --file "${HOME}/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
 fi
 
 # Prompts the user to set a default Git author email if none is configured.
-if [ -z "$(git config --global --get user.email)" ]; then
+if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
   printf "${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
   stty echo
   read -r USER_EMAIL
   stty -echo
 
   # Sets the user's default Git author email if the input is not empty.
-  [ ! -z "$USER_EMAIL" ] && git config --global user.email "$USER_EMAIL"
+  [ ! -z "$USER_EMAIL" ] && git config --file "${HOME}/.git_userconfig" user.email "$USER_EMAIL"
 
   printf "\n\n"
 fi
 
 # Prompts the user to set a default Git author name if none is configured.
-if [ -z "$(git config --global --get user.name)" ]; then
+if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
   printf "${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
   stty echo
   read -r USER_NAME
   stty -echo
 
   # Sets the user's default Git author name if the input is not empty.
-  [ ! -z "$USER_NAME" ] && git config --global user.name "$USER_NAME"
+  [ ! -z "$USER_NAME" ] && git config --file "${HOME}/.git_userconfig" user.name "$USER_NAME"
 
   printf "\n\n"
 fi
