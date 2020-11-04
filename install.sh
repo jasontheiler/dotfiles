@@ -35,9 +35,9 @@ RESET="$(tput sgr0 2>/dev/null || printf "")"
 # Prints an error message.
 print_error() {
   if [ ! -z "$ERROR_MSG" ]; then
-    printf "\n${REVERSE}${RED} X ERROR: ${RESET}${RED} ${ERROR_MSG}${RESET}\n\n"
+    printf "\n${REVERSE}${RED} X ERROR ${RESET}${RED} ${ERROR_MSG}${RESET}\n\n"
   else
-    printf "\n${REVERSE}${RED} X ERROR: ${RESET}${RED} An unknown error has occured!${RESET}\n\n"
+    printf "\n${REVERSE}${RED} X ERROR ${RESET}${RED} An unknown error has occured!${RESET}\n\n"
   fi
 }
 
@@ -94,7 +94,7 @@ done
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
 if [ "$YES" != true ]; then
-  printf "\n${REVERSE}${YELLOW} ! WARNING: ${RESET}${YELLOW} This script could overwrite some of your existing configuration files!${RESET}\n\n"
+  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files!${RESET}\n\n"
   printf "Do you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
   stty echo
   read -r CONTINUE_ANSWER
