@@ -30,6 +30,15 @@ YELLOW="$(tput setaf 3 2>/dev/null || printf "")"
 BLUE="$(tput setaf 4 2>/dev/null || printf "")"
 PURPLE="$(tput setaf 5 2>/dev/null || printf "")"
 CYAN="$(tput setaf 6 2>/dev/null || printf "")"
+LIGHT_GRAY="$(tput setaf 7 2>/dev/null || printf "")"
+DARK_GRAY="$(tput setaf 8 2>/dev/null || printf "")"
+LIGHT_RED="$(tput setaf 9 2>/dev/null || printf "")"
+LIGHT_GREEN="$(tput setaf 10 2>/dev/null || printf "")"
+LIGHT_YELLOW="$(tput setaf 11 2>/dev/null || printf "")"
+LIGHT_BLUE="$(tput setaf 12 2>/dev/null || printf "")"
+LIGHT_PURPLE="$(tput setaf 13 2>/dev/null || printf "")"
+LIGHT_CYAN="$(tput setaf 14 2>/dev/null || printf "")"
+WHITE="$(tput setaf 15 2>/dev/null || printf "")"
 RESET="$(tput sgr0 2>/dev/null || printf "")"
 
 # Prints an error message.
@@ -94,7 +103,7 @@ done
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
 if [ "$YES" != true ]; then
-  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files!${RESET}\n\n"
+  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${RESET}\n\n"
   printf "Do you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
   stty echo
   read -r CONTINUE_ANSWER

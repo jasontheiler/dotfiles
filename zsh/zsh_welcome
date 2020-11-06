@@ -8,9 +8,18 @@ YELLOW="$(tput setaf 3 2>/dev/null || printf "")"
 BLUE="$(tput setaf 4 2>/dev/null || printf "")"
 PURPLE="$(tput setaf 5 2>/dev/null || printf "")"
 CYAN="$(tput setaf 6 2>/dev/null || printf "")"
+LIGHT_GRAY="$(tput setaf 7 2>/dev/null || printf "")"
+DARK_GRAY="$(tput setaf 8 2>/dev/null || printf "")"
+LIGHT_RED="$(tput setaf 9 2>/dev/null || printf "")"
+LIGHT_GREEN="$(tput setaf 10 2>/dev/null || printf "")"
+LIGHT_YELLOW="$(tput setaf 11 2>/dev/null || printf "")"
+LIGHT_BLUE="$(tput setaf 12 2>/dev/null || printf "")"
+LIGHT_PURPLE="$(tput setaf 13 2>/dev/null || printf "")"
+LIGHT_CYAN="$(tput setaf 14 2>/dev/null || printf "")"
+WHITE="$(tput setaf 15 2>/dev/null || printf "")"
 RESET="$(tput sgr0 2>/dev/null || printf "")"
 
-# Prints the username.
+# Prints the user's name.
 username() {
   if [ $(id -u) = 0 ]; then
     printf "🚀 ${BOLD}${RED}${USER}${RESET}"
@@ -19,7 +28,7 @@ username() {
   fi
 }
 
-# Prints the OS name.
+# Prints the OS description.
 os() {
   # Sources all *-release files.
   for file in /etc/*-release; do
@@ -27,9 +36,9 @@ os() {
   done
 
   # Prints the best available variable.
-  if [ ! -z "$PRETTY_NAME" ]; then
+  if [ "$PRETTY_NAME" ]; then
     printf "$PRETTY_NAME"
-  elif [ ! -z "$DISTRIB_DESCRIPTION" ]; then
+  elif [ "$DISTRIB_DESCRIPTION" ]; then
     printf "$DISTRIB_DESCRIPTION"
   else
     printf "Unknown"
@@ -40,8 +49,13 @@ printf "
 $(username) on 💻 ${BOLD}${GREEN}${HOST}${RESET}
 
 ${BOLD}${BLUE}OS:${RESET}        $(os)
-${BOLD}${BLUE}KERNEL:${RESET}    $(uname -s -r)
-${BOLD}${BLUE}UPTIME:${RESET}    ${"$(uptime -p)"#*"up "}
-${BOLD}${BLUE}DOTFILES:${RESET}  https://github.com/jasontheiler/dotfiles
+${BOLD}${BLUE}Kernel:${RESET}    $(uname -s -r)
+${BOLD}${BLUE}Shell:${RESET}     $("$SHELL" --version)
+${BOLD}${BLUE}Uptime:${RESET}    ${"$(uptime -p)"##"up "}
+${BOLD}${BLUE}Dotfiles:${RESET}  https://github.com/jasontheiler/dotfiles
+
+
+${REVERSE}${BLACK}   ${RED}   ${GREEN}   ${YELLOW}   ${BLUE}   ${PURPLE}   ${CYAN}   ${LIGHT_GRAY}   ${RESET}
+${REVERSE}${DARK_GRAY}   ${LIGHT_RED}   ${LIGHT_GREEN}   ${LIGHT_YELLOW}   ${LIGHT_BLUE}   ${LIGHT_PURPLE}   ${LIGHT_CYAN}   ${WHITE}   ${RESET}
 
 "
