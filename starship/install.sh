@@ -8,7 +8,7 @@ set -e
 if [ "$PORTABLE" != true ]; then
   curl -fsSL https://starship.rs/install.sh | sudo bash -s -- -b "/usr/local/bin" -y
 else
-  curl -fsSL https://starship.rs/install.sh | bash -s -- -b "${HOME}/.bin" -y
+  curl -fsSL https://starship.rs/install.sh | bash -s -- -b "${HOME}/.local/bin" -y
 fi
 
 # Creates a .config directory if none exists.

@@ -8,7 +8,7 @@ set -e
 if [ "$PORTABLE" != true ]; then
   curl -fsSL https://git.io/antibody | sudo sh -s -- -b "/usr/local/bin"
 else
-  curl -fsSL https://git.io/antibody | sh -s -- -b "${HOME}/.bin"
+  curl -fsSL https://git.io/antibody | sh -s -- -b "${HOME}/.local/bin"
 fi
 
 # Bundles plugins.

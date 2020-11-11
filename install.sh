@@ -7,7 +7,7 @@
 #     Skips Git user configuration.
 #
 #   -p, --portable
-#     Installs all binaries in ~/.bin instead of /usr/local/bin.
+#     Installs all binaries in ~/.local/bin instead of /usr/local/bin.
 #
 #   -v, --verbose
 #     Enables verbose output.
@@ -72,7 +72,7 @@ for flag in $@; do
     shift
     ;;
 
-    # Installs all binaries in ~/.bin instead of /usr/local/bin.
+    # Installs all binaries in ~/.local/bin instead of /usr/local/bin.
     -p | --portable)
     export PORTABLE=true
     shift

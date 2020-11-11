@@ -14,8 +14,8 @@ source ~/.zsh_aliases
 # Loads plugins if they exist.
 [ -f ~/.zsh_plugins ] && source ~/.zsh_plugins
 
-# Extends PATH with the user's .bin directory if it exists.
-[ -d ~/.bin ] && export PATH=~/.bin:$PATH
+# Extends PATH with the user's .local/bin directory if it exists.
+[ -d ~/.local/bin ] && export PATH=~/.local/bin:$PATH
 
 # Sets the window title to the current user and working directory.
 set_window_title() {
