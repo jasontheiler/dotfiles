@@ -16,10 +16,6 @@
 #     Answers all questions about whether they want to continue with yes.
 #
 
-# Disables user inputs and traps exits to enable them again.
-trap 'stty echo' EXIT
-stty -echo
-
 # Gets terminal-dependent values of common text styling options.
 BOLD="$(tput bold 2>/dev/null || printf "")"
 REVERSE="$(tput rev 2>/dev/null || printf "")"
@@ -50,8 +46,10 @@ print_error() {
   fi
 }
 
-# Traps exits and prints an error message if the error code is not 0.
-trap '[ $? != 0 ] && print_error' EXIT
+# Disables user inputs and traps exits to enable them again and print an error
+# message if the exit code is not 0.
+trap '[ $? != 0 ] && print_error; stty echo' EXIT
+stty -echo
 
 # Exits immediately if an error occurs.
 set -e
