@@ -3,3 +3,6 @@
 
 [docker_context]
 disabled = false
+
+[python]
+python_binary = "python3"
