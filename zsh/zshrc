@@ -14,16 +14,20 @@ source ~/.zsh_aliases
 # Loads plugins if they exist.
 [ -f ~/.zsh_plugins ] && source ~/.zsh_plugins
 
-# Extends PATH with the user's .local/bin directory if it exists.
-[ -d ~/.local/bin ] && export PATH=~/.local/bin:$PATH
+# Adds directories to the PATH variable.
+path+=(
+  ~/.local/bin
+)
 
 # Sets the window title to the current user and working directory.
 set_window_title() {
   echo -ne "\033]0; $([ $(id -u) = 0 ] && printf "${USER} in ")${"${PWD}"/"${HOME}"/"~"} \007"
 }
 
-# Adds new functions to be executed before the prompt.
-precmd_functions+=(set_window_title)
+# Adds functions that are executed before the prompt.
+precmd_functions+=(
+  set_window_title
+)
 
 # Initializes Starship.
 # See: https://starship.rs/
