@@ -4,5 +4,8 @@
 [docker_context]
 disabled = false
 
+[hostname]
+style = "bold green"
+
 [python]
 python_binary = "python3"
