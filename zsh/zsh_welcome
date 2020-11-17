@@ -30,9 +30,9 @@ username() {
 
 # Prints the OS description.
 os() {
-  # Sources all *-release files.
+  # Sources all *-release files with valid attributes.
   for file in /etc/*-release; do
-    [ -f "$file" ] && source "$file"
+    [ -f "$file" ] && source "$file" 2>/dev/null
   done
 
   # Prints the best available variable.
