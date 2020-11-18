@@ -14,7 +14,7 @@
 > Configuration used in the preview:
 >
 > - Terminal emulator: [Windows Terminal](https://github.com/microsoft/terminal)
-> - Color scheme: [Dracula PRO](https://draculatheme.com/pro)
+> - Color scheme: [Dracula PRO - Van Helsing](https://draculatheme.com/pro)
 > - Font: [Cascadia Code](https://github.com/microsoft/cascadia-code)
 
 ## Installation
