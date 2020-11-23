@@ -19,9 +19,9 @@ path+=(
   ~/.local/bin
 )
 
-# Sets the window title to the current user and working directory.
+# Sets the window title to the current user, host and working directory.
 set_window_title() {
-  echo -ne "\033]0; $([ $(id -u) = 0 ] && printf "${USER} in ")${"${PWD}"/"${HOME}"/"~"} \007"
+  echo -ne "\033]0;$([ $(id -u) = 0 ] || [ "$USER" != "$LOGNAME" ] || [ "$SSH_CONNECTION" ] && printf "${USER} in ")$([ "$SSH_CONNECTION" ] && printf "${HOST} in ")${"${PWD}"/"${HOME}"/"~"}\007"
 }
 
 # Adds functions that are executed before the prompt.
