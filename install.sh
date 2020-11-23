@@ -46,10 +46,20 @@ print_error() {
   fi
 }
 
+# Disables user inputs.
+disable_input() {
+  stty -echo 2>/dev/null
+}
+
+# Enables user inputs.
+enable_input() {
+  stty echo 2>/dev/null
+}
+
 # Disables user inputs and traps exits to enable them again and print an error
 # message if the exit code is not 0.
-trap '[ $? != 0 ] && print_error; stty echo' EXIT
-stty -echo
+trap '[ $? != 0 ] && print_error; enable_input' EXIT
+disable_input
 
 # Exits immediately if an error occurs.
 set -e
@@ -101,11 +111,11 @@ done
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
 if [ "$YES" != true ]; then
-  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${RESET}\n\n"
-  printf "Do you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
-  stty echo
+  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${RESET}\n\nDo you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
+
+  enable_input
   read -r CONTINUE_ANSWER
-  stty -echo
+  disable_input
 
   # Exits with an error if they don't want to continue.
   if [ "$CONTINUE_ANSWER" != "y" ]; then
@@ -128,12 +138,11 @@ if [ "$SKIP_GIT_USER_CONFIG" != true ]; then
 
   # Prompts the user to set a default Git author email if none is configured.
   if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
-    printf "\n"
+    printf "\n${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
 
-    printf "${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
-    stty echo
+    enable_input
     read -r USER_EMAIL
-    stty -echo
+    disable_input
 
     # Sets the user's default Git author email if the input is not empty.
     [ ! -z "$USER_EMAIL" ] && git config --file "${HOME}/.git_userconfig" user.email "$USER_EMAIL"
@@ -143,12 +152,11 @@ if [ "$SKIP_GIT_USER_CONFIG" != true ]; then
 
   # Prompts the user to set a default Git author name if none is configured.
   if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
-    printf "\n"
+    printf "\n${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
 
-    printf "${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
-    stty echo
+    enable_input
     read -r USER_NAME
-    stty -echo
+    disable_input
 
     # Sets the user's default Git author name if the input is not empty.
     [ ! -z "$USER_NAME" ] && git config --file "${HOME}/.git_userconfig" user.name "$USER_NAME"

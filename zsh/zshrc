@@ -1,6 +1,6 @@
 # Disables user inputs and traps exits to enable them again.
-trap 'stty echo' EXIT
-stty -echo
+trap 'stty echo 2>/dev/null' EXIT
+stty -echo 2>/dev/null
 
 # Loads the welcome message.
 source ~/.zsh_welcome
