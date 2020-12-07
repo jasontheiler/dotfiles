@@ -17,11 +17,6 @@ source ~/.zsh_plugins
 # Loads command-not-found package if it exists.
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
 
-# Adds directories to the PATH variable.
-path+=(
-  ~/.local/bin
-)
-
 # Sets the window title to the current user, host and working directory.
 set_window_title() {
   echo -ne "\033]0;$([ $(id -u) = 0 ] || [ "$USER" != "$LOGNAME" ] || [ "$SSH_CONNECTION" ] && printf "${USER} in ")$([ "$SSH_CONNECTION" ] && printf "${HOST} in ")${"${PWD}"/"${HOME}"/"~"}\007"

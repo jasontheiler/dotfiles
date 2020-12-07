@@ -20,7 +20,7 @@ WHITE="$(tput setaf 15 2>/dev/null || printf "")"
 RESET="$(tput sgr0 2>/dev/null || printf "")"
 
 # Prints the user's name.
-username() {
+print_user() {
   if [ $(id -u) = 0 ]; then
     printf "🚀 ${BOLD}${RED}${USER}${RESET}"
   else
@@ -29,7 +29,7 @@ username() {
 }
 
 # Prints the OS description.
-os() {
+print_os() {
   # Sources all *-release files with valid attributes.
   for file in /etc/*-release; do
     [ -f "$file" ] && source "$file" 2>/dev/null
@@ -45,13 +45,46 @@ os() {
   fi
 }
 
-printf "
-$(username) on 💻 ${BOLD}${GREEN}${HOST}${RESET}
+# Prints the kernel description.
+print_kernel() {
+  KERNEL="$(uname -s -r 2>/dev/null)"
 
-${BOLD}${BLUE}OS:${RESET}        $(os)
-${BOLD}${BLUE}Kernel:${RESET}    $(uname -s -r)
-${BOLD}${BLUE}Shell:${RESET}     $("$SHELL" --version)
-${BOLD}${BLUE}Uptime:${RESET}    ${"$(uptime -p)"##"up "}
+  if [ "$KERNEL" ]; then
+    printf "$KERNEL"
+  else
+    printf "Unknown"
+  fi
+}
+
+# Prints the shell description.
+print_shell() {
+  SHELL="$("$SHELL" --version 2>/dev/null)"
+
+  if [ "$SHELL" ]; then
+    printf "$SHELL"
+  else
+    printf "Unknown"
+  fi
+}
+
+# Prints the current uptime.
+print_uptime() {
+  UPTIME="${"$(uptime -p 2>/dev/null)"##"up "}"
+
+  if [ "$UPTIME" ]; then
+    printf "$UPTIME"
+  else
+    printf "Unknown"
+  fi
+}
+
+printf "
+$(print_user) on 💻 ${BOLD}${GREEN}${HOST}${RESET}
+
+${BOLD}${BLUE}OS:${RESET}        $(print_os)
+${BOLD}${BLUE}Kernel:${RESET}    $(print_kernel)
+${BOLD}${BLUE}Shell:${RESET}     $(print_shell)
+${BOLD}${BLUE}Uptime:${RESET}    $(print_uptime)
 ${BOLD}${BLUE}Dotfiles:${RESET}  https://github.com/jasontheiler/dotfiles
 
 
