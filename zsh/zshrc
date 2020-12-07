@@ -11,8 +11,8 @@ source ~/.zsh_key-bindings
 # Loads aliases.
 source ~/.zsh_aliases
 
-# Loads plugins if they exist.
-[ -f ~/.zsh_plugins ] && source ~/.zsh_plugins
+# Loads plugins.
+source ~/.zsh_plugins
 
 # Loads command-not-found package if it exists.
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found

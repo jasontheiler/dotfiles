@@ -6,9 +6,6 @@
 #   -g, --skip-git-user-config
 #     Skips Git user configuration.
 #
-#   -p, --portable
-#     Installs all binaries in ~/.local/bin instead of /usr/local/bin.
-#
 #   -v, --verbose
 #     Enables verbose output.
 #
@@ -79,12 +76,6 @@ for flag in $@; do
     # Skips Git user configuration.
     -g | --skip-git-user-config)
     export SKIP_GIT_USER_CONFIG=true
-    shift
-    ;;
-
-    # Installs all binaries in ~/.local/bin instead of /usr/local/bin.
-    -p | --portable)
-    export PORTABLE=true
     shift
     ;;
 
