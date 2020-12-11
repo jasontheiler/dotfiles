@@ -1,0 +1,19 @@
+# Enables colorization of some common commands.
+alias ls="ls --color=auto"
+alias dir="dir --color=auto"
+alias vdir="vdir --color=auto"
+
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+alias ip="ip --color=auto"
+
+# Adds some common ls aliases.
+alias l="ls -F"
+alias la="ls -aF"
+alias ll="ls -alF"
+
+# Adds a convenient Poe the Poet alias if it's not installed globally.
+# See: https://github.com/nat-n/poethepoet
+# [ ! $(command poe 2>/dev/null) ] && alias poe="poetry run poe"
