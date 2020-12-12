@@ -13,7 +13,3 @@ alias ip="ip --color=auto"
 alias l="ls -F"
 alias la="ls -aF"
 alias ll="ls -alF"
-
-# Adds a convenient Poe the Poet alias if it's not installed globally.
-# See: https://github.com/nat-n/poethepoet
-# [ ! $(command poe 2>/dev/null) ] && alias poe="poetry run poe"

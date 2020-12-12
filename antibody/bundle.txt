@@ -1,4 +1,0 @@
-zsh-users/zsh-autosuggestions
-zdharma/fast-syntax-highlighting
-ael-code/zsh-colored-man-pages
-lukechilds/zsh-nvm

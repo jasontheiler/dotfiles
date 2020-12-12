@@ -1,4 +1,0 @@
-# Adds directories to the PATH variable.
-path+=(
-  ~/.local/bin
-)
