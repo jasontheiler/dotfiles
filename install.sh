@@ -158,7 +158,7 @@ fi
 
 printf "\nInstalling a few things:\n\n"
 
-# Retrieves the absolute path to the current directory.
+# Determines the absolute path to the current directory.
 dir="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
 
 # Runs all install scripts.
@@ -193,14 +193,10 @@ printf "${green}\
              /_/
 
 
-You should now follow one of these steps:
+Please follow these steps to start using the dotfiles:
 
-  ${normal}•${green} If you already use fish, run ${normal}source ${magenta}~${cyan}/.config/fish/config.fish${green} to reload your fish configuration.
+  ${normal}1)${green} If you don't use fish yet, run ${normal}chsh ${cyan}-s ${yellow}\"\$(which fish)\"${green} to set fish as your default shell.
 
-  ${normal}•${green} If you don't use fish yet...
-
-    ${normal}1)${green} Run ${normal}chsh ${cyan}-s ${yellow}\"\$(which fish)\"${green} to set fish as your default shell.
-
-    ${normal}2)${green} Restart your shell or run ${normal}fish${green} to start fish immediately.
+  ${normal}2)${green} Restart your shell.
 
 ${normal}"

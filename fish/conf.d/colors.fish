@@ -1,12 +1,3 @@
-# Loads key-bindings.
-source ~/.config/fish/key-bindings.fish
-
-# Loads aliases.
-source ~/.config/fish/aliases.fish
-
-# Sets user paths.
-set fish_user_paths ~/.local/bin
-
 # Sets colors for fish's syntax highlighting.
 set fish_color_autosuggestion brblack
 set fish_color_cancel red
@@ -23,7 +14,3 @@ set fish_color_quote yellow
 set fish_color_redirection cyan
 set fish_color_search_match --background=blue
 set fish_color_valid_path --underline
-
-# Initializes Starship.
-# See: https://starship.rs/
-starship init fish | source

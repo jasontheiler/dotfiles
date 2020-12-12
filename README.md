@@ -4,8 +4,9 @@
 
 **My personal Linux configuration files for fish and more!**
 
-[![Powered by fish](https://img.shields.io/badge/powered%20by-fish-ff2900.svg?style=flat-square)](https://fishshell.com/)
-[![Powered by Starship](https://img.shields.io/badge/powered%20by-starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
+[![powered by fish](https://img.shields.io/badge/powered%20by-fish-4aae47.svg?style=flat-square)](https://fishshell.com/)
+[![powered by Starship](https://img.shields.io/badge/powered%20by-Starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
+[![powered by Fast Node Manager](https://img.shields.io/badge/powered%20by-Fast%20Node%20Manager-689f63.svg?style=flat-square)](https://fnm.vercel.app/)
 
 </div>
 
@@ -26,6 +27,7 @@ You need to make sure that you have access to all these things:
 - `git`: To clone this and other repositories.
 - `curl`: To download scripts and archives.
 - `tar`: To extract downloaded archives.
+- `unzip`: To extract downloaded archives.
 - `bash`: To run some downloaded scripts.
 - `fish`: To actually utilize the dotfiles.
 
