@@ -4,7 +4,7 @@ function greeting_username
     echo -n "🚀 "
     set_color --bold red
   else
-    echo -s -n "⚡ "
+    echo -n "⚡ "
     set_color --bold yellow
   end
 
@@ -14,7 +14,7 @@ end
 
 # Prints the hostname.
 function greeting_hostname
-  echo -s -n "💻 "
+  echo -n "💻 "
   set_color --bold green
   echo -n $hostname
   set_color normal
