@@ -22,5 +22,7 @@ end
 
 # Prints the greeting.
 function fish_greeting
-  echo -s \n (greeting_username) " on " (greeting_hostname)
+  echo
+  echo (greeting_username)" on "(greeting_hostname)
+  echo
 end
