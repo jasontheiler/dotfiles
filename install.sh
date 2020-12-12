@@ -14,32 +14,32 @@
 #
 
 # Gets terminal-dependent values of common text styling options.
-BOLD="$(tput bold 2>/dev/null || printf "")"
-REVERSE="$(tput rev 2>/dev/null || printf "")"
-BLACK="$(tput setaf 0 2>/dev/null || printf "")"
-RED="$(tput setaf 1 2>/dev/null || printf "")"
-GREEN="$(tput setaf 2 2>/dev/null || printf "")"
-YELLOW="$(tput setaf 3 2>/dev/null || printf "")"
-BLUE="$(tput setaf 4 2>/dev/null || printf "")"
-PURPLE="$(tput setaf 5 2>/dev/null || printf "")"
-CYAN="$(tput setaf 6 2>/dev/null || printf "")"
-LIGHT_GRAY="$(tput setaf 7 2>/dev/null || printf "")"
-DARK_GRAY="$(tput setaf 8 2>/dev/null || printf "")"
-LIGHT_RED="$(tput setaf 9 2>/dev/null || printf "")"
-LIGHT_GREEN="$(tput setaf 10 2>/dev/null || printf "")"
-LIGHT_YELLOW="$(tput setaf 11 2>/dev/null || printf "")"
-LIGHT_BLUE="$(tput setaf 12 2>/dev/null || printf "")"
-LIGHT_PURPLE="$(tput setaf 13 2>/dev/null || printf "")"
-LIGHT_CYAN="$(tput setaf 14 2>/dev/null || printf "")"
-WHITE="$(tput setaf 15 2>/dev/null || printf "")"
-RESET="$(tput sgr0 2>/dev/null || printf "")"
+bold="$(tput bold 2>/dev/null || printf "")"
+reverse="$(tput rev 2>/dev/null || printf "")"
+black="$(tput setaf 0 2>/dev/null || printf "")"
+red="$(tput setaf 1 2>/dev/null || printf "")"
+green="$(tput setaf 2 2>/dev/null || printf "")"
+yellow="$(tput setaf 3 2>/dev/null || printf "")"
+blue="$(tput setaf 4 2>/dev/null || printf "")"
+magenta="$(tput setaf 5 2>/dev/null || printf "")"
+cyan="$(tput setaf 6 2>/dev/null || printf "")"
+white="$(tput setaf 7 2>/dev/null || printf "")"
+brblack="$(tput setaf 8 2>/dev/null || printf "")"
+brred="$(tput setaf 9 2>/dev/null || printf "")"
+brgreen="$(tput setaf 10 2>/dev/null || printf "")"
+bryellow="$(tput setaf 11 2>/dev/null || printf "")"
+brblue="$(tput setaf 12 2>/dev/null || printf "")"
+brmagenta="$(tput setaf 13 2>/dev/null || printf "")"
+brcyan="$(tput setaf 14 2>/dev/null || printf "")"
+brwhite="$(tput setaf 15 2>/dev/null || printf "")"
+normal="$(tput sgr0 2>/dev/null || printf "")"
 
 # Prints an error message.
 print_error() {
-  if [ ! -z "$ERROR_MSG" ]; then
-    printf "\n${REVERSE}${RED} X ERROR ${RESET}${RED} ${ERROR_MSG}${RESET}\n\n"
+  if [ ! -z "$error_msg" ]; then
+    printf "\n${reverse}${red} X ERROR ${normal}${red} ${error_msg}${normal}\n\n"
   else
-    printf "\n${REVERSE}${RED} X ERROR ${RESET}${RED} An unknown error has occured!${RESET}\n\n"
+    printf "\n${reverse}${red} X ERROR ${normal}${red} An unknown error has occured!${normal}\n\n"
   fi
 }
 
@@ -61,39 +61,39 @@ disable_input
 # Exits immediately if an error occurs.
 set -e
 
-printf "${BLUE}\
+printf "${blue}\
 
      __     __  ____ __
  ___/ /__  / /_/ _(_) /__ ___
 / _  / _ \/ __/ _/ / / -_|_-<
 \_,_/\___/\__/_//_/_/\__/___/
 
-${RESET}"
+${normal}"
 
 # Checks the provided flags.
 for flag in $@; do
   case $flag in
     # Skips Git user configuration.
     -g | --skip-git-user-config)
-    export SKIP_GIT_USER_CONFIG=true
+    export skip_git_user_config=true
     shift
     ;;
 
     # Enables verbose output.
     -v | --verbose)
-    export VERBOSE=true
+    export verbose=true
     shift
     ;;
 
     # Answers all questions about whether they want to continue with yes.
     -y | --yes)
-    export YES=true
+    export yes=true
     shift
     ;;
 
     # Exits with an error if the flag is invalid.
     *)
-    ERROR_MSG="Invalid flag ${RESET}${flag}${RED}!"
+    error_msg="Invalid flag ${normal}${flag}${red}!"
     exit 1
     ;;
   esac
@@ -101,16 +101,16 @@ done
 
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
-if [ "$YES" != true ]; then
-  printf "\n${REVERSE}${YELLOW} ! WARNING ${RESET}${YELLOW} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${RESET}\n\nDo you want to continue? [${GREEN}y${RESET}/${RED}N${RESET}] "
+if [ "$yes" != true ]; then
+  printf "\n${reverse}${yellow} ! WARNING ${normal}${yellow} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${normal}\n\nDo you want to continue? [${green}y${normal}/${red}N${normal}] "
 
   enable_input
-  read -r CONTINUE_ANSWER
+  read -r continue_answer
   disable_input
 
   # Exits with an error if they don't want to continue.
-  if [ "$CONTINUE_ANSWER" != "y" ]; then
-    ERROR_MSG="You need to answer with ${RESET}y${RED} to continue!"
+  if [ "$continue_answer" != "y" ]; then
+    error_msg="You need to answer with ${normal}y${red} to continue!"
     exit 1
   else
     printf "\n"
@@ -118,7 +118,7 @@ if [ "$YES" != true ]; then
 fi
 
 # Sets up Git user configuration.
-if [ "$SKIP_GIT_USER_CONFIG" != true ]; then
+if [ "$skip_git_user_config" != true ]; then
   # Sets the Windows Git credential helper as the default Git credential helper
   # if the current OS is a WSL2 instance, the Windows Git credential helper is
   # installed in its default directory and none is configured.
@@ -129,28 +129,28 @@ if [ "$SKIP_GIT_USER_CONFIG" != true ]; then
 
   # Prompts the user to set a default Git author email if none is configured.
   if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
-    printf "\n${PURPLE}?${RESET} What is your default Git author email?\n${GREEN}❯${RESET} "
+    printf "\n${magenta}?${normal} What is your default Git author email?\n${green}❯${normal} "
 
     enable_input
-    read -r USER_EMAIL
+    read -r user_email
     disable_input
 
     # Sets the user's default Git author email if the input is not empty.
-    [ ! -z "$USER_EMAIL" ] && git config --file "${HOME}/.git_userconfig" user.email "$USER_EMAIL"
+    [ ! -z "$user_email" ] && git config --file "${HOME}/.git_userconfig" user.email "$user_email"
 
     printf "\n"
   fi
 
   # Prompts the user to set a default Git author name if none is configured.
   if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
-    printf "\n${PURPLE}?${RESET} What is your default Git author name?\n${GREEN}❯${RESET} "
+    printf "\n${magenta}?${normal} What is your default Git author name?\n${green}❯${normal} "
 
     enable_input
-    read -r USER_NAME
+    read -r user_name
     disable_input
 
     # Sets the user's default Git author name if the input is not empty.
-    [ ! -z "$USER_NAME" ] && git config --file "${HOME}/.git_userconfig" user.name "$USER_NAME"
+    [ ! -z "$user_name" ] && git config --file "${HOME}/.git_userconfig" user.name "$user_name"
 
     printf "\n"
   fi
@@ -158,34 +158,34 @@ fi
 
 printf "\nInstalling a few things:\n\n"
 
-# Exports the absolute path to this repository.
-export DOTFILES="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
+# Retrieves the absolute path to the current directory.
+dir="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
 
 # Runs all install scripts.
 while read -r install_script; do
   # Prints the install script's directory name.
-  install_script_path=${install_script#*"${DOTFILES}/"}
+  install_script_path=${install_script#*"${dir}/"}
   install_script_dir=${install_script_path%"/install.sh"*}
-  printf "${CYAN}❯${RESET} ${install_script_dir}...\n"
+  printf "${cyan}❯${normal} ${install_script_dir}...\n"
 
   # Runs the install script and prints a status message.
   if
-    if [ "$VERBOSE" != true ]; then
+    if [ "$verbose" != true ]; then
       sh -c "$install_script" >/dev/null 2>&1
     else
       sh -c "$install_script"
     fi
   then
-    printf "${GREEN}✓ done${RESET}\n\n"
+    printf "${green}✓ done${normal}\n\n"
   else
-    ERROR_MSG="The install script of ${RESET}${install_script_dir}${RED} threw an error!"
+    ERROR_MSG="The install script of ${normal}${install_script_dir}${red} threw an error!"
     exit 1
   fi
 done << EOT
-  $(find "$DOTFILES" -mindepth 2 -name "install.sh" -type f)
+  $(find "$dir" -mindepth 2 -name "install.sh" -type f)
 EOT
 
-printf "${GREEN}\
+printf "${green}\
                       __    __
  _______  __ _  ___  / /__ / /____
 / __/ _ \/  ' \/ _ \/ / -_) __/ -_)
@@ -195,12 +195,12 @@ printf "${GREEN}\
 
 You should now follow one of these steps:
 
-  ${RESET}•${GREEN} If you already use ZSH, run ${CYAN}source ${PURPLE}~${RESET}/.zshrc${GREEN} to reload your ZSH configuration.
+  ${normal}•${green} If you already use fish, run ${normal}source ${magenta}~${cyan}/.config/fish/config.fish${green} to reload your fish configuration.
 
-  ${RESET}•${GREEN} If you don't use ZSH yet...
+  ${normal}•${green} If you don't use fish yet...
 
-    ${RESET}1)${GREEN} Run ${RESET}chsh -s ${YELLOW}\"\$(which zsh)\"${GREEN} to set ZSH as your default shell.
+    ${normal}1)${green} Run ${normal}chsh ${cyan}-s ${yellow}\"\$(which fish)\"${green} to set fish as your default shell.
 
-    ${RESET}2)${GREEN} Restart your shell or run ${RESET}zsh${GREEN} to start ZSH immediately.
+    ${normal}2)${green} Restart your shell or run ${normal}fish${green} to start fish immediately.
 
-${RESET}"
+${normal}"

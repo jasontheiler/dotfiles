@@ -2,9 +2,9 @@
 
 # dotfiles
 
-**My personal Linux configuration files for ZSH and more!**
+**My personal Linux configuration files for fish and more!**
 
-[![Powered by Antibody](https://img.shields.io/badge/powered%20by-antibody-6f5dff.svg?style=flat-square)](https://getantibody.github.io)
+[![Powered by fish](https://img.shields.io/badge/powered%20by-fish-ff2900.svg?style=flat-square)](https://fishshell.com/)
 [![Powered by Starship](https://img.shields.io/badge/powered%20by-starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
 
 </div>
@@ -27,8 +27,7 @@ You need to make sure that you have access to all these things:
 - `curl`: To download scripts and archives.
 - `tar`: To extract downloaded archives.
 - `bash`: To run some downloaded scripts.
-- `zsh`: To actually utilize the dotfiles.
-- `sudo`: Some installations need superuser privileges.
+- `fish`: To actually utilize the dotfiles.
 
 ### How to
 
@@ -38,7 +37,7 @@ Follow these steps to install the dotfiles:
 # Clone the repository to your home directory or any other directory.
 git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
 
-# Run the install script in the local repository.
+# Run the install script in the root of the local repository.
 sh ~/.dotfiles/install.sh
 ```
 
