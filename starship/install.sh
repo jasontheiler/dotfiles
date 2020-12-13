@@ -3,6 +3,9 @@
 # Exits immediately if an error occurs.
 set -e
 
+# Creates a .local/bin directory if none exists.
+mkdir -p "${HOME}/.local/bin"
+
 # Installs Starship.
 # See: https://starship.rs/
 curl -fsSL https://starship.rs/install.sh | bash -s -- -b "${HOME}/.local/bin" -y
