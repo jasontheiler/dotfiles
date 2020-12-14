@@ -6,21 +6,18 @@ set -e
 # Creates a ~/.local/bin directory if none exists.
 mkdir -p "${HOME}/.local/bin"
 
-# Installs Starship.
-# See: https://starship.rs/
-curl -fsSL https://starship.rs/install.sh | bash -s -- -b "${HOME}/.local/bin" -y
+# Installs exa.
+# See: https://the.exa.website/
+curl -fsSL "$(curl -fsSL https://api.github.com/repos/ogham/exa/releases/latest | grep "browser_download_url.*exa-linux-x86_64.*.zip" | cut -d ":" -f 2,3 | tr -d \" | tr -d " ")" -o /tmp/exa.zip
+unzip -u /tmp/exa.zip -d /tmp
+rm -f /tmp/exa.zip
+mv -f /tmp/exa-linux-x86_64 "${HOME}/.local/bin/exa"
 
 # Determines the absolute path to the current directory.
 dir="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
-
-# Creates a ~/.config directory if none exists.
-mkdir -p "${HOME}/.config"
-
-# Creates a symbolic link to the Starship configuration file.
-ln -sf "${dir}/starship.toml" "${HOME}/.config"
 
 # Creates a ~/.config/fish/conf.d directory if none exists.
 mkdir -p "${HOME}/.config/fish/conf.d"
 
 # Creates a symbolic link to the fish configuration file.
-ln -sf "${dir}/starship.fish" "${HOME}/.config/fish/conf.d"
+ln -sf "${dir}/exa.fish" "${HOME}/.config/fish/conf.d"
