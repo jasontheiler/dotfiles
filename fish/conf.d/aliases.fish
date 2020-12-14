@@ -8,8 +8,3 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
 alias ip="ip --color=auto"
-
-# Adds some common ls aliases.
-alias l="ls -F"
-alias la="ls -aF"
-alias ll="ls -alF"

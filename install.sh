@@ -1,18 +1,5 @@
 #!/bin/sh
 
-#
-# Options:
-#
-#     -g, --skip-git-user-config
-#         Skips Git user configuration.
-#
-#     -v, --verbose
-#         Enables verbose output.
-#
-#     -y, --yes
-#         Answers all questions about whether they want to continue with yes.
-#
-
 # Gets terminal-dependent values of common text styling options.
 bold="$(tput bold 2>/dev/null || printf "")"
 reverse="$(tput rev 2>/dev/null || printf "")"

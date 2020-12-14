@@ -6,6 +6,7 @@
 
 [![powered by fish](https://img.shields.io/badge/powered%20by-fish-4aae47.svg?style=flat-square)](https://fishshell.com/)
 [![powered by Starship](https://img.shields.io/badge/powered%20by-Starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
+[![powered by exa](https://img.shields.io/badge/powered%20by-exa-813234.svg?style=flat-square)](https://the.exa.website/)
 [![powered by Fast Node Manager](https://img.shields.io/badge/powered%20by-Fast%20Node%20Manager-689f63.svg?style=flat-square)](https://fnm.vercel.app/)
 
 </div>
@@ -41,6 +42,19 @@ git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
 
 # Run the install script in the root of the local repository.
 sh ~/.dotfiles/install.sh
+
+#
+# Options:
+#
+#     -g, --skip-git-user-config
+#         Skips Git user configuration.
+#
+#     -v, --verbose
+#         Enables verbose output.
+#
+#     -y, --yes
+#         Answers all questions about whether you want to continue with yes.
+#
 ```
 
 ## License
