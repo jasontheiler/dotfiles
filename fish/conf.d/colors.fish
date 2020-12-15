@@ -3,7 +3,7 @@
 set fish_color_autosuggestion brblack
 set fish_color_cancel red
 set fish_color_command normal
-set fish_color_comment --dim normal
+set fish_color_comment brblack
 set fish_color_end magenta
 set fish_color_error red
 set fish_color_escape magenta
