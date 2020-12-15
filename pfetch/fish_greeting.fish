@@ -24,4 +24,7 @@ end
 function fish_greeting
     echo
     echo (greeting_username)" on "(greeting_hostname)
+    echo
+    echo
+    pfetch
 end

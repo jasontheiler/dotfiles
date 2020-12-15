@@ -182,8 +182,10 @@ printf "${green}\
 
 Please follow these steps to start using the dotfiles:
 
-  ${normal}1)${green} If you don't use fish yet, run ${normal}chsh ${cyan}-s ${yellow}\"\$(which fish)\"${green} to set fish as your default shell.
+    ${normal}1)${green} If you haven't switched to fish yet, follow the tutorial linked below.
 
-  ${normal}2)${green} Restart your shell.
+       ${blue}https://fishshell.com/docs/current/tutorial.html#switching-to-fish${green}
+
+    ${normal}2)${green} Restart your shell.
 
 ${normal}"
