@@ -3,12 +3,17 @@ function title_username
     [ (id -u) = 0 ] \
         || [ $USER != $LOGNAME ] \
         || [ $SSH_CONNECTION ] \
+        || [ $SSH_CLIENT ] \
+        || [ $SSH_TTY ] \
         && echo -s -n $USER " in "
 end
 
 # Prints the hostname.
 function title_hostname
-    [ $SSH_CONNECTION ] && echo -s -n $hostname " in "
+    [ $SSH_CONNECTION ] \
+        || [ $SSH_CLIENT ] \
+        || [ $SSH_TTY ] \
+        && echo -s -n $hostname " in "
 end
 
 # Prints the title.
