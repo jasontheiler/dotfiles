@@ -165,12 +165,23 @@ while read -r install_script; do
     then
         printf "${green}✓ done${normal}\n\n"
     else
-        ERROR_MSG="The install script of ${normal}${install_script_dir}${red} threw an error!"
+        error_msg="The install script of ${normal}${install_script_dir}${red} threw an error!"
         exit 1
     fi
 done << EOT
     $(find "$dir" -mindepth 2 -name "install.sh" -type f)
 EOT
+
+# Checks the default shell and sets the appropriate completion message.
+if [[ "$SHELL" =~ ^.*fish$ ]]; then
+    completion_msg="Please restart your shell now!"
+else
+    completion_msg="You don't seem to be using fish yet!
+
+Please follow this tutorial to switch to fish and restart your shell:
+
+    ${blue}https://fishshell.com/docs/current/tutorial.html#switching-to-fish"
+fi
 
 printf "${green}\
                       __    __
@@ -180,12 +191,6 @@ printf "${green}\
              /_/
 
 
-Please follow these steps to start using the dotfiles:
-
-    ${normal}1)${green} If you haven't switched to fish yet, follow the tutorial linked below.
-
-       ${blue}https://fishshell.com/docs/current/tutorial.html#switching-to-fish${green}
-
-    ${normal}2)${green} Restart your shell.
+${completion_msg}
 
 ${normal}"

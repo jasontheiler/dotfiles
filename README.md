@@ -4,7 +4,7 @@
 
 **My personal Linux configuration files for fish and more!**
 
-[![powered by fish](https://img.shields.io/badge/powered%20by-fish-4aae47.svg?style=flat-square)](https://fishshell.com/)
+[![powered by pfetch](https://img.shields.io/badge/powered%20by-pfetch-a17777.svg?style=flat-square)](https://github.com/dylanaraps/pfetch)
 [![powered by Starship](https://img.shields.io/badge/powered%20by-Starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
 [![powered by exa](https://img.shields.io/badge/powered%20by-exa-813234.svg?style=flat-square)](https://the.exa.website/)
 [![powered by Fast Node Manager](https://img.shields.io/badge/powered%20by-Fast%20Node%20Manager-689f63.svg?style=flat-square)](https://fnm.vercel.app/)
@@ -17,7 +17,7 @@
 >
 > - Terminal emulator: [Windows Terminal](https://github.com/microsoft/terminal)
 > - Color scheme: [Dracula PRO - Van Helsing](https://draculatheme.com/pro)
-> - Font: [Cascadia Code](https://github.com/microsoft/cascadia-code)
+> - Font: [Cascadia Code PL](https://github.com/microsoft/cascadia-code)
 
 ## Installation
 
@@ -25,12 +25,12 @@
 
 You need to make sure that you have access to all these things:
 
-- `git`: To clone this and other repositories.
+- [`git`](https://git-scm.com/): To clone this and other repositories.
 - `curl`: To download scripts and archives.
 - `tar`: To extract downloaded archives.
 - `unzip`: To extract downloaded archives.
 - `bash`: To run some downloaded scripts.
-- `fish`: To actually utilize the dotfiles.
+- [`fish`](https://fishshell.com/) (3.0 or later): To actually utilize the dotfiles.
 
 ### How to
 
