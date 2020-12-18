@@ -1,7 +1,7 @@
 # Prepends ~/.fnm directory to PATH.
 set PATH ~/.fnm $PATH
 
-# Loads Fast Node Manager.
+# Loads Fast Node Manager environment.
 # See: https://fnm.vercel.app/
 fnm env | source
 
