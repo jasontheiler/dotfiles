@@ -173,7 +173,7 @@ done << EOT
 EOT
 
 # Checks the default shell and sets the appropriate completion message.
-if [[ "$SHELL" =~ ^.*fish$ ]]; then
+if echo "$SHELL" | grep -Eq ^.*fish$; then
     completion_msg="Please restart your shell now!"
 else
     completion_msg="You don't seem to be using fish yet!
