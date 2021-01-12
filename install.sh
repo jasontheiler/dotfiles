@@ -89,7 +89,7 @@ done
 # Warns the user about possible dangers and prompts them to answer whether they
 # want to continue.
 if [ "$yes" != true ]; then
-    printf "\n${reverse}${yellow} ! WARNING ${normal}${yellow} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${normal}\n\nDo you want to continue? [${green}y${normal}/${red}N${normal}] "
+    printf "\n${reverse}${yellow} ! WARNING ${normal}${yellow} This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!${normal}\n\n${cyan}?${normal} Do you want to continue? [${green}y${normal}/${red}N${normal}] "
 
     enable_input
     read -r continue_answer
@@ -116,7 +116,7 @@ if [ "$skip_git_user_config" != true ]; then
 
     # Prompts the user to set a default Git author email if none is configured.
     if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.email)" ]; then
-        printf "\n${magenta}?${normal} What is your default Git author email?\n${green}❯${normal} "
+        printf "\n${cyan}?${normal} What is your default Git author email?\n${green}❯${normal} "
 
         enable_input
         read -r user_email
@@ -130,7 +130,7 @@ if [ "$skip_git_user_config" != true ]; then
 
     # Prompts the user to set a default Git author name if none is configured.
     if [ -z "$(git config --file "${HOME}/.git_userconfig" --get user.name)" ]; then
-        printf "\n${magenta}?${normal} What is your default Git author name?\n${green}❯${normal} "
+        printf "\n${cyan}?${normal} What is your default Git author name?\n${green}❯${normal} "
 
         enable_input
         read -r user_name
