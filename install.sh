@@ -158,9 +158,9 @@ while read -r install_script; do
     # Runs the install script and prints a status message.
     if
         if [ "$verbose" != true ]; then
-        sh -c "$install_script" >/dev/null 2>&1
+            sh -c "$install_script" >/dev/null 2>&1
         else
-        sh -c "$install_script"
+            sh -c "$install_script"
         fi
     then
         printf "${green}✓ done${normal}\n\n"
