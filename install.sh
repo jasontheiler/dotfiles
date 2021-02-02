@@ -143,7 +143,7 @@ if [ "$skip_git_user_config" != true ]; then
     fi
 fi
 
-printf "\nInstalling a few things:\n\n"
+printf "\nInstalling and configuring a few things:\n\n"
 
 # Determines the absolute path to the current directory.
 dir="$( cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P )"
