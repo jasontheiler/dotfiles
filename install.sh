@@ -153,7 +153,7 @@ while read -r install_script; do
     # Prints the install script's directory name.
     install_script_path=${install_script#*"${dir}/"}
     install_script_dir=${install_script_path%"/install.sh"*}
-    printf "${cyan}❯${normal} ${install_script_dir}...\n"
+    printf "${blue}::${normal} ${install_script_dir}...\n"
 
     # Runs the install script and prints a status message.
     if
@@ -163,7 +163,9 @@ while read -r install_script; do
             sh -c "$install_script"
         fi
     then
-        printf "${green}✓ done${normal}\n\n"
+        printf " ${green}✓ done${normal}\n\n"
+    elif [ $? == 3 ]; then
+        printf " ${yellow}• skipped${normal}\n\n"
     else
         error_msg="The install script of ${normal}${install_script_dir}${red} threw an error!"
         exit 1
