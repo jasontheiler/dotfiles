@@ -1,22 +1,24 @@
 # Prints the username.
 function title_username
-    [ (id -u) = 0 ] \
-        || [ $USER != $LOGNAME ] \
-        || [ $SSH_CONNECTION ] \
-        || [ $SSH_CLIENT ] \
-        || [ $SSH_TTY ] \
-        && echo -n -s $USER " in "
+    if [ (id -u) = 0 ] \
+            || [ $USER != $LOGNAME ] \
+            || [ $SSH_CONNECTION ] \
+            || [ $SSH_CLIENT ] \
+            || [ $SSH_TTY ]
+        echo -n -s $USER " in "
+    end
 end
 
 # Prints the hostname.
 function title_hostname
-    [ $SSH_CONNECTION ] \
-        || [ $SSH_CLIENT ] \
-        || [ $SSH_TTY ] \
-        && echo -n -s $hostname " in "
+    if [ $SSH_CONNECTION ] \
+            || [ $SSH_CLIENT ] \
+            || [ $SSH_TTY ]
+        echo -n -s $hostname " in "
+    end
 end
 
 # Prints the title.
 function fish_title
-    echo -n -s (title_username) (title_hostname) (string replace $HOME "~" $PWD)
+    echo -n -s (title_username) (title_hostname) (string replace "$HOME" "~" "$PWD")
 end

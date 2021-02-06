@@ -1,16 +1,11 @@
-# Disables echoing of input characters.
-function disable_input
-    stty -echo 2>/dev/null
-end
-
 # Handles exits to print an error message if the exit code is not 0.
-function handle_exit --on-event fish_exit
+function handle_exit -e fish_exit
     if [ $status -ne 0 ]
         if [ -z "$err_msg" ]
             set err_msg "An unknown error has occured!"
         end
 
-        echo -n -s \
+        echo -s \
             \n \
             (set_color -r red) \
             " X ERR " \
@@ -19,11 +14,12 @@ function handle_exit --on-event fish_exit
             " " \
             $err_msg \
             (set_color normal) \
-            \n\n
+            \n
     end
 end
 
-disable_input
+# Disables echoing of input characters.
+stty -echo 2>/dev/null
 
 echo -s \
     (set_color blue) \
@@ -70,9 +66,9 @@ if [ "$skip_prompts" != "true" ]
         echo -n -s \
             \n\n \
             (set_color cyan) \
-            "?" \
+            "? " \
             (set_color normal) \
-            " Do you want to continue? [" \
+            "Do you want to continue? [" \
             (set_color green) \
             "y" \
             (set_color normal) \
@@ -84,7 +80,6 @@ if [ "$skip_prompts" != "true" ]
     end
 
     read -p prompt answer
-    disable_input
 
     # Exits with an error if they do not want to continue.
     if [ "$answer" != "y" ]
@@ -113,14 +108,13 @@ if [ "$skip_git_user_config" != "true" ]
 
     # Prompts the user to set a default Git author email if none is configured.
     if [ -z (git config --file "$HOME/.git_userconfig" --get user.email) ]
-        echo -s \n (set_color cyan) "?" (set_color normal) " What is your default Git author email?"
+        echo -s \n (set_color cyan) "? " (set_color normal) "What is your default Git author email?"
 
         function prompt
             echo -n -s (set_color green ) "❯ " (set_color normal)
         end
 
         read -p prompt user_email
-        disable_input
 
         # Sets the user's default Git author email if the input is not empty.
         if [ -n "$user_email" ]
@@ -132,14 +126,13 @@ if [ "$skip_git_user_config" != "true" ]
 
     # Prompts the user to set a default Git author name if none is configured.
     if [ -z (git config --file "$HOME/.git_userconfig" --get user.name) ]
-        echo -s \n (set_color cyan) "?" (set_color normal) " What is your default Git author name?"
+        echo -s \n (set_color cyan) "? " (set_color normal) "What is your default Git author name?"
 
         function prompt
             echo -n -s (set_color green ) "❯ " (set_color normal)
         end
 
         read -p prompt user_name
-        disable_input
 
         # Sets the user's default Git author name if the input is not empty.
         if [ -n "$user_name" ]
@@ -167,7 +160,7 @@ set modules \
 
 # Installs all modules.
 for module in $modules
-    echo -s (set_color blue) "::" (set_color normal) " " $module "..."
+    echo -s (set_color blue) ":: " (set_color normal) $module "..."
 
     set install_script_path "$dir/$module/install.fish"
     set time_start (date "+%s")
@@ -178,38 +171,31 @@ for module in $modules
         fish "$install_script_path"
     end
 
+    switch $status
+        case 0
+            set msg (set_color green) " ✓ successful" (set_color normal)
+        case 3
+            set msg (set_color yellow) " • skipped" (set_color normal)
+        case "*"
+            set msg (set_color red) " X failed" (set_color normal)
+    end
+
     set time_end (date "+%s")
     set duration (math "$time_end - $time_start")
 
-    switch $status
-        case 0
-            echo -n -s (set_color green) " ✓ done" (set_color normal)
-
-            if [ $duration -ge 60 ]
-                echo -s \
-                    " took " \
-                    (set_color yellow) \
-                    (math "floor($duration / 60)") \
-                    "m" \
-                    (math "$duration % 60") \
-                    "s" \
-                    \n
-            else if [ $duration -gt 0 ]
-                echo -s " took " (set_color yellow) $duration "s" \n
-            else
-                echo \n
-            end
-        case 3
-            echo -s (set_color yellow) " • skipped" (set_color normal) \n
-        case "*"
-            set err_msg \
-                "The install script of " \
-                (set_color normal) \
-                $module \
-                (set_color red) \
-                " threw an error!"
-            exit 1
+    if [ $duration -ge 60 ]
+        set -a msg \
+            " took " \
+            (set_color yellow) \
+            (math "floor($duration / 60)") \
+            "m" \
+            (math "$duration % 60") \
+            "s"
+    else if [ $duration -gt 0 ]
+        set -a msg " took " (set_color yellow) $duration "s"
     end
+
+    echo -s $msg \n
 end
 
 # Checks the current default shell and sets the appropriate completion message.
@@ -226,7 +212,7 @@ else
         (set_color green)
 end
 
-echo -n -s \
+echo -s \
     (set_color green) \
     "
                       __    __
@@ -237,5 +223,5 @@ echo -n -s \
     " \
     \n\n \
     $completion_msg \
-    \n\n \
-    (set_color normal)
+    (set_color normal) \
+    \n
