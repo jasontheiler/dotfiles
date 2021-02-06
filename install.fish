@@ -68,7 +68,7 @@ if [ "$skip_prompts" != "true" ]
 
     function prompt
         echo -n -s \
-            \n \
+            \n\n \
             (set_color cyan) \
             "?" \
             (set_color normal) \
@@ -155,6 +155,7 @@ echo -s \n "Installing and configuring a few things:" \n
 # Determines the absolute path to the directory this script is located in.
 set dir (string split -r -m 1 "/" (status filename))[1]
 
+# Lists all modules in their correct order.
 set modules \
     "fish" \
     "git" \
@@ -169,6 +170,7 @@ for module in $modules
     echo -s (set_color blue) "::" (set_color normal) " " $module "..."
 
     set install_script_path "$dir/$module/install.fish"
+    set time_start (date "+%s")
 
     if [ "$verbose" != "true" ]
         fish "$install_script_path" >/dev/null 2>&1
@@ -176,9 +178,27 @@ for module in $modules
         fish "$install_script_path"
     end
 
+    set time_end (date "+%s")
+    set duration (math "$time_end - $time_start")
+
     switch $status
         case 0
-            echo -s (set_color green) " ✓ done" (set_color normal) \n
+            echo -n -s (set_color green) " ✓ done" (set_color normal)
+
+            if [ $duration -ge 60 ]
+                echo -s \
+                    " took " \
+                    (set_color yellow) \
+                    (math "floor($duration / 60)") \
+                    "m" \
+                    (math "$duration % 60") \
+                    "s" \
+                    \n
+            else if [ $duration -gt 0 ]
+                echo -s " took " (set_color yellow) $duration "s" \n
+            else
+                echo \n
+            end
         case 3
             echo -s (set_color yellow) " • skipped" (set_color normal) \n
         case "*"

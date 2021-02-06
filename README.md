@@ -62,4 +62,4 @@ fish ~/.dotfiles/install.fish
 
 [MIT License](/LICENSE)
 
-Copyright © 2020 [Jason Theiler](https://github.com/jasontheiler)
+Copyright © 2021 [Jason Theiler](https://github.com/jasontheiler)
