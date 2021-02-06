@@ -1,5 +1,5 @@
-# Prepends ~/.fnm directory to PATH.
-set PATH ~/.fnm $PATH
+# Appends ~/.fnm directory to the user paths.
+set -a fish_user_paths ~/.fnm
 
 # Loads Fast Node Manager environment.
 # See: https://fnm.vercel.app/

@@ -1,2 +1,2 @@
-# Prepends ~/.cargo/bin directory to PATH.
-set PATH ~/.cargo/bin $PATH
+# Appends ~/.cargo/bin directory to the user paths.
+set -a fish_user_paths ~/.cargo/bin

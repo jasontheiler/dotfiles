@@ -30,18 +30,19 @@ You need to make sure that you have access to all these things:
 - `tar`: To extract downloaded archives.
 - `unzip`: To extract downloaded archives.
 - `bash`: To run some downloaded scripts.
-- [`fish`](https://fishshell.com/) (3.0 or later): To actually utilize the dotfiles.
+- [`fish`](https://fishshell.com/) (3.0 or later): To actually run the install
+  scripts and utilize the dotfiles.
 
 ### How to
 
 Follow these steps to install the dotfiles:
 
-```bash
+```sh
 # Clone the repository to your home directory or any other directory.
 git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
 
 # Run the install script in the root of the local repository.
-sh ~/.dotfiles/install.sh
+fish ~/.dotfiles/install.fish
 
 #
 # Options:
@@ -53,7 +54,7 @@ sh ~/.dotfiles/install.sh
 #         Enables verbose output.
 #
 #     -y, --yes
-#         Answers all questions about whether you want to continue with yes.
+#         # Skips all prompts about whether they want to continue.
 #
 ```
 

@@ -5,7 +5,7 @@ function title_username
         || [ $SSH_CONNECTION ] \
         || [ $SSH_CLIENT ] \
         || [ $SSH_TTY ] \
-        && echo -s -n $USER " in "
+        && echo -n -s $USER " in "
 end
 
 # Prints the hostname.
@@ -13,10 +13,10 @@ function title_hostname
     [ $SSH_CONNECTION ] \
         || [ $SSH_CLIENT ] \
         || [ $SSH_TTY ] \
-        && echo -s -n $hostname " in "
+        && echo -n -s $hostname " in "
 end
 
 # Prints the title.
 function fish_title
-    echo -s -n (title_username) (title_hostname) (string replace $HOME "~" $PWD)
+    echo -n -s (title_username) (title_hostname) (string replace $HOME "~" $PWD)
 end
