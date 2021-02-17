@@ -4,12 +4,12 @@ set -x EXA_COLORS "xx=1;30"
 
 # Adds exa abbreviations.
 abbr -a l exa -F
-abbr -a la exa -aF
-abbr -a ll exa -lF --git
-abbr -a lla exa -alF --git
+abbr -a la exa -Fa
+abbr -a ll exa -Fl --git
+abbr -a lla exa -Fla --git
 
-# Adds exa --tree abbreviations.
-abbr -a t exa --tree -F
-abbr -a ta exa --tree -aF
-abbr -a tl exa --tree -lF --git
-abbr -a tla exa --tree -alF --git
+# Adds exa --tree -L abbreviations.
+abbr -a t exa -F --tree -L
+abbr -a ta exa -Fa --tree -L
+abbr -a tl exa -Fl --git --tree -L
+abbr -a tla exa -Fla --git --tree -L

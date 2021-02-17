@@ -156,7 +156,8 @@ set modules \
     "pfetch" \
     "starship" \
     "exa" \
-    "fnm"
+    "fnm" \
+    "bat"
 
 # Installs all modules.
 for module in $modules
