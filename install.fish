@@ -101,9 +101,8 @@ if [ "$skip_git_user_config" != "true" ]
     # if the current OS is a WSL2 instance, the Windows Git credential helper is
     # installed in its default directory and none is configured.
     # See: https://docs.microsoft.com/windows/wsl/tutorials/wsl-git
-    if [ -z (git config --file "$HOME/.git_userconfig" --get credential.helper) ] \
-            && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager.exe" ]
-        git config --file "$HOME/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+    if [ -z (git config --file "$HOME/.git_userconfig" --get credential.helper) ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe" ]
+        git config --file "$HOME/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe"
     end
 
     # Prompts the user to set a default Git author email if none is configured.
