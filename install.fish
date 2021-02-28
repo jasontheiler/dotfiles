@@ -171,9 +171,10 @@ for module in $modules
         fish "$install_script_path"
     end
 
+    # Sets the module's installation status message.
     switch $status
         case 0
-            set msg (set_color green) " ✓ successful" (set_color normal)
+            set msg (set_color green) " ✓ done" (set_color normal)
         case 3
             set msg (set_color yellow) " • skipped" (set_color normal)
         case "*"
@@ -183,6 +184,7 @@ for module in $modules
     set time_end (date "+%s")
     set duration (math "$time_end - $time_start")
 
+    # Appends the time the module took to install if it took at least 2 seconds.
     if [ $duration -ge 60 ]
         set -a msg \
             " took " \
@@ -191,10 +193,11 @@ for module in $modules
             "m" \
             (math "$duration % 60") \
             "s"
-    else if [ $duration -gt 0 ]
+    else if [ $duration -ge 2 ]
         set -a msg " took " (set_color yellow) $duration "s"
     end
 
+    # Prints the module's installation status message.
     echo -s $msg \n
 end
 

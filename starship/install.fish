@@ -1,9 +1,6 @@
-# Creates a ~/.local/bin directory if none exists.
-mkdir -p "$HOME/.local/bin"
-
 # Installs Starship.
 # See: https://starship.rs/
-curl -fsSL https://starship.rs/install.sh | bash -s -- -b "$HOME/.local/bin" -y
+cargo install starship
 
 # Determines the absolute path to the directory this script is located in.
 set dir (string split -r -m 1 "/" (status filename))[1]

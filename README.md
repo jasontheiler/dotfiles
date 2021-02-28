@@ -4,10 +4,8 @@
 
 **My personal Linux configuration files for fish and more!**
 
-[![powered by pfetch](https://img.shields.io/badge/powered%20by-pfetch-a17777.svg?style=flat-square)](https://github.com/dylanaraps/pfetch)
-[![powered by Starship](https://img.shields.io/badge/powered%20by-Starship-ff33b8.svg?style=flat-square)](https://starship.rs/)
-[![powered by exa](https://img.shields.io/badge/powered%20by-exa-813234.svg?style=flat-square)](https://the.exa.website/)
-[![powered by Fast Node Manager](https://img.shields.io/badge/powered%20by-Fast%20Node%20Manager-689f63.svg?style=flat-square)](https://fnm.vercel.app/)
+[![powered by fish](https://img.shields.io/badge/powered%20by-fish-4aae47.svg?style=flat-square)](https://fishshell.com/)
+[![powered by Rust](https://img.shields.io/badge/powered%20by-Rust-f74c00.svg?style=flat-square)](https://www.rust-lang.org/)
 
 </div>
 
@@ -25,13 +23,13 @@
 
 You need to make sure that you have access to all these things:
 
-- [`git`](https://git-scm.com/): To clone this and other repositories.
-- `curl`: To download scripts and archives.
-- `tar`: To extract downloaded archives.
-- `unzip`: To extract downloaded archives.
-- `bash`: To run some downloaded scripts.
+- [`git`](https://git-scm.com/): To clone this repository.
 - [`fish`](https://fishshell.com/) (3.0 or later): To actually run the install
   scripts and utilize the dotfiles.
+- [`curl`](https://curl.se/): To download files.
+- [`gcc`](https://gcc.gnu.org/): To install
+  [Rust](https://www.rust-lang.org/)-based tools via
+  [Cargo](https://doc.rust-lang.org/cargo/).
 
 ### How to
 

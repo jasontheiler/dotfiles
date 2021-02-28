@@ -1,5 +1,5 @@
-# Appends ~/.fnm directory to the user paths.
-set -a fish_user_paths ~/.fnm
+# Appends ~/.cargo/bin directory to the user paths.
+set -a fish_user_paths ~/.cargo/bin
 
 # Loads Fast Node Manager environment.
 # See: https://fnm.vercel.app/

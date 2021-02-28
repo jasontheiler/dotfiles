@@ -1,5 +1,5 @@
-# Appends ~/.local/bin directory to the user paths.
-set -a fish_user_paths ~/.local/bin
+# Appends ~/.cargo/bin directory to the user paths.
+set -a fish_user_paths ~/.cargo/bin
 
 # Loads Starship.
 # See: https://starship.rs/

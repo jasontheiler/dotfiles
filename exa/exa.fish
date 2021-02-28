@@ -1,3 +1,6 @@
+# Appends ~/.cargo/bin directory to the user paths.
+set -a fish_user_paths ~/.cargo/bin
+
 # Sets colors for exa.
 # See: https://the.exa.website/docs/colour-themes
 set -x EXA_COLORS "xx=1;30"
