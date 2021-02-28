@@ -55,7 +55,7 @@ fish ~/.dotfiles/install.fish
 #         Enables verbose output.
 #
 #     -y, --yes
-#         # Skips all prompts about whether they want to continue.
+#         Confirms the prompt about whether they want to continue.
 #
 ```
 

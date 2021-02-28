@@ -5,17 +5,36 @@ function handle_exit -e fish_exit
             set err_msg "An unknown error has occured!"
         end
 
-        echo -s \
-            \n \
-            (set_color -r red) \
-            " X ERR " \
-            (set_color normal) \
-            (set_color red) \
-            " " \
-            $err_msg \
-            (set_color normal) \
-            \n
+        print_err $err_msg
     end
+end
+
+# Prints a warning message.
+function print_warn
+    echo -s \
+        \n \
+        (set_color -r yellow) \
+        " ! WARN " \
+        (set_color normal) \
+        (set_color yellow) \
+        " " \
+        $argv \
+        (set_color normal) \
+        \n
+end
+
+# Prints an error message.
+function print_err
+    echo -s \
+        \n \
+        (set_color -r red) \
+        " X ERR " \
+        (set_color normal) \
+        (set_color red) \
+        " " \
+        $argv \
+        (set_color normal) \
+        \n
 end
 
 # Disables echoing of input characters.
@@ -41,8 +60,8 @@ for opt in $argv
             # Enables verbose output.
             set verbose "true"
         case -y --yes
-            # Skips all prompts about whether they want to continue.
-            set skip_prompts "true"
+            # Confirms the prompt about whether they want to continue.
+            set yes "true"
         case "*"
             # Exits with an error if the option is invalid.
             set err_msg "Invalid option " (set_color normal) $opt (set_color red) "!"
@@ -50,21 +69,12 @@ for opt in $argv
     end
 end
 
-# Warns the user about possible dangers and prompts them to answer whether they
-# want to continue.
-if [ "$skip_prompts" != "true" ]
-    echo -s \
-        \n \
-        (set_color -r yellow) \
-        " ! WARN " \
-        (set_color normal) \
-        (set_color yellow) \
-        " This script could overwrite some of your existing configuration files! You may want to back them up, before you continue!" \
-        (set_color normal)
+# Warns the user about possible dangers and prompts them to answer whether they want to continue.
+if [ "$yes" != "true" ]
+    print_warn "This script could overwrite some of your existing configuration files! You may want to back them up before you continue!"
 
     function prompt
         echo -n -s \
-            \n\n \
             (set_color cyan) \
             "? " \
             (set_color normal) \
@@ -97,11 +107,12 @@ end
 
 # Sets up Git user configuration.
 if [ "$skip_git_user_config" != "true" ]
-    # Sets the Windows Git credential helper as the default Git credential helper
-    # if the current OS is a WSL2 instance, the Windows Git credential helper is
-    # installed in its default directory and none is configured.
+    # Sets the Windows Git credential helper as the default Git credential helper if the current OS
+    # is a WSL2 instance, the Windows Git credential helper is installed in its default directory
+    # and none is configured.
     # See: https://docs.microsoft.com/windows/wsl/tutorials/wsl-git
-    if [ -z (git config --file "$HOME/.git_userconfig" --get credential.helper) ] && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe" ]
+    if [ -z (git config --file "$HOME/.git_userconfig" --get credential.helper) ] \
+            && [ -f "/mnt/c/Program Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe" ]
         git config --file "$HOME/.git_userconfig" credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe"
     end
 
@@ -110,7 +121,7 @@ if [ "$skip_git_user_config" != "true" ]
         echo -s \n (set_color cyan) "? " (set_color normal) "What is your default Git author email?"
 
         function prompt
-            echo -n -s (set_color green ) "❯ " (set_color normal)
+            echo -n -s (set_color green) "❯ " (set_color normal)
         end
 
         read -p prompt user_email
@@ -128,7 +139,7 @@ if [ "$skip_git_user_config" != "true" ]
         echo -s \n (set_color cyan) "? " (set_color normal) "What is your default Git author name?"
 
         function prompt
-            echo -n -s (set_color green ) "❯ " (set_color normal)
+            echo -n -s (set_color green) "❯ " (set_color normal)
         end
 
         read -p prompt user_name
@@ -142,7 +153,7 @@ if [ "$skip_git_user_config" != "true" ]
     end
 end
 
-echo -s \n "Installing and configuring a few things:" \n
+echo -s \n (set_color cyan) "i " (set_color normal) "Installing and configuring a few things:" \n
 
 # Determines the absolute path to the directory this script is located in.
 set dir (string split -r -m 1 "/" (status filename))[1]
