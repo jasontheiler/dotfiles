@@ -30,6 +30,9 @@ You need to make sure that you have access to all these things:
 - [`gcc`](https://gcc.gnu.org/): To install
   [Rust](https://www.rust-lang.org/)-based tools via
   [Cargo](https://doc.rust-lang.org/cargo/).
+- [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/): To
+  install [Rust](https://www.rust-lang.org/)-based tools via
+  [Cargo](https://doc.rust-lang.org/cargo/).
 
 ### How to
 
