@@ -185,11 +185,11 @@ for module in $modules
     # Sets the module's installation status message.
     switch $status
         case 0
-            set msg (set_color green) " ✓ done" (set_color normal)
+            set msg (set_color green) " ✓ ok" (set_color normal)
         case 3
             set msg (set_color yellow) " • skipped" (set_color normal)
         case "*"
-            set msg (set_color red) " X failed" (set_color normal)
+            set msg (set_color red) " X FAILED" (set_color normal)
     end
 
     set time_end (date "+%s")
