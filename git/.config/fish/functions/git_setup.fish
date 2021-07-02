@@ -40,5 +40,28 @@ function git_setup
         git config --file "$HOME/.gitconfig_user" user.name "$user_name"
     end
 
+    # Prompts the user to set a default GPG signing key ID.
+    echo -s \
+        \n \
+        (set_color cyan) \
+        "? " \
+        (set_color normal) \
+        "What is your default GPG signing key ID?" \
+        \n \
+        "  (This will enable GPG commit signing by default.)"
+
+    function prompt
+        echo -n -s (set_color green) "❯ " (set_color normal)
+    end
+
+    read -p prompt signing_key
+
+    # Sets the user's default GPG signing key ID and enables GPG commit signing by default if the
+    # input is not empty.
+    if [ -n "$signing_key" ]
+        git config --file "$HOME/.gitconfig_user" user.signingkey "$signing_key"
+        git config --file "$HOME/.gitconfig_user" commit.gpgsign true
+    end
+
     echo
 end
