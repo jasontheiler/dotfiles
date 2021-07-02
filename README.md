@@ -24,20 +24,20 @@ Follow these steps to install the dotfiles:
 1. Clone the repository into your home directory:
 
    ```sh
-   git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
+   $ git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
    ```
 
 2. Stow the dotfiles in your home directory from inside the local repository:
 
    ```sh
    # Stows all packages.
-   stow -t ~ */
+   $ stow -t ~ */
 
    # Stows select packages.
-   stow -t ~ fish/ git/
+   $ stow -t ~ fish/ git/
 
    # Unstows select packages.
-   stow -Dt ~ starship/ exa/ fnm/
+   $ stow -Dt ~ starship/ exa/ fnm/
    ```
 
 3. Restart your shell.
