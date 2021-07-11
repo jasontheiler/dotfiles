@@ -16,6 +16,7 @@ You need to make sure that you have access to the following things:
 
 - [`git`](https://git-scm.com/): To clone and manage this repository.
 - [`stow`](https://www.gnu.org/software/stow/): To manage the dotfiles.
+- [`fish`](https://fishshell.com/): To use the dotfiles.
 
 ### How to
 
