@@ -4,7 +4,6 @@ function fish_greeting
     stty -echo 2>/dev/null
 
     if [ "$GREETING" != false ]
-        echo
-        pfetch
+        macchina
     end
 end
