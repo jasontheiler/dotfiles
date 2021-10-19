@@ -15,4 +15,4 @@ show_only = [
     "Uptime",
 ]
 color = "Green"
-palette = true
+palette = "Full"
