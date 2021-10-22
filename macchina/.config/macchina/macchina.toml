@@ -4,15 +4,7 @@
 custom_ascii = "~/.config/macchina/ascii_dino"
 no_box = true
 no_separator = true
-show_only = [
-    "Host",
-    "Kernel",
-    "Distribution",
-    "DesktopEnvironment",
-    "WindowManager",
-    "Shell",
-    "LocalIP",
-    "Uptime",
-]
+hide = ["Processor", "ProcessorLoad", "Memory", "Battery"]
 color = "Green"
+interface = "eth0"
 palette = "Full"
