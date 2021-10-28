@@ -1,0 +1,14 @@
+# Default Macchina theme.
+# See: https://github.com/Macchina-CLI/macchina/blob/main/theme/Carbon.toml
+
+padding = 0
+separator = ""
+color = "Green"
+
+[box]
+title = ""
+visible = true
+
+[box.inner_margin]
+x = 3
+y = 1
