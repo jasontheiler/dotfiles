@@ -2,7 +2,6 @@
 # See: https://github.com/Macchina-CLI/macchina/blob/main/macchina.toml
 
 theme = "Default"
-custom_ascii = "~/.config/macchina/ascii_saturn"
 show = [
     "Host",
     "Machine",
@@ -20,4 +19,3 @@ show = [
     "Uptime",
 ]
 interface = "eth0"
-palette = "Dark"

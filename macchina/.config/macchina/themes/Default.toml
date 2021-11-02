@@ -3,7 +3,11 @@
 
 padding = 0
 separator = ""
-color = "Green"
+key_color = "Green"
+palette = "Dark"
+
+[custom_ascii]
+path = "~/.config/macchina/ascii_saturn"
 
 [box]
 title = ""
