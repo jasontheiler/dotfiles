@@ -2,7 +2,7 @@
 
 # dotfiles
 
-**My personal Linux configuration files for fish and more!**
+**My personal configuration files for fish and more!**
 
 <br />
 
