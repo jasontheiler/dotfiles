@@ -1,17 +1,17 @@
 # Default Macchina theme.
-# See: https://github.com/Macchina-CLI/macchina/blob/main/theme/Carbon.toml
+# See: https://github.com/Macchina-CLI/macchina/blob/main/themes/Hydrogen.toml
 
-padding = 0
+prefer_small_ascii = true
 separator = ""
 key_color = "Green"
 palette = "Dark"
 
-[custom_ascii]
-path = "~/.config/macchina/ascii_saturn"
+# [custom_ascii]
+# path = "~/.config/macchina/..."
 
 [box]
 title = ""
-visible = true
+visible = false
 
 [box.inner_margin]
 x = 3
