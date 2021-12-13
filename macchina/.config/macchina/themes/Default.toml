@@ -6,8 +6,8 @@ separator = ""
 key_color = "Green"
 palette = "Dark"
 
-# [custom_ascii]
-# path = "~/.config/macchina/..."
+[custom_ascii]
+path = "~/.config/macchina/ascii_moon.txt"
 
 [box]
 title = ""
