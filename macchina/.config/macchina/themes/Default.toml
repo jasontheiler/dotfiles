@@ -1,18 +1,9 @@
 # Default Macchina theme.
-# See: https://github.com/Macchina-CLI/macchina/blob/main/themes/Hydrogen.toml
+# See: https://github.com/Macchina-CLI/macchina/blob/main/contrib/themes/Hydrogen.toml
 
 prefer_small_ascii = true
 separator = ""
 key_color = "Green"
-palette = "Dark"
 
 [custom_ascii]
-path = "~/.config/macchina/ascii_moon.txt"
-
-[box]
-title = ""
-visible = false
-
-[box.inner_margin]
-x = 3
-y = 1
+path = "~/.config/macchina/crt.ascii"
