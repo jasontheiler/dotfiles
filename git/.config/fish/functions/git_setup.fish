@@ -19,21 +19,17 @@ function prompt_read
 end
 
 # Sets up the user's Git configuration.
-function git_setup -d "Sets up the user's Git configuration."
-    if contains -- -g $argv || [ ! -d ./.git/ ]
-        set scope global
-        set file --global
-    else
-        set scope local
-        set file --local
-    end
-
-    # Shows the user the determined scope.
-    echo -se \n (set_color yellow) "!" (set_color normal) " Scope: " (set_color -u) $scope
-
-    # Sets the path for included Git defaults.
-    if [ "$scope" = global ]
-        git config $file include.path "~/.gitconfig_defaults"
+function git_setup -d "Sets up the Git repository configuration."
+    # Throws an error if the directory is not a Git repository.
+    if [ ! -d ./.git/ ]
+        echo -se \
+            \n \
+            (set_color -r red) \
+            " ! ERROR: " \
+            (set_color normal) \
+            (set_color red) \
+            " Current directory is not a Git repository."
+        return 1
     end
 
     # Prompts the user to set a Git author email.
@@ -41,7 +37,7 @@ function git_setup -d "Sets up the user's Git configuration."
 
     # Sets the user's Git author email if the input is not empty.
     if [ -n "$user_email" ]
-        git config $file user.email "$user_email"
+        git config --local user.email "$user_email"
     end
 
     # Prompts the user to set a Git author name.
@@ -49,7 +45,7 @@ function git_setup -d "Sets up the user's Git configuration."
 
     # Sets the user's Git author name if the input is not empty.
     if [ -n "$user_name" ]
-        git config $file user.name "$user_name"
+        git config --local user.name "$user_name"
     end
 
     # Prompts the user to set a GPG signing key ID.
@@ -57,7 +53,7 @@ function git_setup -d "Sets up the user's Git configuration."
 
     # Sets the user's GPG signing key ID and enables GPG commit signing if the input is not empty.
     if [ -n "$user_signingkey" ]
-        git config $file user.signingkey "$user_signingkey"
-        git config $file commit.gpgsign true
+        git config --local user.signingkey "$user_signingkey"
+        git config --local commit.gpgsign true
     end
 end
