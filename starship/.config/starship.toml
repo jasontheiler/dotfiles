@@ -1,7 +1,7 @@
 # Configures Starship.
 # See: https://starship.rs/config/
 
-format="$time$all"
+format = "$time$all"
 
 [docker_context]
 disabled = false
