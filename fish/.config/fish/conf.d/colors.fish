@@ -2,7 +2,7 @@
 # See: https://fishshell.com/docs/current/index.html#variables-for-changing-highlighting-colors
 set fish_color_autosuggestion brblack
 set fish_color_cancel red
-set fish_color_command cyan
+set fish_color_command green
 set fish_color_comment brblack
 set fish_color_end normal
 set fish_color_error red
