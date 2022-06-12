@@ -1,35 +1,35 @@
 # Prints the current username.
 function title_username
-    if [ (id -u) = 0 ] \
-            || [ $USER != $LOGNAME ] \
-            || [ $SSH_CONNECTION ] \
-            || [ $SSH_CLIENT ] \
-            || [ $SSH_TTY ]
-        echo -n -s $USER " in "
+    if test (id -u) -eq 0 \
+            || test $USER != $LOGNAME \
+            || test $SSH_CONNECTION \
+            || test $SSH_CLIENT \
+            || test $SSH_TTY
+        echo -ns $USER " in "
     end
 end
 
 # Prints the current hostname.
 function title_hostname
-    if [ $SSH_CONNECTION ] \
-            || [ $SSH_CLIENT ] \
-            || [ $SSH_TTY ]
-        echo -n -s $hostname " in "
+    if test $SSH_CONNECTION \
+            || test $SSH_CLIENT \
+            || test $SSH_TTY
+        echo -ns $hostname " in "
     end
 end
 
 # Prints the executed command.
 function title_command
-    if [ $argv ]
-        echo -n -s " ❯ " $argv
+    if test $argv
+        echo -ns " ❯ " $argv
     end
 end
 
 # Prints fish's title.
 function fish_title
-    echo -n -s \
+    echo -ns \
         (title_username) \
         (title_hostname) \
-        (string replace "$HOME" "~" "$PWD") \
+        (string replace $HOME "~" $PWD) \
         (title_command $argv)
 end
