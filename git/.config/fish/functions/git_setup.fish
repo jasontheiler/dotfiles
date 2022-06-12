@@ -63,6 +63,34 @@ function git_setup -d "Sets up the Git repository configuration."
     #     end
     # end
 
+    # # Sorts the profiles by repo count using Bubblesort.
+    # set -l i 1
+    # while test $i -le (count $profiles)
+    #     set -l has_swapped
+
+    #     set -l j 1
+    #     while test $j -le (math (count $profiles) - $i)
+    #         set -l j1 (math $j + 1)
+    #         set -l j_repos_key {$profiles[$j]}_repos
+    #         set -l j1_repos_key {$profiles[$j1]}_repos
+
+    #         if test (count $$j_repos_key) -lt (count $$j1_repos_key)
+    #             set -l temp $profiles[$j]
+    #             set profiles[$j] $profiles[$j1]
+    #             set profiles[$j1] $temp
+    #             set has_swapped true
+    #         end
+
+    #         set j $j1
+    #     end
+
+    #     if not test $has_swapped
+    #         break
+    #     end
+
+    #     set i (math $i + 1)
+    # end
+
     # for profile_key in $profiles
     #     echo $$profile_key
     #     set -l repos_key {$profile_key}_repos
