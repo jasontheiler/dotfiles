@@ -43,7 +43,7 @@ function git_setup -d "Sets up the Git repository configuration."
     #     "GPG signing key ID"
     # set -f profile_data profile_email profile_name profile_signingkey
 
-    # for config_path in $HOME/{,.}*{,/{,.}*}/.git/config
+    # for config_path in $HOME/{.,}*{,/{.,}*}/.git/config
     #     set -l new_profile \
     #         (git config -f $config_path --default "" --get user.email) \
     #         (git config -f $config_path --default "" --get user.name) \
@@ -102,14 +102,44 @@ function git_setup -d "Sets up the Git repository configuration."
     #     set i (math $i + 1)
     # end
 
-    # for profile_key in $profiles
-    #     echo $$profile_key
+    # set -l profile_number (count $profiles)
+    # for profile_key in $profiles[-1..1]
     #     set -l repos_key {$profile_key}_repos
-    #     echo -s \
+    #     set -l repos_str \
+    #         (
+    #             echo -s \
+    #                 "(Used in " \
+    #                 (string join ", " $$repos_key[1][1..3]) \
+    #                 (
+    #                     if test (count $$repos_key) -gt 3
+    #                         echo -s " and " (math (count $$repos_key) - 3) " more"
+    #                     end
+    #                 ) \
+    #                 ".)"
+    #         )
+
+    #     if test (count $$repos_key) -le 3
+    #         set repos_str (string replace -r ',(?=[^,]*$)' " and" $repos_str)
+    #     end
+
+    #     echo -se \
+    #         \n \
+    #         \[$profile_number\] \
+    #         \n \
+    #         "     Email address: " \
+    #         $$profile_key[1][1] \
+    #         \n \
+    #         "              Name: " \
+    #         $$profile_key[1][2] \
+    #         \n \
+    #         "GPG signing key ID: " \
+    #         $$profile_key[1][3] \
+    #         \n\n \
     #         (set_color brblack) \
-    #         "Used in " \
-    #         (string join ", " $$repos_key) \
+    #         $repos_str \
     #         (set_color normal)
+
+    #     set profile_number (math $profile_number - 1)
     # end
 
     # Prompts the user to set a Git author email.
