@@ -32,7 +32,18 @@ function git_setup -d "Sets up the Git repository configuration."
         return 1
     end
 
-    # for config_path in $HOME/**/.git/config
+    # set -f profile_email \
+    #     user.email \
+    #     "Email address"
+    # set -f profile_name \
+    #     user.name \
+    #     Name
+    # set -f profile_signingkey \
+    #     user.signingkey \
+    #     "GPG signing key ID"
+    # set -f profile_data profile_email profile_name profile_signingkey
+
+    # for config_path in $HOME/{,.}*{,/{,.}*}/.git/config
     #     set -l new_profile \
     #         (git config -f $config_path --default "" --get user.email) \
     #         (git config -f $config_path --default "" --get user.name) \
