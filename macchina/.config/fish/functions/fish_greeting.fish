@@ -3,7 +3,7 @@ function fish_greeting
     # Disables echoing of input characters.
     stty -echo 2>/dev/null
 
-    if [ "$GREETING" != false ]
+    if test "$GREETING" != false
         macchina
     end
 end
