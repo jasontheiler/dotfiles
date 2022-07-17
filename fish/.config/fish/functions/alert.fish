@@ -1,5 +1,5 @@
-# ...
-function alert -d "..."
+# Prints an alert of the specified type.
+function alert -d "Prints an alert of the specified type."
     if not contains $argv[1] error warning info success
         return 1
     end
