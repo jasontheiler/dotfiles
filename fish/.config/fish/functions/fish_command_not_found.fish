@@ -1,4 +1,4 @@
 # Handles fish's "command not found" error.
 function fish_command_not_found
-    __fish_default_command_not_found_handler $argv[1]
+    alert error "Command not found: $argv"
 end
