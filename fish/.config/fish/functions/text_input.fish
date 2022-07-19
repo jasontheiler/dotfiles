@@ -1,6 +1,6 @@
 # Prompts the user to input text.
 function text_input -d "Prompts the user to input text."
-    read -fP "$( \
+    read -P "$( \
         echo -es \
             \n \
             (set_color blue) \
