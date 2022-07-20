@@ -11,7 +11,7 @@ function alert -d "Prints an alert of the specified type."
             set icon 📱
             set color blue
         case success
-            set icon ✅
+            set icon 👌
             set color green
         case '*'
             return 1
@@ -25,5 +25,7 @@ function alert -d "Prints an alert of the specified type."
         ": " \
         (set_color normal) \
         (set_color $color) \
-        " $argv[2..]"
+        " " \
+        $argv[2..] \
+        (set_color normal)
 end
