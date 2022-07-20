@@ -6,13 +6,13 @@ function git_profile -d "Sets up the Git repository configuration."
     end
 
     for config_path in $HOME/{.,}*{,/{.,}*}/.git/config
-        set -l new_profile \
+        set -l profile \
             (git config -f $config_path --default "" --get user.email) \
             (git config -f $config_path --default "" --get user.name) \
             (git config -f $config_path --default "" --get user.signingkey)
 
-        # Skips if the new profile is empty.
-        if test -z (string join0 $new_profile)
+        # Skips if the profile is empty.
+        if test -z (string join0 $profile)
             continue
         end
 
@@ -21,7 +21,7 @@ function git_profile -d "Sets up the Git repository configuration."
 
         # Checks if the profile already exists.
         for profile_key in $profiles
-            if test "$$profile_key" = "$new_profile"
+            if test "$$profile_key" = "$profile"
                 set -a {$profile_key}_repos (string split / $repo_path)[-2]
                 set profile_exists true
                 break
@@ -29,18 +29,25 @@ function git_profile -d "Sets up the Git repository configuration."
         end
 
         if not $profile_exists
-            set -l new_profile_key (string escape --style var $repo_path)
-            set -f $new_profile_key $new_profile
-            set -fa profiles $new_profile_key
-            set -f {$new_profile_key}_repos (string split / $repo_path)[-2]
+            set -l profile_key (string escape --style var $repo_path)
+            set -f $profile_key $profile
+            set -fa profiles $profile_key
+            set -f {$profile_key}_repos (string split / $repo_path)[-2]
         end
     end
 
+    set profiles_len (count $profiles)
+    if test $profiles_len -gt 0
+        set has_profiles true
+    else
+        set has_profiles false
+    end
+
     # Sorts the profiles by repo count using Bubblesort.
-    for i in (seq 1 (count $profiles))
+    for i in (seq 1 $profiles_len)
         set -l has_swapped false
 
-        for j in (seq 1 (math (count $profiles) - $i))
+        for j in (seq 1 (math $profiles_len - $i))
             set -l j1 (math $j + 1)
             set -l j_repos_key {$profiles[$j]}_repos
             set -l j1_repos_key {$profiles[$j1]}_repos
@@ -58,18 +65,18 @@ function git_profile -d "Sets up the Git repository configuration."
         end
     end
 
-    for i in (seq 1 (count $profiles))[-1..1]
+    if not $has_profiles
+        alert info "No existing profiles found."
+    end
+
+    for i in (seq 1 $profiles_len)[-1..1]
         set -l repos_key {$profiles[$i]}_repos
         set -l repos_str (
             string join ", " \
                 $$repos_key[1][1..3] \
-                (
-                    if test (count $$repos_key) -gt 3
-                        echo (math (count $$repos_key) - 3) more
-                    end
-                ) \
-            # Replaces the last `,` with `and`.
-            | string replace -r ',(?=[^,]*$)' " and"
+                (if test (count $$repos_key) -gt 3; echo (math (count $$repos_key) - 3) more; end) \
+                # Replaces the last `,` with ` and`.
+                | string replace -r ',(?=[^,]*$)' " and"
         )
 
         echo -es \
@@ -94,32 +101,36 @@ function git_profile -d "Sets up the Git repository configuration."
             (set_color normal)
     end
 
-    if test (count $profiles) -eq 0
-        alert info "No existing profiles found."
-    end
-
     echo
 
-    while test -z $answer
+    while not set -q answer
         set answer (
-            text_input -i \
-                "Apply an existing profile " \
-                (set_color brblack) \
-                "[" \
-                (set_color blue) \
-                "1" \
+            text_input -it \
                 (
-                    if test (count $profiles) -gt 1
-                        math (count $profiles) \* -1
+                    if $has_profiles
+                        echo -s \
+                            "Apply an existing profile " \
+                            (set_color brblack) \
+                            "[" \
+                            (set_color blue) \
+                            "1" \
+                            (
+                                if test $profiles_len -gt 1
+                                    math $profiles_len \* -1
+                                end
+                            ) \
+                            (set_color normal) \
+                            (set_color brblack) \
+                            "]" \
+                            (set_color normal) \
+                            ", "
                     end
                 ) \
-                (set_color normal) \
+                (if $has_profiles; echo c; else; echo C; end) \
+                "reate a new " \
+                (if $has_profiles; echo one; else; echo profile; end) \
                 (set_color brblack) \
-                "]" \
-                (set_color normal) \
-                ", create a new one " \
-                (set_color brblack) \
-                "[" \
+                " [" \
                 (set_color blue) \
                 "n" \
                 (set_color brblack) \
@@ -136,32 +147,30 @@ function git_profile -d "Sets up the Git repository configuration."
                 "?"
         )
 
-        if not contains "$answer" (seq 1 (count $profiles)) n q
-            alert error "Invalid value: " $value
+        if not contains "$answer" (seq 1 $profiles_len) n q
+            alert error "Invalid value: " $answer
             set -e answer
         end
     end
 
     switch $answer
         case q
-            alert info "Quitting without any changes." \n
+            alert info "Quit without applying any changes." \n
             return
         case n
-            if test (count $profiles) -eq 0
-                alert info "No existing profiles found. Creating a new one:"
-            else
-                alert info "Creating a new profile:"
-            end
+            alert info "Creating a new profile:" \n
 
-            set user_email (text_input "What is your email address?")
-            set user_name (text_input "What is your name?")
+            set user_email (text_input -t "What is your email address?")
+            set user_name (text_input -t "What is your name?")
             set user_signingkey (
-                text_input \
+                text_input -t \
                     "What is your GPG signing key ID?" \
                     \n \
                     (set_color brblack) \
-                    " (This will enable GPG commit signing.)"
+                    " (This will enable GPG commit signing!)"
             )
+
+            echo
         case '*'
             set user_email $$profiles[$answer][1]
             set user_name $$profiles[$answer][2]
