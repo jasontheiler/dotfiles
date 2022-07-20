@@ -40,7 +40,7 @@ function esc -d "Prints common ANSI escape codes."
             end
     end
 
-    if test (count $code) -lt 1
+    if not set -q code
         return 1
     end
 

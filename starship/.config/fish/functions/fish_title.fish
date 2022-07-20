@@ -1,20 +1,20 @@
 # Prints fish's title.
 function fish_title
     if test (id -u) -eq 0
-        or test $USER != $LOGNAME
-        or test $SSH_CONNECTION
-        or test $SSH_CLIENT
-        or test $SSH_TTY
+        or test "$USER" != "$LOGNAME"
+        or set -q SSH_CONNECTION
+        or set -q SSH_CLIENT
+        or set -q SSH_TTY
         set title_username $USER " in "
     end
 
-    if test $SSH_CONNECTION
-        or test $SSH_CLIENT
-        or test $SSH_TTY
+    if set -q SSH_CONNECTION
+        or set -q SSH_CLIENT
+        or set -q SSH_TTY
         set title_hostname $hostname " in "
     end
 
-    if test $argv
+    if test (count $argv) -ge 1
         set title_command " ❯ " $argv
     end
 

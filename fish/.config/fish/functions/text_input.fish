@@ -10,13 +10,7 @@ function text_input -d "Prompts the user to input text."
             (set_color normal) \
             $argv \
             (set_color normal) \
-            (
-                if set -q _flag_inline
-                    echo ' '
-                else
-                    echo '\n'
-                end
-            ) \
+            (if set -q _flag_inline; echo ' '; else; echo '\n'; end) \
             (set_color green) \
             "❯ " \
             (set_color normal)
