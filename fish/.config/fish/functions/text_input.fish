@@ -1,6 +1,6 @@
 # Prompts the user to input text.
 function text_input -d "Prompts the user to input text."
-    argparse --ignore-unknown i/inline  -- $argv
+    argparse i/inline t/trim -- $argv
 
     read -P "$(
         echo -es \
@@ -11,16 +11,20 @@ function text_input -d "Prompts the user to input text."
             $argv \
             (set_color normal) \
             (
-                if test -z $_flag_inline
-                    echo '\n'
-                else
+                if set -q _flag_inline
                     echo ' '
+                else
+                    echo '\n'
                 end
             ) \
             (set_color green) \
             "❯ " \
             (set_color normal)
     )" value
+
+    if set -q _flag_trim
+        set value (string trim $value)
+    end
 
     echo $value
 end
