@@ -1,7 +1,7 @@
 # Sets up the user's Git configuration.
 function git_profile -d "Sets up the Git repository configuration."
     if not test -d ./.git/
-        alert error "Current directory is not a Git repository."
+        alert error "Current directory is not a Git repository!" \n
         return 1
     end
 
@@ -37,12 +37,10 @@ function git_profile -d "Sets up the Git repository configuration."
     end
 
     # Sorts the profiles by repo count using Bubblesort.
-    set -l i 1
-    while test $i -le (count $profiles)
+    for i in (seq 1 (count $profiles))
         set -l has_swapped false
 
-        set -l j 1
-        while test $j -le (math (count $profiles) - $i)
+        for j in (seq 1 (math (count $profiles) - $i))
             set -l j1 (math $j + 1)
             set -l j_repos_key {$profiles[$j]}_repos
             set -l j1_repos_key {$profiles[$j1]}_repos
@@ -53,19 +51,14 @@ function git_profile -d "Sets up the Git repository configuration."
                 set profiles[$j1] $temp
                 set has_swapped true
             end
-
-            set j $j1
         end
 
         if not $has_swapped
             break
         end
-
-        set i (math $i + 1)
     end
 
-    set -l i (count $profiles)
-    while test $i -ge 1
+    for i in (seq 1 (count $profiles))[-1..1]
         set -l repos_key {$profiles[$i]}_repos
         set -l repos_str (
             string join ", " \
@@ -99,59 +92,81 @@ function git_profile -d "Sets up the Git repository configuration."
             $repos_str \
             ".)" \
             (set_color normal)
-
-        set i (math $i - 1)
     end
 
-    if test (count $profiles) -gt 0
-        echo
-
-        set is_valid false
-        while not $is_valid
-            set -l answer (
-                text_input -i \
-                    "Apply an existing profile " \
-                    (set_color brblack) \
-                    "[" \
-                    (set_color blue) \
-                    "1" \
-                    (
-                        if test (count $profiles) -gt 1
-                            math (count $profiles) \* -1
-                        end
-                    ) \
-                    (set_color normal) \
-                    (set_color brblack) \
-                    "]" \
-                    (set_color normal) \
-                    " or create a new one " \
-                    (set_color brblack) \
-                    "[" \
-                    (set_color blue) \
-                    "new" \
-                    (set_color brblack) \
-                    "]" \
-                    (set_color normal) \
-                    "?"
-            )
-
-            set is_valid true
-        end
-    else
-        alert info "No existing profiles found. Creating a new one..."
+    if test (count $profiles) -eq 0
+        alert info "No existing profiles found."
     end
 
     echo
 
-    set user_email (text_input "What is your email address?")
-    set user_name (text_input "What is your name?")
-    set user_signingkey (
-        text_input \
-            "What is your GPG signing key ID?" \
-            \n \
-            (set_color brblack) \
-            " (This will enable GPG commit signing.)"
-    )
+    while test -z $answer
+        set answer (
+            text_input -i \
+                "Apply an existing profile " \
+                (set_color brblack) \
+                "[" \
+                (set_color blue) \
+                "1" \
+                (
+                    if test (count $profiles) -gt 1
+                        math (count $profiles) \* -1
+                    end
+                ) \
+                (set_color normal) \
+                (set_color brblack) \
+                "]" \
+                (set_color normal) \
+                ", create a new one " \
+                (set_color brblack) \
+                "[" \
+                (set_color blue) \
+                "n" \
+                (set_color brblack) \
+                "]" \
+                (set_color normal) \
+                " or quit " \
+                (set_color brblack) \
+                "[" \
+                (set_color blue) \
+                "q" \
+                (set_color brblack) \
+                "]" \
+                (set_color normal) \
+                "?"
+        )
+
+        if not contains "$answer" (seq 1 (count $profiles)) n q
+            alert error "Invalid value: " $value
+            set -e answer
+        end
+    end
+
+    switch $answer
+        case q
+            alert info "Quitting without any changes." \n
+            return
+        case n
+            if test (count $profiles) -eq 0
+                alert info "No existing profiles found. Creating a new one:"
+            else
+                alert info "Creating a new profile:"
+            end
+
+            set user_email (text_input "What is your email address?")
+            set user_name (text_input "What is your name?")
+            set user_signingkey (
+                text_input \
+                    "What is your GPG signing key ID?" \
+                    \n \
+                    (set_color brblack) \
+                    " (This will enable GPG commit signing.)"
+            )
+        case '*'
+            set user_email $$profiles[$answer][1]
+            set user_name $$profiles[$answer][2]
+            set user_signingkey $$profiles[$answer][3]
+    end
 
     if test -n "$user_email"
         git config --local user.email "$user_email"
@@ -164,5 +179,11 @@ function git_profile -d "Sets up the Git repository configuration."
     if test -n "$user_signingkey"
         git config --local user.signingkey "$user_signingkey"
         git config --local commit.gpgsign true
+    end
+
+    if test $answer = n
+        alert success "Created a new profile!" \n
+    else
+        alert success "Applied profile #$answer!" \n
     end
 end
