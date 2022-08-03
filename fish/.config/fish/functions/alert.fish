@@ -21,7 +21,10 @@ function alert -d "Prints an alert of the specified type."
         \n \
         (set_color $color) \
         " $icon " \
+        (set_color -u $color) \
         (string upper $argv[1]) \
+        (set_color normal) \
+        (set_color $color) \
         " ->  " \
         (set_color normal) \
         $argv[2..] \
