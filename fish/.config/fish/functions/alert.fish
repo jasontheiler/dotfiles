@@ -14,6 +14,7 @@ function alert -d "Prints an alert of the specified type."
             set icon ✔
             set color green
         case '*'
+            alert error "Invalid alert level: " `$argv[1]` \n
             return 1
     end
 

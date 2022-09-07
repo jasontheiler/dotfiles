@@ -5,7 +5,20 @@ function git_profile -d "Sets up the Git repository configuration."
         return 1
     end
 
-    for config_path in $HOME/{.,}*{,/{.,}*}/.git/config
+    if contains -- -d $argv
+        set has_flag_depth
+    end
+    argparse "d/depth=" h/hidden -- $argv 2>/dev/null
+
+    if not set -q has_flag_depth
+        set _flag_depth 3
+    else if not string match -qr '^\d+$' -- $_flag_depth
+        or test $_flag_depth -lt 1
+        alert error "Invalid depth: " `$_flag_depth` \n
+        return 1
+    end
+
+    for config_path in $HOME/{.,}*{,/{.,}*}{,/{.,}*}/.git/config
         set -l profile \
             (git config -f $config_path --default "" --get user.email) \
             (git config -f $config_path --default "" --get user.name) \
