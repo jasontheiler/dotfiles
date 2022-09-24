@@ -3,8 +3,10 @@
 
 format = "$time$all"
 
-[docker_context]
-disabled = false
+[git_status]
+ahead = "${count}↑"
+behind = "${count}↓"
+diverged = "${ahead_count}↑${behind_count}↓"
 
 [hostname]
 style = "bold green"
@@ -12,8 +14,9 @@ style = "bold green"
 [nodejs]
 symbol = "⬢ "
 
-[python]
-python_binary = "python3"
+[status]
+disabled = false
+format = "[$status]($style) "
 
 [time]
 disabled = false
