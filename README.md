@@ -26,10 +26,10 @@ Follow these steps to install the dotfiles:
 
    ```sh
    # Using HTTPS
-   git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles
+   git clone https://github.com/jasontheiler/dotfiles.git ~/.dotfiles/
 
    # Using SSH
-   git clone git@github.com:jasontheiler/dotfiles.git ~/.dotfiles
+   git clone git@github.com:jasontheiler/dotfiles.git ~/.dotfiles/
    ```
 
 2. Stow the dotfiles in your home directory from inside the local repository:
