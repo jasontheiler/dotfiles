@@ -1,6 +1,6 @@
 local fn = vim.fn
 local packer_install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-local is_packer_installed = fn.empty(fn.glob(packer_install_path)) > 0
+local is_packer_installed = fn.empty(fn.glob(packer_install_path)) <= 0
 
 if not is_packer_installed then
   fn.system({
