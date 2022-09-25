@@ -36,13 +36,13 @@ Follow these steps to install the dotfiles:
 
    ```sh
    # Stows all packages.
-   stow -t ~ */
+   stow */
 
    # Stows select packages.
-   stow -t ~ fish/ git/
+   stow fish/ git/
 
    # Unstows select packages.
-   stow -Dt ~ starship/ exa/ fnm/
+   stow -D starship/ exa/ fnm/
    ```
 
 3. Restart your shell.
