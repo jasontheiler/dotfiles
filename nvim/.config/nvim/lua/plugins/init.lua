@@ -1,4 +1,6 @@
+local cmd = vim.cmd
 local fn = vim.fn
+
 local packer_install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
 local is_packer_installed = fn.empty(fn.glob(packer_install_path)) <= 0
 
@@ -11,7 +13,7 @@ if not is_packer_installed then
     "https://github.com/wbthomason/packer.nvim",
     packer_install_path
   })
-  vim.cmd([[packadd packer.nvim]])
+  cmd([[packadd packer.nvim]])
 end
 
 local packer = require("packer")
@@ -19,12 +21,14 @@ local packer = require("packer")
 packer.startup(function(use)
   use("wbthomason/packer.nvim")
 
+  use("nvim-lualine/lualine.nvim")
+
   if not is_packer_installed then
     packer.sync()
   end
 end)
 
-vim.cmd([[
+cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
