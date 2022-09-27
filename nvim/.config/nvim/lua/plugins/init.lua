@@ -31,6 +31,9 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-lualine/lualine.nvim
   use("nvim-lualine/lualine.nvim")
 
+  -- See: https://github.com/lewis6991/gitsigns.nvim
+  use("lewis6991/gitsigns.nvim")
+
   -- See: https://github.com/nvim-telescope/telescope.nvim
   use({
     "nvim-telescope/telescope.nvim",

@@ -1,4 +1,5 @@
 require("plugins")
+require("plugins/gitsigns")
 require("plugins/lualine")
 require("plugins/telescope")
 require("plugins/treesitter")
@@ -11,5 +12,6 @@ opt.history = 1000
 opt.number = true
 opt.relativenumber = true
 -- opt.signcolumn = "yes"
+opt.mouse = "a"
 
 wo.fillchars = "eob: "
