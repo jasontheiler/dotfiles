@@ -1,5 +1,6 @@
 require("plugins")
 require("plugins/lualine")
+require("plugins/telescope")
 require("plugins/treesitter")
 
 local cmd = vim.cmd

@@ -31,6 +31,12 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-lualine/lualine.nvim
   use("nvim-lualine/lualine.nvim")
 
+  -- See: https://github.com/nvim-telescope/telescope.nvim
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  })
+
   if not is_packer_installed then
     packer.sync()
   end
