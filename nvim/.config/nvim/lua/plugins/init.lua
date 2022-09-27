@@ -11,7 +11,7 @@ if not is_packer_installed then
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
-    packer_install_path
+    packer_install_path,
   })
   cmd([[packadd packer.nvim]])
 end
@@ -19,8 +19,16 @@ end
 local packer = require("packer")
 
 packer.startup(function(use)
+  -- See: https://github.com/wbthomason/packer.nvim
   use("wbthomason/packer.nvim")
 
+  -- See: https://github.com/nvim-treesitter/nvim-treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+  })
+
+  -- See: https://github.com/nvim-lualine/lualine.nvim
   use("nvim-lualine/lualine.nvim")
 
   if not is_packer_installed then
