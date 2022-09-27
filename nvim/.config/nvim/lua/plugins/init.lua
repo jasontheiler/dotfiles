@@ -28,6 +28,9 @@ packer.startup(function(use)
     run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
   })
 
+  -- See: https://github.com/lukas-reineke/indent-blankline.nvim
+  use("lukas-reineke/indent-blankline.nvim")
+
   -- See: https://github.com/nvim-lualine/lualine.nvim
   use("nvim-lualine/lualine.nvim")
 
@@ -48,6 +51,6 @@ end)
 cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua source $MYVIMRC | PackerCompile
   augroup end
 ]])
