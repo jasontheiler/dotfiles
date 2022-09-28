@@ -1,9 +1,4 @@
 require("plugins")
-require("plugins/gitsigns")
-require("plugins/indent_blankline")
-require("plugins/lualine")
-require("plugins/telescope")
-require("plugins/treesitter")
 
 local cmd = vim.cmd
 local opt = vim.opt

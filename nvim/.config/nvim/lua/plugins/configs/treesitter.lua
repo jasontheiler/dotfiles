@@ -1,4 +1,10 @@
-require("nvim-treesitter.configs").setup({
+local isInstalled, treesitter = pcall(require, "nvim-treesitter.configs")
+
+if not isInstalled then
+  return
+end
+
+treesitter.setup({
   ensure_installed = {
     "css",
     "dockerfile",

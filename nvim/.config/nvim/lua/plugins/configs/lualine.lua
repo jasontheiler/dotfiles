@@ -1,8 +1,17 @@
-require("lualine").setup({
+local isInstalled, lualine = pcall(require, "lualine")
+
+if not isInstalled then
+  return
+end
+
+lualine.setup({
   options = {
     theme = "horizon",
     component_separators = '',
     section_separators = ' ',
+    disabled_filetypes = {
+      statusline = { "NvimTree" },
+    },
   },
   sections = {
     lualine_a = { 'mode' },
