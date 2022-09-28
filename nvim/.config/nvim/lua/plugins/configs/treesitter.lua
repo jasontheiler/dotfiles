@@ -1,6 +1,6 @@
-local isInstalled, treesitter = pcall(require, "nvim-treesitter.configs")
+local is_installed, treesitter = pcall(require, "nvim-treesitter.configs")
 
-if not isInstalled then
+if not is_installed then
   return
 end
 

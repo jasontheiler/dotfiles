@@ -1,6 +1,6 @@
-local isInstalled, gitsigns = pcall(require, "gitsigns")
+local is_installed, gitsigns = pcall(require, "gitsigns")
 
-if not isInstalled then
+if not is_installed then
   return
 end
 

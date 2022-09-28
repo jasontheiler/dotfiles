@@ -1,22 +1,20 @@
 local cmd = vim.cmd
 local fn = vim.fn
 
-local packer_install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-local is_packer_installed = fn.empty(fn.glob(packer_install_path)) <= 0
+local is_installed, packer = pcall(require, "packer")
 
-if not is_packer_installed then
+if not is_installed then
   fn.system({
     "git",
     "clone",
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
-    packer_install_path,
+    fn.stdpath("data").."/site/pack/packer/start/packer.nvim",
   })
   cmd([[packadd packer.nvim]])
+  packer = require("packer")
 end
-
-local packer = require("packer")
 
 packer.startup(function(use)
   -- See: https://github.com/wbthomason/packer.nvim
@@ -49,7 +47,7 @@ packer.startup(function(use)
 
   -- See: https://github.com/lewis6991/gitsigns.nvim
   use({
-    "lewis6991/gitsigns.nvim"
+    "lewis6991/gitsigns.nvim",
     config = function() require("plugins/configs/gitsigns") end,
   })
 
@@ -65,7 +63,7 @@ packer.startup(function(use)
     config = function() require("plugins/configs/telescope") end,
   })
 
-  if not is_packer_installed then
+  if not is_installed then
     packer.sync()
   end
 end)

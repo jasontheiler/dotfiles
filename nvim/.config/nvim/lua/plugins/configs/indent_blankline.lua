@@ -1,6 +1,6 @@
-local isInstalled, indent_blankline = pcall(require, "indent_blankline")
+local is_installed, indent_blankline = pcall(require, "indent_blankline")
 
-if not isInstalled then
+if not is_installed then
   return
 end
 

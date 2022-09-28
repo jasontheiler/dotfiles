@@ -1,8 +1,8 @@
 local api = vim.api
 
-local isInstalled, nvim_tree = pcall(require, "nvim-tree")
+local is_installed, nvim_tree = pcall(require, "nvim-tree")
 
-if not isInstalled then
+if not is_installed then
   return
 end
 

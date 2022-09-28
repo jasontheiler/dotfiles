@@ -1,6 +1,6 @@
-local isInstalled, lualine = pcall(require, "lualine")
+local is_installed, lualine = pcall(require, "lualine")
 
-if not isInstalled then
+if not is_installed then
   return
 end
 
