@@ -7,12 +7,9 @@ end
 -- See: https://github.com/nvim-lualine/lualine.nvim#usage-and-customization
 lualine.setup({
   options = {
-    theme = "horizon",
+    theme = "tokyonight",
     component_separators = '',
     section_separators = ' ',
-    disabled_filetypes = {
-      statusline = { "NvimTree" },
-    },
   },
   sections = {
     lualine_a = { 'mode' },

@@ -10,7 +10,7 @@ if not is_installed then
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
-    fn.stdpath("data").."/site/pack/packer/start/packer.nvim",
+    fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
   })
   cmd([[packadd packer.nvim]])
   packer = require("packer")
@@ -23,21 +23,30 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-lua/plenary.nvim
   use("nvim-lua/plenary.nvim")
 
+  -- See: https://github.com/folke/tokyonight.nvim
+  use({
+    "folke/tokyonight.nvim",
+    config = function() require("plugins/configs/tokyonight") end,
+  })
+
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
-    config = function() require("plugins/configs/treesitter") end,
+    config = function() require("plugins/configs/nvim-treesitter") end,
   })
 
   -- See: https://github.com/lukas-reineke/indent-blankline.nvim
   use({
     "lukas-reineke/indent-blankline.nvim",
-    config = function() require("plugins/configs/indent_blankline") end,
+    config = function() require("plugins/configs/indent-blankline") end,
   })
 
   -- See: https://github.com/kyazdani42/nvim-web-devicons
-  use("kyazdani42/nvim-web-devicons")
+  use({
+    "kyazdani42/nvim-web-devicons",
+    config = function() require("plugins/configs/web-devicons") end,
+  })
 
   -- See: https://github.com/nvim-lualine/lualine.nvim
   use({

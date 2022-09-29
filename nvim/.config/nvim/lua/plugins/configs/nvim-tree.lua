@@ -6,8 +6,8 @@ if not is_installed then
   return
 end
 
+-- See: https://github.com/kyazdani42/nvim-tree.lua#setup
 nvim_tree.setup({
-  disable_netrw = true,
   hijack_cursor = true,
   sync_root_with_cwd = true,
   update_focused_file = {
@@ -18,4 +18,4 @@ nvim_tree.setup({
   },
 })
 
-api.nvim_set_keymap("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
