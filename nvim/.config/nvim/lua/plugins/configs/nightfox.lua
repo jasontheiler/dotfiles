@@ -7,4 +7,4 @@ end
 -- See: https://github.com/EdenEast/nightfox.nvim#configuration
 nightfox.setup({})
 
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme carbonfox")

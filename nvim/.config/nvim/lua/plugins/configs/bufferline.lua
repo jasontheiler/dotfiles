@@ -1,4 +1,3 @@
-local api = vim.api
 local fn = vim.fn
 
 local is_installed, bufferline = pcall(require, "bufferline")
@@ -25,5 +24,7 @@ bufferline.setup({
   },
 })
 
-api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+local keymap = require("utils").keymap
+
+keymap("n", "<Tab>", function() bufferline.cycle(1) end)
+keymap("n", "<S-Tab>", function() bufferline.cycle(-1) end)

@@ -32,7 +32,7 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
-    run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+    run = function() require("nvim-treesitter/install").update({ with_sync = true }) end,
     config = function() require("plugins/configs/nvim-treesitter") end,
   })
 

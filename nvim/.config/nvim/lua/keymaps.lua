@@ -1,6 +1,8 @@
-local api = vim.api
+local keymap = require("utils").keymap
 
-api.nvim_set_keymap("i", "<C-h>", "<Left>", { noremap = true })
-api.nvim_set_keymap("i", "<C-j>", "<Down>", { noremap = true })
-api.nvim_set_keymap("i", "<C-k>", "<Up>", { noremap = true })
-api.nvim_set_keymap("i", "<C-l>", "<Right>", { noremap = true })
+keymap("n", "<C-s>", ":w<CR>")
+
+keymap("i", "<C-h>", "<Left>")
+keymap("i", "<C-j>", "<Down>")
+keymap("i", "<C-k>", "<Up>")
+keymap("i", "<C-l>", "<Right>")

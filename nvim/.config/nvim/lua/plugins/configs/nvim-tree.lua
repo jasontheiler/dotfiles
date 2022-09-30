@@ -1,5 +1,3 @@
-local api = vim.api
-
 local is_installed, nvim_tree = pcall(require, "nvim-tree")
 
 if not is_installed then
@@ -23,4 +21,7 @@ nvim_tree.setup({
   },
 })
 
-api.nvim_set_keymap("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+local keymap = require("utils").keymap
+local nvim_tree_api = require("nvim-tree/api")
+
+keymap("n", "<C-b>", nvim_tree_api.tree.toggle)
