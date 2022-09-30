@@ -23,10 +23,10 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-lua/plenary.nvim
   use("nvim-lua/plenary.nvim")
 
-  -- See: https://github.com/folke/tokyonight.nvim
+  -- See: https://github.com/EdenEast/nightfox.nvim
   use({
-    "folke/tokyonight.nvim",
-    config = function() require("plugins/configs/tokyonight") end,
+    "EdenEast/nightfox.nvim",
+    config = function() require("plugins/configs/nightfox") end,
   })
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
@@ -34,6 +34,12 @@ packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
     config = function() require("plugins/configs/nvim-treesitter") end,
+  })
+
+  -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
+  use({
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function() require("plugins/configs/nvim-treesitter-context") end,
   })
 
   -- See: https://github.com/lukas-reineke/indent-blankline.nvim
@@ -60,6 +66,12 @@ packer.startup(function(use)
     config = function() require("plugins/configs/gitsigns") end,
   })
 
+  -- See: https://github.com/akinsho/bufferline.nvim
+  use({
+    "akinsho/bufferline.nvim",
+    config = function() require("plugins/configs/bufferline") end,
+  })
+
   -- See: https://github.com/kyazdani42/nvim-tree.lua
   use({
     "kyazdani42/nvim-tree.lua",
@@ -76,10 +88,3 @@ packer.startup(function(use)
     packer.sync()
   end
 end)
-
-cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source $MYVIMRC | PackerCompile
-  augroup end
-]])

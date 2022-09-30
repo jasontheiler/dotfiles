@@ -16,6 +16,11 @@ nvim_tree.setup({
   view = {
     hide_root_folder = true,
   },
+  actions = {
+    change_dir = {
+      restrict_above_cwd = true,
+    },
+  },
 })
 
 api.nvim_set_keymap("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
