@@ -25,7 +25,7 @@ local keymap = require("utils").keymap
 
 local find_files = function(no_ignore)
   if vim.fn.executable("rg") == 0 then
-    vim.notify("You need to install ripgrep", 4)
+    vim.notify("You need to install ripgrep", vim.log.levels.ERROR)
     return
   end
 
