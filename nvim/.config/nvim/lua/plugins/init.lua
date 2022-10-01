@@ -81,6 +81,7 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-telescope/telescope.nvim
   use({
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     config = function() require("plugins/configs/telescope") end,
   })
 

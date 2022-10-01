@@ -6,6 +6,26 @@ end
 
 -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
 nvim_treesitter.setup({
+  ensure_installed = {
+    "css",
+    "dockerfile",
+    "fish",
+    "gitignore",
+    "html",
+    "javascript",
+    "jsdoc",
+    "json",
+    "json5",
+    "jsonc",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "rust",
+    "toml",
+    "typescript",
+    "vue",
+    "yaml",
+  },
   auto_install = true,
   highlight = {
     enable = true,

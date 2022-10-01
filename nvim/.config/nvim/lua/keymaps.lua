@@ -1,6 +1,7 @@
 local keymap = require("utils").keymap
 
 keymap("n", "<C-s>", ":w<CR>")
+keymap("n", "<C-q>", ":qa<CR>")
 
 keymap("i", "<C-h>", "<Left>")
 keymap("i", "<C-j>", "<Down>")
