@@ -1,18 +1,15 @@
-local cmd = vim.cmd
-local fn = vim.fn
-
 local is_installed, packer = pcall(require, "packer")
 
 if not is_installed then
-  fn.system({
+  vim.fn.system({
     "git",
     "clone",
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
-    fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
+    vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
   })
-  cmd([[packadd packer.nvim]])
+  vim.cmd("packadd packer.nvim")
   packer = require("packer")
 end
 

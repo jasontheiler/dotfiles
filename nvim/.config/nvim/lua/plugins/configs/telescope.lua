@@ -9,13 +9,6 @@ local telescope_actions = require("telescope/actions")
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
   defaults = {
-    sorting_strategy = "ascending",
-    layout_strategy = "horizontal",
-    layout_config = {
-      horizontal = {
-        prompt_position = "top",
-      },
-    },
     mappings = {
       i = {
         ["<C-h>"] = { type = "command", "<Left>" },
@@ -30,5 +23,17 @@ telescope.setup({
 local telescope_builtin = require("telescope/builtin")
 local keymap = require("utils").keymap
 
-keymap("n", { "<C-k><C-k>", "<C-k>k" }, telescope_builtin.find_files)
-keymap("n", { "<C-k><C-a>", "<C-k>a" }, telescope_builtin.find_files)
+local find_files = function(no_ignore)
+  if vim.fn.executable("rg") == 0 then
+    vim.notify("You need to install ripgrep", 4)
+    return
+  end
+
+  telescope_builtin.find_files({
+    find_command = { "rg", "--files", "--hidden", "--glob", "!*/.git/*", "--glob", "!.git/*" },
+    no_ignore = no_ignore,
+  })
+end
+
+keymap("n", { "<C-k><C-k>", "<C-k>k" }, function() find_files() end)
+keymap("n", { "<C-k><C-a>", "<C-k>a" }, function() find_files(true) end)

@@ -1,5 +1,3 @@
-local cmd = vim.cmd
-local g = vim.g
 local opt = vim.opt
 
 opt.showmode = false
@@ -20,6 +18,8 @@ opt.fillchars = { eob = " " }
 opt.shortmess:append("sI") -- disables nvim intro
 opt.splitbelow = true
 opt.splitright = true
+
+local g = vim.g
 
 g.loaded = 1
 g.loaded_netrwPlugin = 1

@@ -1,5 +1,3 @@
-local fn = vim.fn
-
 local is_installed, bufferline = pcall(require, "bufferline")
 
 if not is_installed then
@@ -17,7 +15,7 @@ bufferline.setup({
       {
         filetype = "NvimTree",
         text = function()
-          return fn.fnamemodify(fn.getcwd(), ":t")
+          return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
         end,
       },
     },

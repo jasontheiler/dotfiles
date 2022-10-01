@@ -21,7 +21,7 @@ nvim_tree.setup({
   },
 })
 
-local keymap = require("utils").keymap
 local nvim_tree_api = require("nvim-tree/api")
+local keymap = require("utils").keymap
 
 keymap("n", "<C-b>", nvim_tree_api.tree.toggle)
