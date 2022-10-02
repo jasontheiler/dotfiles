@@ -12,6 +12,7 @@ mason_lspconfig.setup({
     "dockerls",
     "html",
     "jsonls",
+    "marksman",
     "rust_analyzer",
     "sumneko_lua",
     "taplo",
