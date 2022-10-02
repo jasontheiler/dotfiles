@@ -1,11 +1,12 @@
-local is_installed, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
+local is_installed, treesitter = pcall(require, "nvim-treesitter.configs")
 
 if not is_installed then
   return
 end
 
 -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
-nvim_treesitter.setup({
+treesitter.setup({
+  -- See: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
   ensure_installed = {
     "css",
     "dockerfile",
@@ -28,6 +29,9 @@ nvim_treesitter.setup({
   },
   auto_install = true,
   highlight = {
+    enable = true,
+  },
+  indent = {
     enable = true,
   },
   incremental_selection = {

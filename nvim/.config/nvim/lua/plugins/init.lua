@@ -30,13 +30,33 @@ packer.startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function() require("nvim-treesitter/install").update({ with_sync = true }) end,
-    config = function() require("plugins/configs/nvim-treesitter") end,
+    config = function() require("plugins/configs/treesitter") end,
   })
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
   use({
     "nvim-treesitter/nvim-treesitter-context",
-    config = function() require("plugins/configs/nvim-treesitter-context") end,
+    after = "nvim-treesitter",
+    config = function() require("plugins/configs/treesitter-context") end,
+  })
+
+  -- See: https://github.com/williamboman/mason.nvim
+  use({
+    "williamboman/mason.nvim",
+    config = function() require("plugins/configs/mason") end,
+  })
+
+  -- See: https://github.com/neovim/nvim-lspconfig
+  use({
+    "neovim/nvim-lspconfig",
+    after = "mason.nvim",
+  })
+
+  -- See: https://github.com/williamboman/mason-lspconfig.nvim
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    after = "nvim-lspconfig",
+    config = function() require("plugins/configs/mason-lspconfig") end,
   })
 
   -- See: https://github.com/lukas-reineke/indent-blankline.nvim
@@ -57,6 +77,13 @@ packer.startup(function(use)
     config = function() require("plugins/configs/lualine") end,
   })
 
+  -- See: https://github.com/nvim-telescope/telescope.nvim
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    config = function() require("plugins/configs/telescope") end,
+  })
+
   -- See: https://github.com/lewis6991/gitsigns.nvim
   use({
     "lewis6991/gitsigns.nvim",
@@ -72,14 +99,7 @@ packer.startup(function(use)
   -- See: https://github.com/kyazdani42/nvim-tree.lua
   use({
     "kyazdani42/nvim-tree.lua",
-    config = function() require("plugins/configs/nvim-tree") end,
-  })
-
-  -- See: https://github.com/nvim-telescope/telescope.nvim
-  use({
-    "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    config = function() require("plugins/configs/telescope") end,
+    config = function() require("plugins/configs/tree") end,
   })
 
   if not is_installed then
