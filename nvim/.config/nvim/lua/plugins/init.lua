@@ -81,10 +81,10 @@ packer.startup(function(use)
     config = function() require("plugins/configs/web-devicons") end,
   })
 
-  -- See: https://github.com/nvim-lualine/lualine.nvim
+  -- See: https://github.com/feline-nvim/feline.nvim
   use({
-    "nvim-lualine/lualine.nvim",
-    config = function() require("plugins/configs/lualine") end,
+    "feline-nvim/feline.nvim",
+    config = function() require("plugins/configs/feline") end,
   })
 
   -- See: https://github.com/nvim-telescope/telescope.nvim
