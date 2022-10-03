@@ -1,6 +1,8 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup({
   snippet = {
@@ -9,12 +11,12 @@ cmp.setup({
     end,
   },
   sources = {
-    { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "buffer" },
   },
   mapping = {
     ["<C-Space>"] = cmp.mapping.complete(),
   },
 })
-
-vim.opt.completeopt = "menu,menuone,noselect"

@@ -25,6 +25,10 @@ keymap("n", "<space>e", vim.diagnostic.open_float)
 
 -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
 local on_attach = function(_, buffer)
+  vim.api.nvim_buf_set_option(buffer, "formatexpr", "v:lua.vim.lsp.formatexpr")
+  vim.api.nvim_buf_set_option(buffer, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_buf_set_option(buffer, "tagfunc", "v:lua.vim.lsp.tagfunc")
+
   local opts = { buffer = buffer }
 
   keymap("n", "K", vim.lsp.buf.hover, opts)
@@ -34,6 +38,7 @@ local on_attach = function(_, buffer)
   keymap("n", "gr", vim.lsp.buf.references, opts)
   keymap("n", "gs", vim.lsp.buf.signature_help, opts)
   keymap("n", "gt", vim.lsp.buf.type_definition, opts)
+  keymap("n", "cr", vim.lsp.buf.rename, opts)
 end
 
 -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
