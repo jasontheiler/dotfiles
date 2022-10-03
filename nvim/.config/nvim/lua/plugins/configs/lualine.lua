@@ -1,8 +1,4 @@
-local is_installed, lualine = pcall(require, "lualine")
-
-if not is_installed then
-  return
-end
+local lualine = require("lualine")
 
 -- See: https://github.com/nvim-lualine/lualine.nvim#usage-and-customization
 lualine.setup({

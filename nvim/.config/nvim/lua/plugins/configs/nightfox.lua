@@ -1,8 +1,4 @@
-local is_installed, nightfox = pcall(require, "nightfox")
-
-if not is_installed then
-  return
-end
+local nightfox = require("nightfox")
 
 -- See: https://github.com/EdenEast/nightfox.nvim#configuration
 nightfox.setup({})

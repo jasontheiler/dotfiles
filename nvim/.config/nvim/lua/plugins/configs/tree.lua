@@ -1,8 +1,6 @@
-local is_installed, tree = pcall(require, "nvim-tree")
-
-if not is_installed then
-  return
-end
+local tree = require("nvim-tree")
+local tree_api = require("nvim-tree/api")
+local keymap = require("utils").keymap
 
 -- See: https://github.com/kyazdani42/nvim-tree.lua#setup
 tree.setup({
@@ -20,8 +18,5 @@ tree.setup({
     },
   },
 })
-
-local tree_api = require("nvim-tree/api")
-local keymap = require("utils").keymap
 
 keymap("n", "<C-b>", tree_api.tree.toggle)

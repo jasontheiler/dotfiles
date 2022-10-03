@@ -1,8 +1,7 @@
-local is_mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
-
-if not is_mason_lspconfig_installed then
-  return
-end
+local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local keymap = require("utils").keymap
 
 -- See: https://github.com/williamboman/mason-lspconfig.nvim#configuration
 mason_lspconfig.setup({
@@ -22,14 +21,6 @@ mason_lspconfig.setup({
   },
 })
 
-local is_lspconfig_installed, lspconfig = pcall(require, "lspconfig")
-
-if not is_lspconfig_installed then
-  return
-end
-
-local keymap = require("utils").keymap
-
 keymap("n", "<space>e", vim.diagnostic.open_float)
 
 -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
@@ -47,12 +38,7 @@ end
 
 -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-local is_cmp_nvim_lsp_installed, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-
-if is_cmp_nvim_lsp_installed then
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-end
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 mason_lspconfig.setup_handlers({
   function(lsp)

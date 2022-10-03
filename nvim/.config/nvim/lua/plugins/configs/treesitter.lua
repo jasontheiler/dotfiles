@@ -1,8 +1,4 @@
-local is_installed, treesitter = pcall(require, "nvim-treesitter.configs")
-
-if not is_installed then
-  return
-end
+local treesitter = require("nvim-treesitter.configs")
 
 -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
 treesitter.setup({

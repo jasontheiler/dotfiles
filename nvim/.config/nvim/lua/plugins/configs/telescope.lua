@@ -1,10 +1,7 @@
-local is_installed, telescope = pcall(require, "telescope")
-
-if not is_installed then
-  return
-end
-
+local telescope = require("telescope")
 local telescope_actions = require("telescope/actions")
+local telescope_builtin = require("telescope/builtin")
+local keymap = require("utils").keymap
 
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
@@ -19,9 +16,6 @@ telescope.setup({
     },
   },
 })
-
-local telescope_builtin = require("telescope/builtin")
-local keymap = require("utils").keymap
 
 local find_files = function(no_ignore)
   if vim.fn.executable("rg") == 0 then

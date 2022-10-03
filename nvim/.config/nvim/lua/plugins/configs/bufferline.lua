@@ -1,8 +1,5 @@
-local is_installed, bufferline = pcall(require, "bufferline")
-
-if not is_installed then
-  return
-end
+local bufferline = require("bufferline")
+local keymap = require("utils").keymap
 
 -- See: https://github.com/akinsho/bufferline.nvim#usage
 bufferline.setup({
@@ -21,8 +18,6 @@ bufferline.setup({
     },
   },
 })
-
-local keymap = require("utils").keymap
 
 keymap("n", "<Tab>", function() bufferline.cycle(1) end)
 keymap("n", "<S-Tab>", function() bufferline.cycle(-1) end)

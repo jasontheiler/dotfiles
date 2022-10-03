@@ -1,16 +1,19 @@
-local is_installed, cmp = pcall(require, "cmp")
-
-if not is_installed then
-  return
-end
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup({
-  mapping = {
-    ["<C-Space>"] = cmp.mapping.complete(),
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
   },
   sources = {
     { name = "nvim_lsp" },
+    { name = "luasnip" },
+  },
+  mapping = {
+    ["<C-Space>"] = cmp.mapping.complete(),
   },
 })
 
