@@ -7,16 +7,16 @@ opt.history = 1000
 opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.number = true
-opt.numberwidth = 2
 opt.relativenumber = true
 opt.expandtab = true
-opt.smarttab = true
-opt.autoindent = true
 opt.smartindent = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.colorcolumn = "80,100"
 opt.ignorecase = true
 opt.smartcase = true
 opt.fillchars = { eob = " " }
-opt.shortmess:append("sI") -- disables nvim intro
 opt.splitbelow = true
 opt.splitright = true
 

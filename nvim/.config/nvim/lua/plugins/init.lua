@@ -39,6 +39,13 @@ packer.startup(function(use)
     config = function() require("plugins/configs/treesitter-context") end,
   })
 
+  -- See: https://github.com/hrsh7th/nvim-cmp
+  use({
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/nvim-cmp",
+    config = function() require("plugins/configs/cmp") end,
+  })
+
   -- See: https://github.com/williamboman/mason.nvim
   use({
     "williamboman/mason.nvim",
@@ -54,7 +61,7 @@ packer.startup(function(use)
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
   use({
     "williamboman/mason-lspconfig.nvim",
-    after = "nvim-lspconfig",
+    after = { "cmp-nvim-lsp", "nvim-lspconfig" },
     config = function() require("plugins/configs/mason-lspconfig") end,
   })
 
