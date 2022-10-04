@@ -12,6 +12,9 @@ tree.setup({
   view = {
     hide_root_folder = true,
   },
+  renderer = {
+    highlight_opened_files = "all",
+  },
   actions = {
     change_dir = {
       restrict_above_cwd = true,
