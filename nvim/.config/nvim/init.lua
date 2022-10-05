@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 opt.termguicolors = true
+opt.laststatus = 3
 opt.showmode = false
 opt.clipboard = "unnamedplus"
 opt.history = 1000
