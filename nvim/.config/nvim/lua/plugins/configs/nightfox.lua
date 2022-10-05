@@ -10,6 +10,25 @@ nightfox.setup({
       FelineSLSeg0ToSeg1 = { fg = "palette.bg0", bg = "palette.bg2" },
       FelineSLSeg1 = { fg = "palette.fg1", bg = "palette.bg2" },
 
+      FelineSLViModeRed = { fg = "palette.bg0", bg = "palette.red" },
+      FelineSLViModeRedToSeg0 = { fg = "palette.red", bg = "palette.bg0" },
+      FelineSLViModeGreen = { fg = "palette.bg0", bg = "palette.green" },
+      FelineSLViModeGreenToSeg0 = { fg = "palette.green", bg = "palette.bg0" },
+      FelineSLViModeYellow = { fg = "palette.bg0", bg = "palette.yellow" },
+      FelineSLViModeYellowToSeg0 = { fg = "palette.yellow", bg = "palette.bg0" },
+      FelineSLViModeBlue = { fg = "palette.bg0", bg = "palette.blue" },
+      FelineSLViModeBlueToSeg0 = { fg = "palette.blue", bg = "palette.bg0" },
+      FelineSLViModeMagenta = { fg = "palette.bg0", bg = "palette.magenta" },
+      FelineSLViModeMagentaToSeg0 = { fg = "palette.magenta", bg = "palette.bg0" },
+      FelineSLViModeCyan = { fg = "palette.bg0", bg = "palette.cyan" },
+      FelineSLViModeCyanToSeg0 = { fg = "palette.cyan", bg = "palette.bg0" },
+      FelineSLViModeWhite = { fg ="palette.black", bg = "palette.white" },
+      FelineSLViModeWhiteToSeg0 = { fg ="palette.white", bg = "palette.bg0" },
+      FelineSLViModeOrange = { fg ="palette.black", bg = "palette.orange" },
+      FelineSLViModeOrangeToSeg0 = { fg ="palette.orange", bg = "palette.bg0" },
+      FelineSLViModePink = { fg ="palette.black", bg = "palette.pink" },
+      FelineSLViModePinkToSeg0 = { fg ="palette.pink", bg = "palette.bg0" },
+
       FelineSLSeg1ToGitAdded = { fg = "palette.bg2", bg = "git.add" },
       FelineSLGitAdded = { fg = "palette.bg0", bg = "git.add" },
       FelineSLGitAddedToGitChanged = { fg = "git.add", bg = "git.changed" },
@@ -36,4 +55,4 @@ nightfox.setup({
   },
 })
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme terafox")

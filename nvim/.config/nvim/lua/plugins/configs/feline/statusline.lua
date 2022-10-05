@@ -1,5 +1,6 @@
 local feline = require("feline")
 local with_pad_seps = require("plugins/configs/feline/utils").with_pad_seps
+local vi_mode = require("plugins/configs/feline/providers/vi-mode")
 
 -- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
 feline.setup({
@@ -8,9 +9,9 @@ feline.setup({
       -- left
       {
         with_pad_seps({
-          provider = "vi_mode",
-          icon = "",
-          right_sep = { str = "right_filled", hl = "FelineSLSeg0ToSeg1" },
+          provider = vi_mode.provider,
+          hl = vi_mode.hl,
+          right_sep = { str = "right_filled", hl = vi_mode.sep_hl },
         }),
         with_pad_seps({
           provider = "git_branch",
@@ -25,7 +26,7 @@ feline.setup({
         with_pad_seps({
           provider = {
             name = "file_info",
-            opts = { type = "unique" },
+            opts = { type = "unique", file_readonly_icon = " " },
           },
           hl = "FelineSLSeg1",
           right_sep = { str = "right_filled", hl = "FelineSLSeg1ToGitAdded" },
@@ -133,11 +134,13 @@ feline.setup({
         }),
         with_pad_seps({
           provider = "position",
-          left_sep = { str = "left_filled" },
+          hl = vi_mode.hl,
+          left_sep = { str = "left_filled", hl = vi_mode.sep_hl },
         }),
         with_pad_seps({
           provider = "line_percentage",
-          left_sep = { str = "left" },
+          hl = vi_mode.hl,
+          left_sep = { str = "left", hl = vi_mode.hl },
         }),
       },
     },
