@@ -131,10 +131,19 @@ feline.setup({
           right_sep = { str = " ", hl = "FelineSLSeg1" },
         },
         {
-          provider = "file_encoding",
+          provider = function() return "Tab: " .. vim.bo.tabstop end,
           hl = "FelineSLSeg0",
           left_sep = {
             { str = "left_filled", hl = "FelineSLSeg0toSeg1", always_visible = true },
+            { str = " ", hl = "FelineSLSeg0" },
+          },
+          right_sep = { str = " ", hl = "FelineSLSeg0" },
+        },
+        {
+          provider = "file_encoding",
+          hl = "FelineSLSeg0",
+          left_sep = {
+            { str = "left", hl = "FelineSLSeg0", always_visible = true },
             { str = " ", hl = "FelineSLSeg0" },
           },
           right_sep = { str = " ", hl = "FelineSLSeg0" },
