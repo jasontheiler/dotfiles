@@ -50,22 +50,25 @@ packer.startup(function(use)
     config = function() require("plugins/configs/cmp") end,
   })
 
+  -- See: https://github.com/nvim-lua/lsp-status.nvim
+  use({
+    "nvim-lua/lsp-status.nvim",
+    -- config = function() require("plugins/configs/lsp-status") end,
+  })
+
   -- See: https://github.com/williamboman/mason.nvim
   use({
     "williamboman/mason.nvim",
     config = function() require("plugins/configs/mason") end,
   })
 
-  -- See: https://github.com/neovim/nvim-lspconfig
+  -- See:
+  --   - https://github.com/neovim/nvim-lspconfig
+  --   - https://github.com/williamboman/mason-lspconfig.nvim
   use({
     "neovim/nvim-lspconfig",
-    after = "mason.nvim",
-  })
-
-  -- See: https://github.com/williamboman/mason-lspconfig.nvim
-  use({
     "williamboman/mason-lspconfig.nvim",
-    after = { "cmp-nvim-lsp", "nvim-lspconfig" },
+    after = { "cmp-nvim-lsp", "lsp-status.nvim", "mason.nvim" },
     config = function() require("plugins/configs/mason-lspconfig") end,
   })
 

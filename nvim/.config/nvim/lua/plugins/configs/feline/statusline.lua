@@ -66,7 +66,9 @@ feline.setup({
       -- right
       {
         with_pad_seps({
-          provider = "lsp_client_names",
+          provider = function()
+            return require("feline/providers/lsp").lsp_client_names() .. require("lsp-status").status()
+          end,
           hl = "FelineSLLSP",
           left_sep = {
             str = "left_filled",
