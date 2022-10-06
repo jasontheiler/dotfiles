@@ -1,6 +1,7 @@
 local feline = require("feline")
 local with_pad_seps = require("plugins/configs/feline/utils").with_pad_seps
 local vi_mode = require("plugins/configs/feline/providers/vi-mode")
+local lsp_status = require("plugins/configs/feline/providers/lsp-status")
 
 -- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
 feline.setup({
@@ -66,9 +67,7 @@ feline.setup({
       -- right
       {
         with_pad_seps({
-          provider = function()
-            return require("feline/providers/lsp").lsp_client_names() .. require("lsp-status").status()
-          end,
+          provider = lsp_status.provider,
           hl = "FelineSLLSP",
           left_sep = {
             str = "left_filled",

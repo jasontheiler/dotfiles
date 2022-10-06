@@ -1,8 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup({
   snippet = {
@@ -18,5 +16,8 @@ cmp.setup({
   },
   mapping = {
     ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   },
 })
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
