@@ -13,16 +13,18 @@ M.provider = function()
   end
 
   for _, msg in pairs(lsp_status.messages()) do
-    if msg.progress then
-      local client_status = msg.title
+    if type(client_statuses[msg.name]) == "table" then
+      if msg.progress then
+        local client_status = msg.title
 
-      if msg.message then
-        client_status = client_status .. ": " .. msg.message
+        if msg.message then
+          client_status = client_status .. ": " .. msg.message
+        end
+
+        table.insert(client_statuses[msg.name], client_status)
+      else
+        table.insert(client_statuses[msg.name], msg.content)
       end
-
-      table.insert(client_statuses[msg.name], client_status)
-    else
-      table.insert(client_statuses[msg.name], msg.content)
     end
   end
 
