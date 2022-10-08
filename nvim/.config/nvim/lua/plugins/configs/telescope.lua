@@ -29,6 +29,6 @@ local find_files = function(no_ignore)
   })
 end
 
-keymap("n", { "<C-k><C-k>", "<C-k>k" }, function() find_files(false) end)
-keymap("n", { "<C-k><C-a>", "<C-k>a" }, function() find_files(true) end)
-keymap("n", { "<C-k><C-b>", "<C-k>b" }, telescope_builtin.buffers)
+keymap("n", "<Leader>kk", function() find_files(false) end)
+keymap("n", "<Leader>ka", function() find_files(true) end)
+keymap("n", "<Leader>kb", telescope_builtin.buffers)

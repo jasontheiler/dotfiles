@@ -73,10 +73,7 @@ packer.startup(function(use)
   use({ "neovim/nvim-lspconfig" })
 
   -- See: https://github.com/nvim-lua/lsp-status.nvim
-  use({
-    "nvim-lua/lsp-status.nvim",
-    config = function() require("plugins/configs/lsp-status") end
-  })
+  use({ "nvim-lua/lsp-status.nvim" })
 
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
   use({

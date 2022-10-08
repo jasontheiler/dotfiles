@@ -77,6 +77,7 @@ feline.setup({
         }),
         with_pad_seps({
           provider = "diagnostic_errors",
+          icon = " ",
           hl = "FelineSLDiagErrors",
           left_sep = {
             str = "left_filled",
@@ -86,6 +87,7 @@ feline.setup({
         }),
         with_pad_seps({
           provider = "diagnostic_warnings",
+          icon = " ",
           hl = "FelineSLDiagWarnings",
           left_sep = {
             str = "left_filled",
@@ -95,6 +97,7 @@ feline.setup({
         }),
         with_pad_seps({
           provider = "diagnostic_info",
+          icon = " ",
           hl = "FelineSLDiagInfo",
           left_sep = {
             str = "left_filled",
@@ -104,6 +107,7 @@ feline.setup({
         }),
         with_pad_seps({
           provider = "diagnostic_hints",
+          icon = " ",
           hl = "FelineSLDiagHints",
           left_sep = {
             str = "left_filled",

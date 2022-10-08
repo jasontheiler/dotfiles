@@ -9,6 +9,7 @@ opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.number = true
 opt.relativenumber = true
+opt.scrolloff = 4
 opt.cursorline = true
 opt.cursorlineopt = "number"
 opt.expandtab = true
@@ -25,6 +26,7 @@ opt.splitright = true
 
 local g = vim.g
 
+g.mapleader = " "
 g.loaded = 1
 g.loaded_netrwPlugin = 1
 
