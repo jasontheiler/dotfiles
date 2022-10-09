@@ -1,22 +1,40 @@
+local Job = require("plenary/job")
+
 local M = {}
+
+local ahead = 0
+local behind = 0
+
+if _G.feline_git_status_timer then
+  _G.feline_git_status_timer:stop()
+else
+  _G.feline_git_status_timer = vim.loop.new_timer()
+end
+
+_G.feline_git_status_timer:start(0, 5000, vim.schedule_wrap(function()
+  Job:new({
+    command = "git",
+    args = { "rev-list", "--left-right", "--count", "HEAD...@{upstream}" },
+    on_exit = function(job)
+      local res = job:result()[1]
+
+      if type(res) ~= "string" then
+        ahead = 0
+        behind = 0
+        return
+      end
+
+      ahead, behind = res:match("(%d+)%s+(%d+)")
+      ahead = tonumber(ahead) or 0
+      behind = tonumber(behind) or 0
+    end
+  }):start()
+end))
 
 M.provider = function()
   if not vim.b.gitsigns_head then
     return ""
   end
-
-  -- local lines = vim.fn.systemlist("git status --porcelain=2 --branch")
-
-  local ahead = 0
-  local behind = 0
-
-  -- for _, line in pairs(lines) do
-  --   if line:find("branch.ab") then
-  --     ahead, behind = line:match("%+(%d+)%s+%-(%d+)")
-  --     ahead = tonumber(ahead) or 0
-  --     behind = tonumber(behind) or 0
-  --   end
-  -- end
 
   local s = vim.b.gitsigns_head
 
