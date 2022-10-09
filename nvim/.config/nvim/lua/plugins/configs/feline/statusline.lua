@@ -1,6 +1,7 @@
 local feline = require("feline")
 local with_pad_seps = require("plugins/configs/feline/utils").with_pad_seps
 local vi_mode = require("plugins/configs/feline/providers/vi-mode")
+local git_status = require("plugins/configs/feline/providers/git-status")
 local lsp_status = require("plugins/configs/feline/providers/lsp-status")
 
 -- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
@@ -15,7 +16,7 @@ feline.setup({
           right_sep = { str = "right_filled", hl = vi_mode.sep_hl },
         }),
         with_pad_seps({
-          provider = "git_branch",
+          provider = git_status.provider,
           icon = " ",
           hl = "FelineSLSeg0",
           right_sep = {
