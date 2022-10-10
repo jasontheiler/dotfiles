@@ -27,10 +27,6 @@ local on_attach = function(client, buffer)
   -- See: https://github.com/nvim-lua/lsp-status.nvim#example-use
   lsp_status.on_attach(client)
 
-  vim.api.nvim_buf_set_option(buffer, "formatexpr", "v:lua.vim.lsp.formatexpr")
-  vim.api.nvim_buf_set_option(buffer, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  vim.api.nvim_buf_set_option(buffer, "tagfunc", "v:lua.vim.lsp.tagfunc")
-
   local opts = { buffer = buffer }
 
   keymap("n", "K", vim.lsp.buf.hover, opts)
