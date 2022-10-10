@@ -114,12 +114,6 @@ packer.startup(function(use)
     config = function() require("plugins/configs/telescope") end,
   })
 
-  -- See: https://github.com/glepnir/dashboard-nvim
-  use({
-    "glepnir/dashboard-nvim",
-    config = function() require("plugins/configs/dashboard") end,
-  })
-
   -- See: https://github.com/akinsho/bufferline.nvim
   use({
     "akinsho/bufferline.nvim",
