@@ -35,8 +35,16 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
   use({
     "nvim-treesitter/nvim-treesitter-context",
-    after = { "nvim-treesitter" },
+    after = {
+      "nvim-treesitter",
+    },
     config = function() require("plugins/configs/treesitter-context") end,
+  })
+
+  -- See: https://github.com/windwp/nvim-autopairs
+  use({
+    "windwp/nvim-autopairs",
+    config = function() require("plugins/configs/autopairs") end,
   })
 
   -- See: https://github.com/L3MON4D3/LuaSnip
@@ -78,7 +86,12 @@ packer.startup(function(use)
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
   use({
     "williamboman/mason-lspconfig.nvim",
-    after = { "cmp-nvim-lsp", "mason.nvim", "nvim-lspconfig", "lsp-status.nvim" },
+    after = {
+      "cmp-nvim-lsp",
+      "mason.nvim",
+      "nvim-lspconfig",
+      "lsp-status.nvim",
+    },
     config = function() require("plugins/configs/mason-lspconfig") end,
   })
 
@@ -103,7 +116,11 @@ packer.startup(function(use)
   -- See: https://github.com/feline-nvim/feline.nvim
   use({
     "feline-nvim/feline.nvim",
-    after = { "lsp-status.nvim", "gitsigns.nvim" },
+    after = {
+      "plenary.nvim",
+      "lsp-status.nvim",
+      "gitsigns.nvim",
+    },
     config = function() require("plugins/configs/feline") end,
   })
 
@@ -111,18 +128,35 @@ packer.startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    after = {
+      "nvim-web-devicons",
+    },
     config = function() require("plugins/configs/telescope") end,
+  })
+
+  -- See: https://github.com/akinsho/toggleterm.nvim
+  use({
+    "akinsho/toggleterm.nvim",
+    tag = "*",
+    config = function() require("plugins/configs/toggleterm") end,
   })
 
   -- See: https://github.com/akinsho/bufferline.nvim
   use({
     "akinsho/bufferline.nvim",
+    after = {
+      "nightfox.nvim",
+      "nvim-web-devicons",
+    },
     config = function() require("plugins/configs/bufferline") end,
   })
 
   -- See: https://github.com/kyazdani42/nvim-tree.lua
   use({
     "kyazdani42/nvim-tree.lua",
+    after = {
+      "nvim-web-devicons",
+    },
     config = function() require("plugins/configs/tree") end,
   })
 
