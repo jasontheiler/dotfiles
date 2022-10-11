@@ -134,13 +134,6 @@ packer.startup(function(use)
     config = function() require("plugins/configs/telescope") end,
   })
 
-  -- See: https://github.com/akinsho/toggleterm.nvim
-  use({
-    "akinsho/toggleterm.nvim",
-    tag = "*",
-    config = function() require("plugins/configs/toggleterm") end,
-  })
-
   -- See: https://github.com/akinsho/bufferline.nvim
   use({
     "akinsho/bufferline.nvim",

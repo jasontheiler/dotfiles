@@ -1,8 +1,7 @@
 local M = {}
 
 M.with_pad_seps = function(component)
-  local hl = component.hl
-  local pad_sep = { str = " ", hl = hl }
+  local pad_sep = { str = " ", hl = component.hl }
 
   if component.left_sep then
     if not (type(component.left_sep) == "table" and type(component.left_sep[0]) == "table") then

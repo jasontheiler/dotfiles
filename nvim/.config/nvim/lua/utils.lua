@@ -10,12 +10,7 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 
   local default_opts = { noremap = true, silent = true }
-
-  if opts then
-    opts = vim.tbl_extend("force", default_opts, opts)
-  else
-    opts = default_opts
-  end
+  opts = vim.tbl_extend("force", default_opts, opts or {})
 
   for _, mode in pairs(modes) do
     for _, lhs in pairs(lhss) do
