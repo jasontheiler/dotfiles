@@ -20,8 +20,6 @@ opt.shiftwidth = 2
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.colorcolumn = { 80, 100 }
-opt.ignorecase = true
-opt.smartcase = true
 opt.fillchars = { eob = " " }
 opt.splitbelow = true
 opt.splitright = true

@@ -17,6 +17,8 @@ telescope.setup({
   },
 })
 
+keymap("n", "<Leader>kb", telescope_builtin.buffers)
+
 local find_files = function(no_ignore)
   if vim.fn.executable("rg") == 0 then
     vim.notify("You need to install ripgrep", vim.log.levels.ERROR)
@@ -31,4 +33,18 @@ end
 
 keymap("n", "<Leader>kk", function() find_files(false) end)
 keymap("n", "<Leader>ka", function() find_files(true) end)
-keymap("n", "<Leader>kb", telescope_builtin.buffers)
+
+local live_grep = function()
+  telescope_builtin.live_grep({
+    additional_args = function() return { "--hidden" } end,
+    glob_pattern = {
+      "!*/.git/*",
+      "!.git/*",
+      "!*.lock",
+      "!*/package-lock.json",
+      "!*/pnpm-lock.yaml",
+    },
+  })
+end
+
+keymap("n", "<Leader>kg", live_grep)
