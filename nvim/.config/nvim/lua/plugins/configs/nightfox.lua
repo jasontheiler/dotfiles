@@ -1,7 +1,17 @@
 local nightfox = require("nightfox")
+local shade = require("nightfox/lib/shade")
 
 -- See: https://github.com/EdenEast/nightfox.nvim#configuration
 nightfox.setup({
+  palettes = {
+    terafox = {
+      bg0 = "#0b0d0f",
+      bg1 = "#111316",
+      bg2 = "#191d22",
+      bg3 = "#222b30",
+      green = shade.new("#6ab4af", "#82beb9", "#579c98"),
+    },
+  },
   groups = {
     all = {
       FelineSLBg = { bg = "palette.bg1" },
@@ -55,4 +65,4 @@ nightfox.setup({
   },
 })
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme terafox")

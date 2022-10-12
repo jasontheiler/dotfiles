@@ -12,8 +12,14 @@ cmp.setup({
   formatting = {
     format = function(_, item)
       item.kind = (icons[item.kind] or "?") .. " " .. item.kind
+      item.menu = nil
       return item
     end,
+  },
+  window = {
+    completion = {
+      scrolloff = 4,
+    },
   },
   sources = {
     { name = "luasnip" },

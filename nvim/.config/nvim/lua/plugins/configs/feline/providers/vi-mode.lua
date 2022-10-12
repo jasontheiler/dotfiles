@@ -20,19 +20,19 @@ local modes = {
   ["s"] = { text = "SELECT", hl = "FelineSLViModeMagenta" },
   ["S"] = { text = "S-LINE", hl = "FelineSLViModeMagenta" },
   ["\19"] = { text = "S-BLOCK", hl = "FelineSLViModeMagenta" },
-  ["i"] = { text = "INSERT", hl = "FelineSLViModePink" },
-  ["ic"] = { text = "INSERT", hl = "FelineSLViModePink" },
-  ["ix"] = { text = "INSERT", hl = "FelineSLViModePink" },
+  ["i"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
+  ["ic"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
+  ["ix"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
   ["R"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
   ["Rc"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
   ["Rx"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
   ["Rv"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
   ["Rvc"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
   ["Rvx"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
-  ["c"] = { text = "COMMAND", hl = "FelineSLViModeYellow" },
+  ["c"] = { text = "COMMAND", hl = "FelineSLViModeCyan" },
   ["cv"] = { text = "EX" },
   ["ce"] = { text = "EX" },
-  ["r"] = { text = "REPLACE" },
+  ["r"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
   ["rm"] = { text = "MORE", hl = "FelineSLViModeBlue" },
   ["r?"] = { text = "CONFIRM" },
   ["!"] = { text = "SHELL", hl = "FelineSLViModeGreen" },
@@ -44,11 +44,11 @@ M.provider = function()
 end
 
 M.hl = function()
-  return modes[vim.fn.mode()].hl or "FelineSLViModeCyan"
+  return modes[vim.fn.mode()].hl or "FelineSLViModeYellow"
 end
 
 M.sep_hl = function()
-  return (modes[vim.fn.mode()].hl or "FelineSLViModeCyan") .. "ToSeg0"
+  return (modes[vim.fn.mode()].hl or "FelineSLViModeYellow") .. "ToSeg0"
 end
 
 return M
