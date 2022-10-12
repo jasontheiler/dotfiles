@@ -22,8 +22,13 @@ cmp.setup({
     { name = "buffer" },
   },
   mapping = {
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<Esc>"] = cmp.mapping.close(),
+    ["<C-Space>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.close()
+      else
+        cmp.complete()
+      end
+    end, { "i", "s" }),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then

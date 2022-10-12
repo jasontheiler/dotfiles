@@ -33,6 +33,16 @@ web_devicons.setup({
       icon = "",
       color = "#f1e05a",
     },
+    ["COPYING"] = {
+      name = "License",
+      icon = "",
+      color = "#d1786c",
+    },
+    ["COPYING.LESSER"] = {
+      name = "License",
+      icon = "",
+      color = "#d1786c",
+    },
     ["default_icon"] = {
       name = "Default",
       icon = "",
@@ -62,6 +72,16 @@ web_devicons.setup({
       name = "Json",
       icon = "",
       color = "#f1e05a",
+    },
+    ["license"] = {
+      name = "License",
+      icon = "",
+      color = "#d1786c",
+    },
+    ["LICENSE"] = {
+      name = "License",
+      icon = "",
+      color = "#d1786c",
     },
     ["md"] = {
       name = "Md",

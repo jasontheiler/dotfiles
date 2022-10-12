@@ -10,7 +10,10 @@ local reset_ahead_behind = function()
   behind = 0
 end
 
+local feline_git_status_augroup = vim.api.nvim_create_augroup("feline_git_status", {})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  group = feline_git_status_augroup,
   callback = function()
     if _G.feline_git_status_timer then
       _G.feline_git_status_timer:stop()
