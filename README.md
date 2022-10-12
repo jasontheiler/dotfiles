@@ -2,7 +2,7 @@
 
 # dotfiles
 
-**My personal configuration files for fish and more!**
+**My personal configuration files for fish, Neovim and more!**
 
 <br />
 
