@@ -1,34 +1,30 @@
-local opt = vim.opt
+vim.opt.termguicolors = true
+vim.opt.laststatus = 3
+vim.opt.shortmess = "fIlnxtToOF"
+vim.opt.showmode = false
+vim.opt.hidden = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.history = 1000
+vim.opt.mouse = "a"
+vim.opt.signcolumn = "yes"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 8
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.colorcolumn = { 80, 100 }
+vim.opt.fillchars = { eob = " " }
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-opt.termguicolors = true
-opt.laststatus = 3
-opt.shortmess = "fIlnxtToOF"
-opt.showmode = false
-opt.hidden = true
-opt.clipboard = "unnamedplus"
-opt.history = 1000
-opt.mouse = "a"
-opt.signcolumn = "yes"
-opt.number = true
-opt.relativenumber = true
-opt.scrolloff = 8
-opt.cursorline = true
-opt.cursorlineopt = "number"
-opt.expandtab = true
-opt.smartindent = true
-opt.shiftwidth = 2
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.colorcolumn = { 80, 100 }
-opt.fillchars = { eob = " " }
-opt.splitbelow = true
-opt.splitright = true
-
-local g = vim.g
-
-g.mapleader = " "
-g.loaded = 1
-g.loaded_netrwPlugin = 1
+vim.g.mapleader = " "
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
 
 require("keymaps")
 require("autocmds")
