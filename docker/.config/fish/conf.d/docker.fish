@@ -3,6 +3,8 @@ abbr -a dps docker ps
 abbr -a dc docker compose
 abbr -a dcu docker compose up
 abbr -a dcub docker compose up --build
+abbr -a dcud docker compose up -d
+abbr -a dcubd docker compose up -d --build
 abbr -a dcl docker compose logs -f
 abbr -a dcul docker compose up -d \&\& docker compose logs -f
 abbr -a dcubl docker compose up -d --build \&\& docker compose logs -f
