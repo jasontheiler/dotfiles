@@ -1,4 +1,5 @@
 local Job = require("plenary/job")
+local limit_len = require("utils").limit_len
 
 local M = {}
 
@@ -54,7 +55,7 @@ M.provider = function()
     return ""
   end
 
-  local s = vim.b.gitsigns_head
+  local s = limit_len(vim.b.gitsigns_head, 24)
 
   if ahead ~= 0 or behind ~= 0 then
     s = s .. " "

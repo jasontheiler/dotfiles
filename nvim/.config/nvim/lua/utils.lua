@@ -19,4 +19,20 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 end
 
+M.limit_len = function(s, max_len, ellipsis)
+  if type(ellipsis) ~= "boolean" then
+    ellipsis = true
+  end
+
+  if #s <= max_len then
+    return s
+  end
+
+  if ellipsis then
+    return s:sub(1, max_len - 1) .. "…"
+  else
+    return s:sub(1, max_len)
+  end
+end
+
 return M
