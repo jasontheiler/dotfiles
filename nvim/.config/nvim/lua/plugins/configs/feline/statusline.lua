@@ -11,12 +11,16 @@ feline.setup({
       -- left
       {
         with_pad_seps({
+          priority = 9,
           provider = vi_mode.provider,
+          short_provider = "",
           hl = vi_mode.hl,
           right_sep = { str = "right_filled", hl = vi_mode.sep_hl },
         }),
         with_pad_seps({
+          priority = 6,
           provider = git_status.provider,
+          short_provider = "",
           icon = " ",
           hl = "FelineSLSeg0",
           right_sep = {
@@ -26,15 +30,19 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 7,
           provider = {
             name = "file_info",
             opts = { type = "unique", file_readonly_icon = " " },
           },
+          short_provider = "",
           hl = "FelineSLSeg1",
           right_sep = { str = "right_filled", hl = "FelineSLSeg1ToGitAdded" },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "git_diff_added",
+          short_provider = "",
           icon = "+",
           hl = "FelineSLGitAdded",
           right_sep = {
@@ -44,7 +52,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "git_diff_changed",
+          short_provider = "",
           icon = "~",
           hl = "FelineSLGitChanged",
           right_sep = {
@@ -54,7 +64,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "git_diff_removed",
+          short_provider = "",
           icon = "-",
           hl = "FelineSLGitRemoved",
           right_sep = {
@@ -68,7 +80,9 @@ feline.setup({
       -- right
       {
         with_pad_seps({
-          provider = lsp_status.provider,
+          priority = 5,
+          provider = function() return lsp_status.provider("left") end,
+          short_provider = "",
           hl = "FelineSLLSP",
           left_sep = {
             str = "left_filled",
@@ -77,7 +91,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "diagnostic_errors",
+          short_provider = "",
           icon = " ",
           hl = "FelineSLDiagErrors",
           left_sep = {
@@ -87,7 +103,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "diagnostic_warnings",
+          short_provider = "",
           icon = " ",
           hl = "FelineSLDiagWarnings",
           left_sep = {
@@ -97,7 +115,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "diagnostic_info",
+          short_provider = "",
           icon = " ",
           hl = "FelineSLDiagInfo",
           left_sep = {
@@ -107,7 +127,9 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 8,
           provider = "diagnostic_hints",
+          short_provider = "",
           icon = " ",
           hl = "FelineSLDiagHints",
           left_sep = {
@@ -117,10 +139,12 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 4,
           provider = {
             name = "file_type",
             opts = { case = "lowercase" },
           },
+          short_provider = "",
           hl = "FelineSLSeg1",
           left_sep = {
             str = "left_filled",
@@ -129,22 +153,33 @@ feline.setup({
           },
         }),
         with_pad_seps({
+          priority = 2,
           provider = function() return "Tab: " .. vim.bo.tabstop end,
+          short_provider = "",
           hl = "FelineSLSeg0",
-          left_sep = { str = "left_filled", hl = "FelineSLSeg0toSeg1" },
+          left_sep = {
+            str = "left_filled",
+            hl = "FelineSLSeg0toSeg1",
+            always_visible = true,
+          },
         }),
         with_pad_seps({
+          priority = 1,
           provider = "file_encoding",
+          short_provider = "",
           hl = "FelineSLSeg0",
           left_sep = { str = "left", hl = "FelineSLSeg0" },
         }),
         with_pad_seps({
+          priority = 9,
           provider = "position",
           hl = vi_mode.hl,
           left_sep = { str = "left_filled", hl = vi_mode.sep_hl },
         }),
         with_pad_seps({
+          priority = 3,
           provider = "line_percentage",
+          short_provider = "",
           hl = vi_mode.hl,
           left_sep = { str = "left", hl = vi_mode.hl },
         }),

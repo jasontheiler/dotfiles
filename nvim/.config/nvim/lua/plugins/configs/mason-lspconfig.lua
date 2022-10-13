@@ -1,6 +1,5 @@
 local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
-local lsp_status = require("lsp-status")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local keymap = require("utils").keymap
 
@@ -23,10 +22,7 @@ mason_lspconfig.setup({
 })
 
 -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
-local on_attach = function(client, buffer)
-  -- See: https://github.com/nvim-lua/lsp-status.nvim#example-use
-  lsp_status.on_attach(client)
-
+local on_attach = function(_, buffer)
   local opts = { buffer = buffer }
 
   keymap("n", "K", vim.lsp.buf.hover, opts)
@@ -40,8 +36,6 @@ local on_attach = function(client, buffer)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- See: https://github.com/nvim-lua/lsp-status.nvim#example-use
-capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 

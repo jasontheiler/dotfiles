@@ -83,8 +83,11 @@ packer.startup(function(use)
   -- See: https://github.com/neovim/nvim-lspconfig
   use({ "neovim/nvim-lspconfig" })
 
-  -- See: https://github.com/nvim-lua/lsp-status.nvim
-  use({ "nvim-lua/lsp-status.nvim" })
+  -- See: https://github.com/j-hui/fidget.nvim
+  use({
+    "j-hui/fidget.nvim",
+    config = function() require("plugins/configs/fidget") end,
+  })
 
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
   use({
@@ -93,7 +96,6 @@ packer.startup(function(use)
       "cmp-nvim-lsp",
       "mason.nvim",
       "nvim-lspconfig",
-      "lsp-status.nvim",
     },
     config = function() require("plugins/configs/mason-lspconfig") end,
   })
@@ -121,7 +123,6 @@ packer.startup(function(use)
     "feline-nvim/feline.nvim",
     after = {
       "plenary.nvim",
-      "lsp-status.nvim",
       "gitsigns.nvim",
     },
     config = function() require("plugins/configs/feline") end,
