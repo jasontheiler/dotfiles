@@ -7,7 +7,6 @@ treesitter.setup({
     "css",
     "dockerfile",
     "fish",
-    "gitcommit",
     "gitignore",
     "html",
     "javascript",
