@@ -11,7 +11,7 @@ cmp.setup({
   },
   formatting = {
     format = function(_, item)
-      item.kind = (icons[item.kind] or "?") .. " " .. item.kind
+      item.kind = string.format(" %s %s", (icons[item.kind] or "?"), item.kind)
       item.menu = nil
       return item
     end,
