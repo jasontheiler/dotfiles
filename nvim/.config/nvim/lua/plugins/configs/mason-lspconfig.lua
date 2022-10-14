@@ -15,7 +15,7 @@ mason_lspconfig.setup({
     "rust_analyzer",
     "sumneko_lua",
     "taplo",
-    "tsserver",
+    -- "tsserver",
     "volar",
     "yamlls",
   },
