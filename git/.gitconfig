@@ -2,3 +2,5 @@
 	defaultBranch = main
 [fetch]
 	prune = true
+[remote "origin"]
+	prune = true
