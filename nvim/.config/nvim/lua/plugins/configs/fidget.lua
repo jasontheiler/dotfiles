@@ -20,7 +20,7 @@ fidget.setup({
     end,
   },
   window = {
-    border = { "", "", "", " ", " ", " ", "", "" },
+    border = { " ", " ", " ", " ", " ", " ", " ", " " },
     blend = 0,
   },
 })

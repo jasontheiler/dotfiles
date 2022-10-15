@@ -80,4 +80,4 @@ cmp.setup.cmdline(":", {
   },
 })
 
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }
