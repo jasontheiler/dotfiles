@@ -83,12 +83,6 @@ packer.startup(function(use)
   -- See: https://github.com/neovim/nvim-lspconfig
   use({ "neovim/nvim-lspconfig" })
 
-  -- See: https://github.com/j-hui/fidget.nvim
-  use({
-    "j-hui/fidget.nvim",
-    config = function() require("plugins/configs/fidget") end,
-  })
-
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
   use({
     "williamboman/mason-lspconfig.nvim",
@@ -98,6 +92,25 @@ packer.startup(function(use)
       "nvim-lspconfig",
     },
     config = function() require("plugins/configs/mason-lspconfig") end,
+  })
+
+  -- See: https://github.com/jose-elias-alvarez/null-ls.nvim
+  use({ "jose-elias-alvarez/null-ls.nvim" })
+
+  -- See: https://github.com/jayp0521/mason-null-ls.nvim
+  use({
+    "jayp0521/mason-null-ls.nvim",
+    after = {
+      "mason.nvim",
+      "null-ls.nvim",
+    },
+    config = function() require("plugins/configs/mason-null-ls") end,
+  })
+
+  -- See: https://github.com/j-hui/fidget.nvim
+  use({
+    "j-hui/fidget.nvim",
+    config = function() require("plugins/configs/fidget") end,
   })
 
   -- See: https://github.com/lukas-reineke/indent-blankline.nvim

@@ -1,6 +1,6 @@
 local keymap = require("utils").keymap
 
-keymap("n", "<Space>", "<Nop>")
+keymap({ "n", "v" }, "<Space>", "<Nop>")
 
 keymap("n", "<Leader>s", ":w<CR>")
 keymap("n", "<Leader>qq", ":q<CR>")

@@ -10,7 +10,7 @@ mason_lspconfig.setup({
     "cssls",
     "dockerls",
     "html",
-    "jsonls",
+    -- "jsonls",
     "marksman",
     "rust_analyzer",
     "sumneko_lua",
@@ -33,11 +33,11 @@ local on_attach = function(_, buffer)
   keymap("n", "gs", vim.lsp.buf.signature_help, opts)
   keymap("n", "gt", vim.lsp.buf.type_definition, opts)
   keymap("n", "cr", vim.lsp.buf.rename, opts)
+  keymap({ "n", "v" }, "<Leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 local default_setup_config = {
   on_attach = on_attach,
