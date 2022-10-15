@@ -18,6 +18,12 @@ telescope.setup({
 })
 
 keymap("n", "<Leader>kb", telescope_builtin.buffers)
+keymap("n", "<Leader>ko", function() telescope_builtin.oldfiles({ cwd_only = true }) end)
+keymap("n", "<Leader>kd", telescope_builtin.diagnostics)
+keymap("n", "<Leader>kD", function() telescope_builtin.diagnostics({ bufnr = 0 }) end)
+keymap("n", "<Leader>kgc", telescope_builtin.git_commits)
+keymap("n", "<Leader>kgC", telescope_builtin.git_bcommits)
+keymap("n", "<Leader>kgb", telescope_builtin.git_branches)
 
 local find_files = function(no_ignore)
   if vim.fn.executable("rg") == 0 then
@@ -47,4 +53,4 @@ local live_grep = function()
   })
 end
 
-keymap("n", "<Leader>kg", live_grep)
+keymap("n", "<Leader>k/", live_grep)

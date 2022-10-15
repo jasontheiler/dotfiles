@@ -4,12 +4,6 @@ local shade = require("nightfox/lib/shade")
 -- See: https://github.com/EdenEast/nightfox.nvim#configuration
 nightfox.setup({
   palettes = {
-    duskfox = {
-      bg0 = "#0b0d0f",
-      bg1 = "#111316",
-      bg2 = "#191d22",
-      bg3 = "#222b30",
-    },
     terafox = {
       bg0 = "#0b0d0f",
       bg1 = "#111316",
@@ -71,4 +65,4 @@ nightfox.setup({
   },
 })
 
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme terafox")

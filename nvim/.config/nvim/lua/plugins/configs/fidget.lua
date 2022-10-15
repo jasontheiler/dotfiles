@@ -21,5 +21,6 @@ fidget.setup({
   },
   window = {
     border = { "", "", "", " ", " ", " ", "", "" },
+    blend = 0,
   },
 })
