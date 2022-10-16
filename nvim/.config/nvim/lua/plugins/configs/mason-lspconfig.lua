@@ -25,7 +25,7 @@ mason_lspconfig.setup({
 local on_attach = function(_, buffer)
   local opts = { buffer = buffer }
 
-  keymap("n", "K", vim.lsp.buf.hover, opts)
+  keymap("n", { "K", "<Leader>h" }, vim.lsp.buf.hover, opts)
   keymap("n", "gd", vim.lsp.buf.definition, opts)
   keymap("n", "gD", vim.lsp.buf.declaration, opts)
   keymap("n", "gi", vim.lsp.buf.implementation, opts)
