@@ -6,7 +6,7 @@ format = "$time$all"
 [character]
 error_symbol = "[I ❯](bold green)"
 success_symbol = "[I ❯](bold green)"
-vimcmd_symbol = "[N ❯](bold cyan)"
+vimcmd_symbol = "[N ❯](bold yellow)"
 vimcmd_replace_one_symbol = "[R ❯](bold red)"
 vimcmd_replace_symbol = "[R ❯](bold red)"
 vimcmd_visual_symbol = "[V ❯](bold purple)"
