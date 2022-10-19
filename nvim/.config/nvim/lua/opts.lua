@@ -20,9 +20,18 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.colorcolumn = { 80, 100 }
-vim.opt.fillchars = { eob = " " }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.fillchars = {
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+  eob = " ",
+}
 
 vim.g.mapleader = " "
 vim.g.loaded = 1
