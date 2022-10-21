@@ -7,3 +7,8 @@ set fish_cursor_default block
 set fish_cursor_insert line
 set fish_cursor_replace_one underscore
 set fish_cursor_visual block
+
+bind -s -M insert \ch backward-char
+bind -s -M insert \cj down-or-search
+bind -s -M insert \ck up-or-search
+bind -s -M insert \cl forward-char
