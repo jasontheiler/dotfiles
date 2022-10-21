@@ -11,6 +11,7 @@ function tmux_create_session
         return 1
     end
 
+    set -l working_dir_segs (string split / (string trim -c / $working_dir))
     set -l session_paths (tmux list-sessions -F "#{session_path}" 2>/dev/null)
 
     if test (count $session_paths) -eq 0
@@ -21,7 +22,6 @@ function tmux_create_session
         return 1
     end
 
-    set -l working_dir_segs (string split / (string trim -c / $working_dir))
     set -l session_names (tmux list-sessions -F "#{session_name}")
 
     tmux new-session -d -s $working_dir_segs[-1] -c $working_dir
