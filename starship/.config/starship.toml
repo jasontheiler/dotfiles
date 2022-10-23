@@ -1,7 +1,7 @@
 # Configures Starship.
 # See: https://starship.rs/config/
 
-format = "$time$all"
+format = "$all$fill$time$line_break$jobs$status$shell$character"
 
 [character]
 error_symbol = "[I ❯](bold green)"
@@ -14,6 +14,9 @@ vimcmd_visual_symbol = "[V ❯](bold purple)"
 [directory]
 format = "[($read_only )$path/]($style) "
 read_only = ""
+
+[fill]
+symbol = "─"
 
 [git_status]
 ahead = "${count}↑"
@@ -32,6 +35,6 @@ format = "[\\[$status\\]]($style) "
 
 [time]
 disabled = false
-format = "[$time]($style) "
+format = " [$time]($style)"
 time_format = "%R"
 style = "bold black"
