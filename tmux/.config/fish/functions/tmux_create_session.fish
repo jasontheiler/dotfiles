@@ -12,8 +12,7 @@ function tmux_create_session
     end
 
     set -l working_dir_segs (string split / (string trim -c / $working_dir))
-    set -l session_names (tmux list-sessions -F "#{session_name}" 2>/dev/null) \
-        projects/microservices/quizwall
+    set -l session_names (tmux list-sessions -F "#{session_name}" 2>/dev/null)
     set -l prev_session_names
 
     for i in (seq 1 (count $working_dir_segs))
@@ -38,14 +37,21 @@ function tmux_create_session
                     (string split / (string trim -c / $similar_session_path))
 
                 if test (count $similar_session_path_segs) -ge $i
-                    for j in (seq $i (math max (count $working_dir_segs) (count $similar_session_path_segs)))
+                    set -l max_segs (math max (count $working_dir_segs) (count $similar_session_path_segs))
+                    for j in (seq $i )
                         set -l j (math $j \* -1)
                         set proposed_name (string join / $working_dir_segs[$j..-1])
                         set similar_session_proposed_name \
                             (string join / $similar_session_path_segs[$j..-1])
 
                         if test $proposed_name != $similar_session_proposed_name
+                            tmux rename-session -t $similar_session_name $similar_session_proposed_name
                             break
+                        end
+
+                        if test (math $j \* -1) -eq $max_segs
+                            alert error "This session already exists."
+                            return 1
                         end
                     end
                 else
