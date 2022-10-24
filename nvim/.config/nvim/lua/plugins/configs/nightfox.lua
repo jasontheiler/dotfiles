@@ -14,6 +14,11 @@ nightfox.setup({
   },
   groups = {
     all = {
+      DiagnosticUnderlineError = { style = "undercurl", bg = "diag_bg.error", sp = "diag.error" },
+      DiagnosticUnderlineWarn = { style = "undercurl", bg = "diag_bg.warn", sp = "diag.warn" },
+      DiagnosticUnderlineInfo = { style = "undercurl", bg = "diag_bg.info", sp = "diag.info" },
+      DiagnosticUnderlineHint = { style = "undercurl", bg = "diag_bg.hint", sp = "diag.hint" },
+
       FelineSLBg = { bg = "palette.bg1" },
 
       FelineSLSeg0 = { fg = "palette.fg2", bg = "palette.bg0" },
