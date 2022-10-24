@@ -4,12 +4,9 @@
 theme = "Default"
 show = [
     "Host",
-    "Machine",
     "Kernel",
     "Distribution",
     "OperatingSystem",
-    "DesktopEnvironment",
-    "WindowManager",
     "Packages",
     "LocalIP",
     "Terminal",
