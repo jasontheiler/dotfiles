@@ -2,16 +2,16 @@
 function alert -d "Prints an alert of the specified type."
     switch $argv[1]
         case error
-            set icon 
+            set icon 
             set color red
         case warning
-            set icon 
+            set icon 
             set color yellow
         case info
-            set icon 
+            set icon 
             set color blue
         case success
-            set icon 
+            set icon 
             set color green
         case '*'
             alert error "Invalid alert level: " `$argv[1]`
