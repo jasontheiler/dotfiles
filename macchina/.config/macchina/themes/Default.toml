@@ -12,7 +12,7 @@ key_color = "Green"
 path = "~/.config/macchina/crt_naked.ascii"
 
 [keys]
-host = ""
+host = ""
 kernel = ""
 distro = ""
 os = ""
