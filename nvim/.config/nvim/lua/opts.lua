@@ -37,3 +37,14 @@ vim.g.mapleader = " "
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl  = "DiagnosticInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
+
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_text = {
+    spacing = 3,
+  },
+})

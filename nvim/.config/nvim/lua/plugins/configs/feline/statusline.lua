@@ -94,7 +94,7 @@ feline.setup({
           priority = 8,
           provider = "diagnostic_errors",
           short_provider = "",
-          icon = " ",
+          icon = " ",
           hl = "FelineSLDiagErrors",
           left_sep = {
             str = "left_filled",
@@ -106,7 +106,7 @@ feline.setup({
           priority = 8,
           provider = "diagnostic_warnings",
           short_provider = "",
-          icon = " ",
+          icon = " ",
           hl = "FelineSLDiagWarnings",
           left_sep = {
             str = "left_filled",
@@ -118,7 +118,7 @@ feline.setup({
           priority = 8,
           provider = "diagnostic_info",
           short_provider = "",
-          icon = " ",
+          icon = " ",
           hl = "FelineSLDiagInfo",
           left_sep = {
             str = "left_filled",
@@ -130,7 +130,7 @@ feline.setup({
           priority = 8,
           provider = "diagnostic_hints",
           short_provider = "",
-          icon = " ",
+          icon = " ",
           hl = "FelineSLDiagHints",
           left_sep = {
             str = "left_filled",
