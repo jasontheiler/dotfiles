@@ -185,6 +185,11 @@ feline.setup({
         }),
       },
     },
+    inactive = {
+      -- left
+      {},
+      -- right
+      {},
+    },
   },
 })
-

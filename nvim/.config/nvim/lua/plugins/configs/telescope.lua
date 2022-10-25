@@ -6,6 +6,8 @@ local keymap = require("utils").keymap
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
   defaults = {
+    prompt_prefix = " ",
+    selection_caret = "❯ ",
     mappings = {
       i = {
         ["<C-h>"] = { type = "command", "<Left>" },

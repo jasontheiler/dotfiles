@@ -20,11 +20,18 @@ packer.startup(function(use)
   -- See: https://github.com/nvim-lua/plenary.nvim
   use({ "nvim-lua/plenary.nvim" })
 
-  -- See: https://github.com/EdenEast/nightfox.nvim
+  -- See: https://github.com/catppuccin/nvim
   use({
-    "EdenEast/nightfox.nvim",
-    config = function() require("plugins/configs/nightfox") end,
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function() require("plugins/configs/catppuccin") end,
   })
+
+  -- See: https://github.com/EdenEast/nightfox.nvim
+  -- use({
+  --   "EdenEast/nightfox.nvim",
+  --   config = function() require("plugins/configs/nightfox") end,
+  -- })
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
   use({
@@ -136,6 +143,7 @@ packer.startup(function(use)
     "feline-nvim/feline.nvim",
     after = {
       "plenary.nvim",
+      "catppuccin",
       "gitsigns.nvim",
     },
     config = function() require("plugins/configs/feline") end,
@@ -155,7 +163,6 @@ packer.startup(function(use)
   use({
     "akinsho/bufferline.nvim",
     after = {
-      "nightfox.nvim",
       "nvim-web-devicons",
     },
     config = function() require("plugins/configs/bufferline") end,

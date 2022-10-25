@@ -8,14 +8,6 @@ bufferline.setup({
     show_close_icon = false,
     right_mouse_command = nil,
     middle_mouse_command = "bdelete! %d",
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = function()
-          return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-        end,
-      },
-    },
   },
 })
 

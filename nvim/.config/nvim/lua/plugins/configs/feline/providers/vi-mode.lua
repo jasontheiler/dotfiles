@@ -11,32 +11,32 @@ local modes = {
   ["niV"] = { text = "NORMAL" },
   ["nt"] = { text = "NORMAL" },
   ["ntT"] = { text = "NORMAL" },
-  ["v"] = { text = "VISUAL", hl = "FelineSLViModeMagenta" },
-  ["vs"] = { text = "VISUAL", hl = "FelineSLViModeMagenta" },
-  ["V"] = { text = "V-LINE", hl = "FelineSLViModeMagenta" },
-  ["Vs"] = { text = "V-LINE", hl = "FelineSLViModeMagenta" },
-  ["\22"] = { text = "V-BLOCK", hl = "FelineSLViModeMagenta" },
-  ["\22s"] = { text = "V-BLOCK", hl = "FelineSLViModeMagenta" },
-  ["s"] = { text = "SELECT", hl = "FelineSLViModeMagenta" },
-  ["S"] = { text = "S-LINE", hl = "FelineSLViModeMagenta" },
-  ["\19"] = { text = "S-BLOCK", hl = "FelineSLViModeMagenta" },
-  ["i"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
-  ["ic"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
-  ["ix"] = { text = "INSERT", hl = "FelineSLViModeGreen" },
-  ["R"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
-  ["Rc"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
-  ["Rx"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
-  ["Rv"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
-  ["Rvc"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
-  ["Rvx"] = { text = "V-REPLACE", hl = "FelineSLViModeRed" },
-  ["c"] = { text = "COMMAND", hl = "FelineSLViModeCyan" },
+  ["v"] = { text = "VISUAL", hl = "FelineSLViModeVisual" },
+  ["vs"] = { text = "VISUAL", hl = "FelineSLViModeVisual" },
+  ["V"] = { text = "V-LINE", hl = "FelineSLViModeVisual" },
+  ["Vs"] = { text = "V-LINE", hl = "FelineSLViModeVisual" },
+  ["\22"] = { text = "V-BLOCK", hl = "FelineSLViModeVisual" },
+  ["\22s"] = { text = "V-BLOCK", hl = "FelineSLViModeVisual" },
+  ["s"] = { text = "SELECT", hl = "FelineSLViModeVisual" },
+  ["S"] = { text = "S-LINE", hl = "FelineSLViModeVisual" },
+  ["\19"] = { text = "S-BLOCK", hl = "FelineSLViModeVisual" },
+  ["i"] = { text = "INSERT", hl = "FelineSLViModeInsert" },
+  ["ic"] = { text = "INSERT", hl = "FelineSLViModeInsert" },
+  ["ix"] = { text = "INSERT", hl = "FelineSLViModeInsert" },
+  ["R"] = { text = "REPLACE", hl = "FelineSLViModeReplace" },
+  ["Rc"] = { text = "REPLACE", hl = "FelineSLViModeReplace" },
+  ["Rx"] = { text = "REPLACE", hl = "FelineSLViModeReplace" },
+  ["Rv"] = { text = "V-REPLACE", hl = "FelineSLViModeReplace" },
+  ["Rvc"] = { text = "V-REPLACE", hl = "FelineSLViModeReplace" },
+  ["Rvx"] = { text = "V-REPLACE", hl = "FelineSLViModeReplace" },
+  ["c"] = { text = "COMMAND", hl = "FelineSLViModeCommand" },
   ["cv"] = { text = "EX" },
   ["ce"] = { text = "EX" },
-  ["r"] = { text = "REPLACE", hl = "FelineSLViModeRed" },
-  ["rm"] = { text = "MORE", hl = "FelineSLViModeBlue" },
+  ["r"] = { text = "REPLACE", hl = "FelineSLViModeReplace" },
+  ["rm"] = { text = "MORE" },
   ["r?"] = { text = "CONFIRM" },
-  ["!"] = { text = "SHELL", hl = "FelineSLViModeGreen" },
-  ["t"] = { text = "TERMINAL", hl = "FelineSLViModeGreen" },
+  ["!"] = { text = "SHELL", hl = "FelineSLViModeCommand" },
+  ["t"] = { text = "TERMINAL", hl = "FelineSLViModeCommand" },
 }
 
 M.provider = function()
@@ -44,11 +44,11 @@ M.provider = function()
 end
 
 M.hl = function()
-  return modes[vim.fn.mode()].hl or "FelineSLViModeYellow"
+  return modes[vim.fn.mode()].hl or "FelineSLViModeNormal"
 end
 
 M.sep_hl = function()
-  return (modes[vim.fn.mode()].hl or "FelineSLViModeYellow") .. "ToSeg0"
+  return (modes[vim.fn.mode()].hl or "FelineSLViModeNormal") .. "ToSeg0"
 end
 
 return M

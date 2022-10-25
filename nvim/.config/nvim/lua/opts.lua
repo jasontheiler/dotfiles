@@ -46,5 +46,6 @@ vim.diagnostic.config({
   severity_sort = true,
   virtual_text = {
     spacing = 3,
+    prefix = "",
   },
 })
