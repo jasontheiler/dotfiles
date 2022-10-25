@@ -6,7 +6,7 @@ format = "$all$fill$time$line_break$jobs$status$shell$character"
 [character]
 error_symbol = "[I ❯](bold green)"
 success_symbol = "[I ❯](bold green)"
-vimcmd_symbol = "[N ❯](bold yellow)"
+vimcmd_symbol = "[N ❯](bold blue)"
 vimcmd_replace_one_symbol = "[R ❯](bold red)"
 vimcmd_replace_symbol = "[R ❯](bold red)"
 vimcmd_visual_symbol = "[V ❯](bold purple)"
@@ -23,11 +23,21 @@ ahead = "${count}↑"
 behind = "${count}↓"
 diverged = "${ahead_count}↑${behind_count}↓"
 
+[golang]
+symbol = " "
+
 [hostname]
 style = "bold green"
 
-[nodejs]
-symbol = "⬢ "
+[lua]
+symbol = " "
+
+[package]
+symbol = " "
+style = "bold yellow"
+
+[rust]
+symbol = " "
 
 [status]
 disabled = false
