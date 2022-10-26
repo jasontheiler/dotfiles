@@ -1,4 +1,7 @@
 local web_devicons = require("nvim-web-devicons")
+local catppuccin_palettes = require("catppuccin/palettes")
+
+local palette = catppuccin_palettes.get_palette("mocha")
 
 -- See: https://github.com/kyazdani42/nvim-web-devicons#usage
 web_devicons.setup({
@@ -6,132 +9,192 @@ web_devicons.setup({
     [".dockerignore"] = {
       name = "Dockerignore",
       icon = "",
-      color = "#2496ed",
+      color = palette.sapphire,
     },
     [".gitattributes"] = {
       name = "GitAttributes",
       icon = "",
-      color = "#f54d27",
+      color = palette.peach,
     },
     [".gitconfig"] = {
       name = "GitConfig",
       icon = "",
-      color = "#f54d27",
+      color = palette.peach,
     },
     [".gitignore"] = {
       name = "GitIgnore",
       icon = "",
-      color = "#f54d27",
+      color = palette.peach,
     },
     [".gitkeep"] = {
       name = "GitKeep",
       icon = "",
-      color = "#f54d27",
+      color = palette.peach,
+    },
+    [".npmignore"] = {
+      name = "NPMIgnore",
+      icon = "",
+      color = palette.red,
+    },
+    [".npmrc"] = {
+      name = "NPMrc",
+      icon = "",
+      color = palette.red,
     },
     ["cjs"] = {
       name = "Cjs",
       icon = "",
-      color = "#f1e05a",
+      color = palette.yellow,
+    },
+    ["conf"] = {
+      name = "Conf",
+      icon = "",
+      color = palette.flamingo,
     },
     ["COPYING"] = {
       name = "License",
       icon = "",
-      color = "#d1786c",
+      color = palette.red,
     },
     ["COPYING.LESSER"] = {
       name = "License",
       icon = "",
-      color = "#d1786c",
+      color = palette.red,
+    },
+    ["css"] = {
+      name = "Css",
+      icon = "",
+      color = palette.blue,
     },
     ["default_icon"] = {
       name = "Default",
       icon = "",
-      color = "#42a5f5",
+      color = palette.lavender,
     },
     ["dockerfile"] = {
       name = "Dockerfile",
       icon = "",
-      color = "#2496ed",
+      color = palette.sapphire,
     },
     ["Dockerfile"] = {
       name = "Dockerfile",
       icon = "",
-      color = "#2496ed",
+      color = palette.sapphire,
+    },
+    ["fish"] = {
+      name = "Fish",
+      icon = "",
+      color = palette.green,
     },
     ["git"] = {
       name = "GitLogo",
       icon = "",
-      color = "#f54d27",
+      color = palette.peach,
+    },
+    [".gitlab-ci.yml"] = {
+      name = "GitlabCI",
+      icon = "",
+      color = palette.peach,
+    },
+    ["go"] = {
+      name = "Go",
+      icon = "",
+      color = palette.sapphire,
+    },
+    ["html"] = {
+      name = "Html",
+      icon = "",
+      color = palette.peach,
     },
     ["js"] = {
       name = "Js",
       icon = "",
-      color = "#f1e05a",
+      color = palette.yellow,
     },
     ["json"] = {
       name = "Json",
       icon = "",
-      color = "#f1e05a",
+      color = palette.yellow,
     },
     ["license"] = {
       name = "License",
       icon = "",
-      color = "#d1786c",
+      color = palette.red,
     },
     ["LICENSE"] = {
       name = "License",
       icon = "",
-      color = "#d1786c",
+      color = palette.red,
+    },
+    ["lock"] = {
+      name = "Lock",
+      icon = "",
+      color = palette.yellow,
+    },
+    ["lua"] = {
+      name = "Lua",
+      icon = "",
+      color = palette.blue,
+    },
+    ["luau"] = {
+      name = "Luau",
+      icon = "",
+      color = palette.blue,
     },
     ["md"] = {
       name = "Md",
       icon = "",
-      color = "#519aba",
+      color = palette.blue,
     },
     ["mjs"] = {
       name = "Mjs",
       icon = "",
-      color = "#f1e05a",
+      color = palette.yellow,
     },
     ["package.json"] = {
       name = "PackageJson",
       icon = "",
-      color = "#8bc34a",
+      color = palette.green,
     },
     ["package-lock.json"] = {
       name = "PackageLockJson",
       icon = "",
-      color = "#8bc34a",
+      color = palette.green,
     },
     ["rs"] = {
       name = "Rs",
       icon = "",
-      color = "#ff7043",
+      color = palette.peach,
+    },
+    ["svg"] = {
+      name = "Svg",
+      icon = "ﰟ",
+      color = palette.yellow,
     },
     ["toml"] = {
       name = "Toml",
       icon = "",
-      color = "#42a5f5",
+      color = palette.sapphire,
     },
     ["ts"] = {
       name = "Ts",
       icon = "ﯤ",
-      color = "#3179c7",
+      color = palette.blue,
     },
     ["vue"] = {
       name = "Vue",
       icon = "﵂",
-      color = "#41b883",
+      color = palette.green,
     },
     ["yaml"] = {
       name = "Yaml",
       icon = "",
-      color = "#f44336",
+      color = palette.red,
     },
     ["yml"] = {
       name = "Yml",
       icon = "",
-      color = "#f44336",
+      color = palette.red,
     },
   },
 })
