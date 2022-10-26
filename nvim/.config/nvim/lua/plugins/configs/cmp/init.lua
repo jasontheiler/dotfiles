@@ -1,6 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local icons = require("plugins/configs/cmp/icons")
+local mappings = require("plugins/configs/cmp/mappings")
 
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup({
@@ -11,18 +11,43 @@ cmp.setup({
   },
   formatting = {
     format = function(_, item)
-      item.kind = string.format(" %s %s", (icons[item.kind] or "?"), item.kind)
+      local filetype_labels = mappings.filetype_labels[vim.bo.filetype]
+
+      item.kind = string.format(
+        " %s %s",
+        mappings.icons[item.kind] or "?",
+        filetype_labels and filetype_labels[item.kind] or item.kind
+      )
       item.menu = nil
+
       return item
     end,
   },
   window = {
     completion = {
-      border = "rounded",
+      border = {
+        { "┌", "CmpCompletionBorder" },
+        { "─", "CmpCompletionBorder" },
+        { "┐", "CmpCompletionBorder" },
+        { "│", "CmpCompletionBorder" },
+        { "┘", "CmpCompletionBorder" },
+        { "─", "CmpCompletionBorder" },
+        { "└", "CmpCompletionBorder" },
+        { "│", "CmpCompletionBorder" },
+      },
       scrolloff = 4,
     },
     documentation = {
-      border = "rounded",
+      border = {
+        { "┌", "CmpDocumentationBorder" },
+        { "─", "CmpDocumentationBorder" },
+        { "┐", "CmpDocumentationBorder" },
+        { "│", "CmpDocumentationBorder" },
+        { "┘", "CmpDocumentationBorder" },
+        { "─", "CmpDocumentationBorder" },
+        { "└", "CmpDocumentationBorder" },
+        { "│", "CmpDocumentationBorder" },
+      },
     }
   },
   sources = {

@@ -39,7 +39,7 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl  = "DiagnosticInfo" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
 vim.diagnostic.config({
@@ -48,4 +48,21 @@ vim.diagnostic.config({
     spacing = 3,
     prefix = "",
   },
+  float = {
+    border = "single",
+  },
 })
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {
+    border = "single",
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {
+    border = "single",
+  }
+)

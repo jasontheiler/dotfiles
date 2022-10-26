@@ -1,4 +1,12 @@
-return {
+local M = {}
+
+M.filetype_labels = {
+  rust = {
+    Interface = "Trait",
+  },
+}
+
+M.icons = {
   Class = "",
   Color = "",
   Constant = "",
@@ -27,3 +35,5 @@ return {
   Value = "",
   Variable = "",
 }
+
+return M
