@@ -13,4 +13,3 @@ bufferline.setup({
 
 keymap("n", "<Tab>", function() bufferline.cycle(1) end)
 keymap("n", "<S-Tab>", function() bufferline.cycle(-1) end)
-keymap("n", { "<C-w><C-x>", "<C-w>x" }, ":bd<CR>")
