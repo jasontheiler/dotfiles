@@ -18,8 +18,12 @@ cmp.setup({
   },
   window = {
     completion = {
+      border = "rounded",
       scrolloff = 4,
     },
+    documentation = {
+      border = "rounded",
+    }
   },
   sources = {
     { name = "nvim_lsp" },
