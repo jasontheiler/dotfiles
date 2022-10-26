@@ -67,6 +67,16 @@ catppuccin.setup({
         PmenuSel = { fg = palette.base, bg = palette.lavender },
         PmenuThumb = { bg = palette.lavender },
 
+        ScrollbarHandle = { bg = palette.surface0 },
+        ScrollbarError = { fg = palette.red },
+        ScrollbarErrorHandle = { fg = palette.red, bg = palette.surface0 },
+        ScrollbarWarn = { fg = palette.yellow },
+        ScrollbarWarnHandle = { fg = palette.yellow, bg = palette.surface0 },
+        ScrollbarInfo = { fg = palette.sky },
+        ScrollbarInfoHandle = { fg = palette.sky, bg = palette.surface0 },
+        ScrollbarHint = { fg = palette.teal },
+        ScrollbarHintHandle = { fg = palette.teal, bg = palette.surface0 },
+
         TelescopeBorder = { fg = palette.lavender },
         TelescopePromptTitle = { fg = palette.flamingo },
         TelescopeSelectionCaret = { bg = palette.surface0 },
