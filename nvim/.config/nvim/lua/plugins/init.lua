@@ -27,12 +27,6 @@ packer.startup(function(use)
     config = function() require("plugins/configs/catppuccin") end,
   })
 
-  -- See: https://github.com/EdenEast/nightfox.nvim
-  -- use({
-  --   "EdenEast/nightfox.nvim",
-  --   config = function() require("plugins/configs/nightfox") end,
-  -- })
-
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
   use({
     "nvim-treesitter/nvim-treesitter",

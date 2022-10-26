@@ -9,6 +9,11 @@ catppuccin.setup({
   highlight_overrides = {
     mocha = function(mocha)
       return {
+        DiagnosticUnderlineError = { style = { "undercurl" }, sp = mocha.red },
+        DiagnosticUnderlineWarn = { style = { "undercurl" }, sp = mocha.yellow },
+        DiagnosticUnderlineInfo = { style = { "undercurl" }, sp = mocha.sky},
+        DiagnosticUnderlineHint = { style = { "undercurl" }, sp = mocha.teal },
+
         ["@namespace"] = { style = {} },
         ["@parameter"] = { style = {} },
         ["@tag.attribute"] = { style = {} },
