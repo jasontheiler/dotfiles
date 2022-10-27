@@ -2,14 +2,13 @@
 # See: https://github.com/Macchina-CLI/macchina/blob/main/contrib/themes/Hydrogen.toml
 
 prefer_small_ascii = true
-padding = 1
 spacing = 1
 separator = "│"
 separator_color = "#4e5157"
 key_color = "Green"
 
 [custom_ascii]
-path = "~/.config/macchina/crt_naked.ascii"
+path = "~/.config/macchina/crt.ascii"
 
 [keys]
 host = ""
