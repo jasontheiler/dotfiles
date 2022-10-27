@@ -19,7 +19,7 @@ function tmux_create_session
     end
 
     tmux (if set -q TMUX; echo switch-client; else; echo attach-session; end) -t $session_id\; \
-        split-window -dh -c $working_dir -e GREETING=false\; \
+        split-window -dh -c $working_dir\; \
         select-layout main-vertical\; \
         new-window -dc $working_dir
 end
