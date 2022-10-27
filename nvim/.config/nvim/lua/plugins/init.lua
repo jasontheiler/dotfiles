@@ -126,12 +126,6 @@ packer.startup(function(use)
     config = function() require("plugins/configs/web-devicons") end,
   })
 
-  -- See: https://github.com/petertriho/nvim-scrollbar
-  use({
-    "petertriho/nvim-scrollbar",
-    config = function() require("plugins/configs/scrollbar") end,
-  })
-
   -- See: https://github.com/lewis6991/gitsigns.nvim
   use({
     "lewis6991/gitsigns.nvim",
