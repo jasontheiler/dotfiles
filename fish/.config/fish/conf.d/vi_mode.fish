@@ -12,5 +12,3 @@ bind -s -M insert \ch backward-char
 bind -s -M insert \cj down-or-search
 bind -s -M insert \ck up-or-search
 bind -s -M insert \cl forward-char
-
-vi_default_mode

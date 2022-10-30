@@ -20,3 +20,5 @@ set fish_color_valid_path --underline
 # See: https://fishshell.com/docs/current/index.html#variables-for-changing-highlighting-colors
 set fish_pager_color_description yellow
 set fish_pager_color_progress --reverse cyan
+
+set fish_term24bit 1
