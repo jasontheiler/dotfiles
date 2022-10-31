@@ -15,7 +15,8 @@ feline.setup({
           provider = vi_mode.provider,
           short_provider = "",
           hl = vi_mode.hl,
-          right_sep = { str = "right_filled", hl = vi_mode.sep_hl },
+          left_sep = { str = "left_rounded", hl = vi_mode.hl_to_bg },
+          right_sep = { str = "right_filled", hl = vi_mode.hl_to_seg0 },
         }),
         with_pad_seps({
           priority = 6,
@@ -174,7 +175,7 @@ feline.setup({
           priority = 9,
           provider = "position",
           hl = vi_mode.hl,
-          left_sep = { str = "left_filled", hl = vi_mode.sep_hl },
+          left_sep = { str = "left_filled", hl = vi_mode.hl_to_seg0 },
         }),
         with_pad_seps({
           priority = 3,
@@ -182,6 +183,7 @@ feline.setup({
           short_provider = "",
           hl = vi_mode.hl,
           left_sep = { str = "left", hl = vi_mode.hl },
+          right_sep = { str = "right_rounded", hl = vi_mode.hl_to_bg },
         }),
       },
     },

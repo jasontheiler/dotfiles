@@ -47,7 +47,11 @@ M.hl = function()
   return modes[vim.fn.mode()].hl or "FelineSLViModeNormal"
 end
 
-M.sep_hl = function()
+M.hl_to_bg = function()
+  return (modes[vim.fn.mode()].hl or "FelineSLViModeNormal") .. "ToBg"
+end
+
+M.hl_to_seg0 = function()
   return (modes[vim.fn.mode()].hl or "FelineSLViModeNormal") .. "ToSeg0"
 end
 

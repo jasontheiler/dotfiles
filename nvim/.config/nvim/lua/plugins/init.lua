@@ -162,15 +162,6 @@ packer.startup(function(use)
     config = function() require("plugins/configs/bufferline") end,
   })
 
-  -- See: https://github.com/kyazdani42/nvim-tree.lua
-  use({
-    "kyazdani42/nvim-tree.lua",
-    after = {
-      "nvim-web-devicons",
-    },
-    config = function() require("plugins/configs/tree") end,
-  })
-
   if not is_installed then
     packer.sync()
   end
