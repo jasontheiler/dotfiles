@@ -1,5 +1,7 @@
-# Sets colors for fish's syntax highlighting.
 # See: https://fishshell.com/docs/current/index.html#variables-for-changing-highlighting-colors
+
+set fish_term24bit 1
+
 set fish_color_autosuggestion brblack
 set fish_color_cancel red
 set fish_color_command green
@@ -16,9 +18,5 @@ set fish_color_redirection magenta
 set fish_color_search_match --reverse
 set fish_color_valid_path --underline
 
-# Sets colors for fish's completion pager.
-# See: https://fishshell.com/docs/current/index.html#variables-for-changing-highlighting-colors
 set fish_pager_color_description yellow
 set fish_pager_color_progress --reverse cyan
-
-set fish_term24bit 1

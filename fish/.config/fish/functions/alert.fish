@@ -1,4 +1,3 @@
-# Prints an alert of the specified type.
 function alert -d "Prints an alert of the specified type."
     switch $argv[1]
         case error

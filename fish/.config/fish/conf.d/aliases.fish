@@ -9,7 +9,6 @@ alias egrep="egrep --color=auto"
 
 alias ip="ip --color=auto"
 
-# Adds some common ls aliases.
 alias l="ls -F"
 alias la="ls -FA"
 alias ll="ls -Fl"

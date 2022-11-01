@@ -1,4 +1,3 @@
-# Prompts the user to input text.
 function text_input -d "Prompts the user to input text."
     argparse i/inline t/trim -- $argv
 

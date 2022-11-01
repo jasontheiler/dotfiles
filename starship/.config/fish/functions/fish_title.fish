@@ -1,4 +1,3 @@
-# Prints fish's title.
 function fish_title
     if test (id -u) -eq 0
         or test "$USER" != "$LOGNAME"

@@ -1,8 +1,6 @@
-# Sets colors for exa.
 # See: https://the.exa.website/docs/colour-themes
 set -x EXA_COLORS "xx=1;30"
 
-# Adds exa abbreviations.
 abbr -a l exa -Fs type --tree -L 1
 abbr -a la exa -Fas type --tree -L 1
 abbr -a ll exa -Fls type --git --tree -L 1

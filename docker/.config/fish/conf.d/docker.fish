@@ -1,4 +1,3 @@
-# Adds Docker abbreviations.
 abbr -a dps 'docker ps --format "table {{.ID}}\t{{.Names}}\t{{.RunningFor}}\t{{.Status}}"'
 abbr -a dpsd 'docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Networks}}\t{{.Size}}"'
 abbr -a dc docker compose

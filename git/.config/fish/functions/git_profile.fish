@@ -1,4 +1,3 @@
-# Sets up the user's Git profile.
 function git_profile -d "Sets up the user's Git profile."
     if not test -d ./.git/
         alert error "Current directory is not a Git repository!" \n

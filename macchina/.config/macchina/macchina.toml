@@ -1,4 +1,3 @@
-# Configures Macchina.
 # See: https://github.com/Macchina-CLI/macchina/blob/main/macchina.toml
 
 theme = "Default"
