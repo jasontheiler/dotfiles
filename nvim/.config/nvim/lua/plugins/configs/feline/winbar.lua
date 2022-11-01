@@ -3,11 +3,6 @@ local with_pad_seps = require("plugins/configs/feline/utils").with_pad_seps
 
 -- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
 feline.winbar.setup({
-  disable = {
-    filetypes = {
-      "^NvimTree$",
-    },
-  },
   components = {
     active = {
       -- left
