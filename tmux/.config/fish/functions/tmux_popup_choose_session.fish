@@ -1,4 +1,4 @@
-function tmux_choose_session
+function tmux_popup_choose_session
     if not set -q TMUX
         alert error "You are currently not in a tmux session!"
     end
