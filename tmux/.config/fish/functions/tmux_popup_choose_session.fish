@@ -7,7 +7,7 @@ function tmux_popup_choose_session
     tput sc
     tput civis
 
-    set -l SHOWN_SESSIONS_COUNT 5
+    set -l SHOWN_SESSIONS_COUNT 7
     set -l middle_session_idx (math ceil (math \($SHOWN_SESSIONS_COUNT / 2\) - 1))
 
     set -l sessions (tmux list-sessions -F "#{session_name};#{s|$HOME|~|:session_path}/")
