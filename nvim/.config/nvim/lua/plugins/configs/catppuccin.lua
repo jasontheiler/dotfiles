@@ -1,10 +1,19 @@
 local catppuccin = require("catppuccin")
+local color_utils = require("catppuccin/utils/colors")
 
 -- See: https://github.com/catppuccin/nvim#configuration
 catppuccin.setup({
   flavour = "mocha",
   styles = {
     conditionals = {},
+  },
+  integrations = {
+    underlines = {
+      errors = { "undercurl" },
+      hints = { "undercurl" },
+      warnings = { "undercurl" },
+      information = { "undercurl" },
+    }
   },
   highlight_overrides = {
     mocha = function(palette)
@@ -17,11 +26,6 @@ catppuccin.setup({
         CmpDocumentationBorder = { fg = palette.lavender },
         CmpItemAbbr = { fg = palette.text },
         CmpItemAbbrMatch = { fg = palette.blue },
-
-        DiagnosticUnderlineError = { style = { "undercurl" }, sp = palette.red },
-        DiagnosticUnderlineWarn = { style = { "undercurl" }, sp = palette.yellow },
-        DiagnosticUnderlineInfo = { style = { "undercurl" }, sp = palette.sky },
-        DiagnosticUnderlineHint = { style = { "undercurl" }, sp = palette.teal },
 
         FelineSLBg = { bg = palette.base },
         FelineSLSeg0 = { fg = palette.subtext0, bg = palette.mantle },
@@ -75,6 +79,8 @@ catppuccin.setup({
         TelescopeBorder = { fg = palette.lavender },
         TelescopePromptTitle = { fg = palette.flamingo },
         TelescopeSelectionCaret = { bg = palette.surface0 },
+
+        YankHighlight = { bg = palette.surface2 },
       }
     end,
   },
