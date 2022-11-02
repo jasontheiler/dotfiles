@@ -80,7 +80,7 @@ catppuccin.setup({
         TelescopePromptTitle = { fg = palette.flamingo },
         TelescopeSelectionCaret = { bg = palette.surface0 },
 
-        YankHighlight = { bg = palette.surface2 },
+        YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.33, palette.base) },
       }
     end,
   },
