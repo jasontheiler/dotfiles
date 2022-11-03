@@ -10,12 +10,13 @@ function tmux_popup_choose_session
     set -l SHOWN_SESSIONS_COUNT 7
     set -l middle_session_idx (math ceil (math \($SHOWN_SESSIONS_COUNT / 2\) - 1))
 
-    set -l sessions (tmux list-sessions -F "#{session_name};#{s|$HOME|~|:session_path}/")
+    set -l sessions \
+        (tmux list-sessions -F "#{s|$HOME|~|:session_path}/;#{session_name}" | LC_COLLATE=C sort)
     set -l current_session_name (tmux display-message -p "#{client_session}")
 
     set -l selected_session_idx 0
     for i in (seq 1 (count $sessions))
-        if test (string split ";" $sessions[$i])[1] = $current_session_name
+        if test (string split ";" $sessions[$i])[-1] = $current_session_name
             set selected_session_idx (math $i - 1)
         end
     end
@@ -48,7 +49,7 @@ function tmux_popup_choose_session
                     break
             end
 
-            tmux switch-client -t (string split ";" $sessions[(math $selected_session_idx + 1)])[1]
+            tmux switch-client -t (string split ";" $sessions[(math $selected_session_idx + 1)])[-1]
         else
             echo $statusline
         end
@@ -56,9 +57,9 @@ function tmux_popup_choose_session
         set -l output (string pad -w $term_width \n)
 
         for i in (seq 0 (math $SHOWN_SESSIONS_COUNT - 1))
-            set -l session_idx (math \($selected_session_idx + (count $sessions) + \($i - $middle_session_idx\)\) % (count $sessions))
+            set -l session_idx (math \($selected_session_idx + \((math ceil (math $middle_session_idx / (count $sessions))) \* (count $sessions)\) + \($i - $middle_session_idx\)\) % (count $sessions))
             set -l session_str (echo \
-                (string split ";" $sessions[(math $session_idx + 1)])[-1] \
+                (string split ";" $sessions[(math $session_idx + 1)])[1] \
                 | string sub -l (math $term_width - 2) \
                 | string pad -rw (math $term_width - 2) \
             )
