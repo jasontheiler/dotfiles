@@ -58,7 +58,7 @@ cmp.setup({
   mapping = {
     ["<C-Space>"] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.close()
+        cmp.abort()
       else
         cmp.complete()
       end
