@@ -22,7 +22,7 @@ function tmux_popup_choose_session
     end
 
     set -l term_width (tput cols)
-    set -l statusline (echo -s \
+    set -l title (echo -s \
         (set_color "#f2cdcd") \
         " " \
         (string repeat -Nn (math \($term_width / 2\) - 9) " ") \
@@ -31,27 +31,44 @@ function tmux_popup_choose_session
         | string pad -rw (math $term_width - 2)
     )
 
+    set -l kill_initiated false
+
     set -l renders 0
     while true
         tput rc
 
         if test $renders -ge 1
-            read -l -P "$(echo $statusline)" -n 1 input
+            read -l -P "$(echo $title)" -n 1 input
 
             switch "$input"
                 case j
+                    set kill_initiated false
                     set selected_session_idx \
                         (math \($selected_session_idx + 1\) % (count $sessions))
                 case k
+                    set kill_initiated false
                     set selected_session_idx \
                         (math \($selected_session_idx - 1 + (count $sessions)\) % (count $sessions))
+                case x
+                    set kill_initiated true
+                case n
+                    set kill_initiated false
+                case y
+                    set -l killed_session_name \
+                        (string split ";" $sessions[(math $selected_session_idx + 1)])[-1]
+
+                    tmux kill-session -t $killed_session_name
+
+                    set -e sessions[(math $selected_session_idx + 1)]
+                    set selected_session_idx (math $selected_session_idx % (count $sessions))
+                    set kill_initiated false
                 case q ''
                     break
             end
 
             tmux switch-client -t (string split ";" $sessions[(math $selected_session_idx + 1)])[-1]
         else
-            echo $statusline
+            echo $title
         end
 
         set -l output (string pad -w $term_width \n)
@@ -65,12 +82,17 @@ function tmux_popup_choose_session
             )
 
             if test $i -eq $middle_session_idx
-                set -a output \
-                    (set_color -b "#313244") \
-                    (set_color "#f2cdcd") \
-                    "❯ " \
-                    (set_color normal) \
-                    (set_color -b "#313244")
+                if $kill_initiated
+                    set -a output \
+                        (set_color -b "#32283a" red) \
+                        "? " \
+                        (set_color -b "#32283a" red)
+                else
+                    set -a output \
+                        (set_color -b "#313244" "#f2cdcd") \
+                        "❯ " \
+                        (set_color -b "#313244" normal)
+                end
             else
                 set -a output "  "
             end
