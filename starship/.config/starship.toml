@@ -35,6 +35,7 @@ style = "bold green"
 symbol = " "
 
 [package]
+disabled = true
 symbol = " "
 style = "bold yellow"
 
