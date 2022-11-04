@@ -1,4 +1,4 @@
-function time_out
+function checklist
     set -l bins \
         bat \
         brew \
