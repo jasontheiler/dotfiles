@@ -17,6 +17,9 @@ read_only = ""
 [fill]
 symbol = "─"
 
+[git_branch]
+truncation_length = 24
+
 [git_status]
 ahead = "${count}↑"
 behind = "${count}↓"
