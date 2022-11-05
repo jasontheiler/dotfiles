@@ -61,11 +61,11 @@ M.provider = function()
     s = s .. " "
 
     if ahead ~= 0 then
-      s = s .. ahead .. "↑"
+      s = s .. "↑" .. ahead
     end
 
     if behind ~= 0 then
-      s = s .. behind .. "↓"
+      s = s .. "↓" .. behind
     end
   end
 
