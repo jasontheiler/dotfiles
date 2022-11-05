@@ -21,8 +21,8 @@ symbol = "─"
 truncation_length = 24
 
 [git_status]
-ahead = "${count}↑"
-behind = "${count}↓"
+ahead = "↑${count}"
+behind = "↓${count}"
 diverged = "${ahead_count}↑${behind_count}↓"
 
 [golang]
