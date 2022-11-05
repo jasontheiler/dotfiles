@@ -1,0 +1,22 @@
+disableStartupPopups: true
+notARepository: quit
+gui:
+  showBottomLine: false
+  theme:
+    activeBorderColor:
+      - magenta
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - black
+    cherryPickedCommitBgColor:
+      - cyan
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
