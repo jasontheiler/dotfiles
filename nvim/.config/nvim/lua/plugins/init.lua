@@ -153,6 +153,12 @@ packer.startup(function(use)
     config = function() require("plugins/configs/telescope") end,
   })
 
+  -- See: https://github.com/famiu/bufdelete.nvim
+  use({
+    "famiu/bufdelete.nvim",
+    config = function() require("plugins/configs/bufdelete") end,
+  })
+
   -- See: https://github.com/akinsho/bufferline.nvim
   use({
     "akinsho/bufferline.nvim",

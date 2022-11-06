@@ -3,11 +3,7 @@ local keymap = require("utils").keymap
 keymap({ "n", "v" }, "<Space>", "<Nop>")
 
 keymap("n", "<Leader>s", ":w<CR>")
-keymap("n", "<Leader>qq", ":q<CR>")
-keymap("n", "<Leader>qf", ":q!<CR>")
-keymap("n", "<Leader>qa", ":qa<CR>")
-
-keymap("n", "<Leader>bx", ":bd<CR>")
+keymap("n", "<Leader>qq", ":qa<CR>")
 
 keymap("n", "<Leader>w", "<C-w>")
 keymap("n", { "<C-w><C-h>", "<Leader>w<C-h>" }, "<C-w><")
