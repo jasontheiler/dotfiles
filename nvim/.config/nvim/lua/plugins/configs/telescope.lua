@@ -68,7 +68,11 @@ telescope.setup({
 })
 
 keymap("n", "<Leader>kk", telescope_builtin.find_files)
-keymap("n", "<Leader>ka", function() telescope_builtin.find_files({ no_ignore = true }) end)
+keymap("n", "<Leader>ka", function() telescope_builtin.find_files({
+    prompt_title = "Find All Files",
+    no_ignore = true,
+  })
+end)
 keymap("n", "<Leader>k/", telescope_builtin.live_grep)
 keymap("n", "<Leader>kb", telescope_builtin.buffers)
 keymap("n", "<Leader>ko", function() telescope_builtin.oldfiles({ cwd_only = true }) end)

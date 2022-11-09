@@ -4,6 +4,7 @@ vim.opt.shortmess = "fIlnxtToOF"
 vim.opt.showmode = false
 vim.opt.hidden = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.autoread = true
 vim.opt.history = 1000
 vim.opt.mouse = "a"
 vim.opt.signcolumn = "yes"
