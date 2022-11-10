@@ -54,14 +54,16 @@ function tmux_popup_choose_session
                 case n
                     set kill_initiated false
                 case y
-                    set -l killed_session_name \
-                        (string split ";" $sessions[(math $selected_session_idx + 1)])[-1]
+                    if $kill_initiated
+                        set -l killed_session_name \
+                            (string split ";" $sessions[(math $selected_session_idx + 1)])[-1]
 
-                    tmux kill-session -t $killed_session_name
+                        tmux kill-session -t $killed_session_name
 
-                    set -e sessions[(math $selected_session_idx + 1)]
-                    set selected_session_idx (math $selected_session_idx % (count $sessions))
-                    set kill_initiated false
+                        set -e sessions[(math $selected_session_idx + 1)]
+                        set selected_session_idx (math $selected_session_idx % (count $sessions))
+                        set kill_initiated false
+                    end
                 case q ''
                     break
             end
