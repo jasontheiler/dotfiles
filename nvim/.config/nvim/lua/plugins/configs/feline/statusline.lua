@@ -22,7 +22,11 @@ feline.setup({
           provider = vi_mode.provider,
           short_provider = "",
           hl = vi_mode.hl,
-          right_sep = { str = "right_filled", hl = vi_mode.hl_to_seg0 },
+          right_sep = {
+            str = "right_filled",
+            hl = vi_mode.hl_to_seg0,
+            always_visible = true,
+          },
         }),
         with_pad_seps({
           priority = 6,
@@ -44,7 +48,11 @@ feline.setup({
           },
           short_provider = "",
           hl = "FelineSLSeg1",
-          right_sep = { str = "right_filled", hl = "FelineSLSeg1ToGitAdded" },
+          right_sep = {
+            str = "right_filled",
+            hl = "FelineSLSeg1ToGitAdded",
+            always_visible = true,
+          },
         }),
         with_pad_seps({
           priority = 8,
@@ -180,8 +188,13 @@ feline.setup({
         with_pad_seps({
           priority = 9,
           provider = "position",
+          short_provider = "",
           hl = vi_mode.hl,
-          left_sep = { str = "left_filled", hl = vi_mode.hl_to_seg0 },
+          left_sep = {
+            str = "left_filled",
+            hl = vi_mode.hl_to_seg0,
+            always_visible = true
+          },
         }),
         with_pad_seps({
           priority = 3,
