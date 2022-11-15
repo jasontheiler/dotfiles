@@ -26,7 +26,7 @@ function tmux_create_session
 
     tmux (if set -q TMUX; echo switch-client; else; echo attach-session; end) -t $session_id\; \
         send-keys nvim Enter\; \
-        split-window -dh -c $working_dir\; \
+        split-window -dv -c $working_dir\; \
         select-layout main-vertical\; \
         new-window -dc $working_dir
 end
