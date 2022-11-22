@@ -26,5 +26,5 @@ keymap("n", "<Leader>b7", function() bufferline.go_to(7, true) end)
 keymap("n", "<Leader>b8", function() bufferline.go_to(8, true) end)
 keymap("n", "<Leader>b9", function() bufferline.go_to(9, true) end)
 
-keymap("n", "<Tab>", function() bufferline.cycle(1) end)
-keymap("n", "<S-Tab>", function() bufferline.cycle(-1) end)
+-- keymap("n", "<Tab>", function() bufferline.cycle(1) end)
+-- keymap("n", "<S-Tab>", function() bufferline.cycle(-1) end)
