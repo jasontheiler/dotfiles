@@ -4,3 +4,5 @@
 	prune = true
 [remote "origin"]
 	prune = true
+[user]
+	useConfigOnly = true
