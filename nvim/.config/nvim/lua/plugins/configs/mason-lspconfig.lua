@@ -31,7 +31,11 @@ local on_attach = function(_, buffer)
   keymap("n", "gs", vim.lsp.buf.signature_help, opts)
   keymap("n", "gt", vim.lsp.buf.type_definition, opts)
   keymap("n", "cr", vim.lsp.buf.rename, opts)
-  keymap({ "n", "v" }, "<Leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
+  keymap({ "n", "v" }, "<Leader>f", function() vim.lsp.buf.format({
+      async = true,
+      filter = function(lsp) return lsp.name ~= "volar" end,
+    })
+  end, opts)
 end
 
 -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
