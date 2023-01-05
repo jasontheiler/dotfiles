@@ -6,6 +6,11 @@ local lsp_status = require("plugins/configs/feline/providers/lsp-status")
 
 -- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
 feline.setup({
+  force_inactive = {
+    filetypes = {},
+    buftypes = {},
+    bufnames = {},
+  },
   components = {
     active = {
       -- left
@@ -211,12 +216,6 @@ feline.setup({
           },
         },
       },
-    },
-    inactive = {
-      -- left
-      {},
-      -- right
-      {},
     },
   },
 })
