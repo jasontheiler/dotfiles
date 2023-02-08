@@ -18,6 +18,7 @@ treesitter.setup({
     "markdown",
     "markdown_inline",
     "rust",
+    "scss",
     "toml",
     "typescript",
     "vue",
