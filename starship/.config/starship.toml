@@ -1,6 +1,6 @@
 # See: https://starship.rs/config/
 
-format = "$all$fill$time$line_break$jobs$status$shell$character"
+format = "[╭](bold black) $all$fill$time$line_break[╰](bold black) $jobs$status$shell$character"
 
 [character]
 error_symbol = "[I ❯](bold green)"
