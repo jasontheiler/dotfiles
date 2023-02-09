@@ -13,7 +13,7 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 end
 
-M.limit_len = function(s, max_len, ellipsis)
+M.truncate = function(s, max_len, ellipsis)
   if type(ellipsis) ~= "boolean" then
     ellipsis = true
   end
