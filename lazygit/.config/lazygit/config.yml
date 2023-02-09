@@ -1,3 +1,5 @@
+# See: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
 disableStartupPopups: true
 notARepository: quit
 gui:
