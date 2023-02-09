@@ -37,10 +37,8 @@ telescope.setup({
         },
         mappings = {
             i = {
-                ["<C-h>"] = { type = "command", "<Left>" },
                 ["<C-j>"] = telescope_actions.move_selection_next,
                 ["<C-k>"] = telescope_actions.move_selection_previous,
-                ["<C-l>"] = { type = "command", "<Right>" },
             },
         },
     },
@@ -61,9 +59,6 @@ telescope.setup({
         buffers = {},
         oldfiles = {},
         diagnostics = {},
-        git_commits = {},
-        git_bcommits = {},
-        git_branches = {},
     }),
 })
 
@@ -79,6 +74,3 @@ utils.keymap("n", "<Leader>kb", telescope_builtin.buffers)
 utils.keymap("n", "<Leader>ko", function() telescope_builtin.oldfiles({ cwd_only = true }) end)
 utils.keymap("n", "<Leader>kd", telescope_builtin.diagnostics)
 utils.keymap("n", "<Leader>kD", function() telescope_builtin.diagnostics({ bufnr = 0 }) end)
-utils.keymap("n", "<Leader>kgc", telescope_builtin.git_commits)
-utils.keymap("n", "<Leader>kgC", telescope_builtin.git_bcommits)
-utils.keymap("n", "<Leader>kgb", telescope_builtin.git_branches)

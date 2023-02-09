@@ -115,10 +115,10 @@ packer.startup(function(use)
   })
 
   -- See: https://github.com/lukas-reineke/indent-blankline.nvim
-  use({
-      "lukas-reineke/indent-blankline.nvim",
-      config = function() require("plugins/configs/indent-blankline") end,
-  })
+  -- use({
+  --     "lukas-reineke/indent-blankline.nvim",
+  --     config = function() require("plugins/configs/indent-blankline") end,
+  -- })
 
   -- See: https://github.com/kyazdani42/nvim-web-devicons
   use({
