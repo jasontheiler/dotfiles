@@ -14,40 +14,40 @@ end
 local feline_git_status_augroup = vim.api.nvim_create_augroup("feline_git_status", {})
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  group = feline_git_status_augroup,
-  callback = function()
-    if _G.feline_git_status_timer then
-      _G.feline_git_status_timer:stop()
-    end
+    group = feline_git_status_augroup,
+    callback = function()
+      if _G.feline_git_status_timer then
+        _G.feline_git_status_timer:stop()
+      end
 
-    local buf_name = vim.api.nvim_buf_get_name(0)
+      local buf_name = vim.api.nvim_buf_get_name(0)
 
-    if vim.fn.filereadable(buf_name) == 0 then
-      reset_ahead_behind()
-      return
-    end
+      if vim.fn.filereadable(buf_name) == 0 then
+        reset_ahead_behind()
+        return
+      end
 
-    _G.feline_git_status_timer = vim.loop.new_timer()
-    _G.feline_git_status_timer:start(0, 5000, vim.schedule_wrap(function()
-      Job:new({
-        cwd = vim.fn.fnamemodify(buf_name, ":p:h"),
-        command = "git",
-        args = { "rev-list", "--left-right", "--count", "HEAD...@{upstream}" },
-        on_exit = function(job)
-          local res = job:result()[1]
+      _G.feline_git_status_timer = vim.loop.new_timer()
+      _G.feline_git_status_timer:start(0, 5000, vim.schedule_wrap(function()
+        Job:new({
+            cwd = vim.fn.fnamemodify(buf_name, ":p:h"),
+            command = "git",
+            args = { "rev-list", "--left-right", "--count", "HEAD...@{upstream}" },
+            on_exit = function(job)
+              local res = job:result()[1]
 
-          if type(res) ~= "string" then
-            reset_ahead_behind()
-            return
-          end
+              if type(res) ~= "string" then
+                reset_ahead_behind()
+                return
+              end
 
-          ahead, behind = res:match("(%d+)%s+(%d+)")
-          ahead = tonumber(ahead) or 0
-          behind = tonumber(behind) or 0
-        end
-      }):start()
-    end))
-  end,
+              ahead, behind = res:match("(%d+)%s+(%d+)")
+              ahead = tonumber(ahead) or 0
+              behind = tonumber(behind) or 0
+            end
+        }):start()
+      end))
+    end,
 })
 
 M.provider = function()

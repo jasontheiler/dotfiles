@@ -24,14 +24,14 @@ vim.opt.colorcolumn = { 80, 100 }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.fillchars = {
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┫",
-  vertright = "┣",
-  verthoriz = "╋",
-  eob = " ",
+    horiz = "━",
+    horizup = "┻",
+    horizdown = "┳",
+    vert = "┃",
+    vertleft = "┫",
+    vertright = "┣",
+    verthoriz = "╋",
+    eob = " ",
 }
 
 vim.g.mapleader = " "
@@ -44,26 +44,17 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInf
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
 vim.diagnostic.config({
-  severity_sort = true,
-  virtual_text = {
-    spacing = 3,
-    prefix = "",
-  },
-  float = {
-    border = "single",
-  },
+    severity_sort = true,
+    virtual_text = { spacing = 3, prefix = "" },
+    float = { border = "single" },
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  {
-    border = "single",
-  }
-)
+        vim.lsp.handlers.hover,
+        { border = "single" }
+    )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  {
-    border = "single",
-  }
-)
+        vim.lsp.handlers.signature_help,
+        { border = "single" }
+    )
