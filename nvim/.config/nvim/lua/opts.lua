@@ -5,7 +5,11 @@ vim.opt.showmode = false
 vim.opt.hidden = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.autoread = true
+vim.opt.swapfile = false
+vim.opt.backup = false
 vim.opt.history = 1000
+vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undo/"
 vim.opt.mouse = "a"
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
@@ -21,6 +25,8 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.colorcolumn = { 80, 100 }
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.fillchars = {
@@ -53,7 +59,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover,
         { border = "single" }
     )
-
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help,
         { border = "single" }

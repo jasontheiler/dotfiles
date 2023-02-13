@@ -28,6 +28,11 @@ null_ls.setup({
     on_attach = function(_, buffer)
       local opts = { buffer = buffer }
 
-      utils.keymap({ "n", "v" }, "<Leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
+      utils.keymap({ "n", "v" }, "<Leader>f", function()
+        vim.lsp.buf.format({
+            async = true,
+            filter = function(lsp) return lsp.name ~= "volar" end,
+        })
+      end, opts)
     end,
 })

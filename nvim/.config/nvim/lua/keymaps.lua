@@ -3,6 +3,8 @@ local utils = require("utils")
 utils.keymap({ "n", "v" }, "<Space>", "<Nop>")
 utils.keymap({ "n", "v" }, "K", "<Nop>")
 
+utils.keymap("x", "<Leader>p", "\"_dP")
+
 utils.keymap("n", "<Leader>s", ":w<CR>")
 utils.keymap("n", "<Leader>qq", ":qa<CR>")
 
