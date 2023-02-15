@@ -10,9 +10,9 @@ mason_lspconfig.setup({
         "cssls",
         "dockerls",
         "html",
+        "lua_ls",
         "marksman",
         "rust_analyzer",
-        "sumneko_lua",
         "taplo",
         "tsserver",
         "yamlls",
@@ -61,9 +61,9 @@ mason_lspconfig.setup_handlers({
           },
       }))
     end,
-    -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-    ["sumneko_lua"] = function()
-      lspconfig.sumneko_lua.setup(vim.tbl_extend("force", default_setup_config, {
+    -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup(vim.tbl_extend("force", default_setup_config, {
           settings = {
               Lua = {
                   diagnostics = {
