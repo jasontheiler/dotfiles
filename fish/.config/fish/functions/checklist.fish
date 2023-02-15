@@ -10,6 +10,7 @@ function checklist
         fnm \
         git \
         gpg \
+        gsed \
         lazygit \
         mkcert \
         nvim \
