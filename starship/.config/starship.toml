@@ -16,6 +16,7 @@ read_only = ""
 
 [fill]
 symbol = "─"
+style = "bright-black"
 
 [git_branch]
 truncation_length = 24
@@ -48,6 +49,5 @@ format = "[\\[$status\\]]($style) "
 
 [time]
 disabled = false
-format = " [$time]($style)"
+format = "[](bright-black)[ ](bg:bright-black)[$time](inverted bright-black)[ ](bg:bright-black)[](bright-black)"
 time_format = "%R"
-style = "bold black"
