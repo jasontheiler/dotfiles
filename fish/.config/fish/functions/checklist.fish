@@ -15,6 +15,7 @@ function checklist
         mkcert \
         nvim \
         oha \
+        ouch \
         paru \
         ranger \
         rg \
