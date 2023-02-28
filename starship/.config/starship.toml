@@ -49,5 +49,5 @@ format = "[\\[$status\\]]($style) "
 
 [time]
 disabled = false
-format = "[](bright-black)[ ](bg:bright-black)[$time](inverted bright-black)[ ](bg:bright-black)[](bright-black)"
+format = "[](bright-black)[ $time ](inverted bright-black)[](bright-black)"
 time_format = "%R"
