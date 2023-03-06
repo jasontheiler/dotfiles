@@ -19,3 +19,5 @@ utils.keymap("n", "]d", vim.diagnostic.goto_next)
 utils.keymap("n", "<Leader>d", vim.diagnostic.open_float)
 
 utils.keymap("t", "<Esc>", "<C-\\><C-n>")
+
+utils.keymap("n", "<Leader>n", ":e ${HOME}/notes.md<CR>")
