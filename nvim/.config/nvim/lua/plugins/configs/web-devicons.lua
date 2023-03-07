@@ -71,6 +71,16 @@ web_devicons.setup({
             icon = "",
             color = palette.lavender,
         },
+        ["docker-compose.yml"] = {
+            name = "Dockerfile",
+            icon = "",
+            color = palette.sapphire,
+        },
+        ["docker-compose.yaml"] = {
+            name = "Dockerfile",
+            icon = "",
+            color = palette.sapphire,
+        },
         ["dockerfile"] = {
             name = "Dockerfile",
             icon = "",
