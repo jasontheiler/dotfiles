@@ -1,7 +1,5 @@
 # See: https://starship.rs/config/
 
-format = "[╭](bright-black) $all$fill$time$line_break[╰](bright-black) $jobs$status$shell$character"
-
 [character]
 error_symbol = "[I ❯](bold green)"
 success_symbol = "[I ❯](bold green)"
@@ -13,10 +11,6 @@ vimcmd_visual_symbol = "[V ❯](bold purple)"
 [directory]
 format = "[($read_only )$path/]($style) "
 read_only = ""
-
-[fill]
-symbol = "─"
-style = "bright-black"
 
 [git_branch]
 truncation_length = 24
@@ -46,8 +40,3 @@ symbol = " "
 [status]
 disabled = false
 format = "[\\[$status\\]]($style) "
-
-[time]
-disabled = false
-format = "[](bright-black)[ $time ](inverted bright-black)[](bright-black)"
-time_format = "%R"
