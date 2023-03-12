@@ -68,7 +68,7 @@ catppuccin.setup({
               FelineWBISeg0 = { fg = palette.surface2, bg = palette.base },
               FidgetTitle = { fg = palette.teal },
               FloatBorder = { fg = palette.lavender },
-              NormalFloat = { fg = palette.text, bg = palette.base },
+              NormalFloat = { fg = palette.text, bg = palette.none },
               Pmenu = { fg = palette.text, bg = palette.base },
               PmenuSbar = { bg = palette.surface0 },
               PmenuSel = { fg = palette.base, bg = palette.lavender },
@@ -76,6 +76,9 @@ catppuccin.setup({
               TelescopeBorder = { fg = palette.lavender },
               TelescopePromptTitle = { fg = palette.flamingo },
               TelescopeSelectionCaret = { bg = palette.surface0 },
+              TreesitterContext = { bg = palette.none },
+              TreesitterContextLineNumber = { fg = palette.overlay0 },
+              VirtColumn = { fg = palette.surface0 },
               YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.33, palette.base) },
           }
         end,

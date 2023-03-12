@@ -120,6 +120,12 @@ packer.startup(function(use)
       config = function() require("plugins/configs/gitsigns") end,
   })
 
+  -- See: https://github.com/lukas-reineke/virt-column.nvim
+  use({
+      "lukas-reineke/virt-column.nvim",
+      config = function() require("plugins/configs/virt-column") end,
+  })
+
   -- See: https://github.com/feline-nvim/feline.nvim
   use({
       "feline-nvim/feline.nvim",
