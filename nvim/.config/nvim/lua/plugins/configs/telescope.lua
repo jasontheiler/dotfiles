@@ -46,6 +46,8 @@ telescope.setup({
         find_files = {
             find_command = { "rg", "--files", "--hidden", "--glob", "!*/.git/*", "--glob", "!.git/*" },
         },
+        oldfiles = {},
+        buffers = {},
         live_grep = {
             additional_args = function() return { "--hidden" } end,
             glob_pattern = {
@@ -56,8 +58,6 @@ telescope.setup({
                 "!*/pnpm-lock.yaml",
             },
         },
-        buffers = {},
-        oldfiles = {},
         diagnostics = {},
     }),
 })
@@ -69,8 +69,7 @@ utils.keymap("n", "<Leader>ka", function()
       no_ignore = true,
   })
 end)
-utils.keymap("n", "<Leader>k/", telescope_builtin.live_grep)
-utils.keymap("n", "<Leader>kb", telescope_builtin.buffers)
 utils.keymap("n", "<Leader>ko", function() telescope_builtin.oldfiles({ cwd_only = true }) end)
+utils.keymap("n", "<Leader>kb", telescope_builtin.buffers)
+utils.keymap("n", "<Leader>k/", telescope_builtin.live_grep)
 utils.keymap("n", "<Leader>kd", telescope_builtin.diagnostics)
-utils.keymap("n", "<Leader>kD", function() telescope_builtin.diagnostics({ bufnr = 0 }) end)

@@ -4,9 +4,11 @@ local utils = require("utils")
 -- See: https://github.com/akinsho/bufferline.nvim#usage
 bufferline.setup({
     options = {
+        indicator = { style = 'none' },
         numbers = function(opts)
-          return string.format("%s:", opts.ordinal)
+          return string.format("%s", opts.ordinal)
         end,
+        separator_style = { '' },
         show_buffer_close_icons = false,
         show_close_icon = false,
         right_mouse_command = nil,
@@ -38,7 +40,7 @@ local move_to = function(new_idx)
   end
 end
 
-utils.keymap("n", "<Leader>b1", function() move_to(1) end)
+utils.keymap("n", "<Leadier>b1", function() move_to(1) end)
 utils.keymap("n", "<Leader>b2", function() move_to(2) end)
 utils.keymap("n", "<Leader>b3", function() move_to(3) end)
 utils.keymap("n", "<Leader>b4", function() move_to(4) end)

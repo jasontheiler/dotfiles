@@ -114,18 +114,6 @@ packer.startup(function(use)
       config = function() require("plugins/configs/fidget") end,
   })
 
-  -- See: https://github.com/lukas-reineke/indent-blankline.nvim
-  -- use({
-  --     "lukas-reineke/indent-blankline.nvim",
-  --     config = function() require("plugins/configs/indent-blankline") end,
-  -- })
-
-  -- See: https://github.com/kyazdani42/nvim-web-devicons
-  use({
-      "kyazdani42/nvim-web-devicons",
-      config = function() require("plugins/configs/web-devicons") end,
-  })
-
   -- See: https://github.com/lewis6991/gitsigns.nvim
   use({
       "lewis6991/gitsigns.nvim",
@@ -147,9 +135,6 @@ packer.startup(function(use)
   use({
       "nvim-telescope/telescope.nvim",
       branch = "0.1.x",
-      after = {
-          "nvim-web-devicons",
-      },
       config = function() require("plugins/configs/telescope") end,
   })
 
@@ -163,7 +148,7 @@ packer.startup(function(use)
   use({
       "akinsho/bufferline.nvim",
       after = {
-          "nvim-web-devicons",
+          "catppuccin",
       },
       config = function() require("plugins/configs/bufferline") end,
   })
