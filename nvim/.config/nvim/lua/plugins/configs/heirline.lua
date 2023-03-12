@@ -8,7 +8,7 @@ heirline.setup({
     { provider = "%=" },
     {
       provider = function()
-        local filename = vim.api.nvim_buf_get_name(0)
+        local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
         if filename == "" then
           return filename
         end
@@ -19,7 +19,10 @@ heirline.setup({
           s = " "
         end
 
-        s = s .. "./" .. vim.fn.fnamemodify(filename, ":.")
+        if not filename:find("^/") then
+          s = s .. "./"
+        end
+        s = s .. filename
 
         if vim.bo.modified then
           s = s .. " ●"
