@@ -3,16 +3,19 @@ local utils = require("utils")
 
 -- See: https://github.com/akinsho/bufferline.nvim#usage
 bufferline.setup({
-    options = {
-        indicator = { style = 'none' },
-        numbers = function(opts)
-          return string.format("%s", opts.ordinal)
-        end,
-        separator_style = { '' },
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-        right_mouse_command = nil,
-    },
+  options = {
+    indicator = { style = 'none' },
+    numbers = function(opts)
+      return string.format("%s", opts.ordinal)
+    end,
+    separator_style = { '' },
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    right_mouse_command = nil,
+    custom_filter = function(buf)
+      return vim.fn.bufname(buf) ~= ""
+    end,
+  },
 })
 
 utils.keymap("n", "<Leader>1", function() bufferline.go_to(1, true) end)

@@ -1,10 +1,10 @@
 local default_augroup = vim.api.nvim_create_augroup("default", {})
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-    group = default_augroup,
-    callback = function()
-      vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 250 })
-    end,
+  group = default_augroup,
+  callback = function()
+    vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 250 })
+  end,
 })
 
 -- vim.api.nvim_create_autocmd({ "CmdlineEnter", "CmdlineLeave" }, {
