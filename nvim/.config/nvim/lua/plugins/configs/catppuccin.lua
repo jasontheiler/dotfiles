@@ -43,6 +43,7 @@ catppuccin.setup({
         TelescopeSelectionCaret = { bg = palette.surface0 },
         TreesitterContext = { bg = palette.none },
         TreesitterContextLineNumber = { fg = palette.overlay0 },
+        VertSplit = { fg = palette.crust },
         VirtColumn = { fg = palette.surface0 },
         YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.33, palette.base) },
       }

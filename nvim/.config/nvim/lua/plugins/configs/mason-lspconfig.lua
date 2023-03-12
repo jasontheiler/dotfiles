@@ -98,3 +98,6 @@ mason_lspconfig.setup_handlers({
     }))
   end,
 })
+
+utils.keymap("n", "<Leader>li", ":LspInfo<CR>")
+utils.keymap("n", "<Leader>lr", ":LspRestart<CR>")
