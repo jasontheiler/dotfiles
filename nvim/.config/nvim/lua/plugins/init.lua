@@ -126,15 +126,13 @@ packer.startup(function(use)
     config = function() require("plugins/configs/virt-column") end,
   })
 
-  -- See: https://github.com/feline-nvim/feline.nvim
+  -- See: https://github.com/rebelot/heirline.nvim
   use({
-    "feline-nvim/feline.nvim",
+    "rebelot/heirline.nvim",
     after = {
-      "plenary.nvim",
       "catppuccin",
-      "gitsigns.nvim",
     },
-    config = function() require("plugins/configs/feline") end,
+    config = function() require("plugins/configs/heirline") end,
   })
 
   -- See: https://github.com/nvim-telescope/telescope.nvim
