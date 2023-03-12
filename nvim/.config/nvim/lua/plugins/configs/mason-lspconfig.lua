@@ -30,6 +30,7 @@ local on_attach = function(_, buffer)
   utils.keymap("n", "gr", vim.lsp.buf.references, opts)
   utils.keymap("n", "gs", vim.lsp.buf.signature_help, opts)
   utils.keymap("n", "gt", vim.lsp.buf.type_definition, opts)
+  utils.keymap("n", "ga", vim.lsp.buf.code_action, opts)
   utils.keymap("n", "cr", vim.lsp.buf.rename, opts)
   utils.keymap({ "n", "v" }, "<Leader>f", function()
     vim.lsp.buf.format({
@@ -83,6 +84,16 @@ mason_lspconfig.setup_handlers({
         "javascriptreact",
         "vue",
         "json",
+      },
+    }))
+  end,
+  -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
+  ["yamlls"] = function()
+    lspconfig.yamlls.setup(vim.tbl_extend("force", default_setup_config, {
+      settings = {
+        yaml = {
+          keyOrdering = false,
+        },
       },
     }))
   end,
