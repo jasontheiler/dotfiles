@@ -9,12 +9,15 @@ catppuccin.setup({
     conditionals = {},
   },
   integrations = {
-    underlines = {
-      errors = { "undercurl" },
-      hints = { "undercurl" },
-      warnings = { "undercurl" },
-      information = { "undercurl" },
-    }
+    native_lsp = {
+      enabled = true,
+      underlines = {
+        errors = { "undercurl" },
+        warnings = { "undercurl" },
+        information = { "undercurl" },
+        hints = { "undercurl" },
+      },
+    },
   },
   highlight_overrides = {
     mocha = function(palette)
