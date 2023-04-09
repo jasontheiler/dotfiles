@@ -7,13 +7,12 @@ mason_null_ls.setup({
   ensure_installed = {
     "prettier",
   },
-})
-
--- See: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#configuration
-mason_null_ls.setup_handlers({
-  ["prettier"] = function()
-    null_ls.register(null_ls.builtins.formatting.prettier)
-  end,
+  -- See: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#configuration
+  handlers = {
+    ["prettier"] = function()
+      null_ls.register(null_ls.builtins.formatting.prettier)
+    end,
+  },
 })
 
 -- See: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
