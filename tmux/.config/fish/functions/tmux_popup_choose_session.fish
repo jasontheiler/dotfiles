@@ -23,7 +23,7 @@ function tmux_popup_choose_session
 
     set -l term_width (tput cols)
     set -l title (echo -s \
-        (set_color "#f2cdcd") \
+        (set_color "#DAA992") \
         " " \
         (string repeat -Nn (math \($term_width / 2\) - 9) " ") \
         "Choose Session" \
@@ -86,14 +86,14 @@ function tmux_popup_choose_session
             if test $i -eq $middle_session_idx
                 if $kill_initiated
                     set -a output \
-                        (set_color -b "#32283a" red) \
+                        (set_color -b "#362625" red) \
                         "? " \
-                        (set_color -b "#32283a" red)
+                        (set_color -b "#362625" red)
                 else
                     set -a output \
-                        (set_color -b "#313244" "#f2cdcd") \
+                        (set_color -b "#433737" "#DAA992") \
                         "❯ " \
-                        (set_color -b "#313244" normal)
+                        (set_color -b "#433737" normal)
                 end
             else
                 set -a output "  "
