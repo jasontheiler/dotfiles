@@ -20,3 +20,15 @@ utils.keymap("n", "<Leader>d", vim.diagnostic.open_float)
 utils.keymap("t", "<Esc>", "<C-\\><C-n>")
 
 utils.keymap("n", "<Leader>n", ":e ${HOME}/notes.md<CR>")
+
+utils.keymap("n", "<Leader>u", function()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row, col = cursor[1], cursor[2]
+  local char = vim.api.nvim_buf_get_text(0, row - 1, col, row - 1, col + 1, {})[1]
+  local uuid = vim.fn.systemlist("uuidgen")[1]
+  local col_offset = 1
+  if char == "" then
+    col_offset = 0
+  end
+  vim.api.nvim_buf_set_text(0, row - 1, col + col_offset, row - 1, col + col_offset, { uuid })
+end)
