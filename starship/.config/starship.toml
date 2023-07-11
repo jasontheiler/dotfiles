@@ -35,7 +35,7 @@ symbol = " "
 style = "bold yellow"
 
 [rust]
-symbol = " "
+symbol = " "
 
 [status]
 disabled = false
