@@ -11,6 +11,7 @@ function checklist
         git \
         gpg \
         gsed \
+        hyperfine \
         lazygit \
         mkcert \
         nvim \
