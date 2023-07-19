@@ -55,6 +55,9 @@ mason_lspconfig.setup_handlers({
     lspconfig.rust_analyzer.setup(vim.tbl_extend("force", default_setup_config, {
       settings = {
         ["rust-analyzer"] = {
+          cargo = {
+            features = "all",
+          },
           check = {
             command = "clippy",
           },
