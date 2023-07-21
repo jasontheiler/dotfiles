@@ -1,5 +1,5 @@
-abbr -a dps 'docker ps --format "table {{.ID}}\t{{.Names}}\t{{.RunningFor}}\t{{.Status}}"'
-abbr -a dpsd 'docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Networks}}\t{{.Size}}"'
+abbr -a dps 'docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.RunningFor}}\t{{.Status}}"'
+abbr -a dpsd 'docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Networks}}\t{{.Size}}"'
 abbr -a dc docker compose
 abbr -a dcu docker compose up -d
 abbr -a dcub docker compose up -d --build
