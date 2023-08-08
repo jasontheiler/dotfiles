@@ -37,6 +37,7 @@ telescope.setup({
     },
     mappings = {
       i = {
+        ["<Esc>"] = telescope_actions.close,
         ["<C-j>"] = telescope_actions.move_selection_next,
         ["<C-k>"] = telescope_actions.move_selection_previous,
       },
