@@ -31,12 +31,8 @@ style = "bold green"
 
 [kubernetes]
 disabled = false
-format = "[$symbol($namespace)( \\($context\\))]($style) in "
 symbol = "󱃾 "
 style = "bold blue"
-
-[kubernetes.context_aliases]
-"docker-desktop" = ""
 
 [lua]
 symbol = " "
