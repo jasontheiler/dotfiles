@@ -12,6 +12,7 @@ function checklist
         gpg \
         gsed \
         hyperfine \
+        kubectl \
         lazygit \
         mkcert \
         nvim \
@@ -25,6 +26,7 @@ function checklist
         ssh \
         starship \
         stow \
+        tilt \
         tmux
 
     set -l installed_count 0
