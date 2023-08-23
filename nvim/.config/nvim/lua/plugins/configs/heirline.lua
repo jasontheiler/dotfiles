@@ -16,7 +16,7 @@ heirline.setup({
         local s = ""
 
         if vim.bo.readonly or not vim.bo.modifiable then
-          s = " "
+          s = s .. " "
         end
 
         if not filename:find("^/") then
