@@ -33,6 +33,8 @@ style = "bold green"
 disabled = false
 symbol = "󱃾 "
 style = "bold blue"
+detect_folders = ["kubernetes", "kube", "k8s", "kustomize"]
+detect_files = ["Tiltfile"]
 
 [lua]
 symbol = " "
