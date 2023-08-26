@@ -63,11 +63,14 @@ cmp.setup({
         cmp.complete()
       end
     end, { "i", "s" }),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<CR>"] = cmp.mapping.confirm({
+      select = true,
+      behaviour = cmp.ConfirmBehaviour.Replace
+    }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -76,7 +79,7 @@ cmp.setup({
     ["<C-j>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -85,7 +88,7 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.expand_or_jumpable(-1) then
+      elseif luasnip.expand_or_locally_jumpable(-1) then
         luasnip.expand_or_jump(-1)
       else
         fallback()
@@ -94,7 +97,7 @@ cmp.setup({
     ["<C-k>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.expand_or_jumpable(-1) then
+      elseif luasnip.expand_or_locally_jumpable(-1) then
         luasnip.expand_or_jump(-1)
       else
         fallback()
@@ -106,24 +109,19 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ "/", "?" }, {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
   },
+  mapping = cmp.mapping.preset.cmdline(),
 })
 
--- See: https://github.com/hrsh7th/cmp-cmdline/issues/24#issuecomment-1094896592
 cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
+    { name = "cmdline" },
     {
       name = "path",
-      option = {
-        trailing_slash = true,
-      },
+      option = { trailing_slash = true },
     },
-    { name = "cmdline" },
   },
+  mapping = cmp.mapping.preset.cmdline(),
 })
-
-vim.opt.completeopt = { "menu", "menuone", "noinsert" }
