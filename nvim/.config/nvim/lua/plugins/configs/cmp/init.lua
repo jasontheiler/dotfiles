@@ -65,7 +65,7 @@ cmp.setup({
     end, { "i", "s" }),
     ["<CR>"] = cmp.mapping.confirm({
       select = true,
-      behaviour = cmp.ConfirmBehaviour.Replace
+      behavior = cmp.ConfirmBehavior.Replace
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
