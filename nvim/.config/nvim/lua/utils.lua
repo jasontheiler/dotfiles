@@ -13,6 +13,7 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 end
 
+-- Can possibly be replace with `truncate` function of: https://github.com/nvim-lua/plenary.nvim#plenarystrings
 M.truncate = function(s, max_len, ellipsis)
   if type(ellipsis) ~= "boolean" then
     ellipsis = true

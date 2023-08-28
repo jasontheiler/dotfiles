@@ -1,164 +1,159 @@
-local is_installed, packer = pcall(require, "packer")
-
+local is_installed, lazy = pcall(require, "lazy")
 if not is_installed then
+  local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   vim.fn.system({
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazy_path
   })
-  vim.cmd("packadd packer.nvim")
-  packer = require("packer")
+  vim.opt.rtp:prepend(lazy_path)
+  lazy = require("lazy")
 end
 
-packer.startup(function(use)
-  -- See: https://github.com/wbthomason/packer.nvim
-  use({ "wbthomason/packer.nvim" })
-
+lazy.setup({
   -- See: https://github.com/nvim-lua/plenary.nvim
-  use({ "nvim-lua/plenary.nvim" })
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
+  },
 
   -- See: https://github.com/catppuccin/nvim
-  use({
+  {
     "catppuccin/nvim",
-    as = "catppuccin",
+    name = "catppuccin",
     config = function() require("plugins/configs/catppuccin") end,
-  })
+  },
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
-  use({
+  {
     "nvim-treesitter/nvim-treesitter",
     config = function() require("plugins/configs/treesitter") end,
-  })
+  },
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
-  use({
+  {
     "nvim-treesitter/nvim-treesitter-context",
-    after = {
-      "nvim-treesitter",
+    dependencies = {
+      -- See: https://github.com/nvim-treesitter/nvim-treesitter
+      "nvim-treesitter/nvim-treesitter",
     },
     config = function() require("plugins/configs/treesitter-context") end,
-  })
+  },
 
   -- See: https://github.com/windwp/nvim-autopairs
-  use({
+  {
     "windwp/nvim-autopairs",
+    lazy = true,
+    event = "InsertEnter",
     config = function() require("plugins/configs/autopairs") end,
-  })
-
-  -- See: https://github.com/L3MON4D3/LuaSnip
-  use({ "L3MON4D3/LuaSnip" })
-
-  -- See: https://github.com/saadparwaiz1/cmp_luasnip
-  use({ "saadparwaiz1/cmp_luasnip" })
-
-  -- See: https://github.com/hrsh7th/cmp-nvim-lsp
-  use({ "hrsh7th/cmp-nvim-lsp" })
-
-  -- See: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
-  use({ "hrsh7th/cmp-nvim-lsp-signature-help" })
-
-  -- See: https://github.com/hrsh7th/cmp-buffer
-  use({ "hrsh7th/cmp-buffer" })
-
-  -- See: https://github.com/hrsh7th/cmp-path
-  use({ "hrsh7th/cmp-path" })
-
-  -- See: https://github.com/hrsh7th/cmp-cmdline
-  use({ "hrsh7th/cmp-cmdline" })
+  },
 
   -- See: https://github.com/hrsh7th/nvim-cmp
-  use({
+  {
     "hrsh7th/nvim-cmp",
+    lazy = true,
+    event = "InsertEnter",
+    dependencies = {
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
+      "hrsh7th/cmp-nvim-lsp",
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- See: https://github.com/hrsh7th/cmp-buffer
+      "hrsh7th/cmp-buffer",
+      -- See: https://github.com/hrsh7th/cmp-cmdline
+      "hrsh7th/cmp-cmdline",
+      -- See: https://github.com/hrsh7th/cmp-path
+      "hrsh7th/cmp-path",
+      -- See: https://github.com/L3MON4D3/LuaSnip
+      "L3MON4D3/LuaSnip",
+      -- See: https://github.com/saadparwaiz1/cmp_luasnip
+      "saadparwaiz1/cmp_luasnip",
+    },
     config = function() require("plugins/configs/cmp") end,
-  })
+  },
 
   -- See: https://github.com/williamboman/mason.nvim
-  use({
+  {
     "williamboman/mason.nvim",
     config = function() require("plugins/configs/mason") end,
-  })
-
-  -- See: https://github.com/neovim/nvim-lspconfig
-  use({ "neovim/nvim-lspconfig" })
+  },
 
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
-  use({
+  {
     "williamboman/mason-lspconfig.nvim",
-    after = {
-      "cmp-nvim-lsp",
-      "mason.nvim",
-      "nvim-lspconfig",
+    dependencies = {
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
+      "hrsh7th/cmp-nvim-lsp",
+      -- See: https://github.com/williamboman/mason.nvim
+      "williamboman/mason.nvim",
+      -- See: https://github.com/neovim/nvim-lspconfig
+      "neovim/nvim-lspconfig",
     },
     config = function() require("plugins/configs/mason-lspconfig") end,
-  })
-
-  -- See: https://github.com/jose-elias-alvarez/null-ls.nvim
-  use({ "jose-elias-alvarez/null-ls.nvim" })
+  },
 
   -- See: https://github.com/jayp0521/mason-null-ls.nvim
-  use({
+  {
     "jayp0521/mason-null-ls.nvim",
-    after = {
-      "mason.nvim",
-      "null-ls.nvim",
+    dependencies = {
+      -- See: https://github.com/williamboman/mason.nvim
+      "williamboman/mason.nvim",
+      -- See: https://github.com/jose-elias-alvarez/null-ls.nvim
+      "jose-elias-alvarez/null-ls.nvim",
     },
     config = function() require("plugins/configs/mason-null-ls") end,
-  })
+  },
 
   -- See: https://github.com/j-hui/fidget.nvim
-  use({
+  {
     "j-hui/fidget.nvim",
     tag = "legacy",
     config = function() require("plugins/configs/fidget") end,
-  })
+  },
 
   -- See: https://github.com/lewis6991/gitsigns.nvim
-  use({
+  {
     "lewis6991/gitsigns.nvim",
     config = function() require("plugins/configs/gitsigns") end,
-  })
+  },
 
   -- See: https://github.com/lukas-reineke/virt-column.nvim
-  use({
+  {
     "lukas-reineke/virt-column.nvim",
     config = function() require("plugins/configs/virt-column") end,
-  })
+  },
 
   -- See: https://github.com/rebelot/heirline.nvim
-  use({
+  {
     "rebelot/heirline.nvim",
-    after = {
+    dependencies = {
       "catppuccin",
     },
     config = function() require("plugins/configs/heirline") end,
-  })
+  },
 
   -- See: https://github.com/nvim-telescope/telescope.nvim
-  use({
+  {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function() require("plugins/configs/telescope") end,
-  })
+  },
 
   -- See: https://github.com/famiu/bufdelete.nvim
-  use({
+  {
     "famiu/bufdelete.nvim",
     config = function() require("plugins/configs/bufdelete") end,
-  })
+  },
 
   -- See: https://github.com/akinsho/bufferline.nvim
-  use({
+  {
     "akinsho/bufferline.nvim",
-    after = {
+    dependencies = {
       "catppuccin",
     },
     config = function() require("plugins/configs/bufferline") end,
-  })
-
-  if not is_installed then
-    packer.sync()
-  end
-end)
+  },
+})

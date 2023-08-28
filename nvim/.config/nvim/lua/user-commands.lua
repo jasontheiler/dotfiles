@@ -1,8 +1,8 @@
 vim.api.nvim_create_user_command("Update", function()
-  local is_packer_installed, packer = pcall(require, "packer")
+  local is_lazy_installed, lazy = pcall(require, "lazy")
 
-  if is_packer_installed then
-    packer.sync()
+  if is_lazy_installed then
+    lazy.sync()
   end
 
   local is_treesitter_installed = pcall(require, "nvim-treesitter")
