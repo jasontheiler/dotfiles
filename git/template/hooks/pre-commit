@@ -1,0 +1,36 @@
+#!/bin/bash
+
+GITCONFIG_FILE_NAME=".gitconfig.profile"
+
+while test ! -f "${PWD}/${GITCONFIG_FILE_NAME}" -a "${PWD}" != "/"; do
+    PWD=$(dirname "${PWD}")
+done
+
+if test "${PWD}" == "/"; then
+    echo "No ${GITCONFIG_FILE_NAME} file in parent directories found."
+    exit 1
+fi
+
+git config --local include.path "${PWD}/${GITCONFIG_FILE_NAME}"
+
+USER_EMAIL=$(git config --local --includes --default "" --get user.email)
+if test "${USER_EMAIL}" == ""; then
+    echo "\`user.email\` is not set."
+    exit 1
+fi
+
+COMMIT_GPGSIGN=$(git config --local --includes --default "" --get commit.gpgsign)
+if test "${COMMIT_GPGSIGN}" == ""; then
+    echo "WARNING: \`commit.gpgsign\` is not set."
+fi
+
+if test "${COMMIT_GPGSIGN}" == "true"; then
+    USER_SIGNING_KEY=$(git config --local --includes --default "" --get user.signingkey)
+    if test "${USER_SIGNING_KEY}" == ""; then
+        echo "Commit signing is enabled but \`user.signingkey\` is not set."
+        exit 1
+    fi
+fi
+
+USER_NAME=$(git config --get user.name)
+echo "Commiting as ${USER_NAME} <${USER_EMAIL}>."
