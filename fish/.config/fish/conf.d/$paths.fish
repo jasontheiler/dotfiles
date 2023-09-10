@@ -1,6 +1,6 @@
 set -a fish_user_paths \
-    ~/.local/bin/ \
-    ~/.cargo/bin/
+    $HOME/.local/bin/ \
+    $HOME/.cargo/bin/
 
 if set -q WSL_DISTRO_NAME
     set -a fish_user_paths "/mnt/c/Program Files/win32yank/"
