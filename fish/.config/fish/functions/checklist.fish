@@ -5,7 +5,7 @@ function checklist
         btm \
         curl \
         docker \
-        exa \
+        eza \
         fish \
         fnm \
         git \
