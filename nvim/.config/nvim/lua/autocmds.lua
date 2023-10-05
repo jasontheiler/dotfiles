@@ -1,6 +1,6 @@
 local default_augroup = vim.api.nvim_create_augroup("default", {})
 
-vim.api.nvim_create_autocmd({ "BufEnter", "ModeChanged" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
   group = default_augroup,
   callback = function()
     local mode = vim.api.nvim_get_mode().mode
