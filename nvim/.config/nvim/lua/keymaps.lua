@@ -23,7 +23,7 @@ utils.keymap("n", "<Leader>r", function()
     print("openssl not found")
     return
   end
-  local input = vim.fn.input("Length: ")
+  local input = vim.fn.input("Number of bytes: ")
   local length = tonumber(input)
   if length == nil or length % 1 ~= 0 then
     print(input .. " is not a valid integer")
