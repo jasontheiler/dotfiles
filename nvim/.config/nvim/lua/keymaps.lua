@@ -18,16 +18,27 @@ utils.keymap("n", "]d", vim.diagnostic.goto_next)
 utils.keymap("n", "<Leader>d", vim.diagnostic.open_float)
 
 utils.keymap("n", "<Leader>n", ":e ${HOME}/notes.md<CR>")
+utils.keymap("n", "<Leader>r", function()
+  if vim.fn.executable("openssl") == 0 then
+    print("openssl not found")
+    return
+  end
+  local input = vim.fn.input("Length: ")
+  local length = tonumber(input)
+  if length == nil or length % 1 ~= 0 then
+    print(input .. " is not a valid integer")
+    return
+  end
+  local rand = vim.fn.systemlist("openssl rand -hex " .. length)[1]
+  utils.insert_text_at_cursor(rand)
+end)
 utils.keymap("n", "<Leader>u", function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local row, col = cursor[1], cursor[2]
-  local char = vim.api.nvim_buf_get_text(0, row - 1, col, row - 1, col + 1, {})[1]
-  local col_offset = 1
-  if char == "" then
-    col_offset = 0
+  if vim.fn.executable("uuidgen") == 0 then
+    print("uuidgen not found")
+    return
   end
   local uuid = vim.fn.systemlist("uuidgen")[1]
-  vim.api.nvim_buf_set_text(0, row - 1, col + col_offset, row - 1, col + col_offset, { uuid })
+  utils.insert_text_at_cursor(uuid)
 end)
 
 utils.keymap("t", "<Esc>", "<C-\\><C-n>")

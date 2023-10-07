@@ -1,6 +1,7 @@
 local mason_null_ls = require("mason-null-ls")
 local null_ls = require("null-ls")
 local utils = require("utils")
+local lsp_format_filter = require("plugins/configs/lsp-format-filter")
 
 -- See: https://github.com/jayp0521/mason-null-ls.nvim#configuration
 mason_null_ls.setup({
@@ -28,10 +29,7 @@ null_ls.setup({
     local opts = { buffer = buffer }
 
     utils.keymap({ "n", "v" }, "<Leader>f", function()
-      vim.lsp.buf.format({
-        async = true,
-        filter = function(lsp) return lsp.name ~= "volar" end,
-      })
+      vim.lsp.buf.format({ async = true, filter = lsp_format_filter })
     end, opts)
   end,
 })

@@ -13,7 +13,18 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 end
 
--- Can possibly be replace with `truncate` function of: https://github.com/nvim-lua/plenary.nvim#plenarystrings
+M.insert_text_at_cursor = function(text)
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row, col = cursor[1], cursor[2]
+  local char = vim.api.nvim_buf_get_text(0, row - 1, col, row - 1, col + 1, {})[1]
+  local col_offset = 1
+  if char == "" then
+    col_offset = 0
+  end
+  vim.api.nvim_buf_set_text(0, row - 1, col + col_offset, row - 1, col + col_offset, { text })
+end
+
+-- Can possibly be replaced with `truncate` function of: https://github.com/nvim-lua/plenary.nvim#plenarystrings
 M.truncate = function(s, max_len, ellipsis)
   if type(ellipsis) ~= "boolean" then
     ellipsis = true

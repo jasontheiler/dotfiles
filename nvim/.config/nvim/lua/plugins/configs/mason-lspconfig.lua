@@ -2,6 +2,7 @@ local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local utils = require("utils")
+local lsp_format_filter = require("plugins/configs/lsp-format-filter")
 
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local lsp_servers = {
@@ -72,10 +73,7 @@ local on_attach = function(_, buffer)
   utils.keymap("n", "<Leader>la", vim.lsp.buf.code_action, opts)
   utils.keymap("n", "<Leader>lS", vim.lsp.buf.signature_help, opts)
   utils.keymap({ "n", "v" }, "<Leader>f", function()
-    vim.lsp.buf.format({
-      async = true,
-      filter = function(lsp) return lsp.name ~= "volar" end,
-    })
+    vim.lsp.buf.format({ async = true, filter = lsp_format_filter })
   end, opts)
 end
 
