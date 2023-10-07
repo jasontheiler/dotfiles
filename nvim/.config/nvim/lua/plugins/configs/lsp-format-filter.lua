@@ -5,6 +5,5 @@ local whitelist = {
 }
 
 return function(lsp)
-  print(lsp.name)
   return vim.tbl_contains(whitelist, lsp.name)
 end
