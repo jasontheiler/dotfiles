@@ -2,6 +2,7 @@ local utils = require("utils")
 
 utils.keymap({ "n", "v" }, "<Space>", "<Nop>")
 utils.keymap({ "n", "v" }, "K", "<Nop>")
+utils.keymap("t", "<Esc>", "<C-\\><C-n>")
 
 utils.keymap("n", "<Leader>s", ":w<CR>")
 utils.keymap("x", "<Leader>p", "\"_dP")
@@ -18,27 +19,27 @@ utils.keymap("n", "]d", vim.diagnostic.goto_next)
 utils.keymap("n", "<Leader>d", vim.diagnostic.open_float)
 
 utils.keymap("n", "<Leader>n", ":e ${HOME}/notes.md<CR>")
-utils.keymap("n", "<Leader>r", function()
+utils.keymap({ "n", "v" }, "<Leader>yr", function()
   if vim.fn.executable("openssl") == 0 then
-    print("openssl not found")
+    utils.print("openssl not found")
     return
   end
   local input = vim.fn.input("Number of bytes: ")
   local length = tonumber(input)
   if length == nil or length % 1 ~= 0 then
-    print(input .. " is not a valid integer")
+    utils.print(input .. " is not a valid integer")
     return
   end
   local rand = vim.fn.systemlist("openssl rand -hex " .. length)[1]
-  utils.insert_text_at_cursor(rand)
+  vim.fn.setreg("+", rand, "c")
+  utils.print("Copied to clipboard: " .. rand)
 end)
-utils.keymap("n", "<Leader>u", function()
+utils.keymap({ "n", "v" }, "<Leader>yu", function()
   if vim.fn.executable("uuidgen") == 0 then
-    print("uuidgen not found")
+    utils.print("uuidgen not found")
     return
   end
   local uuid = vim.fn.systemlist("uuidgen")[1]
-  utils.insert_text_at_cursor(uuid)
+  vim.fn.setreg("+", uuid, "c")
+  utils.print("Copied to clipboard: " .. uuid)
 end)
-
-utils.keymap("t", "<Esc>", "<C-\\><C-n>")

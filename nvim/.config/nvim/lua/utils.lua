@@ -1,5 +1,11 @@
 local M = {}
 
+M.print = function(text)
+  vim.schedule(function()
+    vim.print(text)
+  end)
+end
+
 M.keymap = function(modes, lhss, rhs, opts)
   if type(lhss) ~= "table" then
     lhss = { lhss }
@@ -13,9 +19,8 @@ M.keymap = function(modes, lhss, rhs, opts)
   end
 end
 
-M.insert_text_at_cursor = function(text)
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local row, col = cursor[1], cursor[2]
+M.insert_text = function(text)
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local char = vim.api.nvim_buf_get_text(0, row - 1, col, row - 1, col + 1, {})[1]
   local col_offset = 1
   if char == "" then
