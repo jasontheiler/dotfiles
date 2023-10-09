@@ -13,6 +13,7 @@ if not is_installed then
   lazy = require("lazy")
 end
 
+-- See: https://github.com/folke/lazy.nvim
 lazy.setup({
   -- See: https://github.com/nvim-lua/plenary.nvim
   {
@@ -55,7 +56,7 @@ lazy.setup({
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       -- See: https://github.com/hrsh7th/cmp-nvim-lsp
       "hrsh7th/cmp-nvim-lsp",
