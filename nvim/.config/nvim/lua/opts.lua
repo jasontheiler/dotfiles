@@ -72,5 +72,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 vim.filetype.add({
   pattern = {
     [".*[tT]iltfile"] = "starlark",
+    [".env.*"] = "sh",
   },
 })
