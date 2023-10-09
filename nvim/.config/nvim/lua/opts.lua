@@ -4,6 +4,7 @@ vim.opt.cmdheight = 0
 vim.opt.shortmess = "fIlnxtToOF"
 vim.opt.showmode = false
 vim.opt.hidden = true
+vim.opt.shadafile = "NONE"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.autoread = true
 vim.opt.swapfile = false
