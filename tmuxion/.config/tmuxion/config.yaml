@@ -1,0 +1,33 @@
+session_selector:
+  width: 64
+  height: 24
+  scrolloff: 4
+  inverted: false
+  results:
+    bg: reset
+    border: [┏, ┓, ┃, ┃, ┃, ┃, ━, " "]
+    border_fg: "#BDAEC3"
+    border_bg: reset
+    title: ""
+    title_fg: reset
+    title_bg: reset
+    item_fg: reset
+    item_match_fg: blue
+    selection_fg: reset
+    selection_bg: "#433737"
+    selection_prefix: "❯ "
+    selection_prefix_fg: "#DAA992"
+  prompt:
+    bg: reset
+    border: [┃, ┃, ┗, ┛, ┃, ┃, " ", ━]
+    border_fg: "#BDAEC3"
+    border_bg: reset
+    title: " Select Session "
+    title_fg: "#DAA992"
+    title_bg: reset
+    pattern_fg: reset
+    pattern_prefix: "   "
+    pattern_prefix_fg: reset
+keybinds:
+  session_selector: [C-s, M-s]
+  last_session: [w]
