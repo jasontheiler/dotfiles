@@ -73,7 +73,7 @@ local on_attach = function(_, buffer)
 
   utils.keymap("n", "cr", vim.lsp.buf.rename, opts)
   utils.keymap("n", "<Leader>lS", vim.lsp.buf.signature_help, opts)
-  utils.keymap({ "n", "v" }, { "K", "<Leader>h" }, vim.lsp.buf.hover, opts)
+  utils.keymap({ "n", "v" }, "<Leader>h", vim.lsp.buf.hover, opts)
   utils.keymap({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, opts)
   utils.keymap({ "n", "v" }, "<Leader>f", function()
     vim.lsp.buf.format({ async = true, filter = lsp_format_filter })
