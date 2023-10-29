@@ -4,30 +4,25 @@ session_selector:
   scrolloff: 4
   inverted: false
   results:
-    bg: reset
+    style: null
     border: [┏, ┓, ┃, ┃, ┃, ┃, ━, " "]
-    border_fg: "#BDAEC3"
-    border_bg: reset
+    border_style: fg:#BDAEC3
     title: ""
-    title_fg: reset
-    title_bg: reset
-    item_fg: reset
-    item_match_fg: blue
-    selection_fg: reset
-    selection_bg: "#433737"
+    title_style: null
+    item_style: null
+    item_match_style: fg:blue
+    selection_style: bg:#433737
     selection_prefix: "❯ "
-    selection_prefix_fg: "#DAA992"
+    selection_prefix_style: fg:#DAA992
   prompt:
-    bg: reset
+    style: null
     border: [┃, ┃, ┗, ┛, ┃, ┃, " ", ━]
-    border_fg: "#BDAEC3"
-    border_bg: reset
+    border_style: fg:#BDAEC3
     title: " Select Session "
-    title_fg: "#DAA992"
-    title_bg: reset
-    pattern_fg: reset
+    title_style: fg:#DAA992
+    pattern_style: null
     pattern_prefix: "   "
-    pattern_prefix_fg: reset
+    pattern_prefix_style: null
 keybinds:
   session_selector: [C-s, M-s]
   last_session: [w]
