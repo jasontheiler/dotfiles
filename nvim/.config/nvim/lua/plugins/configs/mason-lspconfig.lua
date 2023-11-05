@@ -2,7 +2,6 @@ local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local utils = require("utils")
-local lsp_format_filter = require("plugins/configs/lsp-format-filter")
 
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local lsp_servers = {
@@ -21,6 +20,7 @@ local lsp_servers = {
         },
       },
     },
+    format = true,
   },
   marksman = {},
   -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
@@ -35,6 +35,7 @@ local lsp_servers = {
         },
       },
     },
+    format = true,
   },
   sqlls = {},
   taplo = {},
@@ -76,7 +77,12 @@ local on_attach = function(_, buffer)
   utils.keymap({ "n", "v" }, "<Leader>h", vim.lsp.buf.hover, opts)
   utils.keymap({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, opts)
   utils.keymap({ "n", "v" }, "<Leader>f", function()
-    vim.lsp.buf.format({ async = true, filter = lsp_format_filter })
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(lsp)
+        return lsp.name == "null-ls" or lsp_servers[lsp.name].format
+      end
+    })
   end, opts)
 end
 

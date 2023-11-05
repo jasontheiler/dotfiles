@@ -1,6 +1,5 @@
 local utils = require("utils")
 
-utils.keymap({ "n", "v" }, "<Space>", "<Nop>")
 utils.keymap({ "n", "v" }, "K", "<Nop>")
 utils.keymap("t", "<Esc>", "<C-\\><C-n>")
 
