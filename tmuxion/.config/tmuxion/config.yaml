@@ -11,7 +11,7 @@ session_selector:
     title_style: null
     item_style: null
     item_match_style: fg:blue
-    selection_style: bg:#433737
+    selection_style: bg:#433737 bold
     selection_prefix: "❯ "
     selection_prefix_style: fg:#DAA992
   prompt:
