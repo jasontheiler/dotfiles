@@ -12,7 +12,10 @@ config.enable_tab_bar = false
 config.max_fps = 120
 config.default_cursor_style = "SteadyBlock"
 config.cursor_blink_rate = 0
-config.font = wezterm.font("MonoLisa Nerd Font")
+config.font = wezterm.font_with_fallback({
+  { family = "CommitMono Nerd Font", scale = 1.07 },
+  "MonoLisa Nerd Font",
+})
 config.font_size = 14
 config.underline_position = -5
 config.allow_square_glyphs_to_overflow_width = "Always"
