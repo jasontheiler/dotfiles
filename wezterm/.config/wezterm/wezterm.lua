@@ -22,7 +22,7 @@ config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
 
-config.color_scheme = "Catppuccin Mocha Warm"
+config.color_scheme = "Catppuccin Mocha"
 config.color_schemes = {
   ["Catppuccin Mocha Warm"] = {
     foreground = "#E4CEA8",
@@ -59,7 +59,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 
 if wezterm.target_triple == "x86_64-apple-darwin" then
-  config.font_size = 16
+  config.font_size = 18
 end
 
 return config
