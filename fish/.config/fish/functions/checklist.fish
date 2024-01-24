@@ -10,6 +10,7 @@ function checklist
         fish \
         fnm \
         git \
+        git-open \
         gpg \
         gsed \
         hyperfine \
