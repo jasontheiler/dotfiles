@@ -52,6 +52,7 @@ catppuccin.setup({
   highlight_overrides = {
     mocha = function(palette)
       return {
+        ["@module"] = { style = {} },
         ["@namespace"] = { style = {} },
         ["@parameter"] = { style = {} },
         ["@tag.attribute"] = { style = {} },
