@@ -14,7 +14,7 @@ local config = {
       title_style = nil,
       item_style = nil,
       item_match_style = { fg = "blue" },
-      selection_style = { bg = "#433737", style = { "bold" } },
+      selection_style = { bg = "#433737", modifiers = { "bold" } },
       selection_prefix = "❯ ",
       selection_prefix_style = { fg = "#DAA992" },
     },
