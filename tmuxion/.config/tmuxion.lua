@@ -1,6 +1,6 @@
 local tmuxion = require("tmuxion")
 
-local config = {
+tmuxion.config({
   session_selector = {
     width = 64,
     height = 24,
@@ -33,6 +33,8 @@ local config = {
     session_selector = { "C-s", "M-s" },
     last_session = { "w" },
   },
-}
+})
 
-return config
+tmuxion.on_session_created(function(session)
+  print("session created")
+end)
