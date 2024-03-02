@@ -65,6 +65,7 @@ telescope.setup({
     lsp_type_definitions = {},
     lsp_implementations = {},
     lsp_references = {},
+    git_bcommits = {},
   }),
 })
 

@@ -4,9 +4,9 @@ local utils = require("utils")
 -- See: https://github.com/akinsho/bufferline.nvim#usage
 bufferline.setup({
   options = {
-    indicator = { style = 'none' },
+    indicator = { style = "none" },
     numbers = function(opts) return opts.ordinal end,
-    separator_style = { '' },
+    separator_style = { "" },
     show_buffer_close_icons = false,
     show_close_icon = false,
     right_mouse_command = nil,

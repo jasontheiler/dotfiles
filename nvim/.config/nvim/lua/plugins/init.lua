@@ -18,7 +18,7 @@ lazy.setup({
   -- See: https://github.com/nvim-lua/plenary.nvim
   {
     "nvim-lua/plenary.nvim",
-    lazy = true,
+    event = "VeryLazy",
   },
 
   -- See: https://github.com/catppuccin/nvim
@@ -31,6 +31,7 @@ lazy.setup({
   -- See: https://github.com/nvim-treesitter/nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
     config = function() require("plugins/configs/treesitter") end,
   },
 
@@ -41,13 +42,16 @@ lazy.setup({
       -- See: https://github.com/nvim-treesitter/nvim-treesitter
       "nvim-treesitter/nvim-treesitter",
     },
+    event = "VeryLazy",
     config = function() require("plugins/configs/treesitter-context") end,
   },
+
+  -- See: https://github.com/tpope/vim-sleuth
+  "tpope/vim-sleuth",
 
   -- See: https://github.com/windwp/nvim-autopairs
   {
     "windwp/nvim-autopairs",
-    lazy = true,
     event = "InsertEnter",
     config = function() require("plugins/configs/autopairs") end,
   },
@@ -55,7 +59,6 @@ lazy.setup({
   -- See: https://github.com/hrsh7th/nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    lazy = true,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       -- See: https://github.com/hrsh7th/cmp-nvim-lsp
@@ -79,6 +82,7 @@ lazy.setup({
   -- See: https://github.com/williamboman/mason.nvim
   {
     "williamboman/mason.nvim",
+    event = "VeryLazy",
     config = function() require("plugins/configs/mason") end,
   },
 
@@ -93,6 +97,7 @@ lazy.setup({
       -- See: https://github.com/neovim/nvim-lspconfig
       "neovim/nvim-lspconfig",
     },
+    event = "VeryLazy",
     config = function() require("plugins/configs/mason-lspconfig") end,
   },
 
@@ -105,6 +110,7 @@ lazy.setup({
       -- See: https://github.com/jose-elias-alvarez/null-ls.nvim
       "jose-elias-alvarez/null-ls.nvim",
     },
+    event = "VeryLazy",
     config = function() require("plugins/configs/mason-null-ls") end,
   },
 
@@ -112,18 +118,21 @@ lazy.setup({
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
+    event = "VeryLazy",
     config = function() require("plugins/configs/fidget") end,
   },
 
   -- See: https://github.com/lewis6991/gitsigns.nvim
   {
     "lewis6991/gitsigns.nvim",
+    event = "VeryLazy",
     config = function() require("plugins/configs/gitsigns") end,
   },
 
   -- See: https://github.com/lukas-reineke/virt-column.nvim
   {
     "lukas-reineke/virt-column.nvim",
+    event = "VeryLazy",
     config = function() require("plugins/configs/virt-column") end,
   },
 
@@ -140,6 +149,7 @@ lazy.setup({
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    event = "VeryLazy",
     config = function() require("plugins/configs/telescope") end,
   },
 
