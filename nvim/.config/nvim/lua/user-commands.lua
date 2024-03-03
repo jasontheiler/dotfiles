@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 vim.api.nvim_create_user_command("Update", function()
   local is_lazy_installed, lazy = pcall(require, "lazy")
 
@@ -25,7 +27,7 @@ vim.api.nvim_create_user_command("Update", function()
           has_new_versions = true
           running_updates = running_updates + 1
 
-          print(string.format(
+          utils.print(string.format(
             "Updating Mason package `%s` from v%s to v%s",
             package.name,
             version.current_version,
@@ -33,7 +35,7 @@ vim.api.nvim_create_user_command("Update", function()
           ))
 
           package:install():on("close", function()
-            print(string.format(
+            utils.print(string.format(
               "Updated Mason package `%s` from v%s to v%s",
               package.name,
               version.current_version,
@@ -43,7 +45,7 @@ vim.api.nvim_create_user_command("Update", function()
             running_updates = running_updates - 1
 
             if running_updates == 0 then
-              print("All Mason packages are up-to-date!")
+              utils.print("All Mason packages are up-to-date!")
             end
           end)
         end
@@ -51,7 +53,7 @@ vim.api.nvim_create_user_command("Update", function()
     end
 
     if not has_new_versions then
-      print("All Mason packages are up-to-date!")
+      utils.print("All Mason packages are up-to-date!")
     end
   end
 end, {})

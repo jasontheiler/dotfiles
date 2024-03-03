@@ -5,8 +5,8 @@ if not is_installed then
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
+    "https://github.com/folke/lazy.nvim.git",
     lazy_path
   })
   vim.opt.rtp:prepend(lazy_path)

@@ -20,7 +20,7 @@ utils.keymap("n", "<Leader>d", vim.diagnostic.open_float)
 utils.keymap("n", "<Leader>n", ":e ${HOME}/notes.md<CR>")
 utils.keymap({ "n", "v" }, "<Leader>yr", function()
   if vim.fn.executable("openssl") == 0 then
-    utils.print("openssl not found")
+    utils.print("`openssl` not found")
     return
   end
   local input = vim.fn.input("Number of bytes: ")
@@ -35,7 +35,7 @@ utils.keymap({ "n", "v" }, "<Leader>yr", function()
 end)
 utils.keymap({ "n", "v" }, "<Leader>yu", function()
   if vim.fn.executable("uuidgen") == 0 then
-    utils.print("uuidgen not found")
+    utils.print("`uuidgen` not found")
     return
   end
   local uuid = vim.fn.systemlist("uuidgen")[1]
