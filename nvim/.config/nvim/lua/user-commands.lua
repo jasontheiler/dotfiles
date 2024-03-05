@@ -57,3 +57,13 @@ vim.api.nvim_create_user_command("Update", function()
     end
   end
 end, {})
+
+vim.api.nvim_create_user_command("ToggleDiagnostics", function()
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
+    utils.print("Enabled diagnostics")
+  else
+    vim.diagnostic.disable()
+    utils.print("Disabled diagnostics")
+  end
+end, {})
