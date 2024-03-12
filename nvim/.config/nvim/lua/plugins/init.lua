@@ -145,6 +145,13 @@ lazy.setup({
     config = function() require("plugins/configs/heirline") end,
   },
 
+  -- See: https://github.com/folke/which-key.nvim
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    config = function() require("plugins/configs/which-key") end,
+  },
+
   -- See: https://github.com/nvim-telescope/telescope.nvim
   {
     "nvim-telescope/telescope.nvim",

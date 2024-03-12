@@ -3,7 +3,6 @@ local heirline_conditions = require("heirline/conditions")
 
 -- See: https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md
 heirline.setup({
-  statusline = {},
   winbar = {
     { provider = "%=" },
     {
@@ -38,5 +37,12 @@ heirline.setup({
         end
       end,
     }
+  },
+  opts = {
+    disable_winbar_cb = function(args)
+      return heirline_conditions.buffer_matches({
+        buftype = { "help", "nofile", "prompt", "quickfix" }
+      }, args.buf)
+    end,
   },
 })

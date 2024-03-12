@@ -77,18 +77,18 @@ capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 local on_attach = function(_, buffer)
   local opts = { buffer = buffer }
 
-  utils.keymap("n", "cr", vim.lsp.buf.rename, opts)
-  utils.keymap("n", "<Leader>lS", vim.lsp.buf.signature_help, opts)
-  utils.keymap({ "n", "v" }, "<Leader>h", vim.lsp.buf.hover, opts)
-  utils.keymap({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, opts)
-  utils.keymap({ "n", "v" }, "<Leader>f", function()
+  utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
+  utils.keymap("n", "<leader>lr", vim.lsp.buf.rename, "Rename", opts)
+  utils.keymap("n", "<leader>lS", vim.lsp.buf.signature_help, "Signature", opts)
+  utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
+  utils.keymap("n", "<leader>f", function()
     vim.lsp.buf.format({
       async = true,
       filter = function(lsp)
         return lsp.name == "null-ls" or lsp_servers[lsp.name].format
       end
     })
-  end, opts)
+  end, "Format", opts)
 end
 
 mason_lspconfig.setup_handlers({

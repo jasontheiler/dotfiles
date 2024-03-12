@@ -46,6 +46,7 @@ telescope.setup({
   pickers = with_default_opts({
     find_files = {
       find_command = { "rg", "--files", "--hidden", "--glob", "!*/.git/*", "--glob", "!.git/*" },
+      prompt_title = "Files",
     },
     oldfiles = {},
     buffers = {},
@@ -59,7 +60,7 @@ telescope.setup({
         "!*/pnpm-lock.yaml",
       },
     },
-    diagnostics = {},
+    diagnostics = { prompt_title = "Diagnostics" },
     lsp_document_symbols = {},
     lsp_definitions = {},
     lsp_type_definitions = {},
@@ -69,22 +70,21 @@ telescope.setup({
   }),
 })
 
-utils.keymap("n", "<Leader>kk", telescope_builtin.find_files)
-utils.keymap("n", "<Leader>ka", function()
-  telescope_builtin.find_files({
-    prompt_title = "Find All Files",
-    no_ignore = true,
-  })
-end)
-utils.keymap("n", "<Leader>ko", function() telescope_builtin.oldfiles({ cwd_only = true }) end)
-utils.keymap("n", "<Leader>kb", telescope_builtin.buffers)
-utils.keymap("n", "<Leader>k/", function()
+utils.keymap("n", "<leader>sf", telescope_builtin.find_files, "Files")
+utils.keymap("n", "<leader>sa", function()
+  telescope_builtin.find_files({ prompt_title = "All files", no_ignore = true })
+end, "All files")
+utils.keymap("n", "<leader>so", function()
+  telescope_builtin.oldfiles({ cwd_only = true })
+end, "Oldfiles")
+utils.keymap("n", "<leader>sb", telescope_builtin.buffers, "Buffers")
+utils.keymap("n", "<leader>s/", function()
   telescope_builtin.live_grep({ prompt_title = "Search" })
 end)
-utils.keymap("n", "<Leader>kd", telescope_builtin.diagnostics)
-utils.keymap("n", "<Leader>ls", telescope_builtin.lsp_document_symbols)
-utils.keymap("n", "<Leader>ld", telescope_builtin.lsp_definitions)
-utils.keymap("n", "<Leader>lt", telescope_builtin.lsp_type_definitions)
-utils.keymap("n", "<Leader>li", telescope_builtin.lsp_implementations)
-utils.keymap("n", "<Leader>lr", telescope_builtin.lsp_references)
-utils.keymap("n", "<Leader>gh", telescope_builtin.git_bcommits)
+utils.keymap("n", "<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
+utils.keymap("n", "<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
+utils.keymap("n", "<leader>ld", telescope_builtin.lsp_definitions, "Definitions")
+utils.keymap("n", "<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions")
+utils.keymap("n", "<leader>li", telescope_builtin.lsp_implementations, "Implementations")
+utils.keymap("n", "<leader>lR", telescope_builtin.lsp_references, "References")
+utils.keymap("n", "<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
