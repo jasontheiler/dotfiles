@@ -69,6 +69,7 @@ catppuccin.setup({
         CursorLineNrCommand = { fg = palette.peach },
         FidgetTitle = { fg = palette.teal },
         FloatBorder = { fg = palette.lavender },
+        HeirlineBufferlineInactive = { bg = palette.surface2 },
         HeirlineWinbar = { fg = palette.text },
         HeirlineWinbarInactive = { fg = palette.surface2 },
         NormalFloat = { fg = palette.text, bg = palette.none },
