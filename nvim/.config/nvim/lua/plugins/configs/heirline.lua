@@ -3,7 +3,7 @@ local heirline_conditions = require("heirline/conditions")
 local heirline_utils = require("heirline/utils")
 local utils = require("utils")
 
--- vim.opt.showtabline = 2
+vim.opt.showtabline = 2
 
 local augroup_heirline = vim.api.nvim_create_augroup("heirline", {})
 local bufs = {}
@@ -25,14 +25,15 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "UIEnter", "VimEnter" }, {
         return vim.api.nvim_get_option_value("buflisted", { buf = buf })
       end, vim.api.nvim_list_bufs())
 
-      for _, val in ipairs(bufs_new) do
-        if not vim.tbl_contains(bufs, val) then
-          table.insert(bufs, val)
+      for _, buf in ipairs(bufs_new) do
+        if not vim.tbl_contains(bufs, buf) and vim.api.nvim_buf_get_name(buf) ~= ""
+        then
+          table.insert(bufs, buf)
         end
       end
 
-      for i, val in ipairs(bufs) do
-        if not vim.tbl_contains(bufs_new, val) then
+      for i, buf in ipairs(bufs) do
+        if not vim.tbl_contains(bufs_new, buf) then
           table.remove(bufs, i)
         end
       end
@@ -52,26 +53,54 @@ for i = 1, 9 do
     local index = get_buf_index(buf)
     table.remove(bufs, index)
     table.insert(bufs, i, buf)
+    vim.api.nvim_exec_autocmds("BufAdd", {})
   end, "which_key_ignore")
 end
 
 local bufline = {
-  heirline_utils.make_buflist(
-    {
-      condition = function(self)
-        self.filename = vim.api.nvim_buf_get_name(self.bufnr)
-        return self.filename ~= ""
-      end,
-      provider = function(self)
-        local filename = vim.fn.fnamemodify(self.filename, ":t")
-        return " " .. get_buf_index(self.bufnr) .. " " .. filename .. " "
-      end,
-    },
-    {},
-    {},
-    function() return bufs end,
-    false
-  )
+  {
+    heirline_utils.make_buflist(
+      {
+        { provider = " " },
+        {
+          condition = function(self)
+            return vim.api.nvim_get_option_value("readonly", { buf = self.bufnr }) or
+                not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+          end,
+          provider = " ",
+        },
+        {
+          init = function(self)
+            self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+          end,
+          provider = function(self)
+            local filename = vim.fn.fnamemodify(self.filename, ":t")
+            return get_buf_index(self.bufnr) .. " " .. filename
+          end,
+        },
+        {
+          condition = function(self)
+            return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
+          end,
+          provider = function()
+            return " ●"
+          end,
+        },
+        { provider = " " },
+        hl = function(self)
+          if self.is_active then
+            return "HeirlineBufline"
+          else
+            return "HeirlineBuflineInactive"
+          end
+        end,
+      },
+      { provider = "<-" },
+      { provider = "->" },
+      function() return bufs end,
+      false
+    ),
+  },
 }
 
 local winbar = {
@@ -115,7 +144,7 @@ local winbar = {
 
 -- See: https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md
 heirline.setup({
-  -- tabline = bufline,
+  tabline = bufline,
   winbar = winbar,
   opts = {
     disable_winbar_cb = function(args)

@@ -165,13 +165,4 @@ lazy.setup({
     "famiu/bufdelete.nvim",
     config = function() require("plugins/configs/bufdelete") end,
   },
-
-  -- See: https://github.com/akinsho/bufferline.nvim
-  {
-    "akinsho/bufferline.nvim",
-    dependencies = {
-      "catppuccin",
-    },
-    config = function() require("plugins/configs/bufferline") end,
-  },
 })
