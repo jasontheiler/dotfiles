@@ -16,7 +16,33 @@ M.get_index = function(buf)
   return nil
 end
 
-local augroup_heirline_bufs = vim.api.nvim_create_augroup("heirline_bufs", {})
+local set_keymaps = function(index, which_key_ignore)
+  if index > 9 then
+    return
+  end
+
+  utils.keymap("n", "<leader>" .. index, function()
+    local buf = bufs[index]
+    if buf ~= nil then
+      vim.api.nvim_win_set_buf(0, buf)
+    end
+  end, which_key_ignore and "which_key_ignore" or "Buffer " .. index)
+  utils.keymap("n", "<leader>b" .. index, function()
+    local buf = vim.api.nvim_win_get_buf(0)
+    local index_current = M.get_index(buf)
+    if index <= #bufs then
+      table.remove(bufs, index_current)
+      table.insert(bufs, index, buf)
+      vim.cmd.redrawtabline()
+    end
+  end, which_key_ignore and "which_key_ignore" or "Move current buffer to index " .. index)
+end
+
+for i = 1, 9 do
+  set_keymaps(i, true)
+end
+
+local augroup_heirline_bufs = vim.api.nvim_create_augroup("user_heirline_bufs", {})
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   group = augroup_heirline_bufs,
@@ -27,6 +53,9 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
         local is_listed = vim.api.nvim_get_option_value("buflisted", { buf = buf })
         return name ~= "" and is_listed
       end, vim.api.nvim_list_bufs())
+      for i = 1, #bufs do
+        set_keymaps(i)
+      end
     end)
   end,
 })
@@ -36,6 +65,7 @@ vim.api.nvim_create_autocmd({ "BufAdd" }, {
   callback = function(data)
     if data.file ~= "" and M.get_index(data.buf) == nil then
       table.insert(bufs, data.buf)
+      set_keymaps(#bufs)
     end
   end,
 })
@@ -45,25 +75,10 @@ vim.api.nvim_create_autocmd({ "BufDelete" }, {
   callback = function(data)
     local index = M.get_index(data.buf)
     if index ~= nil then
+      set_keymaps(#bufs, true)
       table.remove(bufs, index)
     end
   end,
 })
-
-for i = 1, 9 do
-  utils.keymap("n", "<leader>" .. i, function()
-    local buf = bufs[i]
-    if buf ~= nil then
-      vim.api.nvim_win_set_buf(0, buf)
-    end
-  end, "Buffer " .. i)
-  utils.keymap("n", "<leader>b" .. i, function()
-    local buf = vim.api.nvim_win_get_buf(0)
-    local index = M.get_index(buf)
-    table.remove(bufs, index)
-    table.insert(bufs, i, buf)
-    vim.cmd.redrawtabline()
-  end, "Current buffer to " .. i)
-end
 
 return M

@@ -1,4 +1,4 @@
-local augroup_default = vim.api.nvim_create_augroup("default", {})
+local augroup_default = vim.api.nvim_create_augroup("user_default", {})
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
   group = augroup_default,
@@ -38,6 +38,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   group = augroup_default,
   callback = function()
-    vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 250 })
+    vim.highlight.on_yank({
+      higroup = "YankHighlight",
+      timeout = 250
+    })
   end,
 })

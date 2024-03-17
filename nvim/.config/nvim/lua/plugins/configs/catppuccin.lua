@@ -56,8 +56,6 @@ catppuccin.setup({
         ["@namespace"] = { style = {} },
         ["@parameter"] = { style = {} },
         ["@tag.attribute"] = { style = {} },
-        BufferLineBufferSelected = { fg = palette.text },
-        BufferLineNumbersSelected = { fg = palette.text },
         CmpCompletionBorder = { fg = palette.lavender },
         CmpDocumentationBorder = { fg = palette.lavender },
         CmpItemAbbr = { fg = palette.text },

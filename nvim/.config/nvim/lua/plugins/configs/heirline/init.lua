@@ -9,8 +9,9 @@ local bufline_buf = {
   { provider = " " },
   {
     condition = function(self)
-      return vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
-          or not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+      local is_readonly = vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+      local is_modifiable = vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+      return is_readonly or not is_modifiable
     end,
     provider = " ",
   },
@@ -19,8 +20,9 @@ local bufline_buf = {
       self.filename = vim.api.nvim_buf_get_name(self.bufnr)
     end,
     provider = function(self)
+      local index = bufs.get_index(self.bufnr)
       local filename = vim.fn.fnamemodify(self.filename, ":t")
-      return bufs.get_index(self.bufnr) .. " " .. filename
+      return index .. " " .. filename
     end,
   },
   {
@@ -38,10 +40,8 @@ local bufline_buf = {
     end
   end,
   on_click = {
-    name = "heirline_bufline_buf_click",
-    minwid = function(self)
-      return self.bufnr
-    end,
+    name = "user_heirline_bufline_buf_click",
+    minwid = function(self) return self.bufnr end,
     callback = function(_, buf, _, button)
       if button == "l" then
         vim.api.nvim_win_set_buf(0, buf)
@@ -53,8 +53,8 @@ local bufline_buf = {
 local bufline = {
   heirline_utils.make_buflist(
     bufline_buf,
-    { provider = "<-" },
-    { provider = "->" },
+    { provider = " <- " },
+    { provider = " -> " },
     function() return bufs.get_all() end,
     false
   ),

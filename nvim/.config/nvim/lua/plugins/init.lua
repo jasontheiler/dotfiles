@@ -59,18 +59,18 @@ lazy.setup({
   -- See: https://github.com/hrsh7th/nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { "CmdlineEnter", "InsertEnter" },
     dependencies = {
-      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
-      "hrsh7th/cmp-nvim-lsp",
-      -- See: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
-      "hrsh7th/cmp-nvim-lsp-signature-help",
       -- See: https://github.com/hrsh7th/cmp-buffer
       "hrsh7th/cmp-buffer",
       -- See: https://github.com/hrsh7th/cmp-cmdline
       "hrsh7th/cmp-cmdline",
       -- See: https://github.com/hrsh7th/cmp-path
       "hrsh7th/cmp-path",
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
+      "hrsh7th/cmp-nvim-lsp",
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       -- See: https://github.com/L3MON4D3/LuaSnip
       "L3MON4D3/LuaSnip",
       -- See: https://github.com/saadparwaiz1/cmp_luasnip
@@ -90,12 +90,12 @@ lazy.setup({
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
-      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
-      "hrsh7th/cmp-nvim-lsp",
       -- See: https://github.com/williamboman/mason.nvim
       "williamboman/mason.nvim",
       -- See: https://github.com/neovim/nvim-lspconfig
       "neovim/nvim-lspconfig",
+      -- See: https://github.com/hrsh7th/cmp-nvim-lsp
+      "hrsh7th/cmp-nvim-lsp",
     },
     event = "VeryLazy",
     config = function() require("plugins/configs/mason-lspconfig") end,
@@ -140,6 +140,7 @@ lazy.setup({
   {
     "rebelot/heirline.nvim",
     dependencies = {
+      -- See: https://github.com/catppuccin/nvim
       "catppuccin",
     },
     config = function() require("plugins/configs/heirline") end,
@@ -158,6 +159,19 @@ lazy.setup({
     branch = "0.1.x",
     event = "VeryLazy",
     config = function() require("plugins/configs/telescope") end,
+  },
+
+  -- See: https://github.com/folke/noice.nvim
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      -- See: https://github.com/MunifTanjim/nui.nvim
+      "MunifTanjim/nui.nvim",
+      -- See: https://github.com/--
+      "rcarriga/nvim-notify",
+    },
+    config = function() require("plugins/configs/noice") end,
   },
 
   -- See: https://github.com/famiu/bufdelete.nvim
