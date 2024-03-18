@@ -173,10 +173,4 @@ lazy.setup({
     },
     config = function() require("plugins/configs/noice") end,
   },
-
-  -- See: https://github.com/famiu/bufdelete.nvim
-  {
-    "famiu/bufdelete.nvim",
-    config = function() require("plugins/configs/bufdelete") end,
-  },
 })
