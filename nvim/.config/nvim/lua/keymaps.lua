@@ -8,19 +8,18 @@ utils.keymap("n", "<leader>wW", "<C-w><C-w>", "Move cursor to window below (wrap
 utils.keymap("n", "<leader>wx", "<C-w>q", "Close current")
 
 utils.keymap("n", "<leader>bx", function()
-  if not vim.bo.modified then
-    vim.api.nvim_buf_delete(0, {})
+  if not vim.bo.modified or vim.bo.filetype == "" then
+    vim.api.nvim_buf_delete(0, { force = true })
     return
   end
   local choice = vim.fn.confirm("Buffer has unwritten changes…", "&Write\n&Don't write")
-  if choice == 1 then
-    vim.cmd.write()
-    vim.api.nvim_buf_delete(0, {})
+  if choice == 0 then
     return
   end
-  if choice == 2 then
-    vim.api.nvim_buf_delete(0, { force = true })
+  if choice == 1 then
+    vim.cmd.write()
   end
+  vim.api.nvim_buf_delete(0, { force = true })
 end, "Close current")
 
 utils.keymap("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
