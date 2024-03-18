@@ -84,9 +84,7 @@ local on_attach = function(_, buffer)
   utils.keymap("n", "<leader>f", function()
     vim.lsp.buf.format({
       async = true,
-      filter = function(lsp)
-        return lsp.name == "null-ls" or lsp_servers[lsp.name].format
-      end
+      filter = function(lsp) return lsp.name == "null-ls" or lsp_servers[lsp.name].format end
     })
   end, "Format", opts)
 end

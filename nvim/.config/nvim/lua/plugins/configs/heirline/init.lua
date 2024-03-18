@@ -28,9 +28,9 @@ local bufline_buf = {
   { provider = " " },
   hl = function(self)
     if self.is_active then
-      return "HeirlineBufline"
+      return "HeirlineBuflineBuf"
     else
-      return "HeirlineBuflineInactive"
+      return "HeirlineBuflineBufInactive"
     end
   end,
   on_click = {

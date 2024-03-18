@@ -32,7 +32,13 @@ lazy.setup({
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    config = function() require("plugins/configs/treesitter") end,
+    -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
+    main = "nvim-treesitter.configs",
+    opts = {
+      auto_install = true,
+      highlight = { enable = true },
+      indent = { enable = true },
+    },
   },
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
@@ -43,7 +49,11 @@ lazy.setup({
       "nvim-treesitter/nvim-treesitter",
     },
     event = "VeryLazy",
-    config = function() require("plugins/configs/treesitter-context") end,
+    -- See: https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
+    opts = {
+      multiline_threshold = 1,
+      separator = "─",
+    },
   },
 
   -- See: https://github.com/tpope/vim-sleuth
@@ -53,7 +63,8 @@ lazy.setup({
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = function() require("plugins/configs/autopairs") end,
+    -- See: https://github.com/windwp/nvim-autopairs#override-default-values
+    opts = {},
   },
 
   -- See: https://github.com/hrsh7th/nvim-cmp
@@ -83,7 +94,8 @@ lazy.setup({
   {
     "williamboman/mason.nvim",
     event = "VeryLazy",
-    config = function() require("plugins/configs/mason") end,
+    -- See: https://github.com/williamboman/mason.nvim#configuration
+    opts = {},
   },
 
   -- See: https://github.com/williamboman/mason-lspconfig.nvim
@@ -133,7 +145,11 @@ lazy.setup({
   {
     "lukas-reineke/virt-column.nvim",
     event = "VeryLazy",
-    config = function() require("plugins/configs/virt-column") end,
+    -- See: https://github.com/lukas-reineke/virt-column.nvim#setup
+    opts = {
+      char = "│",
+      highlight = "VirtColumn",
+    },
   },
 
   -- See: https://github.com/rebelot/heirline.nvim
