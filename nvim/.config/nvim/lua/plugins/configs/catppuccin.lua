@@ -77,7 +77,6 @@ catppuccin.setup({
         PmenuSel = { bg = palette.surface0 },
         PmenuThumb = { bg = palette.lavender },
         TelescopeBorder = { fg = palette.lavender },
-        TelescopePromptTitle = { fg = palette.flamingo },
         TelescopeSelection = { fg = palette.text, bg = palette.surface0 },
         TelescopeSelectionCaret = { bg = palette.surface0 },
         TreesitterContext = { bg = palette.none },

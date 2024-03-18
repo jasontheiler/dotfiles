@@ -6,6 +6,9 @@ local bufs = require("plugins/configs/heirline/bufs")
 vim.opt.showtabline = 2
 
 local bufline_buf = {
+  init = function(self)
+    self.filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ":t")
+  end,
   { provider = " " },
   {
     condition = function(self)
@@ -15,16 +18,7 @@ local bufline_buf = {
     end,
     provider = " ",
   },
-  {
-    init = function(self)
-      self.filename = vim.api.nvim_buf_get_name(self.bufnr)
-    end,
-    provider = function(self)
-      local index = bufs.get_index(self.bufnr)
-      local filename = vim.fn.fnamemodify(self.filename, ":t")
-      return index .. " " .. filename
-    end,
-  },
+  { provider = function(self) return bufs.get_index(self.bufnr) .. " " .. self.filename end },
   {
     condition = function(self)
       return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
@@ -65,9 +59,7 @@ local winbar = {
     self.filename = vim.api.nvim_buf_get_name(0)
     return self.filename ~= ""
   end,
-  init = function(self)
-    self.filename = vim.fn.fnamemodify(self.filename, ":.")
-  end,
+  init = function(self) self.filename = vim.fn.fnamemodify(self.filename, ":.") end,
   { provider = "%=" },
   {
     condition = function() return vim.bo.readonly or not vim.bo.modifiable end,

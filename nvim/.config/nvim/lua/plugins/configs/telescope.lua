@@ -3,24 +3,20 @@ local telescope_actions = require("telescope/actions")
 local telescope_builtin = require("telescope/builtin")
 local utils = require("utils")
 
-local with_default_opts = function(pickers)
-  for picker, opts in pairs(pickers) do
-    pickers[picker] = vim.tbl_extend("force", { preview_title = "" }, opts)
-  end
-  return pickers
-end
-
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
   defaults = {
-    results_title = "",
     selection_caret = "❯ ",
-    prompt_prefix = "   ",
-    get_status_text = function() return "" end,
+    prompt_prefix = "  ",
+    get_status_text = function(picker)
+      local stat_processed = picker.stats.processed or 0
+      local stat_filtered = picker.stats.filtered or 0
+      return (stat_processed - stat_filtered) .. "/" .. stat_processed .. " "
+    end,
     borderchars = {
-      prompt = { " ", "┃", "━", "┃", "┃", "┃", "┛", "┗" },
-      results = { "━", "┃", " ", "┃", "┏", "┓", "┃", "┃" },
-      preview = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
+      prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     },
     layout_strategy = "flex",
     layout_config = {
@@ -43,13 +39,19 @@ telescope.setup({
       },
     },
   },
-  pickers = with_default_opts({
+  pickers = {
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!*/.git/*", "--glob", "!.git/*" },
-      prompt_title = "Files",
+      find_command = {
+        "rg",
+        "--files",
+        "--hidden",
+        "--glob", "!*/.git/*",
+        "--glob", "!.git/*",
+        "--glob", "!*.lock",
+        "--glob", "!*/package-lock.json",
+        "--glob", "!*/pnpm-lock.yaml",
+      },
     },
-    oldfiles = {},
-    buffers = {},
     live_grep = {
       additional_args = function() return { "--hidden" } end,
       glob_pattern = {
@@ -60,31 +62,25 @@ telescope.setup({
         "!*/pnpm-lock.yaml",
       },
     },
-    diagnostics = { prompt_title = "Diagnostics" },
-    lsp_document_symbols = {},
-    lsp_definitions = {},
-    lsp_type_definitions = {},
-    lsp_implementations = {},
-    lsp_references = {},
-    git_bcommits = {},
-  }),
+    oldfiles = { cwd_only = true },
+  },
 })
 
-utils.keymap("n", "<leader>sf", telescope_builtin.find_files, "Files")
-utils.keymap("n", "<leader>sa", function()
-  telescope_builtin.find_files({ prompt_title = "All files", no_ignore = true })
-end, "All files")
-utils.keymap("n", "<leader>so", function()
-  telescope_builtin.oldfiles({ cwd_only = true })
-end, "Oldfiles")
-utils.keymap("n", "<leader>sb", telescope_builtin.buffers, "Buffers")
-utils.keymap("n", "<leader>s/", function()
-  telescope_builtin.live_grep({ prompt_title = "Search" })
-end)
-utils.keymap("n", "<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
-utils.keymap("n", "<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
-utils.keymap("n", "<leader>ld", telescope_builtin.lsp_definitions, "Definitions")
-utils.keymap("n", "<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions")
-utils.keymap("n", "<leader>li", telescope_builtin.lsp_implementations, "Implementations")
-utils.keymap("n", "<leader>lR", telescope_builtin.lsp_references, "References")
-utils.keymap("n", "<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
+local keymap_picker = function(lhs, picker, desc, opts)
+  local default_opts = { prompt_title = desc, preview_title = "Preview" }
+  opts = vim.tbl_extend("force", default_opts, opts or {})
+  utils.keymap("n", lhs, function() picker(opts) end, desc)
+end
+
+keymap_picker("<leader>sf", telescope_builtin.find_files, "Files")
+keymap_picker("<leader>sa", telescope_builtin.find_files, "All files", { no_ignore = true })
+keymap_picker("<leader>so", telescope_builtin.oldfiles, "Oldfiles")
+keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
+keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
+keymap_picker("<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
+keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
+keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions")
+keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions")
+keymap_picker("<leader>li", telescope_builtin.lsp_implementations, "Implementations")
+keymap_picker("<leader>lR", telescope_builtin.lsp_references, "References")
+keymap_picker("<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
