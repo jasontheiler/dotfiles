@@ -22,7 +22,7 @@ session_selector:
     title_style: null
     pattern_style: null
     pattern_prefix: "   "
-    pattern_prefix_style: null
+    pattern_prefix_style: fg:#DAA992
 keybinds:
   session_selector: [C-s, M-s]
   last_session: [w]
