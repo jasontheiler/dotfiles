@@ -5,9 +5,9 @@ session_selector:
   inverted: false
   results:
     style: null
-    border: [┏, ┓, ┃, ┃, ┃, ┃, ━, " "]
+    border: plain
     border_style: fg:#BDAEC3
-    title: ""
+    title: " Results "
     title_style: null
     item_style: null
     item_match_style: fg:blue
@@ -16,10 +16,10 @@ session_selector:
     selection_prefix_style: fg:#DAA992
   prompt:
     style: null
-    border: [┃, ┃, ┗, ┛, ┃, ┃, " ", ━]
+    border: plain
     border_style: fg:#BDAEC3
-    title: " Select Session "
-    title_style: fg:#DAA992
+    title: " Sessions "
+    title_style: null
     pattern_style: null
     pattern_prefix: "   "
     pattern_prefix_style: null
