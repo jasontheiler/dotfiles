@@ -184,7 +184,7 @@ lazy.setup({
     dependencies = {
       -- See: https://github.com/MunifTanjim/nui.nvim
       "MunifTanjim/nui.nvim",
-      -- See: https://github.com/--
+      -- See: https://github.com/rcarriga/nvim-notify
       "rcarriga/nvim-notify",
     },
     config = function() require("plugins/configs/noice") end,

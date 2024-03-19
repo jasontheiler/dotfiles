@@ -12,14 +12,12 @@ cmp.setup({
   formatting = {
     format = function(_, item)
       local filetype_labels = mappings.filetype_labels[vim.bo.filetype]
-
       item.kind = string.format(
         " %s %s",
         mappings.icons[item.kind] or "?",
         filetype_labels and filetype_labels[item.kind] or item.kind
       )
       item.menu = nil
-
       return item
     end,
   },
@@ -51,9 +49,9 @@ cmp.setup({
     }
   },
   sources = {
+    { name = "buffer" },
     { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
-    { name = "buffer" },
   },
   mapping = {
     ["<C-Space>"] = cmp.mapping(function()
