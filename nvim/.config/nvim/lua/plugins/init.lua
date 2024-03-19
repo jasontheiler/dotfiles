@@ -32,13 +32,7 @@ lazy.setup({
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    -- See: https://github.com/nvim-treesitter/nvim-treesitter#modules
-    main = "nvim-treesitter.configs",
-    opts = {
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    config = function() require("plugins/configs/treesitter") end,
   },
 
   -- See: https://github.com/nvim-treesitter/nvim-treesitter-context
