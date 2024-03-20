@@ -3,11 +3,13 @@ local telescope_actions = require("telescope/actions")
 local telescope_builtin = require("telescope/builtin")
 local utils = require("utils")
 
+telescope.load_extension("noice")
+
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
   defaults = {
-    selection_caret = "❯ ",
     prompt_prefix = "  ",
+    selection_caret = "❯ ",
     get_status_text = function(picker)
       local stat_processed = picker.stats.processed or 0
       local stat_filtered = picker.stats.filtered or 0
@@ -67,7 +69,7 @@ telescope.setup({
 })
 
 local keymap_picker = function(lhs, picker, desc, opts)
-  local default_opts = { prompt_title = desc, preview_title = "Preview" }
+  local default_opts = { prompt_title = desc, results_title = "Results", preview_title = "Preview" }
   opts = vim.tbl_extend("force", default_opts, opts or {})
   utils.keymap("n", lhs, function() picker(opts) end, desc)
 end
@@ -78,6 +80,8 @@ keymap_picker("<leader>so", telescope_builtin.oldfiles, "Oldfiles")
 keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
 keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
 keymap_picker("<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
+keymap_picker("<leader>sm", telescope.extensions.noice.noice, "Messages")
+keymap_picker("<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
 keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
 keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions")
 keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions")

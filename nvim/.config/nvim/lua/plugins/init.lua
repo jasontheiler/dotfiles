@@ -64,7 +64,6 @@ lazy.setup({
   -- See: https://github.com/hrsh7th/nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    event = { "CmdlineEnter", "InsertEnter" },
     dependencies = {
       -- See: https://github.com/hrsh7th/cmp-buffer
       "hrsh7th/cmp-buffer",
@@ -81,6 +80,7 @@ lazy.setup({
       -- See: https://github.com/saadparwaiz1/cmp_luasnip
       "saadparwaiz1/cmp_luasnip",
     },
+    event = { "CmdlineEnter", "InsertEnter" },
     config = function() require("plugins/configs/cmp") end,
   },
 
@@ -121,12 +121,12 @@ lazy.setup({
   },
 
   -- See: https://github.com/j-hui/fidget.nvim
-  {
-    "j-hui/fidget.nvim",
-    tag = "legacy",
-    event = "VeryLazy",
-    config = function() require("plugins/configs/fidget") end,
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   tag = "legacy",
+  --   event = "VeryLazy",
+  --   config = function() require("plugins/configs/fidget") end,
+  -- },
 
   -- See: https://github.com/lewis6991/gitsigns.nvim
   {
@@ -156,6 +156,19 @@ lazy.setup({
     config = function() require("plugins/configs/heirline") end,
   },
 
+  -- See: https://github.com/folke/noice.nvim
+  {
+    "folke/noice.nvim",
+    dependencies = {
+      -- See: https://github.com/MunifTanjim/nui.nvim
+      "MunifTanjim/nui.nvim",
+      -- See: https://github.com/rcarriga/nvim-notify
+      "rcarriga/nvim-notify",
+    },
+    event = "VeryLazy",
+    config = function() require("plugins/configs/noice") end,
+  },
+
   -- See: https://github.com/folke/which-key.nvim
   {
     "folke/which-key.nvim",
@@ -167,20 +180,11 @@ lazy.setup({
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    dependencies = {
+      -- See: https://github.com/folke/noice.nvim
+      "folke/noice.nvim",
+    },
     event = "VeryLazy",
     config = function() require("plugins/configs/telescope") end,
-  },
-
-  -- See: https://github.com/folke/noice.nvim
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      -- See: https://github.com/MunifTanjim/nui.nvim
-      "MunifTanjim/nui.nvim",
-      -- See: https://github.com/rcarriga/nvim-notify
-      "rcarriga/nvim-notify",
-    },
-    config = function() require("plugins/configs/noice") end,
   },
 })
