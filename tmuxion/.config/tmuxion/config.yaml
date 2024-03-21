@@ -1,6 +1,6 @@
 session_selector:
-  width: 64
-  height: 24
+  width: 48
+  height: 16
   scrolloff: 4
   inverted: false
   results:
