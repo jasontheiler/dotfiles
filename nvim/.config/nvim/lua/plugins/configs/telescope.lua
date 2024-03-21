@@ -3,8 +3,6 @@ local telescope_actions = require("telescope/actions")
 local telescope_builtin = require("telescope/builtin")
 local utils = require("utils")
 
-telescope.load_extension("noice")
-
 -- See: https://github.com/nvim-telescope/telescope.nvim#customization
 telescope.setup({
   defaults = {
@@ -80,7 +78,6 @@ keymap_picker("<leader>so", telescope_builtin.oldfiles, "Oldfiles")
 keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
 keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
 keymap_picker("<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
-keymap_picker("<leader>sm", telescope.extensions.noice.noice, "Messages")
 keymap_picker("<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
 keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
 keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions")

@@ -25,25 +25,25 @@ vim.api.nvim_create_user_command("Update", function()
           has_new_versions = true
           running_updates = running_updates + 1
 
-          vim.print(string.format(
+          vim.notify(string.format(
             "Updating Mason package `%s` from v%s to v%s",
             package.name,
             version.current_version,
             version.latest_version
-          ))
+          ), vim.log.levels.INFO)
 
           package:install():on("close", function()
-            vim.print(string.format(
+            vim.notify(string.format(
               "Updated Mason package `%s` from v%s to v%s",
               package.name,
               version.current_version,
               version.latest_version
-            ))
+            ), vim.log.levels.INFO)
 
             running_updates = running_updates - 1
 
             if running_updates == 0 then
-              vim.print("All Mason packages are up-to-date!")
+              vim.notify("All Mason packages are up-to-date!", vim.log.levels.INFO)
             end
           end)
         end
@@ -51,7 +51,7 @@ vim.api.nvim_create_user_command("Update", function()
     end
 
     if not has_new_versions then
-      vim.print("All Mason packages are up-to-date!")
+      vim.notify("All Mason packages are up-to-date!", vim.log.levels.INFO)
     end
   end
 end, {})
@@ -59,9 +59,9 @@ end, {})
 vim.api.nvim_create_user_command("ToggleDiagnostics", function()
   if vim.diagnostic.is_disabled() then
     vim.diagnostic.enable()
-    vim.print("Enabled diagnostics")
+    vim.notify("Enabled diagnostics", vim.log.levels.INFO)
   else
     vim.diagnostic.disable()
-    vim.print("Disabled diagnostics")
+    vim.notify("Disabled diagnostics", vim.log.levels.INFO)
   end
 end, {})
