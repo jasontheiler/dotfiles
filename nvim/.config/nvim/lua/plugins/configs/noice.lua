@@ -1,9 +1,5 @@
 local noice = require("noice")
 
--- TODO:
---   - Configue `nvim-notify` (borders, format, colors, etc.)
---   - Remove built-in hover and signature help configs in `opts.lua`.
-
 -- See: https://github.com/folke/noice.nvim
 noice.setup({
   cmdline = {
@@ -27,8 +23,6 @@ noice.setup({
     },
   },
   views = {
-    notify = {
-    },
     cmdline_popup = {
       border = { style = "single" }
     },
