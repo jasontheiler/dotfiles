@@ -9,7 +9,7 @@ utils.keymap("n", "<leader>wx", "<C-w>q", "Close current")
 
 utils.keymap("n", "<leader>bx", function()
   if not vim.bo.modified or vim.bo.filetype == "" then
-    vim.api.nvim_buf_delete(0, { force = true })
+    vim.cmd.bdelete({ bang = true })
     return
   end
   local choice = vim.fn.confirm("Buffer has unwritten changes…", "&Write\n&Don't write")
@@ -19,7 +19,7 @@ utils.keymap("n", "<leader>bx", function()
   if choice == 1 then
     vim.cmd.write()
   end
-  vim.api.nvim_buf_delete(0, { force = true })
+  vim.cmd.bdelete({ bang = true })
 end, "Close current")
 
 utils.keymap("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
