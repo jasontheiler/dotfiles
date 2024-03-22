@@ -6,9 +6,7 @@ which_key.setup({
     padding = { 1, 0, 2, 0 },
     border = "single",
   },
-  icons = {
-    group = ""
-  },
+  icons = { group = "" },
 })
 
 -- See: https://github.com/folke/which-key.nvim?tab=readme-ov-file#%EF%B8%8F-mappings

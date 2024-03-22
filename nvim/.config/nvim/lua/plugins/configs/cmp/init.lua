@@ -5,9 +5,7 @@ local mappings = require("plugins/configs/cmp/mappings")
 -- See: https://github.com/hrsh7th/nvim-cmp#setup
 cmp.setup({
   snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+    expand = function(args) luasnip.lsp_expand(args.body) end,
   },
   formatting = {
     format = function(_, item)
