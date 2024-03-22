@@ -3,12 +3,9 @@ vim.opt.laststatus = 0
 vim.opt.cmdheight = 0
 vim.opt.shortmess = "fIlnxtToOF"
 vim.opt.showmode = false
-vim.opt.hidden = true
 vim.opt.shadafile = "NONE"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.autoread = true
 vim.opt.swapfile = false
-vim.opt.backup = false
 vim.opt.history = 1000
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undo/"
@@ -34,16 +31,6 @@ vim.opt.smartcase = true
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.fillchars = {
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┫",
-  vertright = "┣",
-  verthoriz = "╋",
-  eob = " ",
-}
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -55,11 +42,7 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWar
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
-vim.diagnostic.config({
-  severity_sort = true,
-  virtual_text = { spacing = 3, prefix = "" },
-  float = { border = "single" },
-})
+vim.diagnostic.config({ severity_sort = true, float = { border = "single" } })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
