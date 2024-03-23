@@ -74,7 +74,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
-local on_attach = function(_, buffer)
+local on_attach = function(client, buffer)
   local opts = { buffer = buffer }
 
   utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
@@ -87,6 +87,18 @@ local on_attach = function(_, buffer)
       filter = function(lsp) return lsp.name == "null-ls" or lsp_servers[lsp.name].format end
     })
   end, "Format", opts)
+
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      buffer = buffer,
+      callback = vim.lsp.buf.document_highlight,
+    })
+
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "TextYankPost" }, {
+      buffer = buffer,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 end
 
 mason_lspconfig.setup_handlers({

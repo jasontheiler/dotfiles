@@ -78,6 +78,9 @@ catppuccin.setup({
         HeirlineBuflineBufInactive = { fg = palette.surface2 },
         HeirlineWinbar = { fg = palette.text },
         HeirlineWinbarInactive = { fg = palette.surface2 },
+        LspReferenceRead = { bg = color_utils.darken(palette.rosewater, 0.125, palette.base) },
+        LspReferenceText = { bg = color_utils.darken(palette.rosewater, 0.125, palette.base) },
+        LspReferenceWrite = { bg = color_utils.darken(palette.rosewater, 0.125, palette.base) },
         NormalFloat = { fg = palette.text, bg = palette.none },
         Pmenu = { fg = palette.text, bg = palette.none },
         PmenuSbar = { bg = palette.surface0 },
@@ -90,7 +93,7 @@ catppuccin.setup({
         TreesitterContextSeparator = { fg = palette.surface0 },
         VertSplit = { fg = palette.crust },
         VirtColumn = { fg = palette.surface0 },
-        YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.33, palette.base) },
+        YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.5, palette.base) },
       }
     end,
   },
