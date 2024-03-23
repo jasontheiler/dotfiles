@@ -40,8 +40,7 @@ detect_files = ["Tiltfile"]
 symbol = " "
 
 [package]
-disabled = true
-symbol = " "
+symbol = "󰏗 "
 style = "bold yellow"
 
 [rust]
