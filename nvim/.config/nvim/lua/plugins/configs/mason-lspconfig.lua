@@ -91,7 +91,10 @@ local on_attach = function(client, buffer)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       buffer = buffer,
-      callback = vim.lsp.buf.document_highlight,
+      callback = function()
+        vim.lsp.buf.clear_references()
+        vim.lsp.buf.document_highlight()
+      end,
     })
 
     vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "TextYankPost" }, {
