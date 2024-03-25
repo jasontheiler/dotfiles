@@ -40,5 +40,6 @@ tmuxion.on_session_created(function(session)
   win_1:select_layout("main_vertical")
   win_1:current_pane():run_command(" nvim")
 
-  session:new_window()
+  local win_2 = session:new_window()
+  win_2:select_layout("even_horizontal")
 end)
