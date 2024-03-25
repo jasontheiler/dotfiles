@@ -2,15 +2,15 @@ local tmuxion = require("tmuxion")
 
 tmuxion.config({
   session_selector = {
-    width = 64,
-    height = 24,
+    width = 48,
+    height = 16,
     scrolloff = 4,
     inverted = false,
     results = {
       style = nil,
-      border = { "┏", "┓", "┃", "┃", "┃", "┃", "━", " " },
+      border = "plain",
       border_style = { fg = "#BDAEC3" },
-      title = "",
+      title = " Results ",
       title_style = nil,
       item_style = nil,
       item_match_style = { fg = "blue" },
@@ -20,13 +20,13 @@ tmuxion.config({
     },
     prompt = {
       style = nil,
-      border = { "┃", "┃", "┗", "┛", "┃", "┃", " ", "━" },
+      border = "plain",
       border_style = { fg = "#BDAEC3" },
-      title = " Select Session ",
-      title_style = { fg = "#DAA992" },
+      title = " Sessions ",
+      title_style = nil,
       pattern_style = nil,
-      pattern_prefix = "   ",
-      pattern_prefix_style = nil,
+      pattern_prefix = "  ",
+      pattern_prefix_style = { fg = "#DAA992" },
     },
   },
   keybinds = {
@@ -36,5 +36,9 @@ tmuxion.config({
 })
 
 tmuxion.on_session_created(function(session)
-  print("session created")
+  local win_1 = session:current_window()
+  win_1:select_layout("main_vertical")
+  win_1:current_pane():run_command(" nvim")
+
+  session:new_window()
 end)
