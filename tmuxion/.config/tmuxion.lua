@@ -27,6 +27,8 @@ tmuxion.config({
       pattern_style = nil,
       pattern_prefix = "  ",
       pattern_prefix_style = { fg = "#DAA992" },
+      stats_template = " {results}/{sessions} ",
+      stats_style = { fg = "#75615B" },
     },
   },
   keybinds = {
