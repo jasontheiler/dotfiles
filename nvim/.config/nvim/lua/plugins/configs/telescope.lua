@@ -13,6 +13,7 @@ telescope.setup({
       local stat_filtered = picker.stats.filtered or 0
       return (stat_processed - stat_filtered) .. "/" .. stat_processed .. " "
     end,
+    preview = { filesize_limit = 0.1 },
     borderchars = {
       prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
       results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
@@ -72,6 +73,7 @@ local keymap_picker = function(lhs, picker, desc, opts)
   utils.keymap("n", lhs, function() picker(opts) end, desc)
 end
 
+keymap_picker("<leader>sh", telescope_builtin.help_tags, "Help")
 keymap_picker("<leader>sf", telescope_builtin.find_files, "Files")
 keymap_picker("<leader>sa", telescope_builtin.find_files, "All files", { no_ignore = true })
 keymap_picker("<leader>so", telescope_builtin.oldfiles, "Oldfiles")

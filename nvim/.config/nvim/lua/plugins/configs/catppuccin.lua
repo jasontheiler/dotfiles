@@ -88,7 +88,7 @@ catppuccin.setup({
         PmenuThumb = { bg = palette.lavender },
         TelescopeSelection = { fg = palette.text, bg = palette.surface0 },
         TelescopeSelectionCaret = { bg = palette.surface0 },
-        TreesitterContext = { bg = palette.none },
+        TreesitterContextBottom = { style = {} },
         TreesitterContextLineNumber = { fg = palette.surface1 },
         TreesitterContextSeparator = { fg = palette.surface0 },
         VertSplit = { fg = palette.crust },
