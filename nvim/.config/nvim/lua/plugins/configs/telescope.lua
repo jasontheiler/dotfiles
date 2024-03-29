@@ -14,11 +14,7 @@ telescope.setup({
       return (stat_processed - stat_filtered) .. "/" .. stat_processed .. " "
     end,
     preview = { filesize_limit = 0.1 },
-    borderchars = {
-      prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-      results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-      preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-    },
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     layout_strategy = "flex",
     layout_config = {
       flex = {
@@ -30,6 +26,10 @@ telescope.setup({
       vertical = {
         preview_height = 0.33,
         preview_cutoff = 0,
+      },
+      cursor = {
+        width = 64,
+        height = 8,
       },
     },
     mappings = {
@@ -65,7 +65,20 @@ telescope.setup({
     },
     oldfiles = { cwd_only = true },
   },
+  extensions = {
+    ["ui-select"] = {
+      sorting_strategy = "ascending",
+      results_title = false,
+      borderchars = {
+        prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+      },
+      layout_strategy = "cursor",
+    },
+  },
 })
+
+telescope.load_extension("ui-select")
 
 local keymap_picker = function(lhs, picker, desc, opts)
   local default_opts = { prompt_title = desc, results_title = "Results", preview_title = "Preview" }

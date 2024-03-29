@@ -166,6 +166,10 @@ lazy.setup({
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    dependencies = {
+      -- See: https://github.com/nvim-telescope/telescope-ui-select.nvim
+      "nvim-telescope/telescope-ui-select.nvim",
+    },
     event = "VeryLazy",
     config = function() require("plugins/configs/telescope") end,
   },
