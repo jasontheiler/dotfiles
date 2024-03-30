@@ -14,6 +14,7 @@ function checklist
         gpg \
         gsed \
         hyperfine \
+        jq \
         kubectl \
         lazygit \
         mkcert \
