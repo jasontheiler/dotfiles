@@ -28,8 +28,8 @@ telescope.setup({
         preview_cutoff = 0,
       },
       cursor = {
-        width = 64,
-        height = 8,
+        width = 80,
+        height = 10,
       },
     },
     mappings = {
