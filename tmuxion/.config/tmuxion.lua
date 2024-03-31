@@ -1,6 +1,11 @@
 local tmuxion = require("tmuxion")
 
 tmuxion.config({
+  paths = {
+    truncate_home_dir = true,
+    home_dir_symbol = "~",
+    trailing_slash = true,
+  },
   session_selector = {
     width = 48,
     height = 16,
@@ -52,4 +57,6 @@ tmuxion.on_session_created(function(session)
     pane:run_command(" cd " .. path_dir)
     pane:run_command(" cargo watch -x \"test\"")
   end
+
+  -- win_1:current_pane():toggle_zoom()
 end)
