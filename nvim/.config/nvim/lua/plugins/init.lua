@@ -134,6 +134,19 @@ lazy.setup({
     config = function() require("plugins/configs/gitsigns") end,
   },
 
+  -- See: https://github.com/lewis6991/satellite.nvim
+  {
+    "lewis6991/satellite.nvim",
+    cond = function() return vim.fn.has("nvim-0.10") == 1 end,
+    event = "VeryLazy",
+    opts = {
+      winblend = 0,
+      handlers = {
+        cursor = { enable = false },
+      },
+    },
+  },
+
   -- See: https://github.com/lukas-reineke/virt-column.nvim
   {
     "lukas-reineke/virt-column.nvim",
