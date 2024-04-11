@@ -4,9 +4,9 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.front_end = "WebGpu"
+-- config.front_end = "WebGpu"
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.95
 config.window_close_confirmation = "NeverPrompt"
 config.enable_tab_bar = false
 config.max_fps = 120
@@ -16,8 +16,7 @@ config.font = wezterm.font_with_fallback({
   { family = "CommitMono Nerd Font", scale = 1.07 },
   "MonoLisa Nerd Font",
 })
-config.font_size = 14
-config.underline_position = -5
+config.font_size = 15
 config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
