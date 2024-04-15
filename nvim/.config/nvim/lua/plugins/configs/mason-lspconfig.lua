@@ -1,4 +1,5 @@
 local mason_lspconfig = require("mason-lspconfig")
+local mason_registry = require("mason-registry")
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local utils = require("utils")
@@ -13,9 +14,7 @@ local lsp_servers = {
   lua_ls = {
     settings = {
       Lua = {
-        runtime = {
-          version = "LuaJIT",
-        },
+        runtime = { version = "LuaJIT" },
         workspace = {
           checkThirdParty = false,
           library = {
@@ -32,30 +31,38 @@ local lsp_servers = {
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
-        cargo = {
-          features = "all",
-        },
-        check = {
-          command = "clippy",
-        },
+        cargo = { features = "all" },
+        check = { command = "clippy" },
       },
     },
     format = true,
   },
   sqlls = {},
   taplo = {},
-  tsserver = {},
-  -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-  volar = {
+  -- See:
+  --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+  --   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
+  tsserver = {
+    init_options = {
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = mason_registry.get_package("vue-language-server"):get_install_path() ..
+              "/node_modules/@vue/language-server",
+          languages = { "vue" },
+        }
+      },
+    },
     filetypes = {
-      "typescript",
       "javascript",
-      "typescriptreact",
       "javascriptreact",
+      "typescript",
+      "typescriptreact",
       "vue",
-      "json",
     },
   },
+  -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+  volar = {},
   -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
   yamlls = {
     settings = {
@@ -88,6 +95,10 @@ local on_attach = function(client, buffer)
     })
   end, "Format", opts)
 
+  if client.name == "tsserver" or client.name == "volar" then
+    return
+  end
+
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       buffer = buffer,
@@ -106,11 +117,9 @@ end
 
 mason_lspconfig.setup_handlers({
   function(lsp_server_name)
-    lspconfig[lsp_server_name].setup({
+    lspconfig[lsp_server_name].setup(vim.tbl_extend("force", {
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = lsp_servers[lsp_server_name].settings,
-      filetypes = lsp_servers[lsp_server_name].filetypes,
-    })
+    }, lsp_servers[lsp_server_name]))
   end,
 })
