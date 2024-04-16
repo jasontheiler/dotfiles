@@ -42,6 +42,8 @@ tmuxion.config({
   },
 })
 
+local IGNORED_DIRS = { "!**/node_modules/**", "!**/target/**" }
+
 tmuxion.on_session_created(function(session)
   local win_1 = session:current_window()
   win_1:select_layout("main_vertical")
@@ -50,7 +52,7 @@ tmuxion.on_session_created(function(session)
   local win_2 = session:new_window()
   win_2:select_layout("even_horizontal")
 
-  local paths = session:globs({ "**/Cargo.toml" })
+  local paths = session:globs({ table.unpack(IGNORED_DIRS), "**/Cargo.toml" })
   for _, path in ipairs(paths) do
     local path_dir = path:match("(.*[/\\])")
     local pane = win_1:new_pane()
