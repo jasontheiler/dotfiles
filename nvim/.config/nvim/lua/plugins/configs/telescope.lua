@@ -89,7 +89,7 @@ end
 keymap_picker("<leader>sh", telescope_builtin.help_tags, "Help")
 keymap_picker("<leader>sf", telescope_builtin.find_files, "Files")
 keymap_picker("<leader>sa", telescope_builtin.find_files, "All files", { no_ignore = true })
-keymap_picker("<leader>so", telescope_builtin.oldfiles, "Oldfiles")
+keymap_picker("<leader>sp", telescope_builtin.oldfiles, "Previous files")
 keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
 keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
 keymap_picker("<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
