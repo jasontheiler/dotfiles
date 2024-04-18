@@ -8,14 +8,22 @@ cmp.setup({
     expand = function(args) luasnip.lsp_expand(args.body) end,
   },
   formatting = {
-    format = function(_, item)
+    format = function(entry, item)
+      local filetype_icons = mappings.filetype_icons[vim.bo.filetype]
       local filetype_labels = mappings.filetype_labels[vim.bo.filetype]
-      item.kind = string.format(
-        "%s %s",
-        mappings.icons[item.kind] or "?",
-        filetype_labels and filetype_labels[item.kind] or item.kind
-      )
+      local source_icons = mappings.source_icons[entry.source.name]
+      local source_labels = mappings.source_labels[entry.source.name]
+
+      local icon = filetype_icons and filetype_icons[item.kind]
+          or source_icons and source_icons[item.kind]
+          or mappings.icons[item.kind] or "?"
+      local label = filetype_labels and filetype_labels[item.kind]
+          or source_labels and source_labels[item.kind]
+          or item.kind
+
+      item.kind = string.format(" %s %s", icon, label)
       item.menu = nil
+
       return item
     end,
   },
@@ -49,6 +57,7 @@ cmp.setup({
   sources = {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
+    { name = 'calc' },
     { name = "buffer" },
   },
   mapping = {

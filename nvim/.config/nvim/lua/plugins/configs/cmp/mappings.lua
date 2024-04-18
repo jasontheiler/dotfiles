@@ -1,11 +1,5 @@
 local M = {}
 
-M.filetype_labels = {
-  rust = {
-    Interface = "Trait",
-  },
-}
-
 M.icons = {
   Class = "",
   Color = "",
@@ -34,6 +28,26 @@ M.icons = {
   Unit = "",
   Value = "󰎠",
   Variable = "",
+}
+
+M.source_icons = {
+  calc = {
+    Text = "󰃬",
+  },
+}
+
+M.source_labels = {
+  calc = {
+    Text = "Calculation",
+  },
+}
+
+M.filetype_icons = {}
+
+M.filetype_labels = {
+  rust = {
+    Interface = "Trait",
+  },
 }
 
 return M

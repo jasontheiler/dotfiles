@@ -75,6 +75,8 @@ lazy.setup({
       "hrsh7th/cmp-nvim-lsp",
       -- See: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- See: https://github.com/hrsh7th/cmp-calc
+      "hrsh7th/cmp-calc",
       -- See: https://github.com/L3MON4D3/LuaSnip
       "L3MON4D3/LuaSnip",
       -- See: https://github.com/saadparwaiz1/cmp_luasnip
