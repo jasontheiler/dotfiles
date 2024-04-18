@@ -1,9 +1,11 @@
-[init]
-	defaultBranch = main
+[alias]
+	undo = reset --mixed @~ --
 [commit]
 	verbose = true
 [fetch]
 	prune = true
+[init]
+	defaultBranch = main
 [push]
 	autoSetupRemote = true
 [remote "origin"]
