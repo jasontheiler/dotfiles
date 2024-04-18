@@ -11,7 +11,7 @@ cmp.setup({
     format = function(_, item)
       local filetype_labels = mappings.filetype_labels[vim.bo.filetype]
       item.kind = string.format(
-        " %s %s",
+        "%s %s",
         mappings.icons[item.kind] or "?",
         filetype_labels and filetype_labels[item.kind] or item.kind
       )
