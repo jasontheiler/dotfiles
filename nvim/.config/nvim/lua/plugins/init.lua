@@ -188,4 +188,11 @@ lazy.setup({
     event = "VeryLazy",
     config = function() require("plugins/configs/telescope") end,
   },
+
+  -- See: https://github.com/dmmulroy/ts-error-translator.nvim
+  {
+    "dmmulroy/ts-error-translator.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 })
