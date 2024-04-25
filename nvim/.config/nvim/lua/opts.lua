@@ -1,7 +1,7 @@
 vim.opt.termguicolors = true
 vim.opt.laststatus = 0
 vim.opt.cmdheight = 0
-vim.opt.shortmess = "fIlnxtToOF"
+vim.opt.shortmess = "oOtTICF"
 vim.opt.showmode = false
 vim.opt.shadafile = "NONE"
 vim.opt.clipboard = "unnamedplus"
