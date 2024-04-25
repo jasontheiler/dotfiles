@@ -61,6 +61,14 @@ lazy.setup({
     opts = {},
   },
 
+  -- See: https://github.com/brenoprata10/nvim-highlight-colors
+  {
+    "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
+    -- See: https://github.com/brenoprata10/nvim-highlight-colors#options
+    opts = {},
+  },
+
   -- See: https://github.com/hrsh7th/nvim-cmp
   {
     "hrsh7th/nvim-cmp",
