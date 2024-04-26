@@ -4,7 +4,7 @@ local color_utils = require("catppuccin/utils/colors")
 -- See: https://github.com/catppuccin/nvim#configuration
 catppuccin.setup({
   flavour = "mocha",
-  transparent_background = true,
+  transparent_background = false,
   styles = {
     conditionals = {},
   },
@@ -23,30 +23,30 @@ catppuccin.setup({
     mocha = {
       rosewater = "#DAA992",
       flamingo = "#DAA992",
-      pink = "#C386BB", -- terminal magenta, terminal brightmagenta
+      pink = "#C386BB", -- terminal magenta, terminal bright magenta
       mauve = "#C386BB",
-      red = "#EA6962",  -- terminal red, terminal brightred
+      red = "#EA6962",  -- terminal red, terminal bright red
       maroon = "#D3869B",
       peach = "#DD7F4E",
-      yellow = "#E8C677", -- terminal yellow, terminal brightyellow
-      green = "#A9B665",  -- terminal green, terminal brightgreen
-      teal = "#89B482",   -- terminal cyan, terminal brightcyan
+      yellow = "#E8C677", -- terminal yellow, terminal bright yellow
+      green = "#A9B665",  -- terminal green, terminal bright green
+      teal = "#89B482",   -- terminal cyan, terminal bright cyan
       sky = "#89B482",
       sapphire = "#89B482",
-      blue = "#7DAEB3",     -- terminal blue, terminal brightblue
+      blue = "#7DAEB3", -- terminal blue, terminal bright blue
       lavender = "#BDAEC3",
-      text = "#E4CEA8",     -- terminal foreground, terminal cursor
-      subtext1 = "#DCC6A0", -- terminal white
-      subtext0 = "#D4BE98", -- terminal brightwhite
+      text = "#E4CEA8", -- terminal white, terminal bright white, terminal foreground, terminal cursor
+      subtext1 = "#DCC6A0",
+      subtext0 = "#D4BE98",
       overlay2 = "#877360", -- punctuation, brackets
       overlay1 = "#7D6C60",
       overlay0 = "#75615B", -- comments
-      surface2 = "#615556", -- terminal brightblack
-      surface1 = "#534747", -- line numbers, selection, terminal black
+      surface2 = "#615556",
+      surface1 = "#534747", -- line numbers, selection, terminal black, terminal bright black
       surface0 = "#433737",
-      base = "#231F1F",     -- terminal background
-      mantle = "#1B1717",
-      crust = "#130F0F",
+      base = "#211D1D",     -- terminal background
+      mantle = "#191414",
+      crust = "#110D0D",
     },
   },
   highlight_overrides = {
