@@ -21,14 +21,14 @@ config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
 
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Catppuccin Mocha Warm"
 config.color_schemes = {
   ["Catppuccin Mocha Warm"] = {
     foreground = "#E4CEA8",
-    background = "#231F1F",
+    background = "#211D1D",
     cursor_border = "#89B482",
     cursor_bg = "#89B482",
-    cursor_fg = "#231F1F",
+    cursor_fg = "#211D1D",
     ansi = {
       "#534747", -- black
       "#EA6962", -- red
@@ -37,7 +37,7 @@ config.color_schemes = {
       "#7DAEB3", -- blue
       "#C386BB", -- magenta
       "#89B482", -- cyan
-      "#BAC2DE", -- white
+      "#E4CEA8", -- white
     },
     brights = {
       "#534747", -- black
@@ -47,7 +47,7 @@ config.color_schemes = {
       "#7DAEB3", -- blue
       "#C386BB", -- magenta
       "#89B482", -- cyan
-      "#BAC2DE", -- white
+      "#E4CEA8", -- white
     },
   },
 }
