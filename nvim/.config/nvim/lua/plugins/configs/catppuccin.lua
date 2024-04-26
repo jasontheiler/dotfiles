@@ -89,7 +89,7 @@ catppuccin.setup({
         TelescopeSelection = { fg = palette.text, bg = palette.surface0 },
         TelescopeSelectionCaret = { bg = palette.surface0 },
         TreesitterContextBottom = { style = {} },
-        TreesitterContextLineNumber = { fg = palette.surface1 },
+        TreesitterContextLineNumber = { fg = palette.surface1, bg = palette.base },
         TreesitterContextSeparator = { fg = palette.surface0 },
         VertSplit = { fg = palette.crust },
         VirtColumn = { fg = palette.surface0 },
