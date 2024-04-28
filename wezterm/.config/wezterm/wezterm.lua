@@ -17,6 +17,7 @@ config.font = wezterm.font_with_fallback({
   "MonoLisa Nerd Font",
 })
 config.font_size = 15
+config.bold_brightens_ansi_colors = "No"
 config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
