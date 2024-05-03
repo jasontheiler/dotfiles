@@ -42,6 +42,8 @@ for i = 1, 9 do
   set_keymaps(i, true)
 end
 
+utils.keymap("n", "<leader>bw", ":bp<CR>", "Previous")
+
 local augroup_heirline_bufs = vim.api.nvim_create_augroup("user_heirline_bufs", {})
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
