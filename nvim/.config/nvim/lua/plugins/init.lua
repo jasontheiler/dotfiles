@@ -9,6 +9,7 @@ if not is_installed then
     "https://github.com/folke/lazy.nvim.git",
     lazy_path
   })
+  --- @diagnostic disable-next-line: undefined-field
   vim.opt.rtp:prepend(lazy_path)
   lazy = require("lazy")
 end
@@ -147,7 +148,6 @@ lazy.setup({
   -- See: https://github.com/lewis6991/satellite.nvim
   {
     "lewis6991/satellite.nvim",
-    cond = function() return vim.fn.has("nvim-0.10") == 1 end,
     event = "VeryLazy",
     opts = {
       winblend = 0,

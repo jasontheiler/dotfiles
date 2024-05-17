@@ -10,7 +10,6 @@ catppuccin.setup({
   },
   integrations = {
     native_lsp = {
-      enabled = true,
       underlines = {
         errors = { "undercurl" },
         warnings = { "undercurl" },
