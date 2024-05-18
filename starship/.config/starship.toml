@@ -1,12 +1,12 @@
 # See: https://starship.rs/config/
 
 [character]
-error_symbol = "[❯](bold green)"
-success_symbol = "[❯](bold green)"
-vimcmd_symbol = "[❯](bold blue)"
-vimcmd_replace_one_symbol = "[❯](bold red)"
-vimcmd_replace_symbol = "[❯](bold red)"
-vimcmd_visual_symbol = "[❯](bold purple)"
+error_symbol = "[λ](bold green)"
+success_symbol = "[λ](bold green)"
+vimcmd_symbol = "[λ](bold blue)"
+vimcmd_replace_one_symbol = "[λ](bold red)"
+vimcmd_replace_symbol = "[λ](bold red)"
+vimcmd_visual_symbol = "[λ](bold purple)"
 
 [directory]
 format = "[($read_only )$path/]($style) "
