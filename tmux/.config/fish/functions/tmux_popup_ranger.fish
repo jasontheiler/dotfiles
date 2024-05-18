@@ -2,7 +2,7 @@ function tmux_popup_ranger
     argparse reset -- $argv
 
     if not set -q TMUX
-        alert error "You are currently not in a tmux session!"
+        return 1
     end
 
     if set -q _flag_reset

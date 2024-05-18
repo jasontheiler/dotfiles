@@ -11,6 +11,7 @@ function checklist
         fnm \
         git \
         git-open \
+        go \
         gpg \
         gsed \
         hyperfine \
