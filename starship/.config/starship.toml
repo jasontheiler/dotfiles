@@ -12,9 +12,6 @@ vimcmd_visual_symbol = "[❯](bold purple)"
 format = "[($read_only )$path/]($style) "
 read_only = ""
 
-[docker_context]
-symbol = "󰡨 "
-
 [git_branch]
 truncation_length = 24
 
@@ -40,8 +37,7 @@ detect_files = ["Tiltfile"]
 symbol = " "
 
 [package]
-symbol = "󰏗 "
-style = "bold yellow"
+disabled = true
 
 [rust]
 symbol = " "
