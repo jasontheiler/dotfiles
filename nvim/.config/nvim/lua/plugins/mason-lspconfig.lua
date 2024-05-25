@@ -22,6 +22,7 @@ return {
     local lsp_servers = {
       cssls = {},
       dockerls = {},
+      gopls = {},
       html = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       lua_ls = {
@@ -52,6 +53,7 @@ return {
       },
       sqlls = {},
       taplo = {},
+      templ = {},
       -- See:
       --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
       --   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
