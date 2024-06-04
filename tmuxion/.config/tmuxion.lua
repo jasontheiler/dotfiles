@@ -14,26 +14,44 @@ tmuxion.config({
     results = {
       style = nil,
       border = "plain",
-      border_style = { fg = "#BDAEC3" },
+      -- Catppuccin Mocha
+      border_style = { fg = "#B4BEFE" },
+      -- Catppuccin Mocha Warm
+      -- border_style = { fg = "#BDAEC3" },
       title = " Results ",
       title_style = nil,
       item_style = nil,
       item_match_style = { fg = "blue" },
-      selection_style = { bg = "#433737", modifiers = { "bold" } },
+      -- Catppuccin Mocha
+      selection_style = { bg = "#313244", modifiers = { "bold" } },
+      -- Catppuccin Mocha Warm
+      -- selection_style = { bg = "#433737", modifiers = { "bold" } },
       selection_prefix = "❯ ",
-      selection_prefix_style = { fg = "#DAA992" },
+      -- Catppuccin Mocha
+      selection_prefix_style = { fg = "#F2CDCD" },
+      -- Catppuccin Mocha Warm
+      -- selection_prefix_style = { fg = "#DAA992" },
     },
     prompt = {
       style = nil,
       border = "plain",
-      border_style = { fg = "#BDAEC3" },
+      -- Catppuccin Mocha
+      border_style = { fg = "#B4BEFE" },
+      -- Catppuccin Mocha Warm
+      -- border_style = { fg = "#BDAEC3" },
       title = " Sessions ",
       title_style = nil,
       pattern_style = nil,
       pattern_prefix = "  ",
-      pattern_prefix_style = { fg = "#DAA992" },
+      -- Catppuccin Mocha
+      pattern_prefix_style = { fg = "#F2CDCD" },
+      -- Catppuccin Mocha Warm
+      -- pattern_prefix_style = { fg = "#DAA992" },
       stats_template = " {results}/{sessions} ",
-      stats_style = { fg = "#75615B" },
+      -- Catppuccin Mocha
+      stats_style = { fg = "#6C7086" },
+      -- Catppuccin Mocha Warm
+      -- stats_style = { fg = "#75615B" },
     },
   },
   keybinds = {
