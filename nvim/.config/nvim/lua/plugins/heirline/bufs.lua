@@ -35,7 +35,7 @@ local set_keymaps = function(index, which_key_ignore)
       table.insert(bufs, index, buf)
       vim.cmd.redrawtabline()
     end
-  end, which_key_ignore and "which_key_ignore" or "Move current buffer to index " .. index)
+  end, which_key_ignore and "which_key_ignore" or "Move current to index " .. index)
 end
 
 for i = 1, 9 do

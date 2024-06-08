@@ -78,6 +78,7 @@ return {
         }
       },
       sources = {
+        { name = "luasnip" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp" },
         { name = 'calc' },
