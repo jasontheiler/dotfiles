@@ -2,6 +2,7 @@
 return {
   "L3MON4D3/LuaSnip",
   event = { "InsertEnter" },
+  -- See: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
   config = function()
     local luasnip = require("luasnip")
 
