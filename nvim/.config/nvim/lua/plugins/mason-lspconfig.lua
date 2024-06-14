@@ -22,7 +22,7 @@ return {
     local lsp_servers = {
       cssls = {},
       dockerls = {},
-      gopls = {},
+      gopls = { format = true },
       html = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       lua_ls = {
