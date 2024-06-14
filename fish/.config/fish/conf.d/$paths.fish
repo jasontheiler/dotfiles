@@ -1,6 +1,7 @@
 set -a fish_user_paths \
     $HOME/.bun/bin/ \
     $HOME/.cargo/bin/ \
+    $HOME/.go/bin/ \
     $HOME/.local/bin/
 
 if set -q WSL_DISTRO_NAME
