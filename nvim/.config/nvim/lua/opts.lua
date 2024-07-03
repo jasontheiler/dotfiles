@@ -16,13 +16,14 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.colorcolumn = { 80, 100 }
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "  ", trail = "·" }
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
