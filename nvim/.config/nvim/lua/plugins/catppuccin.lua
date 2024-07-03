@@ -78,7 +78,7 @@ return {
             FidgetDone = { fg = palette.text },
             FidgetGroup = { fg = palette.teal },
             FidgetIcon = { fg = palette.teal },
-            FloatBorder = { fg = palette.lavender },
+            FloatBorder = { fg = palette.lavender, bg = palette.none },
             HeirlineBuflineBuf = { fg = palette.text },
             HeirlineBuflineBufInactive = { fg = palette.surface2 },
             HeirlineWinbar = { fg = palette.text },
