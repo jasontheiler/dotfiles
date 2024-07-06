@@ -16,9 +16,9 @@ return {
       { provider = " " },
       {
         condition = function(self)
-          local is_readonly = vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
-          local is_modifiable = vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
-          return is_readonly or not is_modifiable
+          local readonly = vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+          local modifiable = vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+          return readonly or not modifiable
         end,
         provider = " ",
       },

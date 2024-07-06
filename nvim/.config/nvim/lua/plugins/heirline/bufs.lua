@@ -51,9 +51,9 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     vim.schedule(function()
       bufs = vim.tbl_filter(function(buf)
-        local name = vim.api.nvim_buf_get_name(buf)
-        local is_listed = vim.api.nvim_get_option_value("buflisted", { buf = buf })
-        return name ~= "" and is_listed
+        local filename = vim.api.nvim_buf_get_name(buf)
+        local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
+        return filename ~= "" and buflisted
       end, vim.api.nvim_list_bufs())
       for i = 1, #bufs do
         set_keymaps(i)
@@ -65,7 +65,8 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 vim.api.nvim_create_autocmd({ "BufAdd" }, {
   group = augroup_heirline_bufs,
   callback = function(data)
-    if data.file ~= "" and M.get_index(data.buf) == nil then
+    local index = M.get_index(data.buf)
+    if data.file ~= "" and index == nil then
       table.insert(bufs, data.buf)
       set_keymaps(#bufs)
     end

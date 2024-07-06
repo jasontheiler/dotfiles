@@ -41,3 +41,15 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 500 })
   end,
 })
+
+vim.api.nvim_create_autocmd({ "QuitPre" }, {
+  group = augroup_default,
+  callback = function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      local filename = vim.api.nvim_buf_get_name(buf)
+      if filename == "" then
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+    end
+  end,
+})
