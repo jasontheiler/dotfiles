@@ -3,10 +3,17 @@ local utils = require("utils")
 local M = {}
 local bufs = {}
 
+--- Gets all buffers.
+---
+--- @return number[]
 M.get_all = function()
   return bufs
 end
 
+--- Gets the index of the specified buffer.
+---
+--- @param buf number The buffer handle.
+--- @return number|nil
 M.get_index = function(buf)
   for i, v in ipairs(bufs) do
     if v == buf then
