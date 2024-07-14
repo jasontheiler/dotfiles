@@ -1,18 +1,15 @@
 vim.api.nvim_create_user_command("Update", function()
   local is_lazy_installed, lazy = pcall(require, "lazy")
-
   if is_lazy_installed then
     lazy.sync()
   end
 
   local is_treesitter_installed = pcall(require, "nvim-treesitter")
-
   if is_treesitter_installed then
     vim.api.nvim_command("TSUpdate")
   end
 
   local is_mason_installed, mason_registry = pcall(require, "mason-registry")
-
   -- See: https://github.com/RubixDev/mason-update-all/blob/main/lua/mason-update-all/init.lua
   if is_mason_installed then
     local packages = mason_registry.get_installed_packages()
@@ -57,11 +54,11 @@ vim.api.nvim_create_user_command("Update", function()
 end, {})
 
 vim.api.nvim_create_user_command("ToggleDiagnostics", function()
-  if vim.diagnostic.is_disabled() then
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+    vim.notify("Disabled diagnostics", vim.log.levels.INFO)
+  else
     vim.diagnostic.enable()
     vim.notify("Enabled diagnostics", vim.log.levels.INFO)
-  else
-    vim.diagnostic.disable()
-    vim.notify("Disabled diagnostics", vim.log.levels.INFO)
   end
 end, {})
