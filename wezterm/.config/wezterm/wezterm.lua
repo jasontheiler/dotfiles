@@ -27,7 +27,7 @@ config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
 
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Catppuccin Mocha Neo"
 config.color_schemes = {
   ["Catppuccin Mocha Warm"] = {
     foreground = "#E4CEA8",
@@ -54,6 +54,33 @@ config.color_schemes = {
       "#C386BB", -- magenta
       "#89B482", -- cyan
       "#E4CEA8", -- white
+    },
+  },
+  ["Catppuccin Mocha Neo"] = {
+    foreground = "#E0E2EA",
+    background = "#14161B",
+    cursor_border = "#B3F6C0",
+    cursor_bg = "#B3F6C0",
+    cursor_fg = "#14161B",
+    ansi = {
+      "#45475D", -- black
+      "#FB7FB4", -- red
+      "#B3F6C0", -- green
+      "#F9E6B8", -- yellow
+      "#A6DBFF", -- blue
+      "#E3AAFF", -- magenta
+      "#8CF8F7", -- cyan
+      "#E0E2EA", -- white
+    },
+    brights = {
+      "#45475D", -- black
+      "#FB7FB4", -- red
+      "#B3F6C0", -- green
+      "#F9E6B8", -- yellow
+      "#A6DBFF", -- blue
+      "#E3AAFF", -- magenta
+      "#8CF8F7", -- cyan
+      "#E0E2EA", -- white
     },
   },
 }
