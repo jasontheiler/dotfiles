@@ -1,5 +1,12 @@
 local tmuxion = require("tmuxion")
 
+local catppuccin = {
+  flamingo = os.getenv("CATPPUCCIN_FLAMINGO"),
+  lavender = os.getenv("CATPPUCCIN_LAVENDER"),
+  overlay0 = os.getenv("CATPPUCCIN_OVERLAY0"),
+  surface0 = os.getenv("CATPPUCCIN_SURFACE0"),
+}
+
 tmuxion.config({
   paths = {
     truncate_home_dir = true,
@@ -14,44 +21,26 @@ tmuxion.config({
     results = {
       style = nil,
       border = "plain",
-      -- Catppuccin Mocha
-      border_style = { fg = "#B4BEFE" },
-      -- Catppuccin Mocha Warm
-      -- border_style = { fg = "#BDAEC3" },
+      border_style = { fg = catppuccin.lavender },
       title = " Results ",
       title_style = nil,
       item_style = nil,
       item_match_style = { fg = "blue" },
-      -- Catppuccin Mocha
-      selection_style = { bg = "#313244", modifiers = { "bold" } },
-      -- Catppuccin Mocha Warm
-      -- selection_style = { bg = "#433737", modifiers = { "bold" } },
+      selection_style = { bg = catppuccin.surface0, modifiers = { "bold" } },
       selection_prefix = "❯ ",
-      -- Catppuccin Mocha
-      selection_prefix_style = { fg = "#F2CDCD" },
-      -- Catppuccin Mocha Warm
-      -- selection_prefix_style = { fg = "#DAA992" },
+      selection_prefix_style = { fg = catppuccin.flamingo },
     },
     prompt = {
       style = nil,
       border = "plain",
-      -- Catppuccin Mocha
-      border_style = { fg = "#B4BEFE" },
-      -- Catppuccin Mocha Warm
-      -- border_style = { fg = "#BDAEC3" },
+      border_style = { fg = catppuccin.lavender },
       title = " Sessions ",
       title_style = nil,
       pattern_style = nil,
       pattern_prefix = "  ",
-      -- Catppuccin Mocha
-      pattern_prefix_style = { fg = "#F2CDCD" },
-      -- Catppuccin Mocha Warm
-      -- pattern_prefix_style = { fg = "#DAA992" },
+      pattern_prefix_style = { fg = catppuccin.flamingo },
       stats_template = " {results}/{sessions} ",
-      -- Catppuccin Mocha
-      stats_style = { fg = "#6C7086" },
-      -- Catppuccin Mocha Warm
-      -- stats_style = { fg = "#75615B" },
+      stats_style = { fg = catppuccin.overlay0 },
     },
   },
   keybinds = {
