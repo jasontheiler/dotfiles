@@ -12,6 +12,8 @@ return {
         padding = { 1, 3 },
         border = "single",
       },
+      sort = { "group", "alphanum" },
+      replace = { key = {} },
       icons = {
         group = "",
         rules = false,
