@@ -25,9 +25,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
       ["Rvx"] = "Replace",
     }
     local hl_exists, hl = pcall(
-      vim.api.nvim_get_hl_by_name,
-      "CursorLineNr" .. (mode_hl_suffixes[mode] or "Normal"),
-      true
+      vim.api.nvim_get_hl,
+      0,
+      { name = "CursorLineNr" .. (mode_hl_suffixes[mode] or "Normal") }
     )
     if hl_exists then
       vim.api.nvim_set_hl(0, "CursorLineNr", hl)
