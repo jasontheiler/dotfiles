@@ -11,9 +11,7 @@ return {
     catppuccin.setup({
       flavour = "mocha",
       transparent_background = false,
-      styles = {
-        conditionals = {},
-      },
+      styles = { conditionals = {} },
       integrations = {
         native_lsp = {
           underlines = {

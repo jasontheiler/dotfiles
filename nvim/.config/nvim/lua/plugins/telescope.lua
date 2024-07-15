@@ -94,7 +94,11 @@ return {
     telescope.load_extension("ui-select")
 
     local keymap_picker = function(lhs, picker, desc, opts)
-      local default_opts = { prompt_title = desc, results_title = "Results", preview_title = "Preview" }
+      local default_opts = {
+        prompt_title = desc,
+        results_title = "Results",
+        preview_title = "Preview",
+      }
       opts = vim.tbl_extend("force", default_opts, opts or {})
       utils.keymap("n", lhs, function() picker(opts) end, desc)
     end
@@ -106,7 +110,6 @@ return {
     keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
     keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
     keymap_picker("<leader>sd", telescope_builtin.diagnostics, "Diagnostics")
-    keymap_picker("<leader>gc", telescope_builtin.git_bcommits, "Buffer commits")
     keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols")
     keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions")
     keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions")

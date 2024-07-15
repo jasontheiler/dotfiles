@@ -53,7 +53,7 @@ return {
         bufline_buf,
         { provider = " <- " },
         { provider = " -> " },
-        function() return bufs.get_all() end,
+        bufs.get_all,
         false
       ),
     }
@@ -63,23 +63,24 @@ return {
         self.filename = vim.api.nvim_buf_get_name(0)
         return self.filename ~= ""
       end,
-      init = function(self) self.filename = vim.fn.fnamemodify(self.filename, ":.") end,
+      init = function(self)
+        self.filename = vim.fn.fnamemodify(self.filename, ":.")
+        if not self.filename:find("^/") then
+          self.filename = "./" .. self.filename
+        end
+      end,
       { provider = "%=" },
       {
-        condition = function() return vim.bo.readonly or not vim.bo.modifiable end,
+        condition = function()
+          local readonly = vim.api.nvim_get_option_value("readonly", { buf = 0 })
+          local modifiable = vim.api.nvim_get_option_value("modifiable", { buf = 0 })
+          return readonly or not modifiable
+        end,
         provider = " ",
       },
+      { provider = function(self) return self.filename end },
       {
-        provider = function(self)
-          if self.filename:find("^/") then
-            return self.filename
-          else
-            return "./" .. self.filename
-          end
-        end,
-      },
-      {
-        condition = function() return vim.bo.modified end,
+        condition = function() return vim.api.nvim_get_option_value("modified", { buf = 0 }) end,
         provider = " ●",
       },
       hl = function()
