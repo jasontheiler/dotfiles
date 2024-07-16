@@ -59,7 +59,10 @@ tmuxion.on_session_created(function(session)
   local win_2 = session:new_window()
   win_2:select_layout("even_horizontal")
 
-  local paths = session:globs({ table.unpack(IGNORED_DIRS), "**/Cargo.toml" })
+  local paths = session:globs(
+    { table.unpack(IGNORED_DIRS), "**/Cargo.toml" },
+    { max_depth = 2 }
+  )
   for _, path in ipairs(paths) do
     local path_dir = path:match("(.*[/\\])")
     local pane = win_1:new_pane()
