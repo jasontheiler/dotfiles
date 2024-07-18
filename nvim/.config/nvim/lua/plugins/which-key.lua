@@ -9,6 +9,7 @@ return {
     which_key.setup({
       preset = "helix",
       win = {
+        row = math.huge,
         padding = { 1, 3 },
         border = "single",
       },
