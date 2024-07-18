@@ -13,11 +13,15 @@ return {
         border = "single",
       },
       sort = { "group", "alphanum" },
-      replace = { key = {} },
+      replace = {
+        key = {
+          { "<Space>", "Leader" },
+          { "<LeftMouse>", "<LMB>" },
+        },
+      },
       icons = {
         group = "",
         rules = false,
-        keys = {},
       },
       show_help = false,
     })
