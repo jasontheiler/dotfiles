@@ -107,7 +107,7 @@ return {
             FloatBorder = { fg = palette.lavender, bg = palette.none },
             HeirlineBuflineBuf = { fg = palette.text, style = { "bold" } },
             HeirlineBuflineBufInactive = { fg = palette.surface2 },
-            HeirlineWinbar = { fg = palette.text },
+            HeirlineWinbar = { fg = palette.text, style = { "bold" } },
             HeirlineWinbarInactive = { fg = palette.surface2 },
             LspReferenceRead = { bg = color_utils.darken(palette.rosewater, 0.125, palette.base) },
             LspReferenceText = { bg = color_utils.darken(palette.rosewater, 0.125, palette.base) },
