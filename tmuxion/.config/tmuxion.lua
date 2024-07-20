@@ -8,16 +8,16 @@ local catppuccin = {
 }
 
 tmuxion.config({
-  paths = {
-    truncate_home_dir = true,
-    home_dir_symbol = "~",
-    trailing_slash = true,
-  },
   session_selector = {
     width = 48,
     height = 16,
     scrolloff = 4,
     inverted = false,
+    paths = {
+      truncate_home_dir = true,
+      home_dir_symbol = "~",
+      trailing_slash = true,
+    },
     results = {
       style = nil,
       border = "plain",
