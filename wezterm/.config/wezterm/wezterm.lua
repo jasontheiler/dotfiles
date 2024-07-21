@@ -66,7 +66,7 @@ config.color_schemes = {
       "#45475D", -- black
       "#FB7FB4", -- red
       "#B3F6C0", -- green
-      "#F9E6B8", -- yellow
+      "#F9E6C0", -- yellow
       "#A6DBFF", -- blue
       "#E3AAFF", -- magenta
       "#8CF8F7", -- cyan
@@ -76,7 +76,7 @@ config.color_schemes = {
       "#45475D", -- black
       "#FB7FB4", -- red
       "#B3F6C0", -- green
-      "#F9E6B8", -- yellow
+      "#F9E6C0", -- yellow
       "#A6DBFF", -- blue
       "#E3AAFF", -- magenta
       "#8CF8F7", -- cyan
