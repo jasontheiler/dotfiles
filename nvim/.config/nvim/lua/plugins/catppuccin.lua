@@ -58,8 +58,8 @@ return {
           mauve = "#E3AAFF",     --
           red = "#FB7FB4",       -- terminal red, terminal bright red
           maroon = "#F394B8",    --
-          peach = "#FFB79B",     --
-          yellow = "#F9E6B8",    -- terminal yellow, terminal bright yellow
+          peach = "#FFB7AB",     --
+          yellow = "#F9E6C0",    -- terminal yellow, terminal bright yellow
           green = "#B3F6C0",     -- terminal green, terminal bright green
           teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan
           sky = "#8CF8F7",       --
