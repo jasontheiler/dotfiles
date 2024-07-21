@@ -64,8 +64,8 @@ set -l colors \
     MAUVE "#E3AAFF" \
     RED "#FB7FB4" \
     MAROON "#F394B8" \
-    PEACH "#FFB79B" \
-    YELLOW "#F9E6B8" \
+    PEACH "#FFB7AB" \
+    YELLOW "#F9E6C0" \
     GREEN "#B3F6C0" \
     TEAL "#8CF8F7" \
     SKY "#8CF8F7" \
