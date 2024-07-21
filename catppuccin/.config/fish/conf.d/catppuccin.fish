@@ -62,7 +62,7 @@ set -l colors \
     FLAMINGO "#FFCDCD" \
     PINK "#E3AAFF" \
     MAUVE "#E3AAFF" \
-    RED "#FB7FB4" \
+    RED "#FF87BC" \
     MAROON "#F394B8" \
     PEACH "#FFB7AB" \
     YELLOW "#F9E6C0" \
