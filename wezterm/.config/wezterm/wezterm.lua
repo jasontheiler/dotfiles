@@ -64,7 +64,7 @@ config.color_schemes = {
     cursor_fg = "#14161B",
     ansi = {
       "#45475D", -- black
-      "#FB7FB4", -- red
+      "#FF87BC", -- red
       "#B3F6C0", -- green
       "#F9E6C0", -- yellow
       "#A6DBFF", -- blue
@@ -74,7 +74,7 @@ config.color_schemes = {
     },
     brights = {
       "#45475D", -- black
-      "#FB7FB4", -- red
+      "#FF87BC", -- red
       "#B3F6C0", -- green
       "#F9E6C0", -- yellow
       "#A6DBFF", -- blue
