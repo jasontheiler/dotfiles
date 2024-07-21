@@ -56,7 +56,7 @@ return {
           flamingo = "#FFCDCD",  --
           pink = "#E3AAFF",      -- terminal magenta, terminal bright magenta
           mauve = "#E3AAFF",     --
-          red = "#FB7FB4",       -- terminal red, terminal bright red
+          red = "#FF87BC",       -- terminal red, terminal bright red
           maroon = "#F394B8",    --
           peach = "#FFB7AB",     --
           yellow = "#F9E6C0",    -- terminal yellow, terminal bright yellow
