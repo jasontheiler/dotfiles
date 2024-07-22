@@ -14,10 +14,13 @@ return {
         lsp_format = "fallback",
       },
       formatters_by_ft = {
+        css = { "prettier" },
         fish = { "fish_indent" },
         html = { "prettier" },
         javascript = { "prettier" },
         json = { "prettier" },
+        scss = { "prettier" },
+        typescript = { "prettier" },
         vue = { "prettier" },
         yaml = { "prettier" },
       },
