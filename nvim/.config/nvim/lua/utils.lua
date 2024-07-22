@@ -5,7 +5,7 @@ local M = {}
 --- @param modes string|string[]
 --- @param lhs string
 --- @param rhs string|function
---- @param desc string
+--- @param desc? string
 --- @param opts? vim.keymap.set.Opts
 M.keymap = function(modes, lhs, rhs, desc, opts)
   local default_opts = { noremap = true, silent = true, desc = desc }

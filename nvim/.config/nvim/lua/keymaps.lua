@@ -1,6 +1,7 @@
 local utils = require("utils")
 
 utils.keymap("t", "<Esc>", "<C-\\><C-n>", "Exit terminal mode")
+utils.keymap({ "n", "v" }, " ", "<Nop>")
 utils.keymap({ "n", "v" }, "<leader>p", "\"_dP", "Paste (without yank)")
 
 utils.keymap("n", "<leader>ww", "<C-w>w", "Move cursor to window above (wrap)")

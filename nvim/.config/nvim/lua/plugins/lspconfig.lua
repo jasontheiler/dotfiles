@@ -1,21 +1,21 @@
 local utils = require("utils")
 
--- See: https://github.com/williamboman/mason-lspconfig.nvim
+-- See: https://github.com/neovim/nvim-lspconfig
 return {
-  "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
   dependencies = {
     -- See: https://github.com/williamboman/mason.nvim
     "williamboman/mason.nvim",
-    -- See: https://github.com/neovim/nvim-lspconfig
-    "neovim/nvim-lspconfig",
+    -- See: https://github.com/williamboman/mason-lspconfig.nvim
+    "williamboman/mason-lspconfig.nvim",
     -- See: https://github.com/hrsh7th/cmp-nvim-lsp
     "hrsh7th/cmp-nvim-lsp",
   },
   event = "VeryLazy",
   config = function()
-    local mason_lspconfig = require("mason-lspconfig")
-    local mason_registry = require("mason-registry")
     local lspconfig = require("lspconfig")
+    local mason_registry = require("mason-registry")
+    local mason_lspconfig = require("mason-lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -23,7 +23,7 @@ return {
       clangd = {},
       cssls = {},
       dockerls = {},
-      gopls = { format = true },
+      gopls = {},
       html = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       lua_ls = {
@@ -32,14 +32,10 @@ return {
             runtime = { version = "LuaJIT" },
             workspace = {
               checkThirdParty = false,
-              library = {
-                "${3rd}/luv/library",
-                unpack(vim.api.nvim_get_runtime_file("", true)),
-              },
+              library = { "${3rd}/luv/library", unpack(vim.api.nvim_get_runtime_file("", true)) },
             },
           },
         },
-        format = true,
       },
       marksman = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
@@ -50,7 +46,6 @@ return {
             check = { command = "clippy" },
           },
         },
-        format = true,
       },
       sqlls = {},
       taplo = {},
@@ -58,26 +53,33 @@ return {
       -- See:
       --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
       --   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
-      tsserver = {
-        init_options = {
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = mason_registry.get_package("vue-language-server"):get_install_path() ..
-                  "/node_modules/@vue/language-server",
-              languages = { "vue" },
-            }
+      tsserver = function()
+        local config = {
+          init_options = { plugins = {} },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
           },
-        },
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "vue",
-        },
-      },
-      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+        }
+
+        local is_vue_language_server_installed, vue_language_server = pcall(
+          mason_registry.get_package,
+          "vue-language-server"
+        )
+        if is_vue_language_server_installed then
+          table.insert(config.init_options.plugins, {
+            name = "@vue/typescript-plugin",
+            location = vue_language_server:get_install_path()
+                .. "/node_modules/@vue/language-server",
+            languages = { "vue" },
+          })
+        end
+
+        return config
+      end,
       volar = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
       yamlls = {
@@ -100,16 +102,10 @@ return {
     local on_attach = function(client, buffer)
       local opts = { buffer = buffer }
 
+      utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
       utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
       utils.keymap("n", "<leader>lr", vim.lsp.buf.rename, "Rename", opts)
       utils.keymap("n", "<leader>lS", vim.lsp.buf.signature_help, "Signature", opts)
-      utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
-      utils.keymap("n", "<leader>f", function()
-        vim.lsp.buf.format({
-          async = true,
-          filter = function(lsp) return lsp.name == "null-ls" or lsp_servers[lsp.name].format end
-        })
-      end, "Format", opts)
 
       if client.name == "tsserver" or client.name == "volar" then
         return
@@ -133,10 +129,15 @@ return {
 
     mason_lspconfig.setup_handlers({
       function(lsp_server_name)
-        lspconfig[lsp_server_name].setup(vim.tbl_extend("force", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        }, lsp_servers[lsp_server_name]))
+        local lsp_server_config = lsp_servers[lsp_server_name]
+        if type(lsp_server_config) == "function" then
+          lsp_server_config = lsp_server_config()
+        end
+        lspconfig[lsp_server_name].setup(vim.tbl_extend(
+          "force",
+          { capabilities = capabilities, on_attach = on_attach },
+          lsp_server_config
+        ))
       end,
     })
   end,
