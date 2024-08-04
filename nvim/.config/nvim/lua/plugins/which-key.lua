@@ -8,6 +8,7 @@ return {
     -- See: https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
     which_key.setup({
       preset = "helix",
+      delay = 750,
       win = {
         row = math.huge,
         padding = { 1, 3 },
