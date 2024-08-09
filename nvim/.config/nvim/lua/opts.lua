@@ -40,7 +40,11 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWar
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
-vim.diagnostic.config({ severity_sort = true, float = { border = "single" } })
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_text = { prefix = "" },
+  float = { border = "single" }
+})
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
