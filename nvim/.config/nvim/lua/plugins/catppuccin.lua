@@ -105,6 +105,7 @@ return {
             FidgetGroup = { fg = palette.teal, style = { "bold" } },
             FidgetIcon = { fg = palette.teal, style = { "bold" } },
             FloatBorder = { fg = palette.lavender, bg = palette.none },
+            HeirlineBufline = { bg = palette.base },
             HeirlineBuflineBuf = { fg = palette.text, style = { "bold" } },
             HeirlineBuflineBufInactive = { fg = palette.surface2 },
             HeirlineWinbar = { fg = palette.text, style = { "bold" } },

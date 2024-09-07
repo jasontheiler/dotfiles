@@ -56,6 +56,8 @@ return {
         bufs.get_all,
         false
       ),
+      { provider = "%=" },
+      hl = "HeirlineBufline",
     }
 
     local winbar = {
