@@ -130,6 +130,10 @@ return {
     mason_lspconfig.setup_handlers({
       function(lsp_server_name)
         local lsp_server_config = lsp_servers[lsp_server_name]
+        -- See: https://github.com/neovim/nvim-lspconfig/pull/3232#issuecomment-2331025714
+        if lsp_server_name == "tsserver" then
+          lsp_server_name = "ts_ls"
+        end
         if type(lsp_server_config) == "function" then
           lsp_server_config = lsp_server_config()
         end
