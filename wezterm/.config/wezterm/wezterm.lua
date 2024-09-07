@@ -8,7 +8,7 @@ config.window_decorations = "RESIZE"
 config.window_background_opacity = 1
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = {
-  top = 8,
+  top = 0,
   right = 8,
   bottom = 0,
   left = 8,
@@ -21,7 +21,7 @@ config.font = wezterm.font_with_fallback({
   "CommitMono Nerd Font",
   "MonoLisa Nerd Font",
 })
-config.font_size = 19
+config.font_size = 20
 config.bold_brightens_ansi_colors = "No"
 config.allow_square_glyphs_to_overflow_width = "Always"
 
