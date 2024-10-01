@@ -7,36 +7,36 @@ while test ! -f "${PWD}/${GITCONFIG_FILE_NAME}" -a "${PWD}" != "/"; do
 done
 
 if test "${PWD}" == "/"; then
-    echo "No ${GITCONFIG_FILE_NAME} file in parent directories found."
+    echo "error: No \`${GITCONFIG_FILE_NAME}\` file in parent directories found."
     exit 1
 fi
 
-INCLUDE_PATH_CURRENT=$(git config --local --default "" --get include.path)
-INCLUDE_PATH_NEW="${PWD}/${GITCONFIG_FILE_NAME}"
-if test "${INCLUDE_PATH_CURRENT}" != "${INCLUDE_PATH_NEW}"; then
-    git config --local include.path "${INCLUDE_PATH_NEW}"
-    echo "\`include.path\` has been set to \`${INCLUDE_PATH_NEW}\`. Please commit again."
+include_path_current=$(git config --local --default "" --get include.path)
+include_path_new="${PWD}/${GITCONFIG_FILE_NAME}"
+if test "${include_path_current}" != "${include_path_new}"; then
+    git config --local include.path "${include_path_new}"
+    echo "\`include.path\` has been set to \`${include_path_new}\`. Please commit again."
     exit 1
 fi
 
-USER_EMAIL=$(git config --local --includes --default "" --get user.email)
-if test "${USER_EMAIL}" == ""; then
-    echo "\`user.email\` is not set."
+user_email=$(git config --local --includes --default "" --get user.email)
+if test "${user_email}" == ""; then
+    echo "error: \`user.email\` is not set."
     exit 1
 fi
 
-COMMIT_GPGSIGN=$(git config --local --includes --default "" --get commit.gpgsign)
-if test "${COMMIT_GPGSIGN}" == ""; then
-    echo "WARNING: \`commit.gpgsign\` is not set."
+commit_gpgsign=$(git config --local --includes --default "" --get commit.gpgsign)
+if test "${commit_gpgsign}" == ""; then
+    echo "warning: \`commit.gpgsign\` is not set."
 fi
 
-if test "${COMMIT_GPGSIGN}" == "true"; then
-    USER_SIGNING_KEY=$(git config --local --includes --default "" --get user.signingkey)
-    if test "${USER_SIGNING_KEY}" == ""; then
-        echo "Commit signing is enabled but \`user.signingkey\` is not set."
+if test "${commit_gpgsign}" == "true"; then
+    user_signing_key=$(git config --local --includes --default "" --get user.signingkey)
+    if test "${user_signing_key}" == ""; then
+        echo "error: Commit signing is enabled but \`user.signingkey\` is not set."
         exit 1
     fi
 fi
 
-USER_NAME=$(git config --get user.name)
-echo "Commiting as ${USER_NAME} <${USER_EMAIL}>."
+user_name=$(git config --get user.name)
+echo "Committing as ${user_name} <${user_email}>..."
