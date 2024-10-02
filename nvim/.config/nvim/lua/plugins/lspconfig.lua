@@ -24,7 +24,7 @@ return {
       cssls = {},
       dockerls = {},
       gopls = {},
-      html = {},
+      html = { filetypes = { "html" } },
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       lua_ls = {
         settings = {
