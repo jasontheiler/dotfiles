@@ -18,14 +18,14 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     local lsp_servers = {
       clangd = {},
       cssls = {},
       dockerls = {},
       gopls = {},
       html = { filetypes = { "html" } },
-      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
       lua_ls = {
         settings = {
           Lua = {
@@ -38,7 +38,7 @@ return {
         },
       },
       marksman = {},
-      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
@@ -51,9 +51,9 @@ return {
       taplo = {},
       templ = {},
       -- See:
-      --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+      --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
       --   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
-      tsserver = function()
+      ts_ls = function()
         local config = {
           init_options = { plugins = {} },
           filetypes = {
@@ -81,7 +81,7 @@ return {
         return config
       end,
       volar = {},
-      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
+      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
       yamlls = {
         settings = {
           yaml = {
@@ -130,10 +130,6 @@ return {
     mason_lspconfig.setup_handlers({
       function(lsp_server_name)
         local lsp_server_config = lsp_servers[lsp_server_name]
-        -- See: https://github.com/neovim/nvim-lspconfig/pull/3232#issuecomment-2331025714
-        if lsp_server_name == "tsserver" then
-          lsp_server_name = "ts_ls"
-        end
         if type(lsp_server_config) == "function" then
           lsp_server_config = lsp_server_config()
         end
