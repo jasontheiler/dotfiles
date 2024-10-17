@@ -5,6 +5,7 @@ function checklist
         btm \
         curl \
         docker \
+        direnv \
         dust \
         eza \
         fish \
