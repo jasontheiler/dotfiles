@@ -12,6 +12,12 @@ vimcmd_visual_symbol = "[λ](bold purple)"
 format = "[($read_only )$path/]($style) "
 read_only = ""
 
+[direnv]
+disabled = false
+format = "with [$symbol$loaded/$allowed]($style) "
+symbol = " "
+style = "bold green"
+
 [git_branch]
 truncation_length = 24
 
