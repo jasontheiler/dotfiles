@@ -1,9 +1,14 @@
 [alias]
 	undo = reset --mixed @~ --
 [commit]
+	gpgsign = true
 	verbose = true
 [fetch]
 	prune = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	# allowedSignersFile = ~/.ssh/allowed_signers
 [init]
 	defaultBranch = main
 [push]
