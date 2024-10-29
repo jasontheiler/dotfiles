@@ -26,6 +26,10 @@ config.bold_brightens_ansi_colors = "No"
 config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
+config.keys = {
+  { mods = "CTRL|SHIFT", key = "C", action = wezterm.action.CopyTo("Clipboard") },
+  { mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
+}
 
 config.color_scheme = "Catppuccin Mocha Neo"
 config.color_schemes = {
@@ -89,7 +93,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "wsl", "--cd", "~" }
 end
 
-if wezterm.target_triple == "x86_64-apple-darwin" then
+if os.getenv("XDG_CURRENT_DESKTOP") == "Hyprland" then
+  config.enable_wayland = false
 end
 
 return config
