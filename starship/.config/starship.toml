@@ -33,7 +33,6 @@ symbol = " "
 disabled = false
 symbol = "󱃾 "
 style = "bold blue"
-detect_env_vars = ["REMOVE_ME_WHEN_#5978_GETS_FIXED"]
 detect_folders = ["kubernetes", "kube", "k8s", "kustomize"]
 detect_files = ["Tiltfile"]
 contexts = [{ context_pattern = "docker-desktop", context_alias = "local" }]
