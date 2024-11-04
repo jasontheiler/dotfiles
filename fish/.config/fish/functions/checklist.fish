@@ -32,6 +32,7 @@ function checklist
         starship \
         stow \
         tilt \
+        tldr \
         tmux
 
     set -l installed_count 0
