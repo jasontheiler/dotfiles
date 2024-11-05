@@ -1,3 +1,5 @@
+# See: https://fishshell.com/docs/current/prompt.html
+
 function fish_prompt
     set -l last_status $status
     echo
