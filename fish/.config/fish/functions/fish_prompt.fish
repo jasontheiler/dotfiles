@@ -38,11 +38,19 @@ function fish_prompt_git_branch
 end
 
 function fish_prompt_git_status
-    git rev-parse --is-inside-work-tree >/dev/null 2>&1
-    if test $status -ne 0
+    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
         return
     end
     set -l status_str ""
+    if not git diff --quiet --ignore-submodules
+        set status_str "$status_str!"
+    end
+    if not git diff --cached --quiet --ignore-submodules
+        set status_str "$status_str+"
+    end
+    if not test -z (git ls-files --others --exclude-standard)
+        set status_str "$status_str?"
+    end
     set -l behind_ahead (git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
     set -l behind (echo $behind_ahead | cut -d \t -f 1)
     if test $behind -gt 0
