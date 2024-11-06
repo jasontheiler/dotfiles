@@ -38,8 +38,21 @@ function fish_prompt_git_branch
 end
 
 function fish_prompt_git_status
-    set -l status_str
-    if test "$status_str" = ""
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1
+    if test $status -ne 0
+        return
+    end
+    set -l status_str ""
+    set -l behind_ahead (git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
+    set -l behind (echo $behind_ahead | cut -d \t -f 1)
+    if test $behind -gt 0
+        set status_str $status_str↓$behind
+    end
+    set -l ahead (echo $behind_ahead | cut -d \t -f 2)
+    if test $ahead -gt 0
+        set status_str $status_str↑$ahead
+    end
+    if test -z $status_str
         return
     end
     set_color --bold red
