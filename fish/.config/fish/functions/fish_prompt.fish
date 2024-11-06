@@ -3,16 +3,23 @@
 function fish_prompt
     set -l last_status $status
     echo
-    fish_prompt_pwd
+    fish_prompt_dir
     fish_prompt_git_branch
+    fish_prompt_git_status
     echo
     fish_prompt_status $last_status
     fish_prompt_char
 end
 
-function fish_prompt_pwd
+function fish_prompt_dir
     set_color --bold cyan
-    echo -n (prompt_pwd)
+    set -l git_dir (git rev-parse --show-toplevel 2>/dev/null)
+    if test $status -eq 0
+        echo -n (basename $git_dir)
+        echo -n (prompt_pwd (string replace $git_dir "" $PWD))
+    else
+        echo -n (prompt_pwd)
+    end
     if test $PWD != /
         echo -n /
     end
@@ -21,13 +28,16 @@ end
 
 function fish_prompt_git_branch
     set -l branch (git branch --show-current 2>/dev/null)
-    if test $status -gt 0
+    if test $status -ne 0
         return
     end
     echo -n " on "
     set_color --bold magenta
     echo -n " $branch "
     set_color normal
+end
+
+function fish_prompt_git_status
 end
 
 function fish_prompt_status
