@@ -33,11 +33,18 @@ function fish_prompt_git_branch
     end
     echo -n " on "
     set_color --bold magenta
-    echo -n " $branch "
+    echo -n " $branch"
     set_color normal
 end
 
 function fish_prompt_git_status
+    set -l status_str
+    if test "$status_str" = ""
+        return
+    end
+    set_color --bold red
+    echo -n " [$status_str]"
+    set_color normal
 end
 
 function fish_prompt_status
