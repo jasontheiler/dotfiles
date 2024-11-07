@@ -51,7 +51,7 @@ function fish_prompt_git_status
     if not test -z (git ls-files --others --exclude-standard)
         set status_str $status_str"?"
     end
-    set -l behind_ahead (git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
+    set -l behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
     if not test -z $behind_ahead
         set -l behind (echo $behind_ahead | cut -d \t -f 1)
         if test $behind -gt 0
