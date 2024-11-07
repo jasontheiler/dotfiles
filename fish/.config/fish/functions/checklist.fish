@@ -1,52 +1,54 @@
 function checklist
-    set -l bins \
-        bat \
-        brew \
-        btm \
+    checklist_check_packages Core \
         curl \
-        docker \
-        direnv \
-        dust \
         eza \
         fish \
-        fnm \
         git \
-        git-open \
-        go \
-        gpg \
-        gsed \
-        hyperfine \
-        jq \
-        kubectl \
         lazygit \
-        mkcert \
         nvim \
-        oha \
-        ouch \
         paru \
         ranger \
         rg \
-        rustup \
         scp \
         ssh \
-        starship \
         stow \
-        tilt \
-        tldr \
         tmux
+    checklist_check_packages Extra \
+        bat \
+        btm \
+        docker \
+        direnv \
+        dust \
+        fnm \
+        git-open \
+        go \
+        hyperfine \
+        jq \
+        kubectl \
+        mkcert \
+        oha \
+        ouch \
+        rustup \
+        tilt \
+        tldr
+end
 
+function checklist_check_packages
+    echo \n$argv[1] packages:
     set -l installed_count 0
-
-    for bin in (string pad $bins)
-        echo -sn $bin " "
-
+    for bin in $argv[2..]
+        echo -n "  "
         if fish -c "command -q $bin"
             set installed_count (math $installed_count + 1)
-            echo -s (set_color green)  (set_color normal)
+            set_color --bold green
+            echo -n 
+            set_color normal
         else
-            echo -s (set_color red)  (set_color normal)
+            set_color --bold red
+            echo -n 
+            set_color normal
         end
+        echo " "$bin
     end
-
-    echo -s \n $installed_count / (count $bins) " installed"
+    echo \n $installed_count/(count $argv[2..]) installed
 end

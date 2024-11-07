@@ -33,7 +33,7 @@ function fish_prompt_git_branch
     end
     echo -n " on "
     set_color --bold magenta
-    echo -n " $branch"
+    echo -n  $branch
     set_color normal
 end
 
@@ -43,13 +43,13 @@ function fish_prompt_git_status
     end
     set -l status_str ""
     if not git diff --quiet --ignore-submodules
-        set status_str "$status_str!"
+        set status_str $status_str"!"
     end
     if not git diff --cached --quiet --ignore-submodules
-        set status_str "$status_str+"
+        set status_str $status_str"+"
     end
     if not test -z (git ls-files --others --exclude-standard)
-        set status_str "$status_str?"
+        set status_str $status_str"?"
     end
     set -l behind_ahead (git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
     set -l behind (echo $behind_ahead | cut -d \t -f 1)
@@ -64,7 +64,7 @@ function fish_prompt_git_status
         return
     end
     set_color --bold red
-    echo -n " [$status_str]"
+    echo -n " "[$status_str]
     set_color normal
 end
 
@@ -73,7 +73,7 @@ function fish_prompt_status
         return
     end
     set_color --bold red
-    echo -n "[$argv[1]] "
+    echo -n [$argv[1]]" "
     set_color normal
 end
 
