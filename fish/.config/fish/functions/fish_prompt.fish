@@ -52,13 +52,15 @@ function fish_prompt_git_status
         set status_str $status_str"?"
     end
     set -l behind_ahead (git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
-    set -l behind (echo $behind_ahead | cut -d \t -f 1)
-    if test $behind -gt 0
-        set status_str $status_str↓$behind
-    end
-    set -l ahead (echo $behind_ahead | cut -d \t -f 2)
-    if test $ahead -gt 0
-        set status_str $status_str↑$ahead
+    if not test -z $behind_ahead
+        set -l behind (echo $behind_ahead | cut -d \t -f 1)
+        if test $behind -gt 0
+            set status_str $status_str↓$behind
+        end
+        set -l ahead (echo $behind_ahead | cut -d \t -f 2)
+        if test $ahead -gt 0
+            set status_str $status_str↑$ahead
+        end
     end
     if test -z $status_str
         return
