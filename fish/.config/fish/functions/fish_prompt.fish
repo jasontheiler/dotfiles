@@ -48,7 +48,7 @@ function fish_prompt_git_status
     if not git diff --cached --quiet --ignore-submodules
         set status_str $status_str"+"
     end
-    if not test -z (git ls-files --others --exclude-standard)
+    if not test -z "$(git ls-files --others --exclude-standard)"
         set status_str $status_str"?"
     end
     set -l behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
