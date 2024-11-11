@@ -6,6 +6,7 @@ function fish_prompt
     fish_prompt_dir
     fish_prompt_git_branch
     fish_prompt_git_status
+    fish_prompt_k8s
     echo
     fish_prompt_status $last_status
     fish_prompt_char
@@ -67,6 +68,26 @@ function fish_prompt_git_status
     end
     set_color --bold red
     echo -n " "[$status_str]
+    set_color normal
+end
+
+function fish_prompt_k8s
+    set -l K8S_CONFIG_PATH $HOME/.kube/config
+    if not test -e $K8S_CONFIG_PATH
+        return
+    end
+    while read -l line
+        set -f ctx (string match -rg '^current-context:\s+"?([^"]+)"?$' -- $line)
+        if test $status -eq 0
+            break
+        end
+    end <$K8S_CONFIG_PATH
+    if test -z "$ctx"
+        return
+    end
+    echo -n " via "
+    set_color --bold blue
+    echo -n 󱃾 $ctx
     set_color normal
 end
 
