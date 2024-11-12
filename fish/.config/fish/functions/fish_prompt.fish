@@ -32,7 +32,7 @@ function fish_prompt_git_branch
     if test $status -ne 0
         return
     end
-    echo -n " on "
+    fish_prompt_separator
     set_color --bold magenta
     echo -n  $branch
     set_color normal
@@ -85,7 +85,7 @@ function fish_prompt_k8s
     if test -z "$ctx"
         return
     end
-    echo -n " via "
+    fish_prompt_separator
     set_color --bold blue
     echo -n 󱃾 $ctx
     set_color normal
@@ -113,5 +113,11 @@ function fish_prompt_char
     end
     set_color --bold
     echo -n "λ "
+    set_color normal
+end
+
+function fish_prompt_separator
+    set_color brblack
+    echo -n " | "
     set_color normal
 end
