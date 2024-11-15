@@ -20,7 +20,7 @@ return {
 
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     local lsp_servers = {
-      clangd = {},
+      clangd = { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } },
       cssls = {},
       dockerls = {},
       gopls = {},
@@ -38,6 +38,7 @@ return {
         },
       },
       marksman = {},
+      pbls = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
       rust_analyzer = {
         settings = {
