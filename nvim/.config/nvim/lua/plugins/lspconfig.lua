@@ -23,7 +23,25 @@ return {
       clangd = { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } },
       cssls = {},
       dockerls = {},
-      gopls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            staticcheck = true,
+            -- See:
+            --   - https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+            --   - https://staticcheck.dev/docs/checks/
+            analyses = {
+              SA9003 = true,
+              ST1003 = true,
+              ST1016 = true,
+              ST1020 = true,
+              ST1021 = true,
+              ST1022 = true,
+              ST1023 = true,
+            },
+          },
+        },
+      },
       html = { filetypes = { "html" } },
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
       lua_ls = {
