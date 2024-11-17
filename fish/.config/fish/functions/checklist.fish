@@ -1,10 +1,10 @@
 function checklist
-    checklist_check_packages Core \
+    checklist_list Core \
         curl \
-        eza \
         fish \
         git \
         lazygit \
+        npm \
         nvim \
         paru \
         ranger \
@@ -13,12 +13,14 @@ function checklist
         ssh \
         stow \
         tmux
-    checklist_check_packages Extra \
+    checklist_list Extra \
         bat \
         btm \
+        cargo \
         docker \
         direnv \
         dust \
+        eza \
         fnm \
         git-open \
         go \
@@ -28,14 +30,16 @@ function checklist
         mkcert \
         oha \
         ouch \
+        prettier \
         rustup \
+        staticcheck \
         tilt \
         tldr
 end
 
-function checklist_check_packages
-    echo \n$argv[1] packages:
-    set -l installed_count 0
+function checklist_list
+    echo \n$argv[1]:\n
+    set installed_count 0
     for bin in $argv[2..]
         echo -n "  "
         if fish -c "command -q $bin"

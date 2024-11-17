@@ -1,7 +1,7 @@
 # See: https://fishshell.com/docs/current/prompt.html
 
 function fish_prompt
-    set -l last_status $status
+    set last_status $status
     echo
     fish_prompt_dir
     fish_prompt_git_branch
@@ -14,7 +14,7 @@ end
 
 function fish_prompt_dir
     set_color --bold cyan
-    set -l git_dir (git rev-parse --show-toplevel 2>/dev/null)
+    set git_dir (git rev-parse --show-toplevel 2>/dev/null)
     if test $status -eq 0
         echo -n (basename $git_dir)
         echo -n (prompt_pwd (string replace $git_dir "" $PWD))
@@ -28,7 +28,7 @@ function fish_prompt_dir
 end
 
 function fish_prompt_git_branch
-    set -l branch (git branch --show-current 2>/dev/null)
+    set branch (git branch --show-current 2>/dev/null)
     if test $status -ne 0
         return
     end
@@ -42,7 +42,7 @@ function fish_prompt_git_status
     if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
         return
     end
-    set -l status_str ""
+    set status_str ""
     if not git diff --quiet --ignore-submodules
         set status_str $status_str"!"
     end
@@ -52,7 +52,7 @@ function fish_prompt_git_status
     if not test -z "$(git ls-files --others --exclude-standard)"
         set status_str $status_str"?"
     end
-    set -l behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
+    set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
     if not test -z $behind_ahead
         set -l behind (echo $behind_ahead | cut -d \t -f 1)
         if test $behind -gt 0
@@ -72,16 +72,11 @@ function fish_prompt_git_status
 end
 
 function fish_prompt_k8s
-    set -l K8S_CONFIG_PATH $HOME/.kube/config
-    if not test -e $K8S_CONFIG_PATH
+    set k8s_config (cat $HOME/.kube/config 2>/dev/null)
+    if test $status -ne 0
         return
     end
-    while read -l line
-        set -f ctx (string match -rg '^current-context:\s+"?([^"]+)"?$' -- $line)
-        if test $status -eq 0
-            break
-        end
-    end <$K8S_CONFIG_PATH
+    string match -rq '^current-context:\s+"?(?<ctx>[^"]+)"?$' -- $k8s_config
     if test -z "$ctx"
         return
     end
