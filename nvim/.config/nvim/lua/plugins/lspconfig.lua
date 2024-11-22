@@ -23,6 +23,7 @@ return {
       clangd = { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } },
       cssls = {},
       dockerls = {},
+      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
       gopls = {
         settings = {
           gopls = {
@@ -118,32 +119,13 @@ return {
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
     -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
-    local on_attach = function(client, buffer)
+    local on_attach = function(_, buffer)
       local opts = { buffer = buffer }
 
       utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
       utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
       utils.keymap("n", "<leader>lr", vim.lsp.buf.rename, "Rename", opts)
       utils.keymap("n", "<leader>lS", vim.lsp.buf.signature_help, "Signature", opts)
-
-      if client.name == "tsserver" or client.name == "volar" then
-        return
-      end
-
-      if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-          buffer = buffer,
-          callback = function()
-            vim.lsp.buf.clear_references()
-            vim.lsp.buf.document_highlight()
-          end,
-        })
-
-        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "TextYankPost" }, {
-          buffer = buffer,
-          callback = vim.lsp.buf.clear_references,
-        })
-      end
     end
 
     mason_lspconfig.setup_handlers({

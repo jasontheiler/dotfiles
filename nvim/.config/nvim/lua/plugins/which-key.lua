@@ -34,6 +34,7 @@ return {
       { "<leader>g", group = "Git" },
       { "<leader>l", group = "LSP" },
       { "<leader>s", group = "Search" },
+      { "<leader>w", group = "Window" },
     })
   end,
 }
