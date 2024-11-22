@@ -33,9 +33,7 @@ return {
       { "<leader>b", group = "Buffer" },
       { "<leader>g", group = "Git" },
       { "<leader>l", group = "LSP" },
-      { "<leader>r", group = "Random" },
       { "<leader>s", group = "Search" },
-      { "<leader>w", group = "Window" },
     })
   end,
 }
