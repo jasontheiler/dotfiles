@@ -20,8 +20,6 @@ function checklist
         docker \
         direnv \
         dust \
-        eza \
-        fnm \
         git-open \
         go \
         hyperfine \
