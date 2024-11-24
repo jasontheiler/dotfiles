@@ -9,9 +9,9 @@ config.window_background_opacity = 1
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = {
   top = 0,
-  right = 8,
+  right = "0.5cell",
   bottom = 0,
-  left = 8,
+  left = "0.5cell",
 }
 config.max_fps = 200
 config.enable_tab_bar = false
@@ -91,10 +91,6 @@ config.color_schemes = {
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "wsl", "--cd", "~" }
-end
-
-if os.getenv("XDG_CURRENT_DESKTOP") == "Hyprland" then
-  config.enable_wayland = false
 end
 
 return config
