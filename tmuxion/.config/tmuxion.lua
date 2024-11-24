@@ -44,7 +44,7 @@ tmuxion.config({
     },
   },
   keybinds = {
-    session_selector = { "C-s", "M-s" },
+    session_selector = { "C-s" },
     last_session = { "w" },
   },
 })
@@ -59,15 +59,17 @@ tmuxion.on_session_created(function(session)
   local win_2 = session:new_window()
   win_2:select_layout("even_horizontal")
 
-  local paths = session:globs(
-    { table.unpack(IGNORED_DIRS), "**/Cargo.toml" },
-    { max_depth = 2 }
-  )
-  for _, path in ipairs(paths) do
-    local path_dir = path:match("(.*[/\\])")
-    local pane = win_1:new_pane()
-    pane:run_command(" cd " .. path_dir)
-    pane:run_command(" cargo watch -x \"test\"")
+  if os.execute("which cargo-watch >/dev/null 2>&1") then
+    local paths = session:globs(
+      { table.unpack(IGNORED_DIRS), "**/Cargo.toml" },
+      { max_depth = 2 }
+    )
+    for _, path in ipairs(paths) do
+      local path_dir = path:match("(.*[/\\])")
+      local pane = win_1:new_pane()
+      pane:run_command(" cd " .. path_dir)
+      pane:run_command(" cargo watch -x \"test\"")
+    end
   end
 
   -- win_1:current_pane():toggle_zoom()
