@@ -26,6 +26,7 @@ function checklist
         jq \
         kubectl \
         mkcert \
+        mtr \
         oha \
         ouch \
         prettier \
