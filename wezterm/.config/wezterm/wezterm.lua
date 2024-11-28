@@ -27,6 +27,9 @@ config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
 config.keys = {
+  { mods = "CTRL", key = "0", action = wezterm.action.ResetFontSize },
+  { mods = "CTRL", key = "-", action = wezterm.action.DecreaseFontSize },
+  { mods = "CTRL", key = "=", action = wezterm.action.IncreaseFontSize },
   { mods = "CTRL|SHIFT", key = "C", action = wezterm.action.CopyTo("Clipboard") },
   { mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
 }
