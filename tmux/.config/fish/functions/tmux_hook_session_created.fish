@@ -2,8 +2,7 @@ function tmux_hook_session_created
     set WINDOW_FORMAT "#{window_id}"
     set PANE_FORMAT "#{pane_id}"
 
-    set session_name $argv[1]
-    set session \$$session_name
+    set session \$$argv[1]
 
     set window_1 (tmux display-message -t $session -p $WINDOW_FORMAT)
     tmux select-layout -t $window_1 main-vertical
