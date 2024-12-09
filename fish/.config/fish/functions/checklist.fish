@@ -33,7 +33,8 @@ function checklist
         rustup \
         staticcheck \
         tilt \
-        tldr
+        tldr \
+        tspin
 end
 
 function checklist_list
