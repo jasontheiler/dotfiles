@@ -19,6 +19,7 @@ return {
         html = { "prettier" },
         javascript = { "prettier" },
         json = { "prettier" },
+        markdown = { "prettier" },
         scss = { "prettier" },
         typescript = { "prettier" },
         vue = { "prettier" },
