@@ -111,35 +111,35 @@ return {
       },
     }
 
-    -- See: https://github.com/williamboman/mason-lspconfig.nvim#configuration
-    mason_lspconfig.setup({ ensure_installed = vim.tbl_keys(lsp_servers) })
-
-    -- See: https://github.com/hrsh7th/cmp-nvim-lsp#setup
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-    -- See: https://github.com/neovim/nvim-lspconfig#suggested-configuration
     local on_attach = function(_, buffer)
       local opts = { buffer = buffer }
 
       utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
       utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
       utils.keymap("n", "<leader>lr", vim.lsp.buf.rename, "Rename", opts)
-      utils.keymap("n", "<leader>lS", vim.lsp.buf.signature_help, "Signature", opts)
+      utils.keymap("n", "<leader>lf", vim.lsp.buf.signature_help, "Signature", opts)
     end
 
-    mason_lspconfig.setup_handlers({
-      function(lsp_server_name)
-        local lsp_server_config = lsp_servers[lsp_server_name]
-        if type(lsp_server_config) == "function" then
-          lsp_server_config = lsp_server_config()
-        end
-        lspconfig[lsp_server_name].setup(vim.tbl_extend(
-          "force",
-          { capabilities = capabilities, on_attach = on_attach },
-          lsp_server_config
-        ))
-      end,
+    -- See: https://github.com/williamboman/mason-lspconfig.nvim#configuration
+    mason_lspconfig.setup({
+      ensure_installed = vim.tbl_keys(lsp_servers),
+      handlers = {
+        function(lsp_server_name)
+          local lsp_server_config = lsp_servers[lsp_server_name] or {}
+          if type(lsp_server_config) == "function" then
+            lsp_server_config = lsp_server_config()
+          end
+          lsp_server_config = vim.tbl_extend(
+            "force",
+            { capabilities = capabilities, on_attach = on_attach },
+            lsp_server_config
+          )
+          lspconfig[lsp_server_name].setup(lsp_server_config)
+        end,
+      },
     })
   end,
 }

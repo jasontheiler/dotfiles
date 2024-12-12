@@ -71,10 +71,10 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 
 vim.api.nvim_create_autocmd({ "BufAdd" }, {
   group = augroup_heirline_bufs,
-  callback = function(data)
-    local index = M.get_index(data.buf)
-    if data.file ~= "" and index == nil then
-      table.insert(bufs, data.buf)
+  callback = function(event)
+    local index = M.get_index(event.buf)
+    if event.file ~= "" and index == nil then
+      table.insert(bufs, event.buf)
       set_keymaps(#bufs)
     end
   end,
@@ -82,8 +82,8 @@ vim.api.nvim_create_autocmd({ "BufAdd" }, {
 
 vim.api.nvim_create_autocmd({ "BufDelete" }, {
   group = augroup_heirline_bufs,
-  callback = function(data)
-    local index = M.get_index(data.buf)
+  callback = function(event)
+    local index = M.get_index(event.buf)
     if index ~= nil then
       set_keymaps(#bufs, true)
       table.remove(bufs, index)
