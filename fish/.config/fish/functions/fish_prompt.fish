@@ -91,7 +91,7 @@ function fish_prompt_status
         return
     end
     set_color --bold red
-    echo -n [$argv[1]]" "
+    echo -n [(fish_status_to_signal $argv[1])]" "
     set_color normal
 end
 
