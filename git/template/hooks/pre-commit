@@ -1,18 +1,18 @@
 #!/bin/bash
 
-GITCONFIG_FILE_NAME=".gitconfig.profile"
+GITCONFIG_PROFILE_FILENAME=".gitconfig.profile"
 
-while test ! -f "${PWD}/${GITCONFIG_FILE_NAME}" -a "${PWD}" != "/"; do
+while test ! -f "${PWD}/${GITCONFIG_PROFILE_FILENAME}" -a "${PWD}" != "/"; do
     PWD=$(dirname "${PWD}")
 done
 
 if test "${PWD}" == "/"; then
-    echo "error: No \`${GITCONFIG_FILE_NAME}\` file in parent directories found."
+    echo "error: No \`${GITCONFIG_PROFILE_FILENAME}\` file in parent directories found."
     exit 1
 fi
 
 include_path_current=$(git config --local --default "" --get include.path)
-include_path_new="${PWD}/${GITCONFIG_FILE_NAME}"
+include_path_new="${PWD}/${GITCONFIG_PROFILE_FILENAME}"
 if test "${include_path_current}" != "${include_path_new}"; then
     git config --local include.path "${include_path_new}"
     echo "\`include.path\` has been set to \`${include_path_new}\`. Please commit again."
@@ -21,22 +21,15 @@ fi
 
 user_email=$(git config --local --includes --default "" --get user.email)
 if test "${user_email}" == ""; then
-    echo "error: \`user.email\` is not set."
+    echo "error: \`user.email\` not set."
     exit 1
 fi
 
-commit_gpgsign=$(git config --local --includes --default "" --get commit.gpgsign)
-if test "${commit_gpgsign}" == ""; then
-    echo "warning: \`commit.gpgsign\` is not set."
-fi
-
-if test "${commit_gpgsign}" == "true"; then
-    user_signing_key=$(git config --local --includes --default "" --get user.signingkey)
-    if test "${user_signing_key}" == ""; then
-        echo "error: Commit signing is enabled but \`user.signingkey\` is not set."
-        exit 1
-    fi
+user_signing_key=$(git config --local --includes --default "" --get user.signingkey)
+if test "${user_signing_key}" == ""; then
+    echo "error: \`user.signingkey\` not set."
+    exit 1
 fi
 
 user_name=$(git config --get user.name)
-echo "Committing as ${user_name} <${user_email}>..."
+echo "Committing as ${user_name} <${user_email}>…"

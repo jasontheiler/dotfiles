@@ -7,8 +7,6 @@
 	prune = true
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	# allowedSignersFile = ~/.ssh/allowed_signers
 [init]
 	defaultBranch = main
 [push]

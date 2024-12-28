@@ -1,3 +1,3 @@
 [user]
 	# email = <email>
-	# signingkey = <signingkey>
+	# signingkey = <path_to_ssh_public_key>
