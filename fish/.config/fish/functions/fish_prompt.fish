@@ -76,13 +76,20 @@ function fish_prompt_k8s
     if test $status -ne 0
         return
     end
-    string match -rq '^current-context:\s+"?(?<ctx>[^"]+)"?$' -- $k8s_config
+    string match -rq 'current-context:\s"?(?<ctx>[^"]+)"?' -- $k8s_config
     if test -z "$ctx"
         return
     end
+    string match -rq \
+        '\s{4}namespace:\s"?(?<ns>[^";]+)"?;(\s{4}[^;]+;)*\s{2}name:\s"?'$ctx'"?' \
+        -- \
+        "$(string join ';' -- $k8s_config)"
     fish_prompt_separator
     set_color --bold blue
     echo -n 󱃾 $ctx
+    if not test -z "$ns"
+        echo -n /$ns
+    end
     set_color normal
 end
 
