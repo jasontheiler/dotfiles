@@ -114,7 +114,7 @@ function fish_prompt_char
             set_color magenta
     end
     set_color --bold
-    echo -n "λ "
+    echo -n "󰈺 "
     set_color normal
 end
 
