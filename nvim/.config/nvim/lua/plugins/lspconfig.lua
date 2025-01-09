@@ -22,6 +22,9 @@ return {
     local lsp_servers = {
       clangd = { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } },
       cssls = {},
+      -- See:
+      --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols
+      --   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
       denols = { root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") },
       dockerls = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
@@ -75,6 +78,7 @@ return {
       -- See:
       --   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
       --   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
+      --   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
       ts_ls = function()
         local config = {
           init_options = { plugins = {} },
@@ -102,9 +106,7 @@ return {
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
       yamlls = {
         settings = {
-          yaml = {
-            keyOrdering = false,
-          },
+          yaml = { keyOrdering = false },
         },
       },
     }
