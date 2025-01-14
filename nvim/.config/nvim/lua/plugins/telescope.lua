@@ -93,7 +93,7 @@ return {
 
     telescope.load_extension("ui-select")
 
-    local keymap_picker = function(lhs, picker, desc, picker_opts, keymap_opts)
+    local keymap_picker = function(lhs, picker, desc, keymap_opts, picker_opts)
       local default_picker_opts = {
         prompt_title = desc,
         results_title = "Results",
@@ -105,7 +105,7 @@ return {
 
     keymap_picker("<leader>sh", telescope_builtin.help_tags, "Help")
     keymap_picker("<leader>sf", telescope_builtin.find_files, "Files")
-    keymap_picker("<leader>sa", telescope_builtin.find_files, "All files", { no_ignore = true })
+    keymap_picker("<leader>sa", telescope_builtin.find_files, "All files", {}, { no_ignore = true })
     keymap_picker("<leader>sp", telescope_builtin.oldfiles, "Previous files")
     keymap_picker("<leader>sb", telescope_builtin.buffers, "Buffers")
     keymap_picker("<leader>s/", telescope_builtin.live_grep, "Search")
@@ -119,11 +119,11 @@ return {
       callback = function(event)
         local keymap_opts = { buffer = event.buf }
 
-        keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols", nil, keymap_opts)
-        keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions", nil, keymap_opts)
-        keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions", nil, keymap_opts)
-        keymap_picker("<leader>li", telescope_builtin.lsp_implementations, "Implementations", nil, keymap_opts)
-        keymap_picker("<leader>lR", telescope_builtin.lsp_references, "References", nil, keymap_opts)
+        keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols", keymap_opts)
+        keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions", keymap_opts)
+        keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions", keymap_opts)
+        keymap_picker("<leader>li", telescope_builtin.lsp_implementations, "Implementations", keymap_opts)
+        keymap_picker("<leader>lR", telescope_builtin.lsp_references, "References", keymap_opts)
       end,
     })
   end,
