@@ -17,8 +17,9 @@ function checklist
         bat \
         btm \
         cargo \
-        docker \
+        deno \
         direnv \
+        docker \
         dust \
         git-open \
         go \
