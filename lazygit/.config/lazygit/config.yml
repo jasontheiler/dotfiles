@@ -2,23 +2,13 @@
 
 disableStartupPopups: true
 notARepository: quit
+git:
+  disableForcePushing: true
 gui:
   showBottomLine: false
+  showRandomTip: false
+  showPanelJumps: false
+  border: single
   theme:
-    activeBorderColor:
-      - magenta
-      - bold
-    inactiveBorderColor:
-      - white
-    optionsTextColor:
-      - blue
     selectedLineBgColor:
       - black
-    selectedRangeBgColor:
-      - black
-    cherryPickedCommitBgColor:
-      - cyan
-    cherryPickedCommitFgColor:
-      - blue
-    unstagedChangesColor:
-      - red
