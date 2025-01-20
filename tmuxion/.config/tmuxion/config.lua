@@ -19,7 +19,7 @@ tmuxion.session_selector({
   },
   results = {
     style = nil,
-    border = "plain",
+    border = "rounded",
     border_style = { fg = catppuccin.lavender },
     title = " Results ",
     title_position = "top",
@@ -33,7 +33,7 @@ tmuxion.session_selector({
   },
   prompt = {
     style = nil,
-    border = "plain",
+    border = "rounded",
     border_style = { fg = catppuccin.lavender },
     title = " Sessions ",
     title_position = "top",
