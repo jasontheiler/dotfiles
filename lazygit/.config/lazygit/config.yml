@@ -8,7 +8,6 @@ gui:
   showBottomLine: false
   showRandomTip: false
   showPanelJumps: false
-  border: single
   theme:
     selectedLineBgColor:
       - black
