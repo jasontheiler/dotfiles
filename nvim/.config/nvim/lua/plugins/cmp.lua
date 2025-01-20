@@ -53,26 +53,26 @@ return {
       window = {
         completion = {
           border = {
-            { "┌", "CmpCompletionBorder" },
+            { "╭", "CmpCompletionBorder" },
             { "─", "CmpCompletionBorder" },
-            { "┐", "CmpCompletionBorder" },
+            { "╮", "CmpCompletionBorder" },
             { "│", "CmpCompletionBorder" },
-            { "┘", "CmpCompletionBorder" },
+            { "╯", "CmpCompletionBorder" },
             { "─", "CmpCompletionBorder" },
-            { "└", "CmpCompletionBorder" },
+            { "╰", "CmpCompletionBorder" },
             { "│", "CmpCompletionBorder" },
           },
           scrolloff = 4,
         },
         documentation = {
           border = {
-            { "┌", "CmpDocumentationBorder" },
+            { "╭", "CmpDocumentationBorder" },
             { "─", "CmpDocumentationBorder" },
-            { "┐", "CmpDocumentationBorder" },
+            { "╮", "CmpDocumentationBorder" },
             { "│", "CmpDocumentationBorder" },
-            { "┘", "CmpDocumentationBorder" },
+            { "╯", "CmpDocumentationBorder" },
             { "─", "CmpDocumentationBorder" },
-            { "└", "CmpDocumentationBorder" },
+            { "╰", "CmpDocumentationBorder" },
             { "│", "CmpDocumentationBorder" },
           },
         }

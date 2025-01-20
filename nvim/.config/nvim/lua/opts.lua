@@ -41,21 +41,22 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHin
 vim.diagnostic.config({
   severity_sort = true,
   virtual_text = { prefix = "" },
-  float = { border = "single" }
+  float = { border = "rounded" }
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
-  { border = "single" }
+  { border = "rounded" }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
-  { border = "single" }
+  { border = "rounded" }
 )
 
 vim.filetype.add({
   pattern = {
     [".*[tT]iltfile"] = "starlark",
     [".env.*"] = "sh",
+    ["ghostty/config"] = "config",
   },
 })

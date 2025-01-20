@@ -27,7 +27,6 @@ return {
           return string.format(" %d/%d ", (stat_processed - stat_filtered), stat_processed)
         end,
         preview = { filesize_limit = 0.1 },
-        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         layout_strategy = "flex",
         layout_config = {
           flex = {
@@ -83,8 +82,8 @@ return {
           sorting_strategy = "ascending",
           results_title = false,
           borderchars = {
-            prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-            results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+            prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+            results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
           },
           layout_strategy = "cursor",
         },
