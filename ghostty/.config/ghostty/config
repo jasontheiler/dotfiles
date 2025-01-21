@@ -1,11 +1,13 @@
 # See: https://ghostty.org/docs/config
 
-title = "Ghostty"
-gtk-titlebar = false
+# font-family = CommitMono Nerd Font
+font-size = 20
 
 theme = catppuccin-mocha-neo
 
-# font-family = "CommitMono Nerd Font"
-font-size = 20
-
+mouse-hide-while-typing = true
 mouse-scroll-multiplier = 0.25
+
+title = Ghostty
+
+gtk-titlebar = false
