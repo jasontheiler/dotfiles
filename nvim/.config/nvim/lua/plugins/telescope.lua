@@ -118,7 +118,8 @@ return {
       callback = function(event)
         local keymap_opts = { buffer = event.buf }
 
-        keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Symbols", keymap_opts)
+        keymap_picker("<leader>ls", telescope_builtin.lsp_document_symbols, "Document symbols", keymap_opts)
+        keymap_picker("<leader>lS", telescope_builtin.lsp_workspace_symbols, "Workspace symbols", keymap_opts)
         keymap_picker("<leader>ld", telescope_builtin.lsp_definitions, "Definitions", keymap_opts)
         keymap_picker("<leader>lt", telescope_builtin.lsp_type_definitions, "Type definitions", keymap_opts)
         keymap_picker("<leader>li", telescope_builtin.lsp_implementations, "Implementations", keymap_opts)
