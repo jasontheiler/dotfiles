@@ -56,6 +56,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 vim.filetype.add({
   pattern = {
     [".*[tT]iltfile"] = "starlark",
-    ["ghostty/config"] = "config",
+    ["ghostty/(themes/.+|config)"] = "config",
   },
 })

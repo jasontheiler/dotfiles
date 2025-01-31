@@ -11,7 +11,7 @@ return {
 
     local bufline_buf = {
       init = function(self)
-        self.filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ":t")
+        self.file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ":t")
       end,
       { provider = " " },
       {
@@ -22,7 +22,7 @@ return {
         end,
         provider = " ",
       },
-      { provider = function(self) return bufs.get_index(self.bufnr) .. " " .. self.filename end },
+      { provider = function(self) return bufs.get_index(self.bufnr) .. " " .. self.file_name end },
       {
         condition = function(self)
           return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
@@ -62,14 +62,11 @@ return {
 
     local winbar = {
       condition = function(self)
-        self.filename = vim.api.nvim_buf_get_name(0)
-        return self.filename ~= ""
+        self.file_name = vim.api.nvim_buf_get_name(0)
+        return self.file_name ~= ""
       end,
       init = function(self)
-        self.filename = vim.fn.fnamemodify(self.filename, ":.")
-        if not self.filename:find("^/") then
-          self.filename = "./" .. self.filename
-        end
+        self.file_name = vim.fn.fnamemodify(self.file_name, ":.")
       end,
       { provider = "%=" },
       {
@@ -80,7 +77,7 @@ return {
         end,
         provider = " ",
       },
-      { provider = function(self) return self.filename end },
+      { provider = function(self) return self.file_name end },
       {
         condition = function() return vim.api.nvim_get_option_value("modified", { buf = 0 }) end,
         provider = " ●",

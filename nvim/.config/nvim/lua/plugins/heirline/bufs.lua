@@ -58,9 +58,9 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     vim.schedule(function()
       bufs = vim.tbl_filter(function(buf)
-        local filename = vim.api.nvim_buf_get_name(buf)
+        local file_name = vim.api.nvim_buf_get_name(buf)
         local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
-        return filename ~= "" and buflisted
+        return file_name ~= "" and buflisted
       end, vim.api.nvim_list_bufs())
       for i = 1, #bufs do
         set_keymaps(i)
