@@ -1,18 +1,18 @@
 #!/bin/bash
 
-GITCONFIG_PROFILE_FILENAME=".gitconfig.profile"
+GITCONFIG_PROFILE_FILE_NAME=".gitconfig.profile"
 
-while test ! -f "${PWD}/${GITCONFIG_PROFILE_FILENAME}" -a "${PWD}" != "/"; do
+while test ! -f "${PWD}/${GITCONFIG_PROFILE_FILE_NAME}" -a "${PWD}" != "/"; do
     PWD=$(dirname "${PWD}")
 done
 
 if test "${PWD}" == "/"; then
-    echo "error: No \`${GITCONFIG_PROFILE_FILENAME}\` file in parent directories found."
+    echo "error: No \`${GITCONFIG_PROFILE_FILE_NAME}\` file in parent directories found."
     exit 1
 fi
 
 include_path_current=$(git config --local --default "" --get include.path)
-include_path_new="${PWD}/${GITCONFIG_PROFILE_FILENAME}"
+include_path_new="${PWD}/${GITCONFIG_PROFILE_FILE_NAME}"
 if test "${include_path_current}" != "${include_path_new}"; then
     git config --local include.path "${include_path_new}"
     echo "\`include.path\` has been set to \`${include_path_new}\`. Please commit again."
