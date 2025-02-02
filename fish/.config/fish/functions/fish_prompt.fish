@@ -34,7 +34,7 @@ function fish_prompt_git_branch
     end
     fish_prompt_separator
     set_color --bold magenta
-    echo -n  (string shorten --max 20 $branch)
+    echo -n  (string shorten --max=20 $branch)
     set_color normal
 end
 
