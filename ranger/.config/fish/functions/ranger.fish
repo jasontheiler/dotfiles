@@ -1,6 +1,6 @@
 function ranger
     set -l temp_file (mktemp)
-    command ranger --choosedir $temp_file $argv
+    command ranger --choosedir=$temp_file $argv
     set -l ranger_status $status
 
     if test -s $temp_file
