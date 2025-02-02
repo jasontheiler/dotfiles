@@ -10,7 +10,7 @@ function tmux_popup_ranger
     end
 
     set -l temp_file (mktemp)
-    command ranger --choosedir $temp_file $argv $TMUX_POPUP_RANGER_DIR
+    command ranger --choosedir=$temp_file $argv $TMUX_POPUP_RANGER_DIR
     set -l ranger_status $status
 
     if test -s $temp_file
