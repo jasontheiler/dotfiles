@@ -6,6 +6,7 @@ function fish_prompt
     fish_prompt_dir
     fish_prompt_git_branch
     fish_prompt_git_status
+    fish_prompt_git_divergence
     fish_prompt_k8s
     fish_prompt_separator
     echo
@@ -53,22 +54,35 @@ function fish_prompt_git_status
     if not test -z "$(git ls-files --others --exclude-standard)"
         set status_str $status_str"?"
     end
-    set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
-    if not test -z $behind_ahead
-        set -l behind (echo $behind_ahead | cut --delimiter=\t --fields=1)
-        if test $behind -gt 0
-            set status_str $status_str↓$behind
-        end
-        set -l ahead (echo $behind_ahead | cut --delimiter=\t --fields=2)
-        if test $ahead -gt 0
-            set status_str $status_str↑$ahead
-        end
-    end
     if test -z $status_str
         return
     end
     set_color --bold red
     echo -n " "$status_str
+    set_color normal
+end
+
+function fish_prompt_git_divergence
+    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+        return
+    end
+    set divergence_str ""
+    set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
+    if not test -z $behind_ahead
+        set -l behind (echo $behind_ahead | cut --delimiter=\t --fields=1)
+        if test $behind -gt 0
+            set divergence_str $divergence_str↓$behind
+        end
+        set -l ahead (echo $behind_ahead | cut --delimiter=\t --fields=2)
+        if test $ahead -gt 0
+            set divergence_str $divergence_str↑$ahead
+        end
+    end
+    if test -z $divergence_str
+        return
+    end
+    set_color --bold yellow
+    echo -n " "$divergence_str
     set_color normal
 end
 
