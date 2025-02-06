@@ -7,6 +7,7 @@ function fish_prompt
     fish_prompt_git_branch
     fish_prompt_git_status
     fish_prompt_k8s
+    fish_prompt_separator
     echo
     fish_prompt_status $last_status
     fish_prompt_char
@@ -54,11 +55,11 @@ function fish_prompt_git_status
     end
     set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
     if not test -z $behind_ahead
-        set -l behind (echo $behind_ahead | cut -d \t -f 1)
+        set -l behind (echo $behind_ahead | cut --delimiter=\t --fields=1)
         if test $behind -gt 0
             set status_str $status_str↓$behind
         end
-        set -l ahead (echo $behind_ahead | cut -d \t -f 2)
+        set -l ahead (echo $behind_ahead | cut --delimiter=\t --fields=2)
         if test $ahead -gt 0
             set status_str $status_str↑$ahead
         end
@@ -67,7 +68,7 @@ function fish_prompt_git_status
         return
     end
     set_color --bold red
-    echo -n " "[$status_str]
+    echo -n " "$status_str
     set_color normal
 end
 
@@ -98,7 +99,7 @@ function fish_prompt_status
         return
     end
     set_color --bold red
-    echo -n [(fish_status_to_signal $argv[1])]" "
+    echo -n (fish_status_to_signal $argv[1])" "
     set_color normal
 end
 
@@ -120,6 +121,6 @@ end
 
 function fish_prompt_separator
     set_color brblack
-    echo -n " | "
+    echo -n "; "
     set_color normal
 end
