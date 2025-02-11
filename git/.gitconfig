@@ -14,4 +14,5 @@
 [remote "origin"]
 	prune = true
 [user]
+	email = "jason.theiler@example.com"
 	name = Jason Theiler
