@@ -3,6 +3,7 @@
 function fish_prompt
     set last_status $status
     echo
+    fish_prompt_login
     fish_prompt_dir
     fish_prompt_git_branch
     fish_prompt_git_status
@@ -12,6 +13,22 @@ function fish_prompt
     echo
     fish_prompt_status $last_status
     fish_prompt_char
+end
+
+function fish_prompt_login
+    if set -q SSH_TTY
+        set login_str $USER@$hostname
+    else
+        if fish_is_root_user
+            set login_str $USER
+        else
+            return
+        end
+    end
+    set_color --bold yellow
+    echo -n $login_str
+    set_color normal
+    fish_prompt_separator
 end
 
 function fish_prompt_dir
