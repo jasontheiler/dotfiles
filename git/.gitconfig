@@ -3,16 +3,31 @@
 [commit]
 	gpgsign = true
 	verbose = true
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [fetch]
+	all = true
 	prune = true
+	pruneTags = true
 [gpg]
 	format = ssh
 [init]
 	defaultBranch = main
+[merge]
+	conflictstyle = zdiff3
+[pull]
+	rebase = true
 [push]
 	autoSetupRemote = true
+	followTags = true
 [remote "origin"]
 	prune = true
+[rerere]
+	autoupdate = true
+	enabled = true
 [user]
 	email = "jason.theiler@example.com"
 	name = Jason Theiler
