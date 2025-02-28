@@ -16,7 +16,7 @@ function fish_prompt
 end
 
 function fish_prompt_login
-    if set -q SSH_TTY
+    if set -q SSH_CLIENT; or set -q SSH_CONNECTION; or set -q SSH_TTY
         set login_str $USER@$hostname
     else
         if fish_is_root_user
