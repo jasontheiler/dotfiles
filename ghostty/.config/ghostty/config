@@ -1,9 +1,9 @@
 # See: https://ghostty.org/docs/config
 
-# font-family = CommitMono Nerd Font
-font-size = 20
+font-family = Iosevka Term
+font-size = 18
 
-theme = catppuccin-mocha-neo
+theme = catppuccin-mocha-warm
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 0.25
