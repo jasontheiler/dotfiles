@@ -17,7 +17,7 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
-vim.opt.colorcolumn = { 80, 100 }
+vim.opt.colorcolumn = { 80, 100, 120 }
 vim.opt.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
 vim.opt.hlsearch = true
