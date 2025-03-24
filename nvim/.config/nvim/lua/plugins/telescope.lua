@@ -92,7 +92,7 @@ return {
 
     telescope.load_extension("ui-select")
 
-    local keymap_picker = function(lhs, picker, desc, keymap_opts, picker_opts)
+    local function keymap_picker(lhs, picker, desc, keymap_opts, picker_opts)
       local default_picker_opts = {
         prompt_title = desc,
         results_title = "Results",

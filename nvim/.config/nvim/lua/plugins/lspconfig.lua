@@ -114,7 +114,7 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-    local on_attach = function(_, buffer)
+    local function on_attach(_, buffer)
       local opts = { buffer = buffer }
 
       utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)

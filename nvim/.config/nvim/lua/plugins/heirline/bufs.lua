@@ -6,7 +6,7 @@ local bufs = {}
 --- Gets all buffers.
 ---
 --- @return number[]
-M.get_all = function()
+function M.get_all()
   return bufs
 end
 
@@ -14,7 +14,7 @@ end
 ---
 --- @param buf number The buffer handle.
 --- @return number|nil
-M.get_index = function(buf)
+function M.get_index(buf)
   for i, v in ipairs(bufs) do
     if v == buf then
       return i
@@ -23,7 +23,7 @@ M.get_index = function(buf)
   return nil
 end
 
-local set_keymaps = function(index, which_key_ignore)
+local function set_keymaps(index, which_key_ignore)
   if index > 9 then
     return
   end
