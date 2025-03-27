@@ -27,31 +27,25 @@ vim.opt.smartcase = true
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.winborder = "rounded"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
-
 vim.diagnostic.config({
   severity_sort = true,
   virtual_text = { prefix = "" },
-  float = { border = "rounded" }
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  }
 })
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = "rounded" }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = "rounded" }
-)
 
 vim.filetype.add({
   pattern = {

@@ -125,6 +125,7 @@ return {
 
     -- See: https://github.com/williamboman/mason-lspconfig.nvim#configuration
     mason_lspconfig.setup({
+      automatic_installation = false,
       ensure_installed = vim.tbl_keys(lsp_servers),
       handlers = {
         function(lsp_server_name)

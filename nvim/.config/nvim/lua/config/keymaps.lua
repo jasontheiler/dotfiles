@@ -26,8 +26,8 @@ utils.keymap("n", "<leader>bx", function()
   vim.cmd.bdelete({ bang = true })
 end, "Close current")
 
-utils.keymap("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
-utils.keymap("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+utils.keymap("n", "[d", function() vim.diagnostic.jump({ count = 1 }) end, "Previous diagnostic")
+utils.keymap("n", "]d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
 utils.keymap("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics")
 
 utils.keymap("n", "<leader>n", ":e ${HOME}/notes.md<CR>", "Notes")
