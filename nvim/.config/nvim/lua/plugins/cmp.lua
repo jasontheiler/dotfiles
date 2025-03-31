@@ -1,6 +1,7 @@
 -- See: https://github.com/hrsh7th/nvim-cmp
 return {
   "hrsh7th/nvim-cmp",
+  enabled = true,
   dependencies = {
     -- See: https://github.com/hrsh7th/cmp-buffer
     "hrsh7th/cmp-buffer",

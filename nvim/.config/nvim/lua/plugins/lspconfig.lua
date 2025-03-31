@@ -10,6 +10,8 @@ return {
     "williamboman/mason-lspconfig.nvim",
     -- See: https://github.com/hrsh7th/cmp-nvim-lsp
     "hrsh7th/cmp-nvim-lsp",
+    -- See: https://cmp.saghen.dev/
+    -- "Saghen/blink.nvim",
   },
   event = "VeryLazy",
   config = function()
@@ -17,6 +19,7 @@ return {
     local mason_registry = require("mason-registry")
     local mason_lspconfig = require("mason-lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    -- local blink_cmp = require("blink.cmp")
 
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     local lsp_servers = {
@@ -113,6 +116,7 @@ return {
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+    -- capabilities = blink_cmp.get_lsp_capabilities(capabilities)
 
     local function on_attach(_, buffer)
       local opts = { buffer = buffer }
