@@ -1,15 +1,13 @@
-local utils = require("utils")
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
+vim.keymap.set({ "n", "v" }, "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
 
-utils.keymap({ "n", "v" }, " ", "<Nop>")
-utils.keymap({ "n", "v" }, "<leader>p", "\"_dP", "Paste (without yank)")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-utils.keymap("t", "<Esc>", "<C-\\><C-n>", "Exit terminal mode")
+vim.keymap.set("n", "<Leader>ww", "<C-w>w", { desc = "Move cursor to window above (wrap)" })
+vim.keymap.set("n", "<Leader>wW", "<C-w><C-w>", { desc = "Move cursor to window below (wrap)" })
+vim.keymap.set("n", "<Leader>wx", "<C-w>q", { desc = "Close current" })
 
-utils.keymap("n", "<leader>ww", "<C-w>w", "Move cursor to window above (wrap)")
-utils.keymap("n", "<leader>wW", "<C-w><C-w>", "Move cursor to window below (wrap)")
-utils.keymap("n", "<leader>wx", "<C-w>q", "Close current")
-
-utils.keymap("n", "<leader>bx", function()
+vim.keymap.set("n", "<Leader>bx", function()
   local file_name = vim.api.nvim_buf_get_name(0)
   local modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
   if file_name == "" or not modified then
@@ -24,10 +22,10 @@ utils.keymap("n", "<leader>bx", function()
     vim.cmd.write()
   end
   vim.cmd.bdelete({ bang = true })
-end, "Close current")
+end, { desc = "Close current" })
 
-utils.keymap("n", "[d", function() vim.diagnostic.jump({ count = 1 }) end, "Previous diagnostic")
-utils.keymap("n", "]d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
-utils.keymap("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics")
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Diagnostics" })
 
-utils.keymap("n", "<leader>n", ":e ${HOME}/notes.md<CR>", "Notes")
+vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<CR>", { silent = true, desc = "Notes" })

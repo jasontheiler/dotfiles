@@ -1,11 +1,14 @@
--- See: https://github.com/catppuccin/nvim
+--- See: https://github.com/catppuccin/nvim
+---
+--- @type LazyPluginSpec
 return {
   "catppuccin/nvim",
+  name = "catppuccin",
   lazy = false,
   priority = math.huge,
   config = function()
     local catppuccin = require("catppuccin")
-    local color_utils = require("catppuccin.utils.colors")
+    local catppuccin_utils_colors = require("catppuccin.utils.colors")
 
     -- See: https://github.com/catppuccin/nvim#configuration
     catppuccin.setup({
@@ -59,42 +62,49 @@ return {
             ["@namespace"] = { style = {} },
             ["@parameter"] = { style = {} },
             ["@tag.attribute"] = { style = {} },
-            CmpCompletionBorder = { fg = palette.lavender },
-            CmpDocumentationBorder = { fg = palette.lavender },
-            CmpItemAbbr = { fg = palette.text },
-            CmpItemAbbrMatch = { fg = palette.blue },
+            BlinkCmpDocBorder = { fg = palette.lavender },
+            BlinkCmpDocSeparator = { fg = palette.surface0 },
+            BlinkCmpGhostText = { fg = palette.surface1 },
+            BlinkCmpLabel = { fg = palette.text },
+            BlinkCmpLabelDetail = { fg = palette.overlay2 },
+            BlinkCmpLabelMatch = { fg = palette.blue },
+            BlinkCmpMenuBorder = { fg = palette.lavender },
             CursorLineNrNormal = { fg = palette.blue, style = { "bold" } },
             CursorLineNrVisual = { fg = palette.pink, style = { "bold" } },
             CursorLineNrInsert = { fg = palette.green, style = { "bold" } },
             CursorLineNrReplace = { fg = palette.red, style = { "bold" } },
             CursorLineNrCommand = { fg = palette.peach, style = { "bold" } },
-            FidgetAnnoteDebug = { fg = palette.blue, style = { "bold" } },
-            FidgetAnnoteError = { fg = palette.red, style = { "bold" } },
-            FidgetAnnoteInfo = { fg = palette.green, style = { "bold" } },
-            FidgetAnnoteWarn = { fg = palette.yellow, style = { "bold" } },
-            FidgetBase = { fg = palette.overlay0 },
-            FidgetDone = { fg = palette.text },
-            FidgetGroup = { fg = palette.teal, style = { "bold" } },
-            FidgetIcon = { fg = palette.teal, style = { "bold" } },
+            FidgetNormal = { fg = palette.overlay0 },
+            FidgetNotificationAnnoteDebug = { fg = palette.blue, style = { "bold" } },
+            FidgetNotificationAnnoteError = { fg = palette.red, style = { "bold" } },
+            FidgetNotificationAnnoteInfo = { fg = palette.green, style = { "bold" } },
+            FidgetNotificationAnnoteWarn = { fg = palette.yellow, style = { "bold" } },
+            FidgetProgressDone = { fg = palette.text },
+            FidgetProgressGroup = { fg = palette.teal, style = { "bold" } },
+            FidgetProgressIcon = { fg = palette.teal, style = { "bold" } },
             FloatBorder = { fg = palette.lavender, bg = palette.none },
             HeirlineBufline = { bg = palette.base },
             HeirlineBuflineBuf = { fg = palette.text, style = { "bold" } },
-            HeirlineBuflineBufInactive = { fg = palette.surface2 },
+            HeirlineBuflineBufNC = { fg = palette.surface2 },
             HeirlineWinbar = { fg = palette.text, style = { "bold" } },
-            HeirlineWinbarInactive = { fg = palette.surface2 },
+            HeirlineWinbarNC = { fg = palette.surface2 },
+            NonText = { fg = palette.surface0 },
             NormalFloat = { fg = palette.text, bg = palette.none },
             Pmenu = { fg = palette.text, bg = palette.none },
             PmenuSbar = { bg = palette.surface0 },
             PmenuSel = { bg = palette.surface0 },
             PmenuThumb = { bg = palette.lavender },
+            StatusLine = { fg = palette.crust, bg = palette.base },
+            StatusLineNC = { fg = palette.crust, bg = palette.base },
             TelescopeSelection = { fg = palette.text, bg = palette.surface0 },
             TelescopeSelectionCaret = { bg = palette.surface0 },
             TreesitterContextBottom = { style = {} },
             TreesitterContextLineNumber = { fg = palette.surface1, bg = palette.base },
             TreesitterContextSeparator = { fg = palette.surface0 },
             VertSplit = { fg = palette.crust },
-            VirtColumn = { fg = palette.surface0 },
-            YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.5, palette.base) },
+            YankHighlight = {
+              bg = catppuccin_utils_colors.darken(palette.rosewater, 0.5, palette.base),
+            },
           }
         end,
       },

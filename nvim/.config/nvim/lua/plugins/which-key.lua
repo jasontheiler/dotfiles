@@ -1,4 +1,6 @@
--- See: https://github.com/folke/which-key.nvim
+--- See: https://github.com/folke/which-key.nvim
+---
+--- @type LazyPluginSpec
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -15,7 +17,7 @@ return {
       sort = { "group", "alphanum" },
       replace = {
         key = {
-          { "<Space>", "Leader" },
+          { "<Space>",     "Leader" },
           { "<LeftMouse>", "<LMB>" },
         },
       },
@@ -28,11 +30,11 @@ return {
 
     -- See: https://github.com/folke/which-key.nvim#%EF%B8%8F-setup
     which_key.add({
-      { "<leader>b", group = "Buffer" },
-      { "<leader>g", group = "Git" },
-      { "<leader>l", group = "LSP" },
-      { "<leader>s", group = "Search" },
-      { "<leader>w", group = "Window" },
+      { "<Leader>b", group = "Buffer" },
+      { "<Leader>g", group = "Git" },
+      { "<Leader>l", group = "LSP" },
+      { "<Leader>s", group = "Search" },
+      { "<Leader>w", group = "Window" },
     })
   end,
 }

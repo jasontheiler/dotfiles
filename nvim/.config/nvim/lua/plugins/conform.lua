@@ -1,6 +1,6 @@
-local utils = require("utils")
-
--- See: https://github.com/stevearc/conform.nvim
+--- See: https://github.com/stevearc/conform.nvim
+---
+--- @type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
   event = "VeryLazy",
@@ -30,6 +30,6 @@ return {
       },
     })
 
-    utils.keymap("n", "<leader>f", conform.format, "Format")
+    vim.keymap.set("n", "<Leader>f", conform.format, { desc = "Format" })
   end,
 }

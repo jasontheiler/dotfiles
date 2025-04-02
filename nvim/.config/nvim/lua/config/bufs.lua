@@ -1,6 +1,5 @@
-local utils = require("utils")
-
 local M = {}
+
 local bufs = {}
 
 --- Gets all buffers.
@@ -28,13 +27,13 @@ local function set_keymaps(index, which_key_ignore)
     return
   end
 
-  utils.keymap("n", "<leader>" .. index, function()
+  vim.keymap.set("n", "<Leader>" .. index, function()
     local buf = bufs[index]
     if buf ~= nil then
       vim.api.nvim_win_set_buf(0, buf)
     end
-  end, which_key_ignore and "which_key_ignore" or "Buffer " .. index)
-  utils.keymap("n", "<leader>b" .. index, function()
+  end, { desc = which_key_ignore and "which_key_ignore" or "Buffer " .. index })
+  vim.keymap.set("n", "<Leader>b" .. index, function()
     local buf = vim.api.nvim_win_get_buf(0)
     local index_current = M.get_index(buf)
     if index <= #bufs then
@@ -42,19 +41,19 @@ local function set_keymaps(index, which_key_ignore)
       table.insert(bufs, index, buf)
       vim.cmd.redrawtabline()
     end
-  end, which_key_ignore and "which_key_ignore" or "Move current to index " .. index)
+  end, { desc = which_key_ignore and "which_key_ignore" or "Move current to index " .. index })
 end
 
 for i = 1, 9 do
   set_keymaps(i, true)
 end
 
-utils.keymap("n", "<leader>bw", ":bp<CR>", "Previous")
+vim.keymap.set("n", "<Leader>bw", ":bp<CR>", { silent = true, desc = "Previous" })
 
-local augroup_heirline_bufs = vim.api.nvim_create_augroup("user_heirline_bufs", {})
+local augroup_bufs = vim.api.nvim_create_augroup("user_bufs", {})
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  group = augroup_heirline_bufs,
+  group = augroup_bufs,
   callback = function()
     vim.schedule(function()
       bufs = vim.tbl_filter(function(buf)
@@ -70,7 +69,7 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufAdd" }, {
-  group = augroup_heirline_bufs,
+  group = augroup_bufs,
   callback = function(event)
     local index = M.get_index(event.buf)
     if event.file ~= "" and index == nil then
@@ -81,7 +80,7 @@ vim.api.nvim_create_autocmd({ "BufAdd" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufDelete" }, {
-  group = augroup_heirline_bufs,
+  group = augroup_bufs,
   callback = function(event)
     local index = M.get_index(event.buf)
     if index ~= nil then

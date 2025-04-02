@@ -1,4 +1,6 @@
--- See: https://github.com/j-hui/fidget.nvim
+--- See: https://github.com/j-hui/fidget.nvim
+---
+--- @type LazyPluginSpec
 return {
   "j-hui/fidget.nvim",
   event = "VeryLazy",
@@ -11,22 +13,22 @@ return {
         filter = vim.log.levels.DEBUG,
         window = {
           winblend = 0,
-          normal_hl = "FidgetBase",
+          normal_hl = "FidgetNormal",
         },
-        view = { group_separator = "" },
+        view = { group_separator = "───" },
         configs = {
           default = {
             name = false,
             icon = false,
             ttl = 8,
-            debug_annote = "DEBUG",
-            debug_style = "FidgetAnnoteDebug",
-            info_annote = " INFO",
-            info_style = "FidgetAnnoteInfo",
-            warn_annote = " WARN",
-            warn_style = "FidgetAnnoteWarn",
             error_annote = "ERROR",
-            error_style = "FidgetAnnoteError",
+            error_style = "FidgetNotificationAnnoteError",
+            warn_annote = " WARN",
+            warn_style = "FidgetNotificationAnnoteWarn",
+            info_annote = " INFO",
+            info_style = "FidgetNotificationAnnoteInfo",
+            debug_annote = "DEBUG",
+            debug_style = "FidgetNotificationAnnoteDebug",
           },
         },
       },
@@ -34,10 +36,10 @@ return {
         display = {
           render_limit = false,
           done_icon = "",
-          done_style = "FidgetDone",
-          group_style = "FidgetGroup",
-          icon_style = "FidgetIcon",
-          progress_style = "FidgetProgress",
+          done_style = "FidgetProgressDone",
+          group_style = "FidgetProgressGroup",
+          icon_style = "FidgetProgressIcon",
+          progress_style = "FidgetProgressProgress",
           overrides = {},
           format_message = function(data)
             return string.format(
@@ -45,9 +47,6 @@ return {
               data.message or (data.done and "Completed" or "In progress…"),
               data.percentage and string.format(" (%s%%)", data.percentage) or ""
             )
-          end,
-          format_group_name = function(group_name)
-            return "LSP: " .. group_name
           end,
         }
       },

@@ -23,6 +23,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
       ["Rv"] = "Replace",
       ["Rvc"] = "Replace",
       ["Rvx"] = "Replace",
+      ["c"] = "Command",
+      ["cr"] = "Command",
+      ["cv"] = "Command",
+      ["cvr"] = "Command",
     }
     local hl_exists, hl = pcall(
       vim.api.nvim_get_hl,
@@ -51,5 +55,20 @@ vim.api.nvim_create_autocmd({ "QuitPre" }, {
         vim.api.nvim_buf_delete(buf, { force = true })
       end
     end
+  end,
+})
+
+-- TODO: Remove.
+vim.api.nvim_create_autocmd({ "User" }, {
+  group = augroup_default,
+  pattern = "TelescopeFindPre",
+  callback = function()
+    vim.opt_local.winborder = "none"
+    vim.api.nvim_create_autocmd({ "WinLeave" }, {
+      once = true,
+      callback = function()
+        vim.opt_local.winborder = "rounded"
+      end,
+    })
   end,
 })

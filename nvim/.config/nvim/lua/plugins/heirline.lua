@@ -1,11 +1,13 @@
--- See: https://github.com/rebelot/heirline.nvim
+--- See: https://github.com/rebelot/heirline.nvim
+---
+--- @type LazyPluginSpec
 return {
   "rebelot/heirline.nvim",
   config = function()
     local heirline = require("heirline")
     local heirline_conditions = require("heirline.conditions")
     local heirline_utils = require("heirline.utils")
-    local bufs = require("plugins.heirline.bufs")
+    local bufs = require("config.bufs")
 
     vim.opt.showtabline = 2
 
@@ -34,7 +36,7 @@ return {
         if self.is_active then
           return "HeirlineBuflineBuf"
         else
-          return "HeirlineBuflineBufInactive"
+          return "HeirlineBuflineBufNC"
         end
       end,
       on_click = {
@@ -86,7 +88,7 @@ return {
         if heirline_conditions.is_active() then
           return "HeirlineWinbar"
         else
-          return "HeirlineWinbarInactive"
+          return "HeirlineWinbarNC"
         end
       end,
     }
@@ -98,7 +100,7 @@ return {
       opts = {
         disable_winbar_cb = function(args)
           return heirline_conditions.buffer_matches({
-            buftype = { "help", "nofile", "prompt", "quickfix" }
+            buftype = { "nofile", "prompt", "quickfix" }
           }, args.buf)
         end,
       },

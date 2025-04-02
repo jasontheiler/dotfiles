@@ -1,4 +1,6 @@
--- See: https://github.com/lewis6991/satellite.nvim
+--- See: https://github.com/lewis6991/satellite.nvim
+---
+--- @type LazyPluginSpec
 return {
   "lewis6991/satellite.nvim",
   event = "VeryLazy",

@@ -1,6 +1,6 @@
-local utils = require("utils")
-
--- See: https://github.com/neovim/nvim-lspconfig
+--- See: https://github.com/neovim/nvim-lspconfig
+---
+--- @type LazyPluginSpec
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -8,18 +8,18 @@ return {
     "williamboman/mason.nvim",
     -- See: https://github.com/williamboman/mason-lspconfig.nvim
     "williamboman/mason-lspconfig.nvim",
-    -- See: https://github.com/hrsh7th/cmp-nvim-lsp
-    "hrsh7th/cmp-nvim-lsp",
     -- See: https://cmp.saghen.dev/
-    -- "Saghen/blink.nvim",
+    {
+      "Saghen/blink.cmp",
+      version = "1.*",
+    }
   },
   event = "VeryLazy",
   config = function()
     local lspconfig = require("lspconfig")
     local mason_registry = require("mason-registry")
     local mason_lspconfig = require("mason-lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    -- local blink_cmp = require("blink.cmp")
+    local blink_cmp = require("blink.cmp")
 
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     local lsp_servers = {
@@ -64,7 +64,7 @@ return {
         },
       },
       marksman = {},
-      pbls = {},
+      buf_ls = {},
       pylsp = {},
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
       rust_analyzer = {
@@ -115,16 +115,12 @@ return {
     }
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-    -- capabilities = blink_cmp.get_lsp_capabilities(capabilities)
+    capabilities = blink_cmp.get_lsp_capabilities(capabilities)
 
     local function on_attach(_, buffer)
-      local opts = { buffer = buffer }
-
-      utils.keymap("n", "<leader>h", vim.lsp.buf.hover, "Hover", opts)
-      utils.keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions", opts)
-      utils.keymap("n", "<leader>lr", vim.lsp.buf.rename, "Rename", opts)
-      utils.keymap("n", "<leader>lf", vim.lsp.buf.signature_help, "Signature", opts)
+      vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { desc = "Code actions", buffer = buffer })
+      vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Rename", buffer = buffer })
+      vim.keymap.set("n", "<Leader>lf", vim.lsp.buf.signature_help, { desc = "Signature", buffer = buffer })
     end
 
     -- See: https://github.com/williamboman/mason-lspconfig.nvim#configuration

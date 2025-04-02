@@ -1,4 +1,6 @@
--- See: https://github.com/nvim-treesitter/nvim-treesitter
+--- See: https://github.com/nvim-treesitter/nvim-treesitter
+---
+--- @type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter",
   event = "VeryLazy",

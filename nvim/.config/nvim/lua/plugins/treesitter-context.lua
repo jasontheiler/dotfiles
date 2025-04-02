@@ -1,4 +1,6 @@
--- See: https://github.com/nvim-treesitter/nvim-treesitter-context
+--- See: https://github.com/nvim-treesitter/nvim-treesitter-context
+---
+--- @type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter-context",
   dependencies = {
