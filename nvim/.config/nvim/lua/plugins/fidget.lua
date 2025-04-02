@@ -1,4 +1,6 @@
--- See: https://github.com/j-hui/fidget.nvim
+--- See: https://github.com/j-hui/fidget.nvim
+---
+--- @type LazyPluginSpec
 return {
   "j-hui/fidget.nvim",
   event = "VeryLazy",

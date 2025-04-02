@@ -1,4 +1,6 @@
--- See: https://github.com/catppuccin/nvim
+--- See: https://github.com/catppuccin/nvim
+---
+--- @type LazyPluginSpec
 return {
   "catppuccin/nvim",
   lazy = false,
@@ -59,10 +61,13 @@ return {
             ["@namespace"] = { style = {} },
             ["@parameter"] = { style = {} },
             ["@tag.attribute"] = { style = {} },
-            CmpCompletionBorder = { fg = palette.lavender },
-            CmpDocumentationBorder = { fg = palette.lavender },
-            CmpItemAbbr = { fg = palette.text },
-            CmpItemAbbrMatch = { fg = palette.blue },
+            BlinkCmpDocBorder = { fg = palette.lavender },
+            BlinkCmpDocSeparator = { fg = palette.surface0 },
+            BlinkCmpGhostText = { fg = palette.surface1 },
+            BlinkCmpLabel = { fg = palette.text },
+            BlinkCmpLabelDetail = { fg = palette.overlay2 },
+            BlinkCmpLabelMatch = { fg = palette.blue },
+            BlinkCmpMenuBorder = { fg = palette.lavender },
             CursorLineNrNormal = { fg = palette.blue, style = { "bold" } },
             CursorLineNrVisual = { fg = palette.pink, style = { "bold" } },
             CursorLineNrInsert = { fg = palette.green, style = { "bold" } },
@@ -82,18 +87,20 @@ return {
             HeirlineBuflineBufInactive = { fg = palette.surface2 },
             HeirlineWinbar = { fg = palette.text, style = { "bold" } },
             HeirlineWinbarInactive = { fg = palette.surface2 },
+            NonText = { fg = palette.surface0 },
             NormalFloat = { fg = palette.text, bg = palette.none },
             Pmenu = { fg = palette.text, bg = palette.none },
             PmenuSbar = { bg = palette.surface0 },
             PmenuSel = { bg = palette.surface0 },
             PmenuThumb = { bg = palette.lavender },
+            StatusLine = { fg = palette.crust, bg = palette.base },
+            StatusLineNC = { fg = palette.crust, bg = palette.base },
             TelescopeSelection = { fg = palette.text, bg = palette.surface0 },
             TelescopeSelectionCaret = { bg = palette.surface0 },
             TreesitterContextBottom = { style = {} },
             TreesitterContextLineNumber = { fg = palette.surface1, bg = palette.base },
             TreesitterContextSeparator = { fg = palette.surface0 },
             VertSplit = { fg = palette.crust },
-            VirtColumn = { fg = palette.surface0 },
             YankHighlight = { bg = color_utils.darken(palette.rosewater, 0.5, palette.base) },
           }
         end,

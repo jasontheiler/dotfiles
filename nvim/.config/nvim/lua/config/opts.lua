@@ -1,3 +1,8 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.laststatus = 0
 vim.opt.cmdheight = 0
 vim.opt.shortmess = "oOtTICF"
@@ -25,14 +30,11 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
+vim.opt.winborder = "rounded"
+vim.opt.fillchars = { stl = "─", stlnc = "─" }
+vim.opt.statusline = "%="
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.winborder = "rounded"
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.loaded = 1
-vim.g.loaded_netrwPlugin = 1
 
 vim.diagnostic.config({
   severity_sort = true,

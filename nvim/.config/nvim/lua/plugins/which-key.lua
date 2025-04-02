@@ -1,4 +1,6 @@
--- See: https://github.com/folke/which-key.nvim
+--- See: https://github.com/folke/which-key.nvim
+---
+--- @type LazyPluginSpec
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -15,7 +17,7 @@ return {
       sort = { "group", "alphanum" },
       replace = {
         key = {
-          { "<Space>", "Leader" },
+          { "<Space>",     "Leader" },
           { "<LeftMouse>", "<LMB>" },
         },
       },
