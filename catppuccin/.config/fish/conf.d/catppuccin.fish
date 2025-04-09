@@ -27,7 +27,7 @@
 #     MANTLE "#181825" \
 #     CRUST "#11111B"
 
-# Catppuccin Mocha Warm
+# Catppuccin Cocoa
 set -l colors \
     ROSEWATER "#DAA992" \
     FLAMINGO "#DAA992" \
@@ -56,7 +56,7 @@ set -l colors \
     MANTLE "#191414" \
     CRUST "#110D0D"
 
-# Catppuccin Mocha Neo
+# Catppuccin Neo
 # set -l colors \
 #     ROSEWATER "#FFCDCD" \
 #     FLAMINGO "#FFCDCD" \

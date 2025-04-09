@@ -34,9 +34,9 @@ config.keys = {
   { mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
 }
 
-config.color_scheme = "Catppuccin Mocha Neo"
+config.color_scheme = "Catppuccin Neo"
 config.color_schemes = {
-  ["Catppuccin Mocha Warm"] = {
+  ["Catppuccin Cocoa"] = {
     foreground = "#E4CEA8",
     background = "#211D1D",
     cursor_border = "#89B482",
@@ -63,7 +63,7 @@ config.color_schemes = {
       "#E4CEA8", -- white
     },
   },
-  ["Catppuccin Mocha Neo"] = {
+  ["Catppuccin Neo"] = {
     foreground = "#E0E2EA",
     background = "#14161B",
     cursor_border = "#B3F6C0",
