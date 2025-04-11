@@ -59,7 +59,6 @@ return {
         false
       ),
       { provider = "%=" },
-      hl = "HeirlineBufline",
     }
 
     local winbar = {
@@ -84,13 +83,6 @@ return {
         condition = function() return vim.api.nvim_get_option_value("modified", { buf = 0 }) end,
         provider = " ●",
       },
-      hl = function()
-        if heirline_conditions.is_active() then
-          return "HeirlineWinbar"
-        else
-          return "HeirlineWinbarNC"
-        end
-      end,
     }
 
     -- See: https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md
