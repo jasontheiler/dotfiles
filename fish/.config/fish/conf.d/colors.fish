@@ -12,7 +12,7 @@ set fish_color_escape magenta
 set fish_color_keyword magenta
 set fish_color_match --reverse
 set fish_color_normal normal
-set fish_color_operator magenta
+set fish_color_operator cyan
 set fish_color_option red
 set fish_color_param normal
 set fish_color_quote green

@@ -3,16 +3,23 @@
 function fish_prompt
     set last_status $status
     echo
-    fish_prompt_login
-    fish_prompt_dir
-    fish_prompt_git_branch
-    fish_prompt_git_status
-    fish_prompt_git_divergence
-    fish_prompt_k8s
-    fish_prompt_separator
+    fish_prompt_with_separator (fish_prompt_login)
+    fish_prompt_with_separator (fish_prompt_dir)
+    fish_prompt_with_separator (fish_prompt_git)
+    fish_prompt_with_separator (fish_prompt_k8s)
     echo
     fish_prompt_status $last_status
     fish_prompt_char
+end
+
+function fish_prompt_with_separator
+    if test (count $argv) -eq 0
+        return
+    end
+    echo -n $argv
+    set_color brblack
+    echo -n "; "
+    set_color normal
 end
 
 function fish_prompt_login
@@ -28,7 +35,6 @@ function fish_prompt_login
     set_color --bold yellow
     echo -n $login_str
     set_color normal
-    fish_prompt_separator
 end
 
 function fish_prompt_dir
@@ -46,29 +52,34 @@ function fish_prompt_dir
     set_color normal
 end
 
+function fish_prompt_git
+    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+        return
+    end
+    fish_prompt_git_branch
+    fish_prompt_git_status
+    fish_prompt_git_divergence
+end
+
 function fish_prompt_git_branch
     set branch (git branch --show-current 2>/dev/null)
     if test $status -ne 0
         return
     end
-    fish_prompt_separator
     set_color --bold magenta
     echo -n  (string shorten --max=20 $branch)
     set_color normal
 end
 
 function fish_prompt_git_status
-    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
-        return
-    end
     set status_str ""
-    if not git diff --quiet --ignore-submodules
+    if not git diff --quiet --ignore-submodules 2>/dev/null
         set status_str $status_str"!"
     end
-    if not git diff --cached --quiet --ignore-submodules
+    if not git diff --cached --quiet --ignore-submodules 2>/dev/null
         set status_str $status_str"+"
     end
-    if not test -z "$(git ls-files --others --exclude-standard)"
+    if not test -z "$(git ls-files --others --exclude-standard 2>/dev/null)"
         set status_str $status_str"?"
     end
     if test -z $status_str
@@ -80,9 +91,6 @@ function fish_prompt_git_status
 end
 
 function fish_prompt_git_divergence
-    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
-        return
-    end
     set divergence_str ""
     set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
     if not test -z $behind_ahead
@@ -116,7 +124,6 @@ function fish_prompt_k8s
         '\s{4}namespace:\s"?(?<ns>[^";]+)"?;(\s{4}[^;]+;)*\s{2}name:\s"?'$ctx'"?' \
         -- \
         "$(string join ';' -- $k8s_config)"
-    fish_prompt_separator
     set_color --bold blue
     echo -n 󱃾 $ctx
     if not test -z "$ns"
@@ -147,11 +154,5 @@ function fish_prompt_char
     end
     set_color --bold
     echo -n "󰈺 "
-    set_color normal
-end
-
-function fish_prompt_separator
-    set_color brblack
-    echo -n "; "
     set_color normal
 end
