@@ -1,10 +1,10 @@
 function yazi
-    set -l temp_file (mktemp)
+    set temp_file (mktemp)
     command yazi --cwd-file=$temp_file $argv
-    set -l yazi_status $status
+    set yazi_status $status
 
     if test -s $temp_file
-        set -l yazi_dir (cat $temp_file)
+        set yazi_dir (cat $temp_file)
 
         if test -n $yazi_dir; and test -d $yazi_dir
             builtin cd -- $yazi_dir
