@@ -3,7 +3,7 @@
 font-family = Iosevka Term
 font-size = 18
 
-theme = catppuccin-cocoa
+theme = catppuccin-neo
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 0.25
