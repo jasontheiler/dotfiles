@@ -82,6 +82,7 @@ return {
             FidgetProgressGroup = { fg = palette.teal, style = { "bold" } },
             FidgetProgressIcon = { fg = palette.teal, style = { "bold" } },
             FloatBorder = { fg = palette.peach, bg = palette.none },
+            FloatTitle = { fg = palette.peach, bg = palette.none },
             HeirlineBuflineBuf = { fg = palette.text, style = { "bold" } },
             HeirlineBuflineBufNC = { fg = palette.surface2 },
             NonText = { fg = palette.surface0 },
@@ -101,6 +102,9 @@ return {
             TreesitterContextLineNumber = { fg = palette.surface1, bg = palette.base },
             TreesitterContextSeparator = { fg = palette.surface0 },
             VertSplit = { fg = palette.crust },
+            WhichKeyDesc = { fg = palette.text },
+            WhichKeyGroup = { fg = palette.green },
+            WhichKeySeparator = { fg = palette.surface2, style = {} },
             WinBar = { fg = palette.text, style = { "bold" } },
             WinBarNC = { fg = palette.surface2 },
             YankHighlight = {
