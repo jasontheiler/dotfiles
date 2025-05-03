@@ -7,12 +7,12 @@ function checklist
         npm \
         nvim \
         paru \
-        ranger \
         rg \
         scp \
         ssh \
         stow \
-        tmux
+        tmux \
+        yazi
     checklist_list Extra \
         bat \
         btm \
