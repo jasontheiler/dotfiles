@@ -2,7 +2,7 @@
 ---
 --- @type LazyPluginSpec
 return {
-  "Saghen/blink.cmp",
+  "saghen/blink.cmp",
   version = "1.*",
   event = "VeryLazy",
   --- See: https://cmp.saghen.dev/configuration/general.html
