@@ -14,7 +14,6 @@ function checklist
         tmux \
         yazi
     checklist_list Extra \
-        bat \
         btm \
         cargo \
         deno \
@@ -34,8 +33,8 @@ function checklist
         rustup \
         staticcheck \
         tilt \
-        tldr \
-        tspin
+        tspin \
+        xh
 end
 
 function checklist_list
