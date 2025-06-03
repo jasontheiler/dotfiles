@@ -34,6 +34,7 @@ function checklist
         staticcheck \
         tilt \
         tspin \
+        uv \
         xh
 end
 
