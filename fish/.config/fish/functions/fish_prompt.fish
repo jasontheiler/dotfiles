@@ -18,7 +18,7 @@ function fish_prompt_with_separator
     end
     echo -n $argv
     set_color brblack
-    echo -n "; "
+    echo -n " "
     set_color normal
 end
 
@@ -153,6 +153,10 @@ function fish_prompt_char
             set_color magenta
     end
     set_color --bold
-    echo -n "󰈺 "
+    if fish_is_root_user
+        echo -n "# "
+    else
+        echo -n "\$ "
+    end
     set_color normal
 end
