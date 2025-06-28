@@ -1,35 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-GITCONFIG_PROFILE_FILE_NAME=".gitconfig.profile"
+GITCONFIG_PROFILE_FILENAME=".gitconfig.profile"
 
-while test ! -f "${PWD}/${GITCONFIG_PROFILE_FILE_NAME}" -a "${PWD}" != "/"; do
+while [ ! -f "${PWD}/${GITCONFIG_PROFILE_FILENAME}" ] && [ "${PWD}" != "/" ]; do
     PWD=$(dirname "${PWD}")
 done
 
-if test "${PWD}" == "/"; then
-    echo "error: No \`${GITCONFIG_PROFILE_FILE_NAME}\` file in parent directories found."
+if [ "${PWD}" == "/" ]; then
+    echo "error: No \`${GITCONFIG_PROFILE_FILENAME}\` file in parent directories found."
     exit 1
 fi
 
-include_path_current=$(git config --local --default="" include.path)
-include_path_new="${PWD}/${GITCONFIG_PROFILE_FILE_NAME}"
-if test "${include_path_current}" != "${include_path_new}"; then
+include_path_current=$(git config --local --default "" --get include.path)
+include_path_new="${PWD}/${GITCONFIG_PROFILE_FILENAME}"
+if [ "${include_path_current}" != "${include_path_new}" ]; then
     git config --local include.path "${include_path_new}"
     echo "\`include.path\` has been set to \`${include_path_new}\`. Please commit again."
     exit 1
 fi
 
-user_email=$(git config --local --includes --default="" user.email)
-if test "${user_email}" == ""; then
+user_email=$(git config --local --includes --default "" --get user.email)
+if [ "${user_email}" == "" ]; then
     echo "error: \`user.email\` not set."
     exit 1
 fi
 
-user_signing_key=$(git config --local --includes --default="" user.signingkey)
-if test "${user_signing_key}" == ""; then
+user_signing_key=$(git config --local --includes --default "" --get user.signingkey)
+if [ "${user_signing_key}" == "" ]; then
     echo "error: \`user.signingkey\` not set."
     exit 1
 fi
 
-user_name=$(git config user.name)
+user_name=$(git config --get user.name)
 echo "Committing as ${user_name} <${user_email}>…"

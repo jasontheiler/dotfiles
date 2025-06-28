@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [ $(git branch --show-current 2>/dev/null) != "main" ]; then
+    exit 0
+fi
+
+read -n 1 -r -p "Are you sure you want to push to \`main\`? [y/N] " < /dev/tty
+if [ "${REPLY}" != "" ]; then
+    echo
+fi
+if [ "${REPLY}" = "y" ] || [ "${REPLY}" = "Y" ]; then
+    exit 0
+fi
+
+exit 1
