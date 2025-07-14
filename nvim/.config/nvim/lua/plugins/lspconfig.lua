@@ -30,27 +30,6 @@ return {
       end,
     })
 
-    -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-    vim.lsp.config("gopls", {
-      settings = {
-        gopls = {
-          staticcheck = true,
-          -- See:
-          --   - https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-          --   - https://staticcheck.dev/docs/checks/
-          analyses = {
-            SA9003 = true,
-            ST1003 = true,
-            ST1016 = true,
-            ST1020 = true,
-            ST1021 = true,
-            ST1022 = true,
-            ST1023 = true,
-          },
-        },
-      },
-    })
-
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html
     vim.lsp.config("html", { filetypes = { "html" } })
 
