@@ -1,7 +1,7 @@
 # See: https://ghostty.org/docs/config
 
 font-family = Iosevka Term
-font-size = 18
+font-size = 16
 
 theme = catppuccin-neo
 
