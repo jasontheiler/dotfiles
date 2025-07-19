@@ -22,6 +22,7 @@ return {
         json = { "prettier" },
         jsonc = { "prettier" },
         markdown = { "prettier" },
+        rust = { "dioxus", "rustfmt" },
         scss = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
