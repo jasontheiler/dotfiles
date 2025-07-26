@@ -57,18 +57,3 @@ vim.api.nvim_create_autocmd({ "QuitPre" }, {
     end
   end,
 })
-
--- TODO: Remove.
-vim.api.nvim_create_autocmd({ "User" }, {
-  group = augroup_default,
-  pattern = "TelescopeFindPre",
-  callback = function()
-    vim.opt_local.winborder = "none"
-    vim.api.nvim_create_autocmd({ "WinLeave" }, {
-      once = true,
-      callback = function()
-        vim.opt_local.winborder = "rounded"
-      end,
-    })
-  end,
-})
