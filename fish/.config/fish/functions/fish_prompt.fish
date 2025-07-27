@@ -63,8 +63,8 @@ end
 
 function fish_prompt_git_branch
     set branch (git branch --show-current 2>/dev/null)
-    if test $status -ne 0
-        return
+    if test -z "$branch"
+        set branch (git rev-parse --short HEAD 2>/dev/null)
     end
     set_color --bold magenta
     echo -n  (string shorten --max=20 $branch)
