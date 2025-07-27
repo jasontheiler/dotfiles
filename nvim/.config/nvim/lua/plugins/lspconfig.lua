@@ -120,6 +120,7 @@ return {
         "html",
         "lua_ls",
         "marksman",
+        "nil_ls",
         "pylsp",
         "rust_analyzer",
         "sqlls",
