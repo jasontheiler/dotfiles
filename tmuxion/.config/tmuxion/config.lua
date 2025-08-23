@@ -1,13 +1,5 @@
 local tmuxion = require("tmuxion")
 
-local catppuccin = {
-  peach = os.getenv("CATPPUCCIN_PEACH"),
-  green = os.getenv("CATPPUCCIN_GREEN"),
-  blue = os.getenv("CATPPUCCIN_BLUE"),
-  overlay0 = os.getenv("CATPPUCCIN_OVERLAY0"),
-  surface0 = os.getenv("CATPPUCCIN_SURFACE0"),
-}
-
 tmuxion.session_selector({
   width = 48,
   height = 16,
@@ -21,30 +13,30 @@ tmuxion.session_selector({
   results = {
     style = nil,
     border = "rounded",
-    border_style = { fg = catppuccin.peach },
+    border_style = nil,
     title = " Results ",
     title_alignment = "center",
     title_style = nil,
     item_style = nil,
     item_match_style = { fg = "blue" },
-    selection_style = { bg = catppuccin.surface0, modifiers = { "bold" } },
+    selection_style = { bg = "brightblack", modifiers = { "bold" } },
     selection_prefix = "❯ ",
-    selection_prefix_style = { fg = catppuccin.blue },
+    selection_prefix_style = { fg = "blue" },
   },
   prompt = {
     style = nil,
     border = "rounded",
-    border_style = { fg = catppuccin.peach },
+    border_style = nil,
     title = " Sessions ",
     title_alignment = "center",
     title_style = nil,
     pattern_style = nil,
     pattern_prefix = "  ",
-    pattern_prefix_style = { fg = catppuccin.green },
+    pattern_prefix_style = { fg = "green" },
     stats_format = function(results, sessions)
       return string.format(" %d/%d ", results, sessions)
     end,
-    stats_style = { fg = catppuccin.overlay0 },
+    stats_style = { fg = "brightblack" },
   },
 })
 
