@@ -78,7 +78,11 @@ return {
         end,
         provider = " ",
       },
-      { provider = function(self) return self.file_name end },
+      {
+        provider = function(self)
+          return string.format("%s:%d:%d", self.file_name, unpack(vim.api.nvim_win_get_cursor(0)))
+        end,
+      },
       {
         condition = function() return vim.api.nvim_get_option_value("modified", { buf = 0 }) end,
         provider = " ●",
