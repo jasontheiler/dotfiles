@@ -18,24 +18,52 @@ config.enable_tab_bar = false
 config.default_cursor_style = "SteadyBlock"
 config.cursor_blink_rate = 0
 config.font = wezterm.font_with_fallback({
-  "CommitMono Nerd Font",
-  "MonoLisa Nerd Font",
+  "Iosevka Term",
+  "JetBrainsMono NF",
 })
-config.font_size = 20
+config.font_size = 16
+config.underline_thickness = "200%"
 config.bold_brightens_ansi_colors = "No"
 config.allow_square_glyphs_to_overflow_width = "Always"
 
 config.disable_default_key_bindings = true
 config.keys = {
-  { mods = "CTRL", key = "0", action = wezterm.action.ResetFontSize },
-  { mods = "CTRL", key = "-", action = wezterm.action.DecreaseFontSize },
-  { mods = "CTRL", key = "=", action = wezterm.action.IncreaseFontSize },
+  { mods = "CTRL",       key = "0", action = wezterm.action.ResetFontSize },
+  { mods = "CTRL",       key = "-", action = wezterm.action.DecreaseFontSize },
+  { mods = "CTRL",       key = "=", action = wezterm.action.IncreaseFontSize },
   { mods = "CTRL|SHIFT", key = "C", action = wezterm.action.CopyTo("Clipboard") },
   { mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
 }
 
-config.color_scheme = "Catppuccin Neo"
+config.color_scheme = "Catppuccin Ocean Foam"
 config.color_schemes = {
+  ["Catppuccin Ocean Foam"] = {
+    foreground = "#CDD6F4",
+    background = "#1E1E2E",
+    cursor_border = "#73E9CD",
+    cursor_bg = "#73E9CD",
+    cursor_fg = "#1E1E2E",
+    ansi = {
+      "#45475A", -- black
+      "#F38BA8", -- red
+      "#73E9CD", -- green
+      "#F9E2AF", -- yellow
+      "#89B4FA", -- blue
+      "#F5C2E7", -- magenta
+      "#94E2D5", -- cyan
+      "#CDD6F4", -- white
+    },
+    brights = {
+      "#45475A", -- black
+      "#F38BA8", -- red
+      "#73E9CD", -- green
+      "#F9E2AF", -- yellow
+      "#89B4FA", -- blue
+      "#F5C2E7", -- magenta
+      "#94E2D5", -- cyan
+      "#CDD6F4", -- white
+    },
+  },
   ["Catppuccin Cocoa"] = {
     foreground = "#E4CEA8",
     background = "#211D1D",
