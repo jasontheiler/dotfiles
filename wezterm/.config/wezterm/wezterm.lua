@@ -40,8 +40,8 @@ config.color_schemes = {
   ["Catppuccin Ocean Foam"] = {
     foreground = "#CDD6F4",
     background = "#1E1E2E",
-    cursor_border = "#73E9CD",
-    cursor_bg = "#73E9CD",
+    cursor_border = "#F5E0DC",
+    cursor_bg = "#F5E0DC",
     cursor_fg = "#1E1E2E",
     ansi = {
       "#45475A", -- black
