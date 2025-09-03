@@ -6,3 +6,4 @@ abbr -a gp git push
 abbr -a gu git reset --mixed @~
 abbr -a gri --set-cursor="<COUNT>" git rebase -i @~"<COUNT>"
 abbr -a gra git rebase --abort
+abbr -a grc git rebase --continue
