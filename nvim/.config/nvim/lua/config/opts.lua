@@ -11,7 +11,6 @@ vim.opt.shadafile = "NONE"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undo/"
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true

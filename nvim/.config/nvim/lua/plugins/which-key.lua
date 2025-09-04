@@ -30,7 +30,6 @@ return {
       { "<Leader>g", group = "Git" },
       { "<Leader>l", group = "LSP" },
       { "<Leader>s", group = "Search" },
-      { "<Leader>w", group = "Window" },
     }
   },
 }

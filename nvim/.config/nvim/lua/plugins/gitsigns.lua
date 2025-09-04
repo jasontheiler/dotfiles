@@ -6,7 +6,6 @@ return {
   event = "VeryLazy",
   -- See: https://github.com/lewis6991/gitsigns.nvim#usage
   opts = {
-    preview_config = { border = "rounded" },
     on_attach = function(buffer)
       local gitsigns = package.loaded.gitsigns
 

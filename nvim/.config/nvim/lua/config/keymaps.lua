@@ -1,12 +1,6 @@
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
 
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
-vim.keymap.set("n", "<Leader>ww", "<C-w>w", { desc = "Move cursor to window above (wrap)" })
-vim.keymap.set("n", "<Leader>wW", "<C-w><C-w>", { desc = "Move cursor to window below (wrap)" })
-vim.keymap.set("n", "<Leader>wx", "<C-w>q", { desc = "Close current" })
-
 vim.keymap.set("n", "<Leader>bx", function()
   local file_name = vim.api.nvim_buf_get_name(0)
   local modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
@@ -24,8 +18,12 @@ vim.keymap.set("n", "<Leader>bx", function()
   vim.cmd.bdelete({ bang = true })
 end, { desc = "Close current" })
 
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1 }) end, {
+  desc = "Previous diagnostic",
+})
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1 }) end, {
+  desc = "Next diagnostic",
+})
 vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Diagnostics" })
 
 vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<CR>", { silent = true, desc = "Notes" })
