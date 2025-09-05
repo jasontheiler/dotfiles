@@ -117,6 +117,7 @@ return {
         "cssls",
         "denols",
         "dockerls",
+        "gopls",
         "html",
         "lua_ls",
         "marksman",
