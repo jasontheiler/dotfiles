@@ -31,8 +31,8 @@ tmuxion.session_selector({
     title_alignment = "center",
     title_style = nil,
     pattern_style = nil,
-    pattern_prefix = "  ",
-    pattern_prefix_style = { fg = "green" },
+    pattern_prefix = "❯ ",
+    pattern_prefix_style = { fg = "green", modifiers = { "bold" } },
     stats_format = function(results, sessions)
       return string.format(" %d/%d ", results, sessions)
     end,
