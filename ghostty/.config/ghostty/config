@@ -11,3 +11,6 @@ mouse-scroll-multiplier = 0.25
 title = Ghostty
 
 gtk-titlebar = false
+
+custom-shader = ./shaders/cursor-smear.glsl
+custom-shader-animation = always
