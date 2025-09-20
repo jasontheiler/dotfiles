@@ -315,13 +315,7 @@ require("conform").setup({
 
 require("mini.notify").setup({
   window = {
-    config = function()
-      return {
-        anchor = "SE",
-        col = vim.o.columns,
-        row = vim.o.lines - 1,
-      }
-    end,
+    config = { row = 2 },
   },
 })
 
