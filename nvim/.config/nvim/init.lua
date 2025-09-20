@@ -101,16 +101,16 @@ vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   { src = "https://github.com/catppuccin/nvim",  name = "catppuccin" },
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/tpope/vim-sleuth",
   "https://github.com/windwp/nvim-autopairs",
-  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
-  "https://github.com/stevearc/conform.nvim",
-  "https://github.com/nvim-mini/mini.notify",
+  "https://github.com/tpope/vim-sleuth",
   "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/nvim-mini/mini.notify",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/mason-org/mason-lspconfig.nvim",
-  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/stevearc/conform.nvim",
 })
 
 require("catppuccin").setup({
@@ -242,6 +242,46 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-autopairs").setup()
 
+require("mini.notify").setup({
+  window = {
+    config = { row = 2 },
+  },
+})
+
+require("telescope").setup({
+  defaults = {
+    prompt_prefix = "❯ ",
+    selection_caret = "❯ ",
+    get_status_text = function(picker)
+      local stat_processed = picker.stats.processed or 0
+      local stat_filtered = picker.stats.filtered or 0
+      return string.format(" %d/%d ", stat_processed - stat_filtered, stat_processed)
+    end,
+    preview = { filesize_limit = 0.1 },
+    layout_strategy = "flex",
+    layout_config = {
+      flex = { flip_columns = 120 },
+      horizontal = { preview_cutoff = 0 },
+      vertical = {
+        preview_height = 0.33,
+        preview_cutoff = 0,
+      },
+    },
+    file_ignore_patterns = { ".git/" },
+    mappings = {
+      i = { ["<Esc>"] = require("telescope.actions").close },
+    },
+  },
+  pickers = {
+    find_files = { hidden = true },
+    oldfiles = { cwd_only = true },
+    live_grep = {
+      glob_pattern = { "!*[.-]lock*" },
+      additional_args = function() return { "--hidden" } end,
+    },
+  },
+})
+
 require("blink.cmp").setup({
   completion = {
     ghost_text = { enabled = true },
@@ -290,117 +330,6 @@ require("blink.cmp").setup({
   },
 })
 
-require("conform").setup({
-  default_format_opts = {
-    async = true,
-    lsp_format = "fallback",
-  },
-  formatters_by_ft = {
-    css = { "prettier" },
-    fish = { "fish_indent" },
-    html = { "prettier" },
-    javascript = { "prettier" },
-    javascriptreact = { "prettier" },
-    json = { "prettier" },
-    jsonc = { "prettier" },
-    markdown = { "prettier" },
-    rust = { "dioxus", "rustfmt" },
-    scss = { "prettier" },
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
-    vue = { "prettier" },
-    yaml = { "prettier" },
-  },
-})
-
-require("mini.notify").setup({
-  window = {
-    config = function()
-      return {
-        anchor = "SE",
-        col = vim.o.columns,
-        row = vim.o.lines - 1,
-      }
-    end,
-  },
-})
-
--- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
-vim.lsp.config("clangd", { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } })
-
--- See:
---   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols
---   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
-vim.lsp.config("denols", {
-  root_dir = function(_, cb)
-    local cwd = vim.fn.getcwd()
-    for _, suffix in ipairs({ "/deno.json", "/deno.jsonc" }) do
-      if vim.uv.fs_stat(cwd .. suffix) then
-        cb(cwd)
-      end
-    end
-  end,
-})
-
--- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html
-vim.lsp.config("html", { filetypes = { "html" } })
-
--- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      workspace = {
-        checkThirdParty = false,
-        library = { vim.env.VIMRUNTIME },
-      },
-    },
-  },
-})
-
--- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
-vim.lsp.config("rust_analyzer", {
-  settings = {
-    ["rust-analyzer"] = {
-      cargo = { features = "all" },
-      check = { command = "clippy" },
-    },
-  },
-})
-
--- See:
---   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
---   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
---   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
-vim.lsp.config("ts_ls", {
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server/"),
-        languages = { "vue" },
-      },
-    },
-  },
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-  root_dir = function(_, cb)
-    local cwd = vim.fn.getcwd()
-    for _, suffix in ipairs({ "/package.json", "/tsconfig.json" }) do
-      if vim.uv.fs_stat(cwd .. suffix) then
-        cb(cwd)
-      end
-    end
-  end,
-  single_file_support = false,
-})
-
--- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-vim.lsp.config("yamlls", {
-  settings = {
-    yaml = { keyOrdering = false },
-  },
-})
-
 require("mason").setup()
 
 require("mason-lspconfig").setup({
@@ -426,38 +355,26 @@ require("mason-lspconfig").setup({
   automatic_enable = true,
 })
 
-require("telescope").setup({
-  defaults = {
-    prompt_prefix = "❯ ",
-    selection_caret = "❯ ",
-    get_status_text = function(picker)
-      local stat_processed = picker.stats.processed or 0
-      local stat_filtered = picker.stats.filtered or 0
-      return string.format(" %d/%d ", stat_processed - stat_filtered, stat_processed)
-    end,
-    preview = { filesize_limit = 0.1 },
-    layout_strategy = "flex",
-    layout_config = {
-      flex = { flip_columns = 120 },
-      horizontal = { preview_cutoff = 0 },
-      vertical = {
-        preview_height = 0.33,
-        preview_cutoff = 0,
-      },
-    },
-    mappings = {
-      i = { ["<Esc>"] = require("telescope.actions").close },
-    },
+require("conform").setup({
+  default_format_opts = {
+    async = true,
+    lsp_format = "fallback",
   },
-  pickers = {
-    find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob=!*.git/*" },
-    },
-    live_grep = {
-      additional_args = function() return { "--hidden" } end,
-      glob_pattern = { "!*.git/*", "!*[.-]lock*" },
-    },
-    oldfiles = { cwd_only = true },
+  formatters_by_ft = {
+    css = { "prettier" },
+    fish = { "fish_indent" },
+    html = { "prettier" },
+    javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    json = { "prettier" },
+    jsonc = { "prettier" },
+    markdown = { "prettier" },
+    rust = { "dioxus", "rustfmt" },
+    scss = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    vue = { "prettier" },
+    yaml = { "prettier" },
   },
 })
 
@@ -541,6 +458,82 @@ vim.api.nvim_create_user_command("ToggleDiagnostics", function()
   end
 end, {})
 
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
+vim.lsp.config("clangd", { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } })
+
+-- See:
+--   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols
+--   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
+vim.lsp.config("denols", {
+  root_dir = function(_, cb)
+    local cwd = vim.fn.getcwd()
+    for _, suffix in ipairs({ "/deno.json", "/deno.jsonc" }) do
+      if vim.uv.fs_stat(cwd .. suffix) then
+        cb(cwd)
+      end
+    end
+  end,
+})
+
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html
+vim.lsp.config("html", { filetypes = { "html" } })
+
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      workspace = {
+        checkThirdParty = false,
+        library = { vim.env.VIMRUNTIME },
+      },
+    },
+  },
+})
+
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
+vim.lsp.config("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = { features = "all" },
+      check = { command = "clippy" },
+    },
+  },
+})
+
+-- See:
+--   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
+--   - https://github.com/vuejs/language-tools#hybrid-mode-configuration-requires-vuelanguage-server-version-200
+--   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
+vim.lsp.config("ts_ls", {
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server/"),
+        languages = { "vue" },
+      },
+    },
+  },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+  root_dir = function(_, cb)
+    local cwd = vim.fn.getcwd()
+    for _, suffix in ipairs({ "/package.json", "/tsconfig.json" }) do
+      if vim.uv.fs_stat(cwd .. suffix) then
+        cb(cwd)
+      end
+    end
+  end,
+  single_file_support = false,
+})
+
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
+vim.lsp.config("yamlls", {
+  settings = {
+    yaml = { keyOrdering = false },
+  },
+})
+
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
 
@@ -605,6 +598,7 @@ local function keymap_picker(lhs, picker, keymap_opts, picker_opts)
 end
 
 keymap_picker("<Leader>sh", require("telescope.builtin").help_tags, { desc = "Help" })
+keymap_picker("<Leader>sk", require("telescope.builtin").keymaps, { desc = "Keymaps" })
 keymap_picker("<Leader>sf", require("telescope.builtin").find_files, { desc = "Files" })
 keymap_picker("<Leader>sa", require("telescope.builtin").find_files, { desc = "All files" }, { no_ignore = true })
 keymap_picker("<Leader>sp", require("telescope.builtin").oldfiles, { desc = "Previous files" })
@@ -612,36 +606,9 @@ keymap_picker("<Leader>sb", require("telescope.builtin").buffers, { desc = "Buff
 keymap_picker("<Leader>s/", require("telescope.builtin").live_grep, { desc = "Search" })
 keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "Diagnostics" })
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
-
-vim.api.nvim_create_autocmd({ "LspAttach" }, {
-  callback = function(event)
-    vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
-    vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
-    vim.keymap.set("n", "<Leader>lf", vim.lsp.buf.signature_help, { desc = "Signature", buffer = event.buf })
-
-    keymap_picker("<Leader>ls", require("telescope.builtin").lsp_document_symbols, {
-      desc = "Document symbols",
-      buffer = event.buf,
-    })
-    keymap_picker("<Leader>lS", require("telescope.builtin").lsp_workspace_symbols, {
-      desc = "Workspace symbols",
-      buffer = event.buf,
-    })
-    keymap_picker("<Leader>ld", require("telescope.builtin").lsp_definitions, {
-      desc = "Definitions",
-      buffer = event.buf,
-    })
-    keymap_picker("<Leader>lt", require("telescope.builtin").lsp_type_definitions, {
-      desc = "Type definitions",
-      buffer = event.buf,
-    })
-    keymap_picker("<Leader>li", require("telescope.builtin").lsp_implementations, {
-      desc = "Implementations",
-      buffer = event.buf,
-    })
-    keymap_picker("<Leader>lR", require("telescope.builtin").lsp_references, {
-      desc = "References",
-      buffer = event.buf,
-    })
-  end,
-})
+keymap_picker("<Leader>ls", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
+keymap_picker("<Leader>lS", require("telescope.builtin").lsp_workspace_symbols, { desc = "Workspace symbols" })
+keymap_picker("<Leader>ld", require("telescope.builtin").lsp_definitions, { desc = "Definitions" })
+keymap_picker("<Leader>lt", require("telescope.builtin").lsp_type_definitions, { desc = "Type definitions" })
+keymap_picker("<Leader>li", require("telescope.builtin").lsp_implementations, { desc = "Implementations" })
+keymap_picker("<Leader>lR", require("telescope.builtin").lsp_references, { desc = "References" })
