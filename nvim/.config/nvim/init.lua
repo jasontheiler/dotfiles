@@ -433,8 +433,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
         break
       end
     end
-    local hl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" .. hl_name_suffix })
-    vim.api.nvim_set_hl(0, "CursorLineNr", hl)
+    vim.api.nvim_set_hl(0, "CursorLineNr", { link = "CursorLineNr" .. hl_name_suffix })
   end,
 })
 
