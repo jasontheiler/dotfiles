@@ -538,8 +538,6 @@ vim.keymap.set({ "n", "v" }, "<Leader>p", "\"_dP", { desc = "Paste (without yank
 
 vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<CR>", { silent = true, desc = "Notes" })
 
-vim.keymap.set("n", "<Leader>f", require("conform").format, { desc = "Format" })
-
 for i = 1, 9 do
   vim.keymap.set("n", "<Leader>" .. i, function()
     local buf = bufs[i]
@@ -558,7 +556,6 @@ for i = 1, 9 do
     end
   end, { desc = "Move current buffer to index " .. i })
 end
-vim.keymap.set("n", "<Leader>bw", ":bp<CR>", { silent = true, desc = "Previous buffer" })
 vim.keymap.set("n", "<Leader>bx", function()
   local file_name = vim.api.nvim_buf_get_name(0)
   local modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
@@ -586,6 +583,8 @@ vim.keymap.set("n", "<Leader>gb", require("gitsigns").blame_line, { desc = "Git 
 vim.keymap.set("n", "<Leader>gp", require("gitsigns").preview_hunk, { desc = "Preview Git hunk" })
 vim.keymap.set("n", "<Leader>gu", require("gitsigns").reset_hunk, { desc = "Undo Git hunk" })
 
+vim.keymap.set("n", "<Leader>f", require("conform").format, { desc = "Format" })
+
 local function keymap_picker(lhs, picker, keymap_opts, picker_opts)
   local default_picker_opts = {
     prompt_title = (keymap_opts or {}).desc,
@@ -604,7 +603,9 @@ keymap_picker("<Leader>sp", require("telescope.builtin").oldfiles, { desc = "Pre
 keymap_picker("<Leader>sb", require("telescope.builtin").buffers, { desc = "Buffers" })
 keymap_picker("<Leader>s/", require("telescope.builtin").live_grep, { desc = "Search" })
 keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "Diagnostics" })
+
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
+
 keymap_picker("<Leader>ls", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
 keymap_picker("<Leader>lS", require("telescope.builtin").lsp_workspace_symbols, { desc = "Workspace symbols" })
 keymap_picker("<Leader>ld", require("telescope.builtin").lsp_definitions, { desc = "Definitions" })
