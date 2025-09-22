@@ -99,8 +99,8 @@ end
 
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
-  { src = "https://github.com/catppuccin/nvim",  name = "catppuccin" },
-  "https://github.com/nvim-treesitter/nvim-treesitter",
+  { src = "https://github.com/catppuccin/nvim",                 name = "catppuccin" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tpope/vim-sleuth",
   "https://github.com/lewis6991/gitsigns.nvim",
@@ -233,12 +233,6 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme("catppuccin")
-
-require("nvim-treesitter.configs").setup({
-  auto_install = true,
-  highlight = { enable = true },
-  indent = { enable = true },
-})
 
 require("nvim-autopairs").setup()
 
@@ -378,39 +372,45 @@ require("conform").setup({
   },
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  callback = function()
-    vim.schedule(function()
-      vim.opt.clipboard = "unnamedplus"
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
 
-      bufs = vim.tbl_filter(function(buf)
-        local file_name = vim.api.nvim_buf_get_name(buf)
-        local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
-        return file_name ~= "" and buflisted
-      end, vim.api.nvim_list_bufs())
-    end)
-  end,
-})
+  bufs = vim.tbl_filter(function(buf)
+    local file_name = vim.api.nvim_buf_get_name(buf)
+    local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
+    return file_name ~= "" and buflisted
+  end, vim.api.nvim_list_bufs())
+end)
 
-vim.api.nvim_create_autocmd({ "BufAdd" }, {
-  callback = function(event)
-    if event.file ~= "" then
-      table.insert(bufs, event.buf)
+vim.api.nvim_create_autocmd("BufAdd", {
+  callback = function(args)
+    if args.file ~= "" then
+      table.insert(bufs, args.buf)
     end
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufDelete" }, {
-  callback = function(event)
+vim.api.nvim_create_autocmd("BufDelete", {
+  callback = function(args)
     for i, buf in ipairs(bufs) do
-      if buf == event.buf then
+      if buf == args.buf then
         table.remove(bufs, i)
       end
     end
   end,
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = require("nvim-treesitter").get_available(),
+  callback = function(args)
+    require("nvim-treesitter").install(vim.bo[args.buf].filetype):await(function()
+      vim.treesitter.start(args.buf)
+      vim.bo[args.buf].indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
   end,
@@ -437,7 +437,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "QuitPre" }, {
+vim.api.nvim_create_autocmd("QuitPre", {
   callback = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_get_name(buf) == "" then
