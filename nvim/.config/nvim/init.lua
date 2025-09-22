@@ -606,9 +606,8 @@ keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "
 
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
 
-keymap_picker("<Leader>ls", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
-keymap_picker("<Leader>lS", require("telescope.builtin").lsp_workspace_symbols, { desc = "Workspace symbols" })
-keymap_picker("<Leader>ld", require("telescope.builtin").lsp_definitions, { desc = "Definitions" })
-keymap_picker("<Leader>lt", require("telescope.builtin").lsp_type_definitions, { desc = "Type definitions" })
-keymap_picker("<Leader>li", require("telescope.builtin").lsp_implementations, { desc = "Implementations" })
-keymap_picker("<Leader>lR", require("telescope.builtin").lsp_references, { desc = "References" })
+keymap_picker("grd", require("telescope.builtin").lsp_definitions, { desc = "Definitions" })
+keymap_picker("grr", require("telescope.builtin").lsp_references, { desc = "References" })
+keymap_picker("gri", require("telescope.builtin").lsp_implementations, { desc = "Implementations" })
+keymap_picker("grt", require("telescope.builtin").lsp_type_definitions, { desc = "Type definitions" })
+keymap_picker("gO", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
