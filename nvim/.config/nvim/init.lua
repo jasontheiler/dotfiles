@@ -606,8 +606,27 @@ keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "
 
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
 
-keymap_picker("grd", require("telescope.builtin").lsp_definitions, { desc = "Definitions" })
-keymap_picker("grr", require("telescope.builtin").lsp_references, { desc = "References" })
-keymap_picker("gri", require("telescope.builtin").lsp_implementations, { desc = "Implementations" })
-keymap_picker("grt", require("telescope.builtin").lsp_type_definitions, { desc = "Type definitions" })
-keymap_picker("gO", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    keymap_picker("grd", require("telescope.builtin").lsp_definitions, {
+      buffer = args.buf,
+      desc = "Definitions",
+    })
+    keymap_picker("grr", require("telescope.builtin").lsp_references, {
+      buffer = args.buf,
+      desc = "References",
+    })
+    keymap_picker("gri", require("telescope.builtin").lsp_implementations, {
+      buffer = args.buf,
+      desc = "Implementations",
+    })
+    keymap_picker("grt", require("telescope.builtin").lsp_type_definitions, {
+      buffer = args.buf,
+      desc = "Type definitions",
+    })
+    keymap_picker("gO", require("telescope.builtin").lsp_document_symbols, {
+      buffer = args.buf,
+      desc = "Document symbols",
+    })
+  end,
+})
