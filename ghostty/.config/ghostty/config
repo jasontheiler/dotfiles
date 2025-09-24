@@ -6,8 +6,5 @@ font-size = 16
 theme = catppuccin-ocean-foam
 
 mouse-hide-while-typing = true
-mouse-scroll-multiplier = 0.25
-
-title = Ghostty
 
 gtk-titlebar = false
