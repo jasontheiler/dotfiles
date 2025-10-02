@@ -115,6 +115,7 @@ vim.pack.add({
 
 require("catppuccin").setup({
   flavour = "mocha",
+  transparent_background = true,
   styles = {
     conditionals = {},
     miscs = {},
@@ -190,49 +191,46 @@ require("catppuccin").setup({
     --   crust = "#04060B",     --
     -- },
   },
-  highlight_overrides = {
-    mocha = function(palette)
-      return {
-        BlinkCmpLabel = { link = "Pmenu" },
-        BlinkCmpLabelDeprecated = { link = "NonText" },
-        BlinkCmpLabelMatch = { fg = palette.blue },
-        BlinkCmpMenuBorder = { link = "Pmenu" },
-        BlinkCmpScrollBarGutter = { link = "PmenuSbar" },
-        BlinkCmpScrollBarThumb = { link = "PmenuThumb" },
-        CursorLineNrNormal = { fg = palette.blue, style = { "bold" } },
-        CursorLineNrVisual = { fg = palette.pink, style = { "bold" } },
-        CursorLineNrInsert = { fg = palette.green, style = { "bold" } },
-        CursorLineNrReplace = { fg = palette.red, style = { "bold" } },
-        CursorLineNrCommand = { fg = palette.peach, style = { "bold" } },
-        DiagnosticSignDebug = { style = { "bold" } },
-        DiagnosticSignError = { style = { "bold" } },
-        DiagnosticSignInfo = { style = { "bold" } },
-        DiagnosticSignWarn = { style = { "bold" } },
-        FloatBorder = { fg = palette.text, bg = palette.none },
-        FloatTitle = { link = "FloatBorder" },
-        NonText = { fg = palette.surface1 },
-        NormalFloat = { fg = palette.text, bg = palette.none },
-        Pmenu = { link = "FloatBorder" },
-        PmenuSbar = { bg = palette.text },
-        PmenuSel = { fg = palette.text, bg = palette.surface1, style = { "bold" } },
-        PmenuThumb = { link = "PmenuSbar" },
-        StatusLine = { link = "VertSplit" },
-        StatusLineNC = { link = "VertSplit" },
-        TabLineFill = { fg = palette.surface1, bg = palette.base },
-        TabLineSel = { fg = palette.text, style = { "bold" } },
-        TelescopePromptPrefix = { fg = palette.green, style = { "bold" } },
-        TelescopeSelection = { link = "PmenuSel" },
-        TelescopeSelectionCaret = { fg = palette.blue, bg = palette.surface1, style = { "bold" } },
-        VertSplit = { fg = palette.surface1, bg = palette.base },
-        WinBar = { link = "TabLineSel" },
-        WinBarNC = { link = "TabLineFill" },
-        Yank = { bg = require("catppuccin.utils.colors").darken(palette.rosewater, 0.5, palette.base) },
-      }
-    end,
-  },
 })
 
 vim.cmd.colorscheme("catppuccin")
+
+local palette = require("catppuccin.palettes").get_palette("mocha")
+
+vim.api.nvim_set_hl(0, "BlinkCmpLabel", { link = "Pmenu" })
+vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { link = "NonText" })
+vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = palette.blue })
+vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "Pmenu" })
+vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { link = "PmenuSbar" })
+vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { link = "PmenuThumb" })
+vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.peach, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.pink, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = palette.red, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = palette.teal, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = palette.sky, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = palette.yellow, bold = true })
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+vim.api.nvim_set_hl(0, "FloatTitle", { link = "FloatBorder" })
+vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface1 })
+vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+vim.api.nvim_set_hl(0, "Pmenu", { link = "FloatBorder" })
+vim.api.nvim_set_hl(0, "PmenuSbar", { bg = palette.text })
+vim.api.nvim_set_hl(0, "PmenuSel", { fg = palette.text, bg = palette.surface1, bold = true })
+vim.api.nvim_set_hl(0, "PmenuThumb", { link = "PmenuSbar" })
+vim.api.nvim_set_hl(0, "StatusLine", { link = "VertSplit" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { link = "VertSplit" })
+vim.api.nvim_set_hl(0, "TabLineFill", { link = "NonText" })
+vim.api.nvim_set_hl(0, "TabLineSel", { fg = palette.text, bold = true })
+vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = palette.green, bold = true })
+vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "PmenuSel" })
+vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = palette.blue, bg = palette.surface1, bold = true })
+vim.api.nvim_set_hl(0, "VertSplit", { link = "NonText" })
+vim.api.nvim_set_hl(0, "WinBar", { link = "TabLineSel" })
+vim.api.nvim_set_hl(0, "WinBarNC", { link = "TabLineFill" })
+vim.api.nvim_set_hl(0, "Yank", { bg = require("catppuccin.utils.colors").darken(palette.rosewater, 0.5, palette.base) })
 
 require("nvim-autopairs").setup()
 
