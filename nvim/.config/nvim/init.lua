@@ -28,7 +28,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.winborder = "rounded"
-vim.opt.fillchars = { stl = "─", stlnc = "─" }
+vim.opt.fillchars = { eob = " ", stl = "─", stlnc = "─" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.cmdheight = 0
