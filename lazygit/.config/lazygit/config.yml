@@ -12,7 +12,7 @@ gui:
     selectedLineBgColor:
       - black
   branchColorPatterns:
-    ^main$: red
+    ^(main|master)$: red
     ^(dev|staging)$: magenta
     ^(feat|(|hot)fix)\/: blue
     ^\d+-: blue

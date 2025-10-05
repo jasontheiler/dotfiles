@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-if [ $(git branch --show-current 2>/dev/null) != "main" ]; then
+branch=$(git branch --show-current 2>/dev/null)
+
+if [ ${branch} != "main" ] && [ ${branch} != "master" ]; then
     exit 0
 fi
 
-read -n 1 -r -p "Are you sure you want to push to \`main\`? [y/N] " < /dev/tty
+read -n 1 -r -p "Are you sure you want to push to \`${branch}\`? [y/N] " < /dev/tty
 if [ "${REPLY}" != "" ]; then
     echo
 fi
