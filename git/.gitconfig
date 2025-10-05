@@ -13,7 +13,7 @@
 [gpg]
 	format = ssh
 [init]
-	defaultBranch = main
+	defaultBranch = master
 [merge]
 	conflictstyle = zdiff3
 [pull]
