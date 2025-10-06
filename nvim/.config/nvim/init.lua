@@ -40,7 +40,7 @@ vim.opt.winbar = "%{%v:lua.custom_winbar()%}"
 
 vim.diagnostic.config({
   severity_sort = true,
-  virtual_text = { prefix = "▌" },
+  virtual_text = true,
 })
 
 vim.filetype.add({
