@@ -120,15 +120,13 @@ require("catppuccin").setup({
     conditionals = {},
     miscs = {},
   },
-  integrations = {
-    native_lsp = {
-      underlines = {
-        errors = { "undercurl" },
-        warnings = { "undercurl" },
-        information = { "undercurl" },
-        hints = { "undercurl" },
-      },
-    },
+  lsp_styles = {
+    underlines = {
+      errors = { "undercurl" },
+      warnings = { "undercurl" },
+      information = { "undercurl" },
+      hints = { "undercurl" },
+    }
   },
   color_overrides = {
     mocha = {            -- Ocean Foam
