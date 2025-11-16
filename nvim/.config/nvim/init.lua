@@ -165,10 +165,10 @@ require("catppuccin").setup({
     --   flamingo = "#FFCDCD",  --
     --   pink = "#E3AAFF",      -- terminal magenta, terminal bright magenta
     --   mauve = "#E3AAFF",     --
-    --   red = "#fF87BC",       -- terminal red, terminal bright red
+    --   red = "#FFC0B9",       -- terminal red, terminal bright red; #FFC0B9
     --   maroon = "#F394B8",    --
     --   peach = "#FFB7AB",     --
-    --   yellow = "#F9E6C0",    -- terminal yellow, terminal bright yellow
+    --   yellow = "#FCE094",    -- terminal yellow, terminal bright yellow; #FCE094
     --   green = "#B3F6C0",     -- terminal green, terminal bright green
     --   teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan
     --   sky = "#8CF8F7",       --
@@ -178,7 +178,7 @@ require("catppuccin").setup({
     --   text = "#E0E2EA",      -- terminal white, terminal bright white, terminal foreground, terminal cursor
     --   subtext1 = "#B9BCC7",  --
     --   subtext0 = "#A5A8B5",  --
-    --   overlay2 = "#9295A4",  -- punctuation, brackets
+    --   overlay2 = "#9B9EA4",  -- punctuation, brackets; #9B9EA4
     --   overlay1 = "#7E8192",  --
     --   overlay0 = "#6B6D81",  -- comments
     --   surface2 = "#585A6F",  --
