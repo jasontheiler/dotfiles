@@ -341,6 +341,7 @@ require("mason-lspconfig").setup({
     "templ",
     "vue_ls",
     "yamlls",
+    "zls",
   },
   automatic_enable = true,
 })
