@@ -1,9 +1,9 @@
 # See: https://ghostty.org/docs/config
 
 font-family = Iosevka Term
-font-size = 16
+font-size = 15
 
-theme = catppuccin-ocean-foam
+theme = catppuccin-neo
 
 mouse-hide-while-typing = true
 
