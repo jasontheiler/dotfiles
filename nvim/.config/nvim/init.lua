@@ -162,9 +162,9 @@ require("catppuccin").setup({
     -- },
     mocha = {                -- Neo
       rosewater = "#FFDDDD", --
-      flamingo = "#F9CBEE",  --
-      pink = "#F4BAFF",      -- terminal magenta, terminal bright magenta
-      mauve = "#F9BDDC",     --
+      flamingo = "#FCCDE4",  --
+      pink = "#F9BDEC",      -- terminal magenta, terminal bright magenta
+      mauve = "#EEBDF5",     -- #DEBDF5
       red = "#FFC0B9",       -- terminal red, terminal bright red; fixed: #FFC0B9
       maroon = "#FFC0B9",    --
       peach = "#FDD0A6",     --
