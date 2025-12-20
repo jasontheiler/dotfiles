@@ -4,7 +4,7 @@ set fish_term24bit 1
 
 set fish_color_autosuggestion brblack
 set fish_color_cancel blue
-set fish_color_command green
+set fish_color_command blue
 set fish_color_comment brblack
 set fish_color_end normal
 set fish_color_error red
