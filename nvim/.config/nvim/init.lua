@@ -379,7 +379,10 @@ vim.schedule(function()
   end, vim.api.nvim_list_bufs())
 end)
 
+local augroup = vim.api.nvim_create_augroup("user", { clear = true })
+
 vim.api.nvim_create_autocmd("BufAdd", {
+  group = augroup,
   callback = function(args)
     if args.file ~= "" then
       table.insert(bufs, args.buf)
@@ -388,6 +391,7 @@ vim.api.nvim_create_autocmd("BufAdd", {
 })
 
 vim.api.nvim_create_autocmd("BufDelete", {
+  group = augroup,
   callback = function(args)
     for i, buf in ipairs(bufs) do
       if buf == args.buf then
@@ -398,6 +402,7 @@ vim.api.nvim_create_autocmd("BufDelete", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
   pattern = require("nvim-treesitter").get_available(),
   callback = function(args)
     require("nvim-treesitter").install(vim.bo[args.buf].filetype):await(function()
@@ -408,6 +413,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup,
   callback = function()
     vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
   end,
@@ -421,6 +427,7 @@ local modes_by_group = {
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
+  group = augroup,
   callback = function()
     local mode = vim.api.nvim_get_mode().mode
     local hl_name_suffix = "Normal"
@@ -435,6 +442,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
 })
 
 vim.api.nvim_create_autocmd("QuitPre", {
+  group = augroup,
   callback = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_get_name(buf) == "" then
@@ -528,6 +536,7 @@ keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup,
   callback = function(args)
     keymap_picker("grd", require("telescope.builtin").lsp_definitions, {
       buffer = args.buf,
