@@ -327,7 +327,6 @@ require("mason-lspconfig").setup({
     "buf_ls",
     "clangd",
     "cssls",
-    "denols",
     "dockerls",
     "gopls",
     "html",
@@ -336,7 +335,6 @@ require("mason-lspconfig").setup({
     "nil_ls",
     "postgres_lsp",
     "pylsp",
-    "rust_analyzer",
     "taplo",
     "templ",
     "vue_ls",
@@ -559,6 +557,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       desc = "Document symbols",
     })
   end,
+})
+
+vim.lsp.enable({
+  "denols",
+  "rust_analyzer",
 })
 
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
