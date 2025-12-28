@@ -424,7 +424,7 @@ local modes_by_group = {
   Command = { "c", "cr", "cv", "cvr" },
 }
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "ModeChanged" }, {
+vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter", "BufLeave", "ModeChanged" }, {
   group = augroup,
   callback = function()
     local mode = vim.api.nvim_get_mode().mode
