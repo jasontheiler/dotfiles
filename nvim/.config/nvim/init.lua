@@ -28,15 +28,12 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.winborder = "rounded"
-vim.opt.fillchars = { eob = " ", stl = "─", stlnc = "─" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.cmdheight = 0
-vim.opt.laststatus = 0
-vim.opt.statusline = "%="
+vim.opt.laststatus = 3
 vim.opt.showtabline = 2
 vim.opt.tabline = "%{%v:lua.custom_tabline()%}"
-vim.opt.winbar = "%{%v:lua.custom_winbar()%}"
 
 vim.diagnostic.config({
   severity_sort = true,
@@ -53,48 +50,35 @@ vim.filetype.add({
 --- @type number[]
 local bufs = {}
 
---- Surrounds the specified text with flags for the specified buffer.
----
---- @param buf number The buffer handle.
---- @param text string The text to be surrounded with flags.
---- @return string
-local function with_flags(buf, text)
-  local readonly = vim.api.nvim_get_option_value("readonly", { buf = buf })
-  local modifiable = vim.api.nvim_get_option_value("modifiable", { buf = buf })
-  if readonly or not modifiable then
-    text = " " .. text
-  end
-  if vim.api.nvim_get_option_value("modified", { buf = buf }) then
-    text = text .. " ●"
-  end
-  return text
-end
-
 function _G.custom_tabline()
   local s = ""
   local buf_current = vim.api.nvim_win_get_buf(0)
   for i, buf in ipairs(bufs) do
-    s = s .. "%" .. buf .. "@v:lua.custom_tabline_on_click@"
+    s = string.format("%s%%%d@v:lua.custom_tabline_on_click@", s, buf)
     if buf == buf_current then
       s = s .. "%#TabLineSel#"
     end
-    local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
-    s = s .. " " .. with_flags(buf, string.format("%d %s", i, file_name)) .. " %*%T"
+    s = string.format("%s %d %s", s, i, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t"))
+    local flags = ""
+    if vim.api.nvim_get_option_value("modified", { buf = buf }) then
+      flags = flags .. "[+]"
+    end
+    if not vim.api.nvim_get_option_value("modifiable", { buf = buf }) then
+      flags = flags .. "[-]"
+    end
+    if vim.api.nvim_get_option_value("readonly", { buf = buf }) then
+      flags = flags .. "[RO]"
+    end
+    if string.len(flags) > 0 then
+      s = string.format("%s %s", s, flags)
+    end
+    s = string.format("%s %%*%%T", s)
   end
   return s
 end
 
 function _G.custom_tabline_on_click(buf)
   vim.api.nvim_win_set_buf(0, buf)
-end
-
-function _G.custom_winbar()
-  local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
-  if file_name == "" then
-    return ""
-  end
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  return "%=" .. with_flags(0, string.format("%s:%d:%d", file_name, unpack(cursor)))
 end
 
 vim.pack.add({
@@ -210,6 +194,7 @@ vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = palette.red, bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = palette.teal, bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = palette.sky, bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = palette.yellow, bold = true })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { link = "NonText" })
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FloatTitle", { link = "FloatBorder" })
 vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface1 })
@@ -218,25 +203,17 @@ vim.api.nvim_set_hl(0, "Pmenu", { link = "FloatBorder" })
 vim.api.nvim_set_hl(0, "PmenuSbar", { bg = palette.text })
 vim.api.nvim_set_hl(0, "PmenuSel", { fg = palette.text, bg = palette.surface1, bold = true })
 vim.api.nvim_set_hl(0, "PmenuThumb", { link = "PmenuSbar" })
-vim.api.nvim_set_hl(0, "StatusLine", { link = "VertSplit" })
-vim.api.nvim_set_hl(0, "StatusLineNC", { link = "VertSplit" })
 vim.api.nvim_set_hl(0, "TabLineFill", { link = "NonText" })
 vim.api.nvim_set_hl(0, "TabLineSel", { fg = palette.text, bold = true })
 vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = palette.green, bold = true })
 vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "PmenuSel" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = palette.blue, bg = palette.surface1, bold = true })
 vim.api.nvim_set_hl(0, "VertSplit", { link = "NonText" })
-vim.api.nvim_set_hl(0, "WinBar", { link = "TabLineSel" })
-vim.api.nvim_set_hl(0, "WinBarNC", { link = "TabLineFill" })
 vim.api.nvim_set_hl(0, "Yank", { bg = require("catppuccin.utils.colors").darken(palette.rosewater, 0.5, palette.base) })
 
 require("nvim-autopairs").setup()
 
-require("mini.notify").setup({
-  window = {
-    config = { row = 2 },
-  },
-})
+require("mini.notify").setup()
 
 require("telescope").setup({
   defaults = {
