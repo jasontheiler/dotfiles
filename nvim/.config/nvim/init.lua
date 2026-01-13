@@ -112,6 +112,7 @@ require("catppuccin").setup({
       hints = { "undercurl" },
     }
   },
+  default_integrations = false,
   color_overrides = {
     mocha = {                -- Neo
       rosewater = "#FFDDDD", --
