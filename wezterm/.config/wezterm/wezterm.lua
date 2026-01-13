@@ -37,60 +37,6 @@ config.keys = {
 
 config.color_scheme = "Catppuccin Ocean Foam"
 config.color_schemes = {
-  ["Catppuccin Ocean Foam"] = {
-    foreground = "#CDD6F4",
-    background = "#1E1E2E",
-    cursor_border = "#F5E0DC",
-    cursor_bg = "#F5E0DC",
-    cursor_fg = "#1E1E2E",
-    ansi = {
-      "#45475A", -- black
-      "#F38BA8", -- red
-      "#73E9CD", -- green
-      "#F9E2AF", -- yellow
-      "#89B4FA", -- blue
-      "#F5C2E7", -- magenta
-      "#94E2D5", -- cyan
-      "#CDD6F4", -- white
-    },
-    brights = {
-      "#45475A", -- black
-      "#F38BA8", -- red
-      "#73E9CD", -- green
-      "#F9E2AF", -- yellow
-      "#89B4FA", -- blue
-      "#F5C2E7", -- magenta
-      "#94E2D5", -- cyan
-      "#CDD6F4", -- white
-    },
-  },
-  ["Catppuccin Cocoa"] = {
-    foreground = "#E4CEA8",
-    background = "#211D1D",
-    cursor_border = "#89B482",
-    cursor_bg = "#89B482",
-    cursor_fg = "#211D1D",
-    ansi = {
-      "#534747", -- black
-      "#EA6962", -- red
-      "#A9B665", -- green
-      "#E8C677", -- yellow
-      "#7DAEB3", -- blue
-      "#C386BB", -- magenta
-      "#89B482", -- cyan
-      "#E4CEA8", -- white
-    },
-    brights = {
-      "#534747", -- black
-      "#EA6962", -- red
-      "#A9B665", -- green
-      "#E8C677", -- yellow
-      "#7DAEB3", -- blue
-      "#C386BB", -- magenta
-      "#89B482", -- cyan
-      "#E4CEA8", -- white
-    },
-  },
   ["Catppuccin Neo"] = {
     foreground = "#E0E2EA",
     background = "#14161B",
