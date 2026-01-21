@@ -124,8 +124,10 @@ function fish_prompt_k8s
         '\s{4}namespace:\s"?(?<ns>[^";]+)"?;(\s{4}[^;]+;)*\s{2}name:\s"?'$ctx'"?' \
         -- \
         "$(string join ';' -- $k8s_config)"
-    set_color --bold blue
-    echo -n 󱃾 $ctx
+    set_color blue
+    echo -n "󱃾 "
+    set_color --bold
+    echo -n $ctx
     if not test -z "$ns"
         echo -n /$ns
     end
