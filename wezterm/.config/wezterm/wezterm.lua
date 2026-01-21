@@ -15,13 +15,11 @@ config.window_padding = {
 }
 config.max_fps = 200
 config.enable_tab_bar = false
-config.default_cursor_style = "SteadyBlock"
-config.cursor_blink_rate = 0
 config.font = wezterm.font_with_fallback({
   "Iosevka Term",
   "JetBrainsMono NF",
 })
-config.font_size = 16
+config.font_size = 15
 config.underline_thickness = "200%"
 config.bold_brightens_ansi_colors = "No"
 config.allow_square_glyphs_to_overflow_width = "Always"
