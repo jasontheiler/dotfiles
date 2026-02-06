@@ -9,6 +9,7 @@ abbr -a kck kubectl create -k
 abbr -a ka kubectl apply
 abbr -a kaf kubectl apply -f
 abbr -a kak kubectl apply -k
+abbr -a ke kubectl edit
 abbr -a kx kubectl config use-context
 abbr -a kxl kubectl config get-contexts
 abbr -a kxu kubectl config unset current-context
