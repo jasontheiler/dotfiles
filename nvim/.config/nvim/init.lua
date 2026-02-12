@@ -277,6 +277,7 @@ require("mason-lspconfig").setup({
     "dockerls",
     "gopls",
     "html",
+    "jsonls",
     "lua_ls",
     "marksman",
     "nil_ls",
