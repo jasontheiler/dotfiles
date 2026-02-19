@@ -147,14 +147,18 @@ function fish_prompt_char
     switch $fish_bind_mode
         case default
             set_color blue
+            echo -n "N "
         case insert
             set_color green
-        case replace_one
+            echo -n "I "
+        case replace replace_one
             set_color red
+            echo -n "R "
         case visual
             set_color magenta
+            echo -n "V "
     end
-    set_color --bold
+    set_color normal --bold
     if fish_is_root_user
         echo -n "# "
     else
