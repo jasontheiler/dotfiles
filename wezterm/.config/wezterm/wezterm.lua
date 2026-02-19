@@ -33,7 +33,7 @@ config.keys = {
   { mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
 }
 
-config.color_scheme = "Catppuccin Ocean Foam"
+config.color_scheme = "Gruvbox Material"
 config.color_schemes = {
   ["Catppuccin Neo"] = {
     foreground = "#E0E2EA",
@@ -60,6 +60,33 @@ config.color_schemes = {
       "#E3AAFF", -- magenta
       "#8CF8F7", -- cyan
       "#E0E2EA", -- white
+    },
+  },
+  ["Gruvbox Material"] = {
+    foreground = "#D4BE98",
+    background = "#282828",
+    cursor_border = "#D4BE98",
+    cursor_bg = "#D4BE98",
+    cursor_fg = "#282828",
+    ansi = {
+      "#5A524C", -- black
+      "#EA6962", -- red
+      "#A9B665", -- green
+      "#D8A657", -- yellow
+      "#7DAEA3", -- blue
+      "#D3869B", -- magenta
+      "#89B482", -- cyan
+      "#D4BE98", -- white
+    },
+    brights = {
+      "#5A524C", -- black
+      "#EA6962", -- red
+      "#A9B665", -- green
+      "#D8A657", -- yellow
+      "#7DAEA3", -- blue
+      "#D3869B", -- magenta
+      "#89B482", -- cyan
+      "#D4BE98", -- white
     },
   },
 }
