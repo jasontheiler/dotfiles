@@ -2,6 +2,8 @@ if vim.fn.has("nvim-0.12") == 0 then
   error("The loaded configuration requires Neovim >= 0.12")
 end
 
+local augroup_user = vim.api.nvim_create_augroup("user", { clear = true })
+
 vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -82,6 +84,7 @@ end
 
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/sainnhe/gruvbox-material",
   { src = "https://github.com/catppuccin/nvim",                 name = "catppuccin" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   "https://github.com/windwp/nvim-autopairs",
@@ -98,7 +101,7 @@ vim.pack.add({
 
 require("catppuccin").setup({
   flavour = "mocha",
-  transparent_background = true,
+  transparent_background = false,
   styles = {
     conditionals = {},
     miscs = {},
@@ -113,72 +116,101 @@ require("catppuccin").setup({
   },
   default_integrations = false,
   color_overrides = {
-    mocha = {                -- Neo
-      rosewater = "#FFDDDD", --
-      flamingo = "#FCCDE4",  --
-      pink = "#F9BDEC",      -- terminal magenta, terminal bright magenta
-      mauve = "#EEBDF5",     -- #DEBDF5
-      red = "#FFC0B9",       -- terminal red, terminal bright red; fixed: #FFC0B9
-      maroon = "#FFC0B9",    --
-      peach = "#FDD0A6",     --
-      yellow = "#FCE094",    -- terminal yellow, terminal bright yellow; fixed: #FCE094
-      green = "#B3F6C0",     -- terminal green, terminal bright green; fixed: #B3F6C0
-      teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan; fixed: #8CF8F7
-      sky = "#8CF8F7",       --
-      sapphire = "#8CF8F7",  --
-      blue = "#A6DBFF",      -- terminal blue, terminal bright blue; fixed: #A6DBFF
-      lavender = "#C4BEFF",  --
-      text = "#E0E2EA",      -- terminal white, terminal bright white, terminal foreground, terminal cursor; fixed: #E0E2EA
-      subtext1 = "#BDC0C7",  --
-      subtext0 = "#BDC0C7",  --
-      overlay2 = "#9B9EA4",  -- punctuation, brackets
-      overlay1 = "#9B9EA4",  --
-      overlay0 = "#9B9EA4",  -- comments; fixed: #9B9EA4
-      surface2 = "#4F5258",  --
-      surface1 = "#4F5258",  -- line numbers, selection, terminal black, terminal bright black; fixed: #4F5258
-      surface0 = "#313439",  --
-      base = "#14161B",      -- terminal background; fixed: #14161B
-      mantle = "#0C0E13",    --
-      crust = "#04060B",     --
-    },
+    -- mocha = {                -- Neo
+    --   rosewater = "#FFDDDD", --
+    --   flamingo = "#FCCDE4",  --
+    --   pink = "#F9BDEC",      -- terminal magenta, terminal bright magenta
+    --   mauve = "#EEBDF5",     -- #DEBDF5
+    --   red = "#FFC0B9",       -- terminal red, terminal bright red; fixed: #FFC0B9
+    --   maroon = "#FFC0B9",    --
+    --   peach = "#FDD0A6",     --
+    --   yellow = "#FCE094",    -- terminal yellow, terminal bright yellow; fixed: #FCE094
+    --   green = "#B3F6C0",     -- terminal green, terminal bright green; fixed: #B3F6C0
+    --   teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan; fixed: #8CF8F7
+    --   sky = "#8CF8F7",       --
+    --   sapphire = "#8CF8F7",  --
+    --   blue = "#A6DBFF",      -- terminal blue, terminal bright blue; fixed: #A6DBFF
+    --   lavender = "#C4BEFF",  --
+    --   text = "#E0E2EA",      -- terminal white, terminal bright white, terminal foreground, terminal cursor; fixed: #E0E2EA
+    --   subtext1 = "#BDC0C7",  --
+    --   subtext0 = "#BDC0C7",  --
+    --   overlay2 = "#9B9EA4",  -- punctuation, brackets
+    --   overlay1 = "#9B9EA4",  --
+    --   overlay0 = "#9B9EA4",  -- comments; fixed: #9B9EA4
+    --   surface2 = "#4F5258",  --
+    --   surface1 = "#4F5258",  -- line numbers, selection, terminal black, terminal bright black; fixed: #4F5258
+    --   surface0 = "#313439",  --
+    --   base = "#14161B",      -- terminal background; fixed: #14161B
+    --   mantle = "#0C0E13",    --
+    --   crust = "#04060B",     --
+    -- },
   },
 })
 
-vim.cmd.colorscheme("catppuccin")
+local COLORSCHEME = "gruvbox-material"
 
-local palette = require("catppuccin.palettes").get_palette("mocha")
+if COLORSCHEME == "gruvbox-material" then
+  vim.g.gruvbox_material_transparent_background = 0
+  vim.cmd.colorscheme("gruvbox-material")
+
+  local config = vim.fn['gruvbox_material#get_configuration']()
+  local palette = vim.fn['gruvbox_material#get_palette'](config.background, config.foreground, config.colors_override)
+
+  vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.orange[1], bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green[1], bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue[1], bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red[1], bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.purple[1], bold = true })
+end
+
+if COLORSCHEME == "catppuccin" then
+  vim.cmd.colorscheme("catppuccin")
+
+  local palette = require("catppuccin.palettes").get_palette("mocha")
+
+  vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = palette.green })
+  vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.peach, bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green, bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue, bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red, bold = true })
+  vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.pink, bold = true })
+  vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface2 })
+  vim.api.nvim_set_hl(0, "StatusLine", { bg = palette.surface0 })
+  vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.green })
+end
+
+local diagnostic_error_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).fg
+local diagnostic_hint_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg
+local diagnostic_info_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).fg
+local diagnostic_warn_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
+local non_text_fg = vim.api.nvim_get_hl(0, { name = "NonText", link = false }).fg
+local normal_fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).fg
 
 vim.api.nvim_set_hl(0, "BlinkCmpLabel", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { link = "NonText" })
-vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = palette.blue })
 vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { link = "PmenuSbar" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { link = "PmenuThumb" })
-vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.peach, bold = true })
-vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green, bold = true })
-vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue, bold = true })
-vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red, bold = true })
-vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.pink, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = palette.red, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = palette.teal, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = palette.sky, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = palette.yellow, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNr", { link = "CursorLineNrNormal" })
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = diagnostic_error_fg, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = diagnostic_hint_fg, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = diagnostic_info_fg, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = diagnostic_warn_fg, bold = true })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { link = "NonText" })
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FloatTitle", { link = "FloatBorder" })
-vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface1 })
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
 vim.api.nvim_set_hl(0, "Pmenu", { link = "FloatBorder" })
-vim.api.nvim_set_hl(0, "PmenuSbar", { bg = palette.text })
-vim.api.nvim_set_hl(0, "PmenuSel", { fg = palette.text, bg = palette.surface1, bold = true })
+vim.api.nvim_set_hl(0, "PmenuSbar", { bg = normal_fg })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = non_text_fg, bold = true })
 vim.api.nvim_set_hl(0, "PmenuThumb", { link = "PmenuSbar" })
 vim.api.nvim_set_hl(0, "TabLineFill", { link = "NonText" })
-vim.api.nvim_set_hl(0, "TabLineSel", { fg = palette.text, bold = true })
-vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = palette.green, bold = true })
+vim.api.nvim_set_hl(0, "TabLineSel", { fg = normal_fg, bold = true })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "Pmenu" })
+vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { link = "Normal" })
 vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "PmenuSel" })
-vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = palette.blue, bg = palette.surface1, bold = true })
 vim.api.nvim_set_hl(0, "VertSplit", { link = "NonText" })
-vim.api.nvim_set_hl(0, "Yank", { bg = require("catppuccin.utils.colors").darken(palette.rosewater, 0.5, palette.base) })
+vim.api.nvim_set_hl(0, "Yank", { bg = non_text_fg })
 
 require("nvim-autopairs").setup()
 
@@ -187,13 +219,13 @@ require("mini.notify").setup()
 require("telescope").setup({
   defaults = {
     prompt_prefix = "❯ ",
-    selection_caret = "❯ ",
+    selection_caret = "  ",
     get_status_text = function(picker)
       local stat_processed = picker.stats.processed or 0
       local stat_filtered = picker.stats.filtered or 0
       return string.format(" %d/%d ", stat_processed - stat_filtered, stat_processed)
     end,
-    preview = { filesize_limit = 0.1 },
+    preview = { filesize_limit = 0.5 },
     layout_strategy = "flex",
     layout_config = {
       flex = { flip_columns = 128 },
@@ -329,10 +361,8 @@ vim.schedule(function()
   end, vim.api.nvim_list_bufs())
 end)
 
-local augroup = vim.api.nvim_create_augroup("user", { clear = true })
-
 vim.api.nvim_create_autocmd("BufAdd", {
-  group = augroup,
+  group = augroup_user,
   callback = function(args)
     if args.file ~= "" then
       table.insert(bufs, args.buf)
@@ -341,7 +371,7 @@ vim.api.nvim_create_autocmd("BufAdd", {
 })
 
 vim.api.nvim_create_autocmd("BufDelete", {
-  group = augroup,
+  group = augroup_user,
   callback = function(args)
     for i, buf in ipairs(bufs) do
       if buf == args.buf then
@@ -352,7 +382,7 @@ vim.api.nvim_create_autocmd("BufDelete", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup,
+  group = augroup_user,
   pattern = require("nvim-treesitter").get_available(),
   callback = function(args)
     require("nvim-treesitter").install(vim.bo[args.buf].filetype):await(function()
@@ -363,7 +393,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup,
+  group = augroup_user,
   callback = function()
     vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
   end,
@@ -377,7 +407,7 @@ local modes_by_group = {
 }
 
 vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter", "BufLeave", "ModeChanged" }, {
-  group = augroup,
+  group = augroup_user,
   callback = function()
     local mode = vim.api.nvim_get_mode().mode
     local hl_name_suffix = "Normal"
@@ -392,7 +422,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter", "BufLeave", "M
 })
 
 vim.api.nvim_create_autocmd("QuitPre", {
-  group = augroup,
+  group = augroup_user,
   callback = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_get_name(buf) == "" then
@@ -486,7 +516,7 @@ keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "
 keymap_picker("<Leader>gc", require("telescope.builtin").git_bcommits, { desc = "Buffer commits" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = augroup,
+  group = augroup_user,
   callback = function(args)
     keymap_picker("grd", require("telescope.builtin").lsp_definitions, {
       buffer = args.buf,
