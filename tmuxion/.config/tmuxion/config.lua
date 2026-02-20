@@ -18,10 +18,10 @@ tmuxion.session_selector({
     title_alignment = "center",
     title_style = nil,
     item_style = nil,
-    item_match_style = { fg = "blue" },
+    item_match_style = nil,
     selection_style = { bg = "brightblack", modifiers = { "bold" } },
-    selection_prefix = "❯ ",
-    selection_prefix_style = { fg = "blue" },
+    selection_prefix = "  ",
+    selection_prefix_style = nil,
   },
   prompt = {
     style = nil,
@@ -32,7 +32,7 @@ tmuxion.session_selector({
     title_style = nil,
     pattern_style = nil,
     pattern_prefix = "❯ ",
-    pattern_prefix_style = { fg = "green", modifiers = { "bold" } },
+    pattern_prefix_style = nil,
     stats_format = function(results, sessions)
       return string.format(" %d/%d ", results, sessions)
     end,
