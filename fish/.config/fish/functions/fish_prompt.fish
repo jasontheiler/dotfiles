@@ -13,13 +13,9 @@ function fish_prompt
 end
 
 function fish_prompt_with_separator
-    if test (count $argv) -eq 0
-        return
+    if test (count $argv) -gt 0
+        echo -n $argv" "
     end
-    echo -n $argv
-    set_color brblack
-    echo -n " "
-    set_color normal
 end
 
 function fish_prompt_login
@@ -72,21 +68,11 @@ function fish_prompt_git_branch
 end
 
 function fish_prompt_git_status
-    set status_str ""
-    if not git diff --quiet --ignore-submodules 2>/dev/null
-        set status_str $status_str"!"
-    end
-    if not git diff --cached --quiet --ignore-submodules 2>/dev/null
-        set status_str $status_str"+"
-    end
-    if not test -z "$(git ls-files --others --exclude-standard 2>/dev/null)"
-        set status_str $status_str"?"
-    end
-    if test -z $status_str
+    if test -z "$(git status --porcelain 2>/dev/null)"
         return
     end
     set_color --bold red
-    echo -n " "$status_str
+    echo -n " "[+]
     set_color normal
 end
 
@@ -112,10 +98,10 @@ function fish_prompt_git_divergence
 end
 
 function fish_prompt_k8s
-    set k8s_config (cat $HOME/.kube/config 2>/dev/null)
-    if test $status -ne 0
+    if not test -f $HOME/.kube/config
         return
     end
+    set k8s_config (cat $HOME/.kube/config 2>/dev/null)
     string match -rq 'current-context:\s"?(?<ctx>[^"]+)"?' -- $k8s_config
     if test -z "$ctx"
         return
