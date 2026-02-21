@@ -11,7 +11,7 @@ if [ "${PWD}" == "/" ]; then
     exit 1
 fi
 
-include_path_current=$(git config --local --default "" --get include.path)
+include_path_current=$(git config --local --get --default="" include.path)
 include_path_new="${PWD}/${GITCONFIG_PROFILE_FILENAME}"
 if [ "${include_path_current}" != "${include_path_new}" ]; then
     git config --local include.path "${include_path_new}"
@@ -19,13 +19,13 @@ if [ "${include_path_current}" != "${include_path_new}" ]; then
     exit 1
 fi
 
-user_email=$(git config --local --includes --default "" --get user.email)
+user_email=$(git config --local --includes --get --default="" user.email)
 if [ "${user_email}" == "" ]; then
     echo "error: \`user.email\` not set."
     exit 1
 fi
 
-user_signing_key=$(git config --local --includes --default "" --get user.signingkey)
+user_signing_key=$(git config --local --includes --get --default="" user.signingkey)
 if [ "${user_signing_key}" == "" ]; then
     echo "error: \`user.signingkey\` not set."
     exit 1
