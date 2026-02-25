@@ -21,8 +21,6 @@ vim.opt.tabstop = 4
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
 vim.opt.guicursor = "a:block"
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
 vim.opt.colorcolumn = { 80, 100, 120 }
 vim.opt.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
@@ -152,15 +150,6 @@ local COLORSCHEME = "gruvbox-material"
 if COLORSCHEME == "gruvbox-material" then
   vim.g.gruvbox_material_transparent_background = 0
   vim.cmd.colorscheme("gruvbox-material")
-
-  local config = vim.fn['gruvbox_material#get_configuration']()
-  local palette = vim.fn['gruvbox_material#get_palette'](config.background, config.foreground, config.colors_override)
-
-  vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.orange[1], bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green[1], bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue[1], bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red[1], bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.purple[1], bold = true })
 end
 
 if COLORSCHEME == "catppuccin" then
@@ -169,11 +158,6 @@ if COLORSCHEME == "catppuccin" then
   local palette = require("catppuccin.palettes").get_palette("mocha")
 
   vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = palette.green })
-  vim.api.nvim_set_hl(0, "CursorLineNrCommand", { fg = palette.peach, bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrInsert", { fg = palette.green, bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrNormal", { fg = palette.blue, bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrReplace", { fg = palette.red, bold = true })
-  vim.api.nvim_set_hl(0, "CursorLineNrVisual", { fg = palette.pink, bold = true })
   vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface2 })
   vim.api.nvim_set_hl(0, "StatusLine", { bg = palette.surface0 })
   vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.green })
@@ -191,7 +175,6 @@ vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { link = "NonText" })
 vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { link = "PmenuSbar" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { link = "PmenuThumb" })
-vim.api.nvim_set_hl(0, "CursorLineNr", { link = "CursorLineNrNormal" })
 vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = diagnostic_error_fg, bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = diagnostic_hint_fg, bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = diagnostic_info_fg, bold = true })
@@ -396,28 +379,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup_user,
   callback = function()
     vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
-  end,
-})
-
-local modes_by_group = {
-  Visual = { "v", "V", "Vs", "\22", "\22s", "s", "S", "\19" },
-  Insert = { "i", "ic", "ix" },
-  Replace = { "r", "R", "Rc", "Rx", "Rv", "Rvc", "Rvx" },
-  Command = { "c", "cr", "cv", "cvr" },
-}
-
-vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter", "BufLeave", "ModeChanged" }, {
-  group = augroup_user,
-  callback = function()
-    local mode = vim.api.nvim_get_mode().mode
-    local hl_name_suffix = "Normal"
-    for group, modes in pairs(modes_by_group) do
-      if vim.tbl_contains(modes, mode) then
-        hl_name_suffix = group
-        break
-      end
-    end
-    vim.api.nvim_set_hl(0, "CursorLineNr", { link = "CursorLineNr" .. hl_name_suffix })
   end,
 })
 
