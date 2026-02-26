@@ -83,8 +83,8 @@ end
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/sainnhe/gruvbox-material",
-  { src = "https://github.com/catppuccin/nvim",                 name = "catppuccin" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  { src = "https://github.com/catppuccin/nvim",  name = "catppuccin" },
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tpope/vim-sleuth",
   "https://github.com/lewis6991/gitsigns.nvim",
@@ -97,54 +97,6 @@ vim.pack.add({
   "https://github.com/stevearc/conform.nvim",
 })
 
-require("catppuccin").setup({
-  flavour = "mocha",
-  transparent_background = false,
-  styles = {
-    conditionals = {},
-    miscs = {},
-  },
-  lsp_styles = {
-    underlines = {
-      errors = { "undercurl" },
-      warnings = { "undercurl" },
-      information = { "undercurl" },
-      hints = { "undercurl" },
-    }
-  },
-  default_integrations = false,
-  color_overrides = {
-    -- mocha = {                -- Neo
-    --   rosewater = "#FFDDDD", --
-    --   flamingo = "#FCCDE4",  --
-    --   pink = "#F9BDEC",      -- terminal magenta, terminal bright magenta
-    --   mauve = "#EEBDF5",     -- #DEBDF5
-    --   red = "#FFC0B9",       -- terminal red, terminal bright red; fixed: #FFC0B9
-    --   maroon = "#FFC0B9",    --
-    --   peach = "#FDD0A6",     --
-    --   yellow = "#FCE094",    -- terminal yellow, terminal bright yellow; fixed: #FCE094
-    --   green = "#B3F6C0",     -- terminal green, terminal bright green; fixed: #B3F6C0
-    --   teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan; fixed: #8CF8F7
-    --   sky = "#8CF8F7",       --
-    --   sapphire = "#8CF8F7",  --
-    --   blue = "#A6DBFF",      -- terminal blue, terminal bright blue; fixed: #A6DBFF
-    --   lavender = "#C4BEFF",  --
-    --   text = "#E0E2EA",      -- terminal white, terminal bright white, terminal foreground, terminal cursor; fixed: #E0E2EA
-    --   subtext1 = "#BDC0C7",  --
-    --   subtext0 = "#BDC0C7",  --
-    --   overlay2 = "#9B9EA4",  -- punctuation, brackets
-    --   overlay1 = "#9B9EA4",  --
-    --   overlay0 = "#9B9EA4",  -- comments; fixed: #9B9EA4
-    --   surface2 = "#4F5258",  --
-    --   surface1 = "#4F5258",  -- line numbers, selection, terminal black, terminal bright black; fixed: #4F5258
-    --   surface0 = "#313439",  --
-    --   base = "#14161B",      -- terminal background; fixed: #14161B
-    --   mantle = "#0C0E13",    --
-    --   crust = "#04060B",     --
-    -- },
-  },
-})
-
 local COLORSCHEME = "gruvbox-material"
 
 if COLORSCHEME == "gruvbox-material" then
@@ -153,6 +105,54 @@ if COLORSCHEME == "gruvbox-material" then
 end
 
 if COLORSCHEME == "catppuccin" then
+  require("catppuccin").setup({
+    flavour = "mocha",
+    transparent_background = false,
+    styles = {
+      conditionals = {},
+      miscs = {},
+    },
+    lsp_styles = {
+      underlines = {
+        errors = { "undercurl" },
+        warnings = { "undercurl" },
+        information = { "undercurl" },
+        hints = { "undercurl" },
+      }
+    },
+    default_integrations = false,
+    color_overrides = {
+      -- mocha = {                -- Neo
+      --   rosewater = "#FFDDDD", --
+      --   flamingo = "#FCCDE4",  --
+      --   pink = "#F9BDEC",      -- terminal magenta, terminal bright magenta
+      --   mauve = "#EEBDF5",     -- #DEBDF5
+      --   red = "#FFC0B9",       -- terminal red, terminal bright red; fixed: #FFC0B9
+      --   maroon = "#FFC0B9",    --
+      --   peach = "#FDD0A6",     --
+      --   yellow = "#FCE094",    -- terminal yellow, terminal bright yellow; fixed: #FCE094
+      --   green = "#B3F6C0",     -- terminal green, terminal bright green; fixed: #B3F6C0
+      --   teal = "#8CF8F7",      -- terminal cyan, terminal bright cyan; fixed: #8CF8F7
+      --   sky = "#8CF8F7",       --
+      --   sapphire = "#8CF8F7",  --
+      --   blue = "#A6DBFF",      -- terminal blue, terminal bright blue; fixed: #A6DBFF
+      --   lavender = "#C4BEFF",  --
+      --   text = "#E0E2EA",      -- terminal white, terminal bright white, terminal foreground, terminal cursor; fixed: #E0E2EA
+      --   subtext1 = "#BDC0C7",  --
+      --   subtext0 = "#BDC0C7",  --
+      --   overlay2 = "#9B9EA4",  -- punctuation, brackets
+      --   overlay1 = "#9B9EA4",  --
+      --   overlay0 = "#9B9EA4",  -- comments; fixed: #9B9EA4
+      --   surface2 = "#4F5258",  --
+      --   surface1 = "#4F5258",  -- line numbers, selection, terminal black, terminal bright black; fixed: #4F5258
+      --   surface0 = "#313439",  --
+      --   base = "#14161B",      -- terminal background; fixed: #14161B
+      --   mantle = "#0C0E13",    --
+      --   crust = "#04060B",     --
+      -- },
+    },
+  })
+
   vim.cmd.colorscheme("catppuccin")
 
   local palette = require("catppuccin.palettes").get_palette("mocha")
