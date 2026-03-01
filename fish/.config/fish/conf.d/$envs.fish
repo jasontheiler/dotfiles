@@ -9,7 +9,6 @@ set -x GOPATH $HOME/.go
 set -a fish_user_paths \
     $CARGO_HOME/bin \
     $GOPATH/bin \
-    $HOME/.bun/bin \
     $HOME/.deno/bin \
     $HOME/.krew/bin \
     $HOME/.local/bin
