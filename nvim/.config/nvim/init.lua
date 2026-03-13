@@ -153,7 +153,7 @@ if COLORSCHEME == "catppuccin" then
     },
   })
 
-  vim.cmd.colorscheme("catppuccin")
+  vim.cmd.colorscheme("catppuccin-nvim")
 
   local palette = require("catppuccin.palettes").get_palette("mocha")
 
