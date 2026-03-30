@@ -9,7 +9,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.opt.mouse = "a"
-vim.opt.shortmess = "oOtTICF"
 vim.opt.shadafile = "NONE"
 vim.opt.swapfile = false
 vim.opt.undofile = true
@@ -163,37 +162,34 @@ if COLORSCHEME == "catppuccin" then
   vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = palette.green })
 end
 
-local diagnostic_error_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).fg
-local diagnostic_hint_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg
-local diagnostic_info_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).fg
-local diagnostic_warn_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
-local non_text_fg = vim.api.nvim_get_hl(0, { name = "NonText", link = false }).fg
-local normal_fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).fg
+local hl_non_text = vim.api.nvim_get_hl(0, { name = "NonText", link = false })
+local hl_normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
 
 vim.api.nvim_set_hl(0, "BlinkCmpLabel", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { link = "NonText" })
-vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "Pmenu" })
+vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "PmenuBorder" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { link = "PmenuSbar" })
 vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { link = "PmenuThumb" })
-vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = diagnostic_error_fg, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = diagnostic_hint_fg, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = diagnostic_info_fg, bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = diagnostic_warn_fg, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { update = true, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { update = true, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { update = true, bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { update = true, bold = true })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { link = "NonText" })
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FloatTitle", { link = "FloatBorder" })
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-vim.api.nvim_set_hl(0, "Pmenu", { link = "FloatBorder" })
-vim.api.nvim_set_hl(0, "PmenuSbar", { bg = normal_fg })
-vim.api.nvim_set_hl(0, "PmenuSel", { bg = non_text_fg, bold = true })
+vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+vim.api.nvim_set_hl(0, "PmenuBorder", { link = "FloatBorder" })
+vim.api.nvim_set_hl(0, "PmenuSbar", { bg = hl_normal.fg })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = hl_non_text.fg, bold = true })
 vim.api.nvim_set_hl(0, "PmenuThumb", { link = "PmenuSbar" })
 vim.api.nvim_set_hl(0, "TabLineFill", { link = "NonText" })
-vim.api.nvim_set_hl(0, "TabLineSel", { fg = normal_fg, bold = true })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "Pmenu" })
-vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TabLineSel", { fg = hl_normal.fg, bold = true })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "PmenuBorder" })
+vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "PmenuSel" })
 vim.api.nvim_set_hl(0, "VertSplit", { link = "NonText" })
-vim.api.nvim_set_hl(0, "Yank", { bg = non_text_fg })
+vim.api.nvim_set_hl(0, "Yank", { bg = hl_non_text.fg })
 
 require("nvim-autopairs").setup()
 
@@ -443,8 +439,6 @@ vim.keymap.set("n", "<Leader>bx", function()
   vim.cmd.bdelete({ bang = true })
 end, { desc = "Close current buffer" })
 
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Diagnostics" })
 
 vim.keymap.set("n", "[g", require("gitsigns").prev_hunk, { desc = "Previous Git hunk" })
@@ -510,20 +504,6 @@ vim.lsp.enable({
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
 vim.lsp.config("clangd", { filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } })
 
--- See:
---   - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols
---   - https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
-vim.lsp.config("denols", {
-  root_dir = function(_, cb)
-    local cwd = vim.fn.getcwd()
-    for _, suffix in ipairs({ "/deno.json", "/deno.jsonc" }) do
-      if vim.uv.fs_stat(cwd .. suffix) then
-        cb(cwd)
-      end
-    end
-  end,
-})
-
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html
 vim.lsp.config("html", { filetypes = { "html" } })
 
@@ -565,14 +545,7 @@ vim.lsp.config("ts_ls", {
     },
   },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-  root_dir = function(_, cb)
-    local cwd = vim.fn.getcwd()
-    for _, suffix in ipairs({ "/package.json", "/tsconfig.json" }) do
-      if vim.uv.fs_stat(cwd .. suffix) then
-        cb(cwd)
-      end
-    end
-  end,
+  root_markers = { "package.json", "tsconfig.json" },
   single_file_support = false,
 })
 
