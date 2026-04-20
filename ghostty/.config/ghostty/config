@@ -1,9 +1,8 @@
 # See: https://ghostty.org/docs/config
 
-font-family = Iosevka Term
-font-size = 15
+font-size = 13
 
-theme = gruvbox-material
+theme = catppuccin-neo
 
 mouse-hide-while-typing = true
 
