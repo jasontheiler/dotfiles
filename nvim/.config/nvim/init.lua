@@ -13,13 +13,13 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
 vim.opt.tabstop = 4
+vim.opt.expandtab = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
 vim.opt.guicursor = "a:block"
 vim.opt.colorcolumn = { 80, 100, 120 }
 vim.opt.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
-vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.winborder = "rounded"
@@ -102,7 +102,7 @@ end
 if COLORSCHEME == "catppuccin" then
   require("catppuccin").setup({
     flavour = "mocha",
-    transparent_background = false,
+    transparent_background = true,
     styles = {
       conditionals = {},
       miscs = {},
@@ -246,18 +246,6 @@ require("blink.cmp").setup({
     ["<C-u>"] = { "scroll_documentation_up", "fallback" },
     ["<C-d>"] = { "scroll_documentation_down", "fallback" },
     ["<CR>"] = { "accept", "fallback" },
-    ["<Tab>"] = {
-      function(cmp)
-        if not cmp.is_visible() then
-          return false
-        end
-        cmp.insert_next()
-        cmp.insert_prev()
-        cmp.hide()
-        return true
-      end,
-      "fallback",
-    },
   },
   cmdline = {
     completion = {
@@ -272,8 +260,7 @@ require("blink.cmp").setup({
     },
     keymap = {
       ["<C-Space>"] = { "show", "hide" },
-      ["<CR>"] = { "accept_and_enter", "fallback" },
-      ["<Tab>"] = { "accept", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
     },
   },
 })
@@ -326,20 +313,22 @@ require("conform").setup({
   },
 })
 
+local function include_buf(buf)
+  local file_name = vim.api.nvim_buf_get_name(buf)
+  local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
+  return file_name ~= "" and buflisted
+end
+
 vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
 
-  bufs = vim.tbl_filter(function(buf)
-    local file_name = vim.api.nvim_buf_get_name(buf)
-    local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
-    return file_name ~= "" and buflisted
-  end, vim.api.nvim_list_bufs())
+  bufs = vim.tbl_filter(include_buf, vim.api.nvim_list_bufs())
 end)
 
 vim.api.nvim_create_autocmd("BufAdd", {
   group = augroup_user,
   callback = function(args)
-    if args.file ~= "" then
+    if include_buf(args.buf) then
       table.insert(bufs, args.buf)
     end
   end,
@@ -396,8 +385,7 @@ vim.api.nvim_create_user_command("ToggleDiagnostics", function()
 end, {})
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
-vim.keymap.set({ "n", "v" }, "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
-
+vim.keymap.set("v", "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
 vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<CR>", { silent = true, desc = "Notes" })
 
 for i = 1, 9 do
