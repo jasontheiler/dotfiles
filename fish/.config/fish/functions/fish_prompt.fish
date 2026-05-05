@@ -3,16 +3,16 @@
 function fish_prompt
     set last_status $status
     echo
-    fish_prompt_with_separator (fish_prompt_login)
-    fish_prompt_with_separator (fish_prompt_dir)
-    fish_prompt_with_separator (fish_prompt_git)
-    fish_prompt_with_separator (fish_prompt_k8s)
+    fish_prompt_with_trailing_space (fish_prompt_login)
+    fish_prompt_with_trailing_space (fish_prompt_dir)
+    fish_prompt_with_trailing_space (fish_prompt_git)
+    fish_prompt_with_trailing_space (fish_prompt_k8s)
     echo
-    fish_prompt_status $last_status
-    fish_prompt_char
+    fish_prompt_with_trailing_space (fish_prompt_status $last_status)
+    fish_prompt_with_trailing_space (fish_prompt_char)
 end
 
-function fish_prompt_with_separator
+function fish_prompt_with_trailing_space
     if test (count $argv) -gt 0
         echo -n $argv" "
     end
@@ -42,9 +42,6 @@ function fish_prompt_dir
     else
         echo -n (prompt_pwd)
     end
-    if test $PWD != /
-        echo -n /
-    end
     set_color normal
 end
 
@@ -52,18 +49,19 @@ function fish_prompt_git
     if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
         return
     end
-    fish_prompt_git_branch
+    fish_prompt_git_branch_or_commit
     fish_prompt_git_status
     fish_prompt_git_divergence
 end
 
-function fish_prompt_git_branch
-    set branch (git branch --show-current 2>/dev/null)
-    if test -z "$branch"
-        set branch (git rev-parse --short HEAD 2>/dev/null)
-    end
+function fish_prompt_git_branch_or_commit
     set_color --bold magenta
-    echo -n  (string shorten --max=20 $branch)
+    set branch (git branch --show-current 2>/dev/null)
+    if not test -z "$branch"
+        echo -n  (string shorten --max=20 $branch)
+    else
+        echo -n ◯ (git rev-parse --short HEAD 2>/dev/null)
+    end
     set_color normal
 end
 
@@ -79,7 +77,7 @@ end
 function fish_prompt_git_divergence
     set divergence_str ""
     set behind_ahead "$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
-    if not test -z $behind_ahead
+    if not test -z "$behind_ahead"
         set -l behind (echo $behind_ahead | cut --delimiter=\t --fields=1)
         if test $behind -gt 0
             set divergence_str $divergence_str↓$behind
@@ -89,7 +87,7 @@ function fish_prompt_git_divergence
             set divergence_str $divergence_str↑$ahead
         end
     end
-    if test -z $divergence_str
+    if test -z "$divergence_str"
         return
     end
     set_color --bold yellow
@@ -98,25 +96,24 @@ function fish_prompt_git_divergence
 end
 
 function fish_prompt_k8s
-    if not test -f $HOME/.kube/config
+    if set -q KUBECONFIG
+        set config_file (string split : $KUBECONFIG)[1]
+    else
+        set config_file $HOME/.kube/config
+    end
+    set mtime (stat -c %Y $config_file 2>/dev/null)
+    if test "$mtime" != "$fish_prompt_k8s_mtime"
+        set -g fish_prompt_k8s_mtime $mtime
+        set tmpl '{{range .contexts}}{{.name}}{{with .context.namespace}}/{{.}}{{end}}{{end}}'
+        set -g fish_prompt_k8s_value (kubectl config view --minify --output=go-template=$tmpl 2>/dev/null)
+    end
+    if test -z "$fish_prompt_k8s_value"
         return
     end
-    set k8s_config (cat $HOME/.kube/config 2>/dev/null)
-    string match -rq 'current-context:\s"?(?<ctx>[^"]+)"?' -- $k8s_config
-    if test -z "$ctx"
-        return
-    end
-    string match -rq \
-        '\s{4}namespace:\s"?(?<ns>[^";]+)"?;(\s{4}[^;]+;)*\s{2}name:\s"?'$ctx'"?' \
-        -- \
-        "$(string join ';' -- $k8s_config)"
     set_color blue
     echo -n "󱃾 "
     set_color --bold
-    echo -n $ctx
-    if not test -z "$ns"
-        echo -n /$ns
-    end
+    echo -n $fish_prompt_k8s_value
     set_color normal
 end
 
@@ -125,7 +122,7 @@ function fish_prompt_status
         return
     end
     set_color --bold red
-    echo -n (fish_status_to_signal $argv[1])" "
+    echo -n (fish_status_to_signal $argv[1])
     set_color normal
 end
 
@@ -146,9 +143,9 @@ function fish_prompt_char
     end
     set_color normal --bold
     if fish_is_root_user
-        echo -n "# "
+        echo -n "#"
     else
-        echo -n "\$ "
+        echo -n "\$"
     end
     set_color normal
 end
