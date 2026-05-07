@@ -8,7 +8,7 @@ tmuxion.session_selector({
   paths = {
     truncate_home_dir = true,
     home_dir_symbol = "~",
-    trailing_slash = true,
+    trailing_slash = false,
   },
   results = {
     style = nil,
