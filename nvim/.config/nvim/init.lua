@@ -26,8 +26,6 @@ vim.opt.winborder = "rounded"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.laststatus = 3
-vim.opt.showtabline = 2
-vim.opt.tabline = "%{%v:lua.custom_tabline()%}"
 
 vim.diagnostic.config({
   severity_sort = true,
@@ -41,51 +39,23 @@ vim.filetype.add({
   },
 })
 
---- @type number[]
-local bufs = {}
-
-function _G.custom_tabline()
-  local s = ""
-  local buf_current = vim.api.nvim_win_get_buf(0)
-  for i, buf in ipairs(bufs) do
-    s = string.format("%s%%%d@v:lua.custom_tabline_on_click@", s, buf)
-    if buf == buf_current then
-      s = s .. "%#TabLineSel#"
-    end
-    s = string.format("%s %d %s", s, i, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t"))
-    local flags = ""
-    if vim.api.nvim_get_option_value("modified", { buf = buf }) then
-      flags = flags .. "[+]"
-    end
-    if not vim.api.nvim_get_option_value("modifiable", { buf = buf }) then
-      flags = flags .. "[-]"
-    end
-    if vim.api.nvim_get_option_value("readonly", { buf = buf }) then
-      flags = flags .. "[RO]"
-    end
-    if string.len(flags) > 0 then
-      s = string.format("%s %s", s, flags)
-    end
-    s = string.format("%s %%*%%T", s)
-  end
-  return s
-end
-
-function _G.custom_tabline_on_click(buf)
-  vim.api.nvim_win_set_buf(0, buf)
-end
-
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/sainnhe/gruvbox-material",
-  { src = "https://github.com/catppuccin/nvim",  name = "catppuccin" },
+  {
+    src = "https://github.com/catppuccin/nvim",
+    name = "catppuccin",
+  },
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tpope/vim-sleuth",
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/nvim-mini/mini.notify",
   "https://github.com/nvim-telescope/telescope.nvim",
-  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
+  {
+    src = "https://github.com/saghen/blink.cmp",
+    version = vim.version.range("1.*"),
+  },
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/mason-org/mason-lspconfig.nvim",
@@ -313,37 +283,9 @@ require("conform").setup({
   },
 })
 
-local function include_buf(buf)
-  local file_name = vim.api.nvim_buf_get_name(buf)
-  local buflisted = vim.api.nvim_get_option_value("buflisted", { buf = buf })
-  return file_name ~= "" and buflisted
-end
-
 vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
-
-  bufs = vim.tbl_filter(include_buf, vim.api.nvim_list_bufs())
 end)
-
-vim.api.nvim_create_autocmd("BufAdd", {
-  group = augroup_user,
-  callback = function(args)
-    if include_buf(args.buf) then
-      table.insert(bufs, args.buf)
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufDelete", {
-  group = augroup_user,
-  callback = function(args)
-    for i, buf in ipairs(bufs) do
-      if buf == args.buf then
-        table.remove(bufs, i)
-      end
-    end
-  end,
-})
 
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup_user,
@@ -360,6 +302,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup_user,
   callback = function()
     vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
+  group = augroup_user,
+  callback = function(args)
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    for _, mark in ipairs(vim.fn.getmarklist()) do
+      if mark.pos[1] == args.buf then
+        vim.fn.setpos(mark.mark, { mark.pos[1], cursor[1], cursor[2] + 1, mark.pos[4] })
+      end
+    end
   end,
 })
 
@@ -386,26 +340,8 @@ end, {})
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set("v", "<Leader>p", "\"_dP", { desc = "Paste (without yank)" })
-vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<CR>", { silent = true, desc = "Notes" })
+vim.keymap.set("n", "<Leader>n", ":e ${HOME}/notes.md<Enter>", { silent = true, desc = "Notes" })
 
-for i = 1, 9 do
-  vim.keymap.set("n", "<Leader>" .. i, function()
-    local buf = bufs[i]
-    if buf ~= nil then
-      vim.api.nvim_win_set_buf(0, buf)
-    end
-  end, { desc = "Buffer " .. i })
-  vim.keymap.set("n", "<Leader>b" .. i, function()
-    local buf_current = vim.api.nvim_win_get_buf(0)
-    for j, buf in ipairs(bufs) do
-      if buf == buf_current then
-        table.remove(bufs, j)
-        table.insert(bufs, math.min(i, #bufs + 1), buf_current)
-        vim.cmd.redrawtabline()
-      end
-    end
-  end, { desc = "Move current buffer to index " .. i })
-end
 vim.keymap.set("n", "<Leader>bx", function()
   local file_name = vim.api.nvim_buf_get_name(0)
   local modified = vim.api.nvim_get_option_value("modified", { buf = 0 })
