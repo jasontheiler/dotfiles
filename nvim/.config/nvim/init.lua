@@ -250,12 +250,8 @@ require("mason-lspconfig").setup({
     "marksman",
     "nil_ls",
     "postgres_lsp",
-    "pylsp",
     "taplo",
-    "templ",
-    "vue_ls",
     "yamlls",
-    "zls",
   },
   automatic_enable = true,
 })
