@@ -1,12 +1,6 @@
-<div align="center">
-
 # dotfiles
 
-**My personal configuration files for fish, tmux, Neovim and more!**
-
-<br>
-
-</div>
+My personal configuration files for fish, tmux, Neovim and more!
 
 ## Installation
 
