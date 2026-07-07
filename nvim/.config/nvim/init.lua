@@ -371,13 +371,21 @@ local function keymap_picker(lhs, picker, keymap_opts, picker_opts)
     results_title = "Results",
     preview_title = "Preview",
   }
-  picker_opts = vim.tbl_extend("force", default_picker_opts, picker_opts or {})
-  vim.keymap.set("n", lhs, function() picker(picker_opts) end, keymap_opts)
+  vim.keymap.set("n", lhs, function()
+    local opts = picker_opts
+    if type(opts) == "function" then
+      opts = opts()
+    end
+    picker(vim.tbl_extend("force", default_picker_opts, opts or {}))
+  end, keymap_opts)
 end
 
 keymap_picker("<Leader>sh", require("telescope.builtin").help_tags, { desc = "Help" })
 keymap_picker("<Leader>sk", require("telescope.builtin").keymaps, { desc = "Keymaps" })
 keymap_picker("<Leader>sf", require("telescope.builtin").find_files, { desc = "Files" })
+keymap_picker("<Leader>ss", require("telescope.builtin").find_files, { desc = "Sibling files" }, function()
+  return { cwd = vim.fn.expand("%:p:h") }
+end)
 keymap_picker("<Leader>sa", require("telescope.builtin").find_files, { desc = "All files" }, { no_ignore = true })
 keymap_picker("<Leader>sp", require("telescope.builtin").oldfiles, { desc = "Previous files" })
 keymap_picker("<Leader>sb", require("telescope.builtin").buffers, { desc = "Buffers" })
