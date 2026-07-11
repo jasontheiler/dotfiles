@@ -256,26 +256,40 @@ require("mason-lspconfig").setup({
   automatic_enable = true,
 })
 
+local function is_deno_project(buf)
+  return #vim.fs.find({ "deno.json", "deno.jsonc" }, {
+    path = vim.fs.dirname(vim.api.nvim_buf_get_name(buf)),
+    upward = true,
+    type = "file",
+  }) > 0
+end
+
+local function deno_or_prettier(buf)
+  if is_deno_project(buf) then
+    return { "deno_fmt" }
+  end
+  return { "prettier" }
+end
+
+
 require("conform").setup({
   default_format_opts = {
-    async = true,
     lsp_format = "fallback",
   },
   formatters_by_ft = {
-    css = { "oxfmt", "prettier" },
+    css = deno_or_prettier,
     fish = { "fish_indent" },
-    html = { "oxfmt", "prettier" },
-    javascript = { "oxfmt", "prettier" },
-    javascriptreact = { "oxfmt", "prettier" },
-    json = { "oxfmt", "prettier" },
-    jsonc = { "oxfmt", "prettier" },
-    markdown = { "oxfmt", "prettier" },
+    html = deno_or_prettier,
+    javascript = deno_or_prettier,
+    javascriptreact = deno_or_prettier,
+    json = deno_or_prettier,
+    jsonc = deno_or_prettier,
+    markdown = deno_or_prettier,
     rust = { "dioxus", "rustfmt" },
-    scss = { "oxfmt", "prettier" },
-    typescript = { "oxfmt", "prettier" },
-    typescriptreact = { "oxfmt", "prettier" },
-    vue = { "oxfmt", "prettier" },
-    yaml = { "oxfmt", "prettier" },
+    scss = deno_or_prettier,
+    typescript = deno_or_prettier,
+    typescriptreact = deno_or_prettier,
+    yaml = deno_or_prettier,
   },
 })
 
