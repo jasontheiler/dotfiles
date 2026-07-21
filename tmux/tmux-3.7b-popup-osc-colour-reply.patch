@@ -1,0 +1,57 @@
+diff --git i/input.c w/input.c
+index ae503e5..db15f87 100644
+--- i/input.c
++++ w/input.c
+@@ -3042,6 +3042,26 @@ bad:
+ 	log_debug("bad OSC 9;4 %s", p);
+ }
+ 
++/*
++ * Get the foreground or background colour from the first attached client
++ * that has reported one, for replies when there is no pane (popups).
++ */
++static int
++input_client_colour(int bg)
++{
++	struct client	*c;
++
++	TAILQ_FOREACH(c, &clients, entry) {
++		if (c->session == NULL || (c->flags & CLIENT_CONTROL))
++			continue;
++		if (bg && c->tty.bg != -1)
++			return (c->tty.bg);
++		if (!bg && c->tty.fg != -1)
++			return (c->tty.fg);
++	}
++	return (-1);
++}
++
+ /* Handle the OSC 10 sequence for setting and querying foreground colour. */
+ static void
+ input_osc_10(struct input_ctx *ictx, const char *p)
+@@ -3051,8 +3071,11 @@ input_osc_10(struct input_ctx *ictx, const char *p)
+ 	int			 c;
+ 
+ 	if (strcmp(p, "?") == 0) {
+-		if (wp == NULL)
++		if (wp == NULL) {
++			input_osc_colour_reply(ictx, 1, 10, 0,
++			    input_client_colour(0), ictx->input_end);
+ 			return;
++		}
+ 		c = window_pane_get_fg_control_client(wp);
+ 		if (c == -1) {
+ 			tty_default_colours(&defaults, wp);
+@@ -3101,8 +3124,11 @@ input_osc_11(struct input_ctx *ictx, const char *p)
+ 	int			 c;
+ 
+ 	if (strcmp(p, "?") == 0) {
+-		if (wp == NULL)
++		if (wp == NULL) {
++			input_osc_colour_reply(ictx, 1, 11, 0,
++			    input_client_colour(1), ictx->input_end);
+ 			return;
++		}
+ 		c = window_pane_get_bg(wp);
+ 		input_osc_colour_reply(ictx, 1, 11, 0, c, ictx->input_end);
+ 		return;
