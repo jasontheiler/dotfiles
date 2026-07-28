@@ -12,6 +12,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
+vim.opt.shiftwidth = 0
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 8
@@ -370,8 +371,8 @@ end, { desc = "Close current buffer" })
 
 vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Diagnostics" })
 
-vim.keymap.set("n", "[g", require("gitsigns").prev_hunk, { desc = "Previous Git hunk" })
-vim.keymap.set("n", "]g", require("gitsigns").next_hunk, { desc = "Next Git hunk" })
+vim.keymap.set("n", "[g", function() require("gitsigns").nav_hunk("prev") end, { desc = "Previous Git hunk" })
+vim.keymap.set("n", "]g", function() require("gitsigns").nav_hunk("next") end, { desc = "Next Git hunk" })
 vim.keymap.set("n", "<Leader>gb", require("gitsigns").blame_line, { desc = "Git Blame" })
 vim.keymap.set("n", "<Leader>gp", require("gitsigns").preview_hunk, { desc = "Preview Git hunk" })
 vim.keymap.set("n", "<Leader>gu", require("gitsigns").reset_hunk, { desc = "Undo Git hunk" })
@@ -400,7 +401,6 @@ keymap_picker("<Leader>ss", require("telescope.builtin").find_files, { desc = "S
   return { cwd = vim.fn.expand("%:p:h") }
 end)
 keymap_picker("<Leader>sa", require("telescope.builtin").find_files, { desc = "All files" }, { no_ignore = true })
-keymap_picker("<Leader>sp", require("telescope.builtin").oldfiles, { desc = "Previous files" })
 keymap_picker("<Leader>sb", require("telescope.builtin").buffers, { desc = "Buffers" })
 keymap_picker("<Leader>s/", require("telescope.builtin").live_grep, { desc = "Search" })
 keymap_picker("<Leader>sd", require("telescope.builtin").diagnostics, { desc = "Diagnostics" })
@@ -483,7 +483,6 @@ vim.lsp.config("ts_ls", {
   },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   root_markers = { "package.json", "tsconfig.json" },
-  single_file_support = false,
 })
 
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
