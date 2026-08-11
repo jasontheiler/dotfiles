@@ -1,2 +1,14 @@
 set editing-mode vi
+set completion-ignore-case on
 set show-mode-in-prompt on
+set show-all-if-ambiguous on
+set colored-stats on
+set colored-completion-prefix on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+set keymap vi-command
+
+"j": history-search-forward
+"k": history-search-backward
