@@ -1,11 +1,9 @@
 abbr -a k kubectl
 abbr -a kg kubectl get
+abbr -a kgy kubectl get -o=yaml
 abbr -a kd kubectl describe
 abbr -a kl kubectl logs
 abbr -a klf kubectl logs -f
-abbr -a kc kubectl create
-abbr -a kcf kubectl create -f
-abbr -a kck kubectl create -k
 abbr -a ka kubectl apply
 abbr -a kaf kubectl apply -f
 abbr -a kak kubectl apply -k
