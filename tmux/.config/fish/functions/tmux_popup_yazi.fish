@@ -1,9 +1,9 @@
 function tmux_popup_yazi
-    if not set -q TMUX
-        return 1
-    end
+    set -q TMUX
+    or return 1
 
     argparse reset -- $argv
+    or return 1
 
     if set -q _flag_reset
         set -e TMUX_POPUP_YAZI_DIR
@@ -13,7 +13,6 @@ function tmux_popup_yazi
     set temp_file (mktemp)
     tmux new-session -A \
         -s popup_yazi_$client_name \
-        -e TMUXION_TARGET_CLIENT=$client_name \
         "command yazi --cwd-file=$temp_file $argv $TMUX_POPUP_YAZI_DIR"\; \
         set-hook client-detached kill-session\; \
         set-hook after-split-window kill-pane

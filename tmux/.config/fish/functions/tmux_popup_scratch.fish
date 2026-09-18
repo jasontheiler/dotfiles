@@ -1,11 +1,7 @@
 function tmux_popup_scratch
-    if not set -q TMUX
-        return 1
-    end
+    set -q TMUX
+    or return 1
 
     set client_name (tmux display-message -p "#{client_name}")
-    tmux new-session -A \
-        -s popup_scratch_$client_name \
-        -c $HOME \
-        -e TMUXION_TARGET_CLIENT=$client_name
+    tmux new-session -A -s popup_scratch_$client_name -c $HOME
 end
