@@ -4,6 +4,7 @@ vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.shadafile = "NONE"
 vim.opt.swapfile = false
@@ -164,7 +165,6 @@ require("mini.notify").setup()
 
 require("telescope").setup({
   defaults = {
-    prompt_prefix = "❯ ",
     selection_caret = "  ",
     get_status_text = function(picker)
       local stat_processed = picker.stats.processed or 0
