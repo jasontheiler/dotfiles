@@ -8,8 +8,5 @@ abbr -a ka kubectl apply
 abbr -a kaf kubectl apply -f
 abbr -a kak kubectl apply -k
 abbr -a ke kubectl edit
-abbr -a kx kubectl config use-context
-abbr -a kxl kubectl config get-contexts
-abbr -a kxu kubectl config unset current-context
-abbr -a kns --set-cursor="<NAMESPACE>" kubectl config set-context --current --namespace="<NAMESPACE>"
-abbr -a knsl kubectl get ns
+abbr -a kx kubectl config get-contexts -o=name \| fzf \| xargs kubectl config use-context
+abbr -a kns kubectl get ns -o=name \| cut -d/ -f2 \| fzf \| xargs kubectl config set-context --current --namespace
