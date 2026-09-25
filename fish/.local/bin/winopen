@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+for arg in "$@"; do
+    case "$arg" in
+        http://*|https://*)
+            rundll32.exe url.dll,FileProtocolHandler "$arg"
+            ;;
+        *)
+            explorer.exe "$(wslpath -w "$arg" 2>/dev/null || printf '%s' "$arg")" || true
+            ;;
+    esac
+done

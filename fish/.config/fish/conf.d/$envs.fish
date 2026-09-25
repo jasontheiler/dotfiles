@@ -14,6 +14,6 @@ set -a fish_user_paths \
     $HOME/.local/bin
 
 if set -q WSL_DISTRO_NAME
-    set -x BROWSER explorer.exe
+    set -x BROWSER winopen
     set -a fish_user_paths "/mnt/c/Program Files/win32yank"
 end
