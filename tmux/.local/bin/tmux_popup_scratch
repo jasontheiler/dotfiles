@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+[ -n "${TMUX:-}" ] || exit 1
+
+client_name=$(tmux display-message -p "#{client_name}")
+tmux new-session -A -s "popup_scratch_$client_name" -c "$HOME"

@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+detached=0
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -d|--detached) detached=1; shift;;
+        --) shift; break;;
+        *) break;;
+    esac
+done
+
+sessions=""
+if [ -n "${TMUX:-}" ]; then
+    tab=$(printf '\t')
+    sessions=$(tmux list-sessions -F "#{session_id}$tab#{session_name}$tab#{session_path}")
+fi
+
+created_session_id=""
+existing_session_id=""
+for path in ${@:-$PWD}; do
+    if [ ! -d "$path" ]; then
+        echo "error: \"$path\" is not a directory" >&2
+        exit 1
+    fi
+
+    dir=$(realpath -- $path)
+    session_id=""
+    for session in $sessions; do
+        case "$(cut -f2 <<< "$session")" in
+            popup_*) continue;;
+        esac
+        [ "$(cut -f3 <<< "$session")" = "$dir" ] || continue
+        session_id=$(cut -f1 <<< "$session")
+        break
+    done
+
+    if [ -z "$session_id" ]; then
+        session_id=$(tmux new-session -dc "$dir" -PF "#{session_id}")
+        # Prefer the first newly created session...
+        [ -z "$created_session_id" ] && created_session_id=$session_id
+    elif [ -z "$existing_session_id" ]; then
+        # ...or fall back to the first pre-existing one.
+        existing_session_id=$session_id
+    fi
+done
+
+target_session_id=$created_session_id
+[ -z "$target_session_id" ] && target_session_id=$existing_session_id
+
+if [ "$detached" -eq 1 ] || [ -z "$target_session_id" ]; then
+    exit 0
+fi
+
+if [ -n "${TMUX:-}" ]; then
+    client_name=$(tmux display-message -p "#{?#{m:popup_*,#{session_name}},#{s|^popup_[a-z]+_||:session_name},#{client_name}}")
+    tmux switch-client -t "$target_session_id" -c "$client_name"
+else
+    tmux attach-session -t "$target_session_id"
+fi
