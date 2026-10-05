@@ -19,7 +19,7 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
 vim.opt.guicursor = "a:block"
-vim.opt.colorcolumn = { 80, 100, 120 }
+vim.opt.colorcolumn = "80,100,120"
 vim.opt.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
 vim.opt.ignorecase = true
@@ -311,7 +311,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup_user,
   callback = function()
-    vim.hl.on_yank({ higroup = "Yank", timeout = 250 })
+    vim.hl.hl_op({ higroup = "Yank", timeout = 250 })
   end,
 })
 
