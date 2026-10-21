@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-TMUX_VERSION=${TMUX_VERSION:-3.7c}
+TMUX_VERSION=${TMUX_VERSION:-3.8}
 PREFIX=${PREFIX:-$HOME/.local}
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 PATCHES="$SCRIPT_DIR/tmux-${TMUX_VERSION}-*.patch"

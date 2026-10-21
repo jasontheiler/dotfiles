@@ -1,8 +1,8 @@
 diff --git i/tty-keys.c w/tty-keys.c
-index d3a93f1..2b59eb6 100644
+index 7125dca..b0f3e9d 100644
 --- i/tty-keys.c
 +++ w/tty-keys.c
-@@ -742,6 +742,26 @@ tty_keys_winsz(struct tty *tty, const char *buf, size_t len, size_t *size)
+@@ -740,6 +740,26 @@ tty_keys_winsz(struct tty *tty, const char *buf, size_t len, size_t *size)
  }
  
  
@@ -29,29 +29,34 @@ index d3a93f1..2b59eb6 100644
  /* Process at least one key in the buffer. Return 0 if no keys present. */
  int
  tty_keys_next(struct tty *tty)
-@@ -976,9 +996,23 @@ partial_key:
+@@ -999,10 +1019,28 @@ partial_key:
  		if (delay < 500)
  			delay = 500;
  	}
--	if ((tty->flags & (TTY_WAITFG|TTY_WAITBG) ||
--	    (tty->flags & TTY_ALL_REQUEST_FLAGS) != TTY_ALL_REQUEST_FLAGS) ||
--	    !TAILQ_EMPTY(&c->input_requests)) {
-+	if (!TAILQ_EMPTY(&c->input_requests)) {
+-	if (tty->flags & (TTY_WAITFG|TTY_WAITBG) ||
+-	    tty->flags & (TTY_OSC52QUERY|TTY_WINSIZEQUERY) ||
+-	    (tty->flags & TTY_ALL_REQUEST_FLAGS) != TTY_ALL_REQUEST_FLAGS ||
++	if ((tty->flags & TTY_OSC52QUERY) ||
+ 	    !TAILQ_EMPTY(&c->input_requests)) {
 +		log_debug("%s: increasing delay (input request)", c->name);
 +		if (delay < 500)
 +			delay = 500;
-+	} else if ((tty->flags & (TTY_WAITFG|TTY_WAITBG) ||
++	} else if ((tty->flags & (TTY_WAITFG|TTY_WAITBG|TTY_WINSIZEQUERY) ||
 +	    (tty->flags & TTY_ALL_REQUEST_FLAGS) != TTY_ALL_REQUEST_FLAGS) &&
 +	    !tty_keys_no_query_delay()) {
 +		/*
 +		 * tmux normally forces the key delay to 500ms while its own
-+		 * terminal probes (DA/DA2/XDA and the OSC 10/11 fg/bg queries)
-+		 * are still outstanding, so a probe reply is not chopped up.
-+		 * Terminals that never answer these probes (for example WezTerm
-+		 * reached through the Windows ConPTY layer) leave the wait flags
-+		 * set for the whole TTY_QUERY_TIMEOUT window, and re-arm them on
-+		 * every resize, so <Esc> lags ~500ms regardless of escape-time.
-+		 * The @no-query-escape-delay user option opts out of that bump.
++		 * terminal probes (DA/DA2/XDA, the OSC 10/11 fg/bg queries and
++		 * the CSI 18t/14t window size query) are still outstanding, so
++		 * a probe reply is not chopped up. Terminals that never answer
++		 * these probes (for example WezTerm reached through the Windows
++		 * ConPTY layer) leave the wait flags set for the whole
++		 * TTY_QUERY_TIMEOUT window (or, for the window size query, until
++		 * a reply that never comes), and re-arm them on every resize, so
++		 * <Esc> lags ~500ms regardless of escape-time. The
++		 * @no-query-escape-delay user option opts out of that bump. The
++		 * OSC 52 clipboard query is user-initiated and its reply carries
++		 * clipboard contents, so it keeps the delay above.
 +		 */
  		log_debug("%s: increasing delay (active query)", c->name);
  		if (delay < 500)

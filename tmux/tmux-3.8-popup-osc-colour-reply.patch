@@ -1,8 +1,8 @@
 diff --git i/input.c w/input.c
-index ae503e5..db15f87 100644
+index 2fef558..27d0587 100644
 --- i/input.c
 +++ w/input.c
-@@ -3042,6 +3042,26 @@ bad:
+@@ -3065,6 +3065,26 @@ bad:
  	log_debug("bad OSC 9;4 %s", p);
  }
  
@@ -29,7 +29,7 @@ index ae503e5..db15f87 100644
  /* Handle the OSC 10 sequence for setting and querying foreground colour. */
  static void
  input_osc_10(struct input_ctx *ictx, const char *p)
-@@ -3051,8 +3071,11 @@ input_osc_10(struct input_ctx *ictx, const char *p)
+@@ -3074,8 +3094,11 @@ input_osc_10(struct input_ctx *ictx, const char *p)
  	int			 c;
  
  	if (strcmp(p, "?") == 0) {
@@ -41,8 +41,8 @@ index ae503e5..db15f87 100644
 +		}
  		c = window_pane_get_fg_control_client(wp);
  		if (c == -1) {
- 			tty_default_colours(&defaults, wp);
-@@ -3101,8 +3124,11 @@ input_osc_11(struct input_ctx *ictx, const char *p)
+ 			tty_default_colours(&defaults, wp, NULL);
+@@ -3124,8 +3147,11 @@ input_osc_11(struct input_ctx *ictx, const char *p)
  	int			 c;
  
  	if (strcmp(p, "?") == 0) {
