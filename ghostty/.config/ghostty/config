@@ -2,8 +2,10 @@
 
 font-size = 13
 
-theme = catppuccin-neo
+theme = gruvbox-material
+cursor-style-blink = false
 
 mouse-hide-while-typing = true
 
+desktop-notifications = false
 gtk-titlebar = false
