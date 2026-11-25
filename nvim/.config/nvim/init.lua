@@ -1,33 +1,31 @@
 local augroup_user = vim.api.nvim_create_augroup("user", { clear = true })
 
 vim.g.mapleader = " "
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
-vim.opt.termguicolors = true
-vim.opt.mouse = "a"
-vim.opt.shadafile = "NONE"
-vim.opt.swapfile = false
-vim.opt.undofile = true
-vim.opt.signcolumn = "yes"
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.wrap = false
-vim.opt.shiftwidth = 0
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 16
-vim.opt.guicursor = "a:block"
-vim.opt.colorcolumn = "80,100,120"
-vim.opt.list = true
-vim.opt.listchars = { tab = "  ", trail = "·" }
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.winborder = "rounded"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.laststatus = 3
+vim.o.termguicolors = true
+vim.o.mouse = "a"
+vim.o.shadafile = "NONE"
+vim.o.swapfile = false
+vim.o.undofile = true
+vim.o.signcolumn = "yes"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.wrap = false
+vim.o.shiftwidth = 0
+vim.o.tabstop = 4
+vim.o.expandtab = true
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 16
+vim.o.guicursor = "a:block"
+vim.o.colorcolumn = "80,100,120"
+vim.o.list = true
+vim.o.listchars = { tab = "  ", trail = "·" }
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.winborder = "rounded"
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.laststatus = 3
 
 vim.diagnostic.config({
   severity_sort = true,
@@ -41,6 +39,10 @@ vim.filetype.add({
   },
 })
 
+require("vim._core.ui2").enable({
+  msg = { targets = "msg" },
+})
+
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/sainnhe/gruvbox-material",
@@ -52,7 +54,6 @@ vim.pack.add({
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tpope/vim-sleuth",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/nvim-mini/mini.notify",
   "https://github.com/nvim-telescope/telescope.nvim",
   {
     src = "https://github.com/saghen/blink.cmp",
@@ -64,10 +65,10 @@ vim.pack.add({
   "https://github.com/stevearc/conform.nvim",
 })
 
-local COLORSCHEME = "catppuccin"
+local COLORSCHEME = "gruvbox-material"
 
 if COLORSCHEME == "gruvbox-material" then
-  vim.g.gruvbox_material_transparent_background = 0
+  vim.g.gruvbox_material_transparent_background = 1
   vim.cmd.colorscheme("gruvbox-material")
 end
 
@@ -156,12 +157,10 @@ vim.api.nvim_set_hl(0, "TabLineSel", { fg = hl_normal.fg, bold = true })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "PmenuBorder" })
 vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { link = "Pmenu" })
 vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "PmenuSel" })
+vim.api.nvim_set_hl(0, "TextEdit", { bg = hl_non_text.fg })
 vim.api.nvim_set_hl(0, "VertSplit", { link = "NonText" })
-vim.api.nvim_set_hl(0, "Yank", { bg = hl_non_text.fg })
 
 require("nvim-autopairs").setup()
-
-require("mini.notify").setup()
 
 require("telescope").setup({
   defaults = {
@@ -257,16 +256,8 @@ require("mason-lspconfig").setup({
   automatic_enable = true,
 })
 
-local function is_deno_project(buf)
-  return #vim.fs.find({ "deno.json", "deno.jsonc" }, {
-    path = vim.fs.dirname(vim.api.nvim_buf_get_name(buf)),
-    upward = true,
-    type = "file",
-  }) > 0
-end
-
 local function deno_or_prettier(buf)
-  if is_deno_project(buf) then
+  if vim.fs.root(buf, { "deno.json", "deno.jsonc" }) then
     return { "deno_fmt" }
   end
   return { "prettier" }
@@ -303,15 +294,34 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(args)
     require("nvim-treesitter").install(vim.bo[args.buf].filetype):await(function()
       vim.treesitter.start(args.buf)
-      vim.bo[args.buf].indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+      vim.bo[args.buf].indentexpr = require('nvim-treesitter').indentexpr
     end)
   end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd("LspProgress", {
+  group = augroup_user,
+  callback = function(args)
+    local value = args.data.params.value
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    vim.api.nvim_echo({ { value.message or "Done" } }, false, {
+      id = ("lsp.%d.%s"):format(client.id, args.data.params.token),
+      kind = "progress",
+      source = "vim.lsp",
+      title = ("%s: %s"):format(client.name, value.title),
+      status = value.kind ~= "end" and "running" or "success",
+      percent = value.percentage,
+    })
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
   group = augroup_user,
   callback = function()
-    vim.hl.hl_op({ higroup = "Yank", timeout = 250 })
+    vim.hl.hl_op({ higroup = "TextEdit", timeout = 250 })
   end,
 })
 
